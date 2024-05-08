@@ -25,6 +25,12 @@ export default defineConfig({
                             picture: "/trueberryless.png", // Images in the `public` directory are supported.
                             url: "https://trueberryless.org",
                         },
+                        clemens: {
+                            name: "clemens",
+                            title: "Clemens Schlipfinger",
+                            picture: "/clemens.png", // Images in the `public` directory are supported.
+                            url: "https://www.linkedin.com/in/clemens-schlipfinger/",
+                        },
                     },
                 }),
             ],
