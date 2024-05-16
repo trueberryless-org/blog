@@ -5,16 +5,16 @@ tags:
     - Deployment
     - Kubernetes
     - Cloudflare
-excerpt: This blog posts describes the process of setting up a kubernetes cluster with k3s and cilium. We use Helm as the package manager and Cloudflare as the certificate issuer. We used the tips and tricks from Vegard S. Hagen from [this article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/). Essentially, this blog explains, how all the trueberryless.org websites are deployed.
+excerpt: This blog posts describes the process of setting up a kubernetes cluster with k3s and cilium. We use Helm as the package manager and Cloudflare as the certificate issuer. We used the tips and tricks from Vegard S. Hagen from [his article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/). Essentially, this blog explains, how all the trueberryless.org websites are deployed.
 authors:
     - trueberryless
 ---
 
-## What is Kubernetes?
-
 Working with Docker Containers can be hard. However, there are tools which enhance the management of containers, like Kubernetes. Actually, Kubernetes is the only tool to my knowledge which acts as a management software for Docker Containers. Kubernetes is well-integrated in almost all cloud providers, like Google Cloud, Azure and AWS. As a result, it has a standardized `yaml`-syntax, which is great for small developers because they can switch between `The Big Three` with low effort.
 
-## Install and configure k3s
+## Install k3s
+
+As Hagen explains in [his article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/), we want to install `k3s` with no configurations and everything disabled. He describes what components are not installed in details.
 
 ```bash
 curl -sfL https://get.k3s.io | sh -s - \
@@ -26,11 +26,15 @@ curl -sfL https://get.k3s.io | sh -s - \
   --cluster-init
 ```
 
+After the installation, there should be some pods running (3). Don't be shocked if the pods are in the `ContainerCreating` or `Pending` state. This is because the pods can't communicate between each other because we disabled the CNI (`--flannel-backend=none`). We will later install Cilium, which will be the replacement of the Flannel CNI.
+
 ```bash
 kubectl get pods -A
 ```
 
 ## Install Helm
+
+Helm is the package manager for Kubernetes, so you should either install it directly (follow the [Helm docs](https://helm.sh/docs/intro/install/)) or use parts of Helm which are shipped with Cilium. We chose to install Helm directly, which is easily possible with this command:
 
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
@@ -38,18 +42,54 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 ## Install Cilium
 
+Cilium is a networking and security software for Kubernetes. Cilium is very fast, scalable and secure because it's built upon eBPF -- a revolutionary technology that can run sandboxed programs in the Linux kernel without recompiling the kernel or loading kernel modules.
+
+We could install Cilium with Helm like shown here:
+
 ```bash
 helm repo add cilium https://helm.cilium.io/
 helm repo update
+helm install cilium cilium/cilium
+```
+
+However, we wanted to install with their CLI and this is how you can do it. Firstly, install the Cilium CLI by running this code snipped:
+
+```bash
+CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
+CLI_ARCH=amd64
+curl -L --fail --remote-name-all https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-${CLI_ARCH}.tar.gz
+sudo tar xzvfC cilium-linux-${CLI_ARCH}.tar.gz /usr/local/bin
+rm cilium-linux-${CLI_ARCH}.tar.gz
+```
+
+Then you can install Cilium with your Server IP-Address:
+
+```bash
+cilium install \
+  --set k8sServiceHost=${API_SERVER_IP} \
+  --set k8sServicePort=6643 \
+  --set kubeProxyReplacement=true
+```
+
+Now we wait until Cilium says, everything is `OK` or `disabled`:
+
+```bash
+cilium status --wait
+```
+
+After a while, all pods should be `Running`.
+
+```bash
+kubectl get pods -A
 ```
 
 ## Setup Keel
 
-I always wanted a clean Continuous Integration (CI) and Continuous Delivery (CD) solution for my websites. This means, that I only want to push a commit to GitHub and the website automatically updates itself.
+We always wanted a clean Continuous Integration (CI) and Continuous Delivery (CD) solution for our websites. This means, that a specific commit message should trigger an automated process over GitHub, Docker Hub and our server, which in the end updates the corresponding website after about two minutes.
 
-Keel is a robust software tool which enables this feature for Kubernetes. I used Keel for pulling new Docker Images from Docker Hub by polling every few minutes. Moreover, Keel provides a beautiful dashboard where you can control the polling as well.
+Keel is a robust software tool which enables this feature for Kubernetes. We used Keel for pulling new Docker Images from Docker Hub by polling every few minutes. Moreover, Keel provides a beautiful dashboard where you can control the polling as well.
 
-In order to set up Keel with the admin dashboard, I created these files:
+In order to set up Keel with the admin dashboard, we created those files:
 
 -   `secret-dashboard.yaml` for the Admin Username and Password (not everyone should be able to access the dashboard)
 -   `keel.yaml` for the actual k3s configs (copied and adapted from [KeelHQ](https://github.com/keel-hq/keel/blob/9f0a7160bbdc3a107ad148933a4269f30e4e479c/deployment/deployment-template.yaml))
@@ -67,7 +107,7 @@ stringData:
     password: <password>
 ```
 
-```yaml
+```yaml {155-165}
 # keel.yaml
 ---
 apiVersion: v1
@@ -264,4 +304,33 @@ spec:
             app: keel
 ```
 
-After applying both files and managing the additional certificate for `keel.trueberryless.org`, the CI/CD worked perfectly.
+After applying both files and managing the additional certificate for `keel.trueberryless.org`, the Keel dashboard works perfectly. Moreover, every Kubernetes `Deployment` can opt in for automated Docker Hub Polling by setting some annotations:
+
+```yaml {8-12}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mutanuq
+    namespace: mutanuq
+    labels:
+        app: mutanuq
+    annotations:
+        keel.sh/policy: all
+        keel.sh/trigger: poll
+        keel.sh/pollSchedule: "@every 1m"
+        keel.sh/releaseNotes: "https://github.com/trueberryless-org/mutanuq/releases"
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: mutanuq
+    template:
+        metadata:
+            labels:
+                app: mutanuq
+        spec:
+            containers:
+                - name: mutanuq
+                  image: trueberryless/mutanuq
+                  imagePullPolicy: Always
+```

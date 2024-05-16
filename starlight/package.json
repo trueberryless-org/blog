@@ -12,6 +12,13 @@
   "dependencies": {
     "@astrojs/check": "^0.6.0",
     "@astrojs/starlight": "^0.22.2",
+    "@fontsource-variable/big-shoulders-display": "^5.0.20",
+    "@fontsource-variable/ibarra-real-nova": "^5.0.21",
+    "@fontsource-variable/jetbrains-mono": "^5.0.21",
+    "@fontsource/inria-sans": "^5.0.13",
+    "@fontsource/nova-script": "^5.0.12",
+    "@fontsource/nova-square": "^5.0.19",
+    "@fontsource/tauri": "^5.0.20",
     "astro": "^4.3.5",
     "sharp": "^0.32.5",
     "starlight-blog": "^0.7.0",

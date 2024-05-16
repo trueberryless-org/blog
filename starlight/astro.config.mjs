@@ -34,7 +34,12 @@ export default defineConfig({
                     },
                 }),
             ],
-            customCss: ["./src/styles/custom.css"],
+            customCss: [
+                "./src/styles/custom.css",
+                "@fontsource/nova-square/400.css",
+                "@fontsource/inria-sans/400.css",
+                "@fontsource-variable/jetbrains-mono/wght.css",
+            ],
             pagination: false,
         }),
     ],

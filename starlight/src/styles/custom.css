@@ -35,3 +35,15 @@
     justify-content: center;
     line-height: var(--size);
 }
+
+:is(h1, h2, h3, h4, h5, h6) {
+    font-family: "Nova Square", system-ui;
+}
+
+.content-panel :is(p, ul) {
+    font-family: "Inria Sans", sans-serif;
+}
+
+:is(code, code *) {
+    font-family: "JetBrains Mono Variable", sans-serif !important;
+}

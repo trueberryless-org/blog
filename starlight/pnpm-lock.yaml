@@ -11,6 +11,27 @@ dependencies:
   '@astrojs/starlight':
     specifier: ^0.22.2
     version: 0.22.2(astro@4.7.1)
+  '@fontsource-variable/big-shoulders-display':
+    specifier: ^5.0.20
+    version: 5.0.20
+  '@fontsource-variable/ibarra-real-nova':
+    specifier: ^5.0.21
+    version: 5.0.21
+  '@fontsource-variable/jetbrains-mono':
+    specifier: ^5.0.21
+    version: 5.0.21
+  '@fontsource/inria-sans':
+    specifier: ^5.0.13
+    version: 5.0.13
+  '@fontsource/nova-script':
+    specifier: ^5.0.12
+    version: 5.0.12
+  '@fontsource/nova-square':
+    specifier: ^5.0.19
+    version: 5.0.19
+  '@fontsource/tauri':
+    specifier: ^5.0.20
+    version: 5.0.20
   astro:
     specifier: ^4.3.5
     version: 4.7.1(typescript@5.4.5)
@@ -696,6 +717,34 @@ packages:
     resolution: {integrity: sha512-gDdnQrfDRXw5Y+PKHJDkpAUdf2pthYOthGcgy3JB8GOTQ3EL1h+755Ct/bGc4MR6jn+dgnQP47uHMWQaccvN6Q==}
     dependencies:
       '@expressive-code/core': 0.35.3
+    dev: false
+
+  /@fontsource-variable/big-shoulders-display@5.0.20:
+    resolution: {integrity: sha512-efCI4xa3eDHc+/C+5/IPugNi85YRinoUCIyYVJDH1eBL8G7I3+WJYGYhGu/R0U5cgrApyWSbVDvH+Kd1+ei7nQ==}
+    dev: false
+
+  /@fontsource-variable/ibarra-real-nova@5.0.21:
+    resolution: {integrity: sha512-XGV3jUrQ6oOmg7Nz7EG/jPxU++o+LPkNpFNwQcreZ1wdt5OC+V4X1tNJi4tjajzoRIBcS/PscHKfMFccVGxMVQ==}
+    dev: false
+
+  /@fontsource-variable/jetbrains-mono@5.0.21:
+    resolution: {integrity: sha512-LL/57KBbM3r0UMuN6tSeYExiBObt0QuGq49m1FyoDFIv1GAcuKU0EQ/GAKJ/yt3R8onOCD3f5X9Dln//G6uzRQ==}
+    dev: false
+
+  /@fontsource/inria-sans@5.0.13:
+    resolution: {integrity: sha512-Z6t0XTmN2zy851KKWO86FIPuq4ZWjqBj6sx2EoPPpgJWJpZRARanj2KprkyRDV9voUQcdRfcDbW4YJD7nJzeaQ==}
+    dev: false
+
+  /@fontsource/nova-script@5.0.12:
+    resolution: {integrity: sha512-9B7k1BSNpDpEYnet1mAEEuzsvxXru4YxkBOg3qK8pv1H1ffVmLCnw3unXs1GN9BdxgtWzEB1MMTjPdl5NnwAAg==}
+    dev: false
+
+  /@fontsource/nova-square@5.0.19:
+    resolution: {integrity: sha512-FQE+TgEjHoECc0ceVDESIjjBOlPpL6ZnEuJ7SVUe/HcTguTMVs70XYfzSBXzDPWn0P9NACequoJdWoWSIV23Xg==}
+    dev: false
+
+  /@fontsource/tauri@5.0.20:
+    resolution: {integrity: sha512-cekklkzeAJcb9ylkcjhrdWjB6JYnCYWozR2u3oRQOgFZDbWIMBxtb5mQT9oRTlpk3vPyG4Xv90z24Xxv3/U55w==}
     dev: false
 
   /@img/sharp-darwin-arm64@0.33.3:
