@@ -41,6 +41,7 @@ export default defineConfig({
                 "@fontsource-variable/jetbrains-mono/wght.css",
             ],
             pagination: false,
+            credits: true,
         }),
     ],
     redirects: {
