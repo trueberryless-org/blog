@@ -30,6 +30,7 @@ export default defineConfig({
             ],
             customCss: ["./src/styles/custom.css"],
             pagination: false,
+            credits: true,
         }),
     ],
     redirects: {
