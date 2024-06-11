@@ -43,6 +43,9 @@ dependencies:
   starlight-blog:
     specifier: ^0.7.0
     version: 0.7.0(@astrojs/starlight@0.24.0)(astro@4.9.3)
+  starlight-view-modes:
+    specifier: ^0.5.1
+    version: 0.5.1(@astrojs/starlight@0.24.0)(astro@4.9.3)
   typescript:
     specifier: ^5.4.5
     version: 5.4.5
@@ -4507,6 +4510,17 @@ packages:
       astro: 4.9.3(typescript@5.4.5)
       astro-remote: 0.3.2
       github-slugger: 2.0.0
+    dev: false
+
+  /starlight-view-modes@0.5.1(@astrojs/starlight@0.24.0)(astro@4.9.3):
+    resolution: {integrity: sha512-wptYFMFt50TZoUDsXNKXHbmwEbeFVm+qy5ORmrsY7ri5+KeaJgawPXLPe8uAG2YZyMtNfd5hKqEaxTy0emPb7g==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.16.0'
+      astro: '>=4.0.0'
+    dependencies:
+      '@astrojs/starlight': 0.24.0(astro@4.9.3)
+      astro: 4.9.3(typescript@5.4.5)
     dev: false
 
   /stdin-discarder@0.2.2:

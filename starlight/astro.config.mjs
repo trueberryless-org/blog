@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightBlog from "starlight-blog";
+import starlightViewModes from "starlight-view-modes";
 
 // https://astro.build/config
 export default defineConfig({
@@ -32,6 +33,9 @@ export default defineConfig({
                             url: "https://www.linkedin.com/in/clemens-schlipfinger/",
                         },
                     },
+                }),
+                starlightViewModes({
+                    zenModeShowTableOfContents: false,
                 }),
             ],
             customCss: [
