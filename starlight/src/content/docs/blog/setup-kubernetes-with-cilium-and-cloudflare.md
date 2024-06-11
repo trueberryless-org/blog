@@ -1,6 +1,6 @@
 ---
 title: Setting up Kubernetes with Cilium and Cloudflare
-date: 2024-05-13
+date: 2024-06-11
 tags:
     - Deployment
     - Kubernetes
@@ -83,6 +83,50 @@ After a while, all pods should be `Running`.
 kubectl get pods -A
 ```
 
+## Setup Certificate Manager with Cloudflare
+
+In order to be able to create certificates for each subdomain, it is important to apply a certificate issuer which handles certificate requests and resolves them at some provider. We chose Cloudflare as our issuer and here is the setup which you need to apply to your kubernetes cluster. For further information you can check out the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/).
+
+```yaml
+# cert-issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+    name: acme-issuer
+    namespace: cert-manager
+spec:
+    acme:
+        email: <Email for updates>
+        server: https://acme-v02.api.letsencrypt.org/directory
+        privateKeySecretRef:
+            name: acme-issuer
+        solvers:
+            - dns01:
+                  cloudflare:
+                      email: <Cloudflare account Email>
+                      apiTokenSecretRef:
+                          name: cloudflare-api-token-secret
+                          key: api-token
+```
+
+As you may have spotted above, we also need a secret for the API token which authenticates that this issuer is allowed to request certificates. Therefore, we create a secret with an unencrypted `API Token` from Cloudflare.
+
+Nowadays we create a token by going to your Cloudflare dashboard, then click on your profile and select the tab `API Tokens`. Here you can generate a specific token for your issuer or use the Global API Key (not recommended any more). A more detailed description about the tokens, can be found in the [Cloudflare docs](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
+
+After applying this secret to Kubernetes, the issuer should be ready to resolve some bad boys!
+
+```yaml
+# secret-cloudflare.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+    name: cloudflare-api-key-secret
+    namespace: cert-manager
+type: Opaque
+stringData:
+    api-key: <Cloudflare API Token (not encrypted)>
+```
+
 ## Setup Keel
 
 We always wanted a clean Continuous Integration (CI) and Continuous Delivery (CD) solution for our websites. This means, that a specific commit message should trigger an automated process over GitHub, Docker Hub and our server, which in the end updates the corresponding website after about two minutes.
@@ -107,7 +151,7 @@ stringData:
     password: <password>
 ```
 
-```yaml {155-165}
+```yaml {157-160,162-165} collapse={1-155, 166-194}
 # keel.yaml
 ---
 apiVersion: v1
@@ -306,7 +350,7 @@ spec:
 
 After applying both files and managing the additional certificate for `keel.trueberryless.org`, the Keel dashboard works perfectly. Moreover, every Kubernetes `Deployment` can opt in for automated Docker Hub Polling by setting some annotations:
 
-```yaml {8-12}
+```yaml {8-12} collapse={15-26}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

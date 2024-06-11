@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightBlog from "starlight-blog";
 import starlightViewModes from "starlight-view-modes";
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 
 // https://astro.build/config
 export default defineConfig({
@@ -46,6 +47,9 @@ export default defineConfig({
             ],
             pagination: false,
             credits: true,
+            expressiveCode: {
+                plugins: [pluginCollapsibleSections()],
+            },
         }),
     ],
     redirects: {
