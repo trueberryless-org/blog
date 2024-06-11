@@ -109,6 +109,18 @@ spec:
                           key: api-token
 ```
 
+You can apply a file to the Kubernetes cluster, by running this k8s command:
+
+```bash
+kubectl apply -f cluster-issuer.yaml
+```
+
+If you want to delete the resource in the Kubernetes cluster, the command is pretty straight forward:
+
+```bash
+kubectl delete -f cluster-issuer.yaml
+```
+
 As you may have spotted above, we also need a secret for the API token which authenticates that this issuer is allowed to request certificates. Therefore, we create a secret with an unencrypted `API Token` from Cloudflare.
 
 Nowadays we create a token by going to your Cloudflare dashboard, then click on your profile and select the tab `API Tokens`. Here you can generate a specific token for your issuer or use the Global API Key (not recommended any more). A more detailed description about the tokens, can be found in the [Cloudflare docs](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
@@ -125,6 +137,103 @@ metadata:
 type: Opaque
 stringData:
     api-key: <Cloudflare API Token (not encrypted)>
+```
+
+You can now use this issuer by applying this file which will hopefully create a certificate:
+
+```yaml
+# mutanuq-certificat.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+    name: mutanuq
+    namespace: mutanuq
+spec:
+    secretName: mutanuq
+    issuerRef:
+        name: acme-issuer
+        kind: ClusterIssuer
+    dnsNames:
+        - "mutanuq.trueberryless.org"
+```
+
+It usually takes around 90 seconds to authenticate the request once applied. You can check the current status of the request by running this kubernetes command:
+
+```bash
+kubectl describe certificaterequests.cert-manager.io -n mutanuq
+```
+
+:::tip
+The `-n` option stands for namespace.
+:::
+
+Then you can use this certificate in your Ingress controller:
+
+```yaml collapse={1-42} {61-64}
+# mutanuq.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mutanuq
+    namespace: mutanuq
+    labels:
+        app: mutanuq
+    annotations:
+        keel.sh/policy: all
+        keel.sh/trigger: poll
+        keel.sh/pollSchedule: "@every 10s"
+        keel.sh/releaseNotes: "https://github.com/trueberryless-org/mutanuq/releases"
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: mutanuq
+    template:
+        metadata:
+            labels:
+                app: mutanuq
+        spec:
+            containers:
+                - name: mutanuq
+                  image: trueberryless/mutanuq
+                  imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: mutanuq
+    namespace: mutanuq
+    annotations:
+        cert-manager.io/issuer: acme-issuer
+spec:
+    selector:
+        app: mutanuq
+    ports:
+        - name: http
+          port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: mutanuq
+    namespace: mutanuq
+spec:
+    rules:
+        - host: mutanuq.trueberryless.org
+          http:
+              paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: mutanuq
+                            port:
+                                number: 80
+
+    tls:
+        - hosts:
+              - mutanuq.trueberryless.org
+          secretName: mutanuq
 ```
 
 ## Setup Keel
@@ -350,7 +459,7 @@ spec:
 
 After applying both files and managing the additional certificate for `keel.trueberryless.org`, the Keel dashboard works perfectly. Moreover, every Kubernetes `Deployment` can opt in for automated Docker Hub Polling by setting some annotations:
 
-```yaml {8-12} collapse={15-26}
+```yaml {8-12} collapse={15-63}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -377,4 +486,45 @@ spec:
                 - name: mutanuq
                   image: trueberryless/mutanuq
                   imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: mutanuq
+    namespace: mutanuq
+    annotations:
+        cert-manager.io/issuer: acme-issuer
+spec:
+    selector:
+        app: mutanuq
+    ports:
+        - name: http
+          port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: mutanuq
+    namespace: mutanuq
+spec:
+    rules:
+        - host: mutanuq.trueberryless.org
+          http:
+              paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: mutanuq
+                            port:
+                                number: 80
+
+    tls:
+        - hosts:
+              - mutanuq.trueberryless.org
+          secretName: mutanuq
 ```
+
+## Celebrate with a Coffee!
+
+Congratulations, you've successfully set up Kubernetes with Cilium and Cloudflare! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
