@@ -46,6 +46,7 @@ cilium status --wait
 ```
 
 ```yaml
+# cert-manager.yaml
 # secret-cloudflare.yaml
 apiVersion: v1
 kind: Secret
