@@ -12,6 +12,71 @@ authors:
 
 Working with Docker Containers can be hard. However, there are tools which enhance the management of containers, like Kubernetes. Actually, Kubernetes is the only tool to my knowledge which acts as a management software for Docker Containers. Kubernetes is well-integrated in almost all cloud providers, like Google Cloud, Azure and AWS. As a result, it has a standardized `yaml`-syntax, which is great for small developers because they can switch between `The Big Three` with low effort.
 
+## tl;dr
+
+Install everything and then apply cert-manager. ez
+
+```bash
+curl -sfL https://get.k3s.io | sh -s - \
+  --flannel-backend=none \
+  --disable-kube-proxy \
+  --disable servicelb \
+  --disable-network-policy \
+  --disable traefik \
+  --cluster-init
+
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+helm repo add cilium https://helm.cilium.io/
+helm repo update
+helm install cilium cilium/cilium
+
+CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
+CLI_ARCH=amd64
+curl -L --fail --remote-name-all https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-${CLI_ARCH}.tar.gz
+sudo tar xzvfC cilium-linux-${CLI_ARCH}.tar.gz /usr/local/bin
+rm cilium-linux-${CLI_ARCH}.tar.gz
+
+cilium install \
+  --set k8sServiceHost=${API_SERVER_IP} \
+  --set k8sServicePort=6643 \
+  --set kubeProxyReplacement=true
+
+cilium status --wait
+```
+
+```yaml
+# secret-cloudflare.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+    name: cloudflare-api-key-secret
+    namespace: cert-manager
+type: Opaque
+stringData:
+    api-key: <Cloudflare API Token (not encrypted)>
+---
+# cert-issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+    name: acme-issuer
+    namespace: cert-manager
+spec:
+    acme:
+        email: <Email for updates>
+        server: https://acme-v02.api.letsencrypt.org/directory
+        privateKeySecretRef:
+            name: acme-issuer
+        solvers:
+            - dns01:
+                  cloudflare:
+                      email: <Cloudflare account Email>
+                      apiTokenSecretRef:
+                          name: cloudflare-api-token-secret
+                          key: api-token
+```
+
 ## Install k3s
 
 As Hagen explains in [his article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/), we want to install `k3s` with no configurations and everything disabled. He describes what components are not installed in details.
