@@ -1,6 +1,7 @@
 ---
 title: Setting up Kubernetes with Cilium and Cloudflare
 date: 2024-06-11
+lastUpdated: 2024-07-25
 tags:
     - Deployment
     - Kubernetes
@@ -147,6 +148,102 @@ After a while, all pods should be `Running`.
 
 ```bash
 kubectl get pods -A
+```
+
+Last but not least, you can apply some resources for Cilium:
+
+```yaml
+# announce.yaml
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+    name: default-l2-announcement-policy
+    namespace: kube-system
+spec:
+    externalIPs: true
+    loadBalancerIPs: true
+```
+
+```yaml
+# ip-pool.yaml
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumLoadBalancerIPPool
+metadata:
+    name: "first-pool"
+spec:
+    blocks:
+        - start: "192.168.0.240"
+          stop: "192.168.0.249"
+```
+
+Additionally you should upgrade the cilium config. In order to do that with the proper values, first create this file in the root directory where you wanna manage the k3s cluster. Later you could also apply some hubble and prometheus related properties if you want to use [Grafana](https://grafana.com/) or so (open the collapsed lines if you want to use our config as well).
+
+```yaml collapse={32-59}
+#cilium-config.yaml
+k8sServiceHost: 127.0.0.1
+k8sServicePort: 6443
+
+kubeProxyReplacement: true
+l2announcements:
+    enabled: true
+
+externalIPs:
+    enabled: true
+
+k8sClientRateLimit:
+    qps: 50
+    burst: 200
+
+operator:
+    replicas: 1
+    rollOutPods: true
+    prometheus:
+        enabled: true
+
+rollOutCiliumPods: true
+
+ingressController:
+    enabled: true
+    default: true
+    loadbalancerMode: shared
+    service:
+        annotations:
+            io.cilium/lb-ipam-ips: 192.168.0.240
+
+hubble:
+    relay:
+        enabled: true
+    ui:
+        enabled: true
+    metrics:
+        serviceMonitor:
+            enabled: true
+        enableOpenMetrics: true
+        enabled:
+            - dns
+            - drop
+            - tcp
+            - icmp
+            - port-distribution
+            - "flow:sourceContext=workload-name|reserved-identity;destinationContext=workload-name|reserved-identity"
+            - "kafka:labelsContext=source_namespace,source_workload,destination_namespace,destination_workload,traffic_direction;sourceContext=workload-name|reserved-identity;destinationContext=workload-name|reserved-identity"
+            - "httpV2:exemplars=true;labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction;sourceContext=workload-name|reserved-identity;destinationContext=workload-name|reserved-identity"
+        dashboards:
+            enabled: true
+            namespace: monitoring
+            annotations:
+                grafana_folder: "Hubble"
+
+prometheus:
+    enabled: true
+    serviceMonitor:
+        enabled: true
+```
+
+Run this command to upgrade:
+
+```bash
+cilium upgrade -f cilium-config.yaml
 ```
 
 ## Setup Certificate Manager with Cloudflare
@@ -594,3 +691,38 @@ spec:
 ## Celebrate with a Coffee!
 
 Congratulations, you've successfully set up Kubernetes with Cilium and Cloudflare! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
+
+## Troubleshooting
+
+### Cilium-ingress has no External-IP
+
+Make sure that the `ip-pool` includes the address specified by the annotations in the `config.yaml` file.
+
+```yaml
+# ip-pool.yaml
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumLoadBalancerIPPool
+metadata:
+    name: "first-pool"
+spec:
+    blocks:
+        - start: "192.168.0.240" # 240 included for ingress
+          stop: "192.168.0.249"
+```
+
+```yaml
+#cilium-config.yaml
+ingressController:
+    enabled: true
+    default: true
+    loadbalancerMode: shared
+    service:
+        annotations:
+            io.cilium/lb-ipam-ips: 192.168.0.240 # this must be within range
+```
+
+:::note
+Also in some cases, other ingress controllers get the annotated address before the Cilium IC can access it, so it would still be pending...
+:::
+
+If you don't deploy locally but on one of `The Big Three`, please check out some other documentation on why the External IP is still pending. It's mostly their obligation to provide you with an address.
