@@ -1,7 +1,7 @@
 ---
 title: Setting up Kubernetes with Cilium and Cloudflare
 date: 2024-06-11
-lastUpdated: 2024-07-25
+lastUpdated: 2024-07-27
 tags:
     - Deployment
     - Kubernetes
@@ -286,7 +286,14 @@ kubectl delete -f cluster-issuer.yaml
 
 As you may have spotted above, we also need a secret for the API token which authenticates that this issuer is allowed to request certificates. Therefore, we create a secret with an unencrypted `API Token` from Cloudflare.
 
-Nowadays we create a token by going to your Cloudflare dashboard, then click on your profile and select the tab `API Tokens`. Here you can generate a specific token for your issuer or use the Global API Key (not recommended any more). A more detailed description about the tokens, can be found in the [Cloudflare docs](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
+Nowadays we create a token by going to your Cloudflare dashboard, then click on your profile and select the tab `API Tokens`. Here you can generate a specific token for your issuer or use the Global API Key (not recommended any more). The recommended solution is to create a API token with two permissions (custom token):
+
+-   Zone - DNS - Edit
+-   Zone - Zone - Read
+
+![Cloudflare API Token](../../../assets/cloudflare/cloudflare_api_token.png)
+
+A more detailed description about the tokens, can be found in the [Cloudflare docs](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
 
 After applying this secret to Kubernetes, the issuer should be ready to resolve some bad boys!
 
@@ -320,7 +327,8 @@ spec:
         - "mutanuq.trueberryless.org"
 ```
 
-It usually takes around 90 seconds to authenticate the request once applied. You can check the current status of the request by running this kubernetes command:
+It usually takes around 90 seconds to authenticate the request once applied. You can check the current status of the request by running this kubernetes command.
+If it takes longer than 2 minutes, maybe some tips in [#Troubleshooting](#no-cloudflare-certificate-approval) can help you.
 
 ```bash
 kubectl describe certificaterequests.cert-manager.io -n mutanuq
@@ -726,3 +734,33 @@ Also in some cases, other ingress controllers get the annotated address before t
 :::
 
 If you don't deploy locally but on one of `The Big Three`, please check out some other documentation on why the External IP is still pending. It's mostly their obligation to provide you with an address.
+
+### No Cloudflare Certificate Approval
+
+There can be some problem when the certificate won't get approved by Cloudflare.
+
+#### Wrong API token
+
+First make sure that the Cloudflare API token is correct. To make 100 percent sure, create a new one and put it (not base64 encoded) into this file:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+    name: cloudflare-api-key-secret
+    namespace: cert-manager
+type: Opaque
+stringData:
+    api-key: <Cloudflare API Token (not encrypted)>
+```
+
+#### Max auth failures reached
+
+We once ran into the error `Error: 9109: Max auth failures reached, please check your Authorization header.`. Just wait a few hours, delete the resource and apply it again:
+
+```bash
+kubectl delete -f certificate.yaml
+kubectl apply -f certificate.yaml
+```
+
+Hopefully, you're now good to go!

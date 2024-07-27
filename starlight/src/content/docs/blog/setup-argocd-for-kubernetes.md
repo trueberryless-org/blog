@@ -48,6 +48,8 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
+## Certificate
+
 Additionally, we'll need a certificate:
 
 ```yaml
@@ -65,7 +67,11 @@ spec:
         - "argo-cd.trueberryless.org"
 ```
 
-and the ingress controller, which we use on every (sub)domain:
+Apply this resource by running `kubectl apply -f certificate.yaml`.
+
+## Ingress Controller
+
+And we'll need a ingress controller which is managed by Cilium:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -92,4 +98,58 @@ spec:
           secretName: argocd
 ```
 
-After applying both and waiting a little bit (request of certificate has to be approved by Cloudflare), we should see the UI under [`https://argo-cd.trueberryless.org`](https://argo-cd.trueberryless.org).
+Apply this resource by running `kubectl apply -f argocd-ingress.yaml`.
+
+## Deactivate TSL within Argo CD
+
+With the certificate the connection between the client and server is secured. However, there is still a self-signed certificate within the Argo CD services, which we don't necessarily need. We can therefore deactivate the security of the Argo CD server, by editing the property `server.insecure`.
+
+In order to do that, we first run this command:
+
+```bash
+kubectl edit cm argocd-cmd-params-cm -n argocd
+```
+
+which will hopefully open a file in vim or neovim (otherwise would be cringe if you ask us, LMAO). The file should like something like this:
+
+```yaml {21-22}
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+data:
+    server.insecure: "true"
+kind: ConfigMap
+metadata:
+    annotations:
+        kubectl.kubernetes.io/last-applied-configuration: |
+            {"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"argocd-cmd-params-cm","app.kubernetes.io/part-of":"argocd"},"name":"arg
+    creationTimestamp: "2024-07-27T11:15:28Z"
+    labels:
+        app.kubernetes.io/name: argocd-cmd-params-cm
+        app.kubernetes.io/part-of: argocd
+    name: argocd-cmd-params-cm
+    namespace: argocd
+    resourceVersion: "239710156"
+    uid: 5f53d26b-3adf-4ed9-9807-c3da847335a2
+data:
+    server.insecure: "true"
+```
+
+The last two lines will probably be not there at first, but this is exactly the setting we want to achieve. Go ahead and add those two lines (marked above) and save the file (`Esc` → `:wq` if you're cool).
+
+Restart the Argo CD Server by running and waiting till the rollout is completed:
+
+```bash
+kubectl rollout restart deploy argocd-server -n argocd
+kubectl rollout status deploy argocd-server -n argocd
+```
+
+After all those steps, we should now see the UI under [`https://argo-cd.trueberryless.org`](https://argo-cd.trueberryless.org) (password protected).
+
+![Argo CD UI Dashboard](../../../assets/argocd/argocd_ui_dashboard.png)
+
+## Celebrate with a Coffee!
+
+Congratulations, you've successfully set up Argo CD with k3s and Cilium! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
