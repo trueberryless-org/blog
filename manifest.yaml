@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blog
-          image: trueberryless/blog:latest
+          image: trueberryless/blog:${NEW_TAG}
           imagePullPolicy: Always
 ---
 apiVersion: v1
@@ -25,7 +25,7 @@ kind: Service
 metadata:
   name: blog
   namespace: blog
-  annotations: 
+  annotations:
     cert-manager.io/issuer: acme-issuer
 spec:
   selector:
@@ -33,3 +33,7 @@ spec:
   ports:
     - name: http
       port: 80
+  template:
+    spec:
+      containers:
+        - image: trueberryless/blog:${NEW_TAG}
