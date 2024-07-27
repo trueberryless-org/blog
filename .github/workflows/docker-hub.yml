@@ -131,6 +131,12 @@ jobs:
                   json: '{ "major": ${{ env.MAJOR }}, "minor": ${{ env.MINOR }}, "patch": ${{ env.PATCH }} }'
                   dir: ".github/artifacts/"
 
+            
+            - name: Update manifest.yaml file
+              run: |
+                NEW_TAG="${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}"
+                yq eval '.spec.template.spec.containers[0].image = \"trueberryless/blog:${NEW_TAG}\"' -i manifest.yaml
+
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: update version.json (automated)
