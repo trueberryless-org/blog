@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blog
-          image: 'trueberryless/blog:'
+          image: 'trueberryless/blog:0.2.8'
           imagePullPolicy: Always
 ---
 apiVersion: v1
@@ -36,4 +36,4 @@ spec:
   template:
     spec:
       containers:
-        - image: 'trueberryless/blog:'
+        - image: 'trueberryless/blog:0.2.8'
