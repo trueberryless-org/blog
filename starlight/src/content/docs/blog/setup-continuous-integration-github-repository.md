@@ -1,6 +1,6 @@
 ---
 title: Setting up Continuous deployment in a GitHub repository
-date: 2069-04-20
+date: 2024-07-28
 tags:
     - CI/CD
     - Deployment
@@ -28,7 +28,7 @@ Your GitHub repository must fulfil these conditions:
 
 ## Create workflow file(s)
 
-GitHub Actions are special jobs in GitHub which mostly run on Linux servers and can be controlled by creating `yaml` files in the directory `.github/workflows`. These special files can controll after which events these jobs should run and they give you a lot of freedom. As a regular GitHub Action user I can tell you, get used to rewriting your `yaml` files pretty often because you often forget to think about the small details. But without further adoo, let's jump straight into creating a fitting `deployment.yaml` file, which will do some jobs for us:
+GitHub Actions are special jobs in GitHub which mostly run on Linux servers and can be controlled by creating `yaml` files in the directory `.github/workflows`. These special files can controll after which events these jobs should run and they give you a lot of freedom. As a regular GitHub Action user I can tell you, get used to rewriting your `yaml` files pretty often because you often forget to think about the small details. But without further ado, let's jump straight into creating a fitting `deployment.yaml` file, which will do some jobs for us:
 
 -   Push a new docker image to Docker Hub (with the newest version).
 -   Update the `manifest/deployment.yaml` file, so Argo CD gets notified about the new tagged image.
