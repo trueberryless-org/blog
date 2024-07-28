@@ -153,3 +153,7 @@ After all those steps, we should now see the UI under [`https://argo-cd.trueberr
 ## Celebrate with a Coffee!
 
 Congratulations, you've successfully set up Argo CD with k3s and Cilium! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
+
+## Continuation
+
+Be continued for our [next blog](./setup-continuous-integration-github-repository) which will describe how to set up a GitHub repository which can then be deployed via Argo CD.
