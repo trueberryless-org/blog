@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blog
-          image: trueberryless/blog:latest
+          image: trueberryless/blog:${NEW_TAG}
           imagePullPolicy: Always
 ---
 apiVersion: v1
@@ -33,3 +33,7 @@ spec:
   ports:
     - name: http
       port: 80
+  template:
+    spec:
+      containers:
+        - image: trueberryless/blog:${NEW_TAG}
