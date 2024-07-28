@@ -338,6 +338,8 @@ kubectl describe certificaterequests.cert-manager.io -n mutanuq
 The `-n` option stands for namespace.
 :::
 
+## Example app [`mutanuq`](https://mutanuq.trueberryless.org)
+
 Then you can use this certificate in your Ingress controller:
 
 ```yaml collapse={1-42} {61-64}

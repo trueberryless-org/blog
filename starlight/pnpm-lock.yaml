@@ -47,6 +47,9 @@ importers:
       starlight-blog:
         specifier: ^0.11.1
         version: 0.11.1(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))(astro@4.12.2(typescript@5.5.4))
+      starlight-image-zoom:
+        specifier: ^0.7.0
+        version: 0.7.0(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))
       starlight-view-modes:
         specifier: ^0.6.0
         version: 0.6.0(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))(astro@4.12.2(typescript@5.5.4))
@@ -2011,6 +2014,12 @@ packages:
     peerDependencies:
       '@astrojs/starlight': '>=0.24.0'
       astro: '>=4.8.6'
+
+  starlight-image-zoom@0.7.0:
+    resolution: {integrity: sha512-XDs9qT5pU6B5p86qP9iMSaSQY1yr4Ns/KOZ4DU3yzkJRaWLvvMBUkrIDGJPeMZVioJyiok/FRNJD2zR5pTPjKA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.22.0'
 
   starlight-view-modes@0.6.0:
     resolution: {integrity: sha512-mYMTE8Zsy9j8Yj+3ywl1FH0IW0uh66GSZLIuV+Hs4oeQRA8DYkfRcsKNKWic4bYGquBI9OMfHKDQl3XCwhCAMw==}
@@ -4932,6 +4941,13 @@ snapshots:
       marked: 12.0.2
       marked-plaintify: 1.0.1(marked@12.0.2)
       ultrahtml: 1.5.3
+
+  starlight-image-zoom@0.7.0(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4))):
+    dependencies:
+      '@astrojs/starlight': 0.24.5(astro@4.12.2(typescript@5.5.4))
+      rehype-raw: 7.0.0
+      unist-util-visit: 5.0.0
+      unist-util-visit-parents: 6.0.1
 
   starlight-view-modes@0.6.0(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))(astro@4.12.2(typescript@5.5.4)):
     dependencies:

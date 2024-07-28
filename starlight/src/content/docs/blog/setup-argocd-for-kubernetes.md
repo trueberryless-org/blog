@@ -1,6 +1,7 @@
 ---
 title: Setting up Argo CD in a k3s cluster
-date: 2024-07-30
+date: 2024-07-27
+lastUpdated: 2024-07-28
 tags:
     - ArgoCD
     - Deployment
@@ -149,6 +150,140 @@ kubectl rollout status deploy argocd-server -n argocd
 After all those steps, we should now see the UI under [`https://argo-cd.trueberryless.org`](https://argo-cd.trueberryless.org) (password protected).
 
 ![Argo CD UI Dashboard](../../../assets/argocd/argocd_ui_dashboard.png)
+
+:::note
+The credentials of Argo CD UI consist of a user and a password. The user is always `admin` and you can get your password by running:
+
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+:::
+
+## Add manifest to repository
+
+Now in order to create a new application in Argo CD (either UI or CLI — we use UI cause we didn't setup CLI), we need to prepare the Git repository. Because the repository is the single source of truth, this is also the place, where we define all the kubernetes resources which should be created by Argo CD.
+
+We recommend creating a new folder in the git repository called something like `manifest`. In this folder, we'll create a few files:
+
+-   `certificate.yaml`:
+
+    ```yaml
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    metadata:
+    name: mutanuq
+    namespace: mutanuq
+    spec:
+    secretName: mutanuq
+    issuerRef:
+        name: acme-issuer
+        kind: ClusterIssuer
+    dnsNames:
+        - "mutanuq.trueberryless.org"
+    ```
+
+-   `deployment.yaml`:
+
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+        name: mutanuq
+        namespace: mutanuq
+        labels:
+            app: mutanuq
+    spec:
+        replicas: 3
+        selector:
+            matchLabels:
+                app: mutanuq
+        template:
+            metadata:
+                labels:
+                    app: mutanuq
+            spec:
+                containers:
+                    - name: mutanuq
+                    image: "trueberryless/mutanuq"
+                    imagePullPolicy: Always
+    ```
+
+-   `service.yaml`:
+
+    ```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+    name: mutanuq
+    namespace: mutanuq
+    annotations:
+        cert-manager.io/issuer: acme-issuer
+    spec:
+    selector:
+        app: mutanuq
+    ports:
+        - name: http
+        port: 80
+    ```
+
+-   `ingress.yaml`:
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+    name: mutanuq
+    namespace: mutanuq
+    spec:
+    rules:
+        - host: mutanuq.trueberryless.org
+        http:
+            paths:
+            - path: /
+                pathType: Prefix
+                backend:
+                service:
+                    name: mutanuq
+                    port:
+                    number: 80
+
+    tls:
+    - hosts:
+        - mutanuq.trueberryless.org
+        secretName: mutanuq
+    ```
+
+These files are basically the exact same files mentioned in the [other post](./setup-kubernetes-with-cilium-and-cloudflare#example-app-mutanuq) but separated into four files because this gives us the advantage to manipulate the manifest from GitHub Actions. But first things first, you'll see how to set up the manifest with GitHub actions in the [next post](./setup-continuous-integration-github-repository).
+
+## Create new application in Argo CD UI
+
+You'll probably see the big `NEW APP` button in the Argo CD UI. Click it and create a new application with adapted properties from below:
+
+-   Application Name: `mutanuq`
+-   Project Name: `default`
+-   Sync Policy: Find out more in [this post](./setup-continuous-integration-github-repository) / leave `Manual` for now
+-   Repository URL: `https://github.com/trueberryless-org/mutanuq`
+-   Revision: `HEAD`
+-   Path: `manifest`
+-   Cluster URL: `https://kubernetes.default.svc`
+-   Namespace: `mutanuq`
+
+Optionally — if you have [the CLI installed](https://argo-cd.readthedocs.io/en/stable/cli_installation/) — you can run this command for the same output:
+
+```bash
+argocd app create mutanuq \
+  --project default \
+  --repo https://github.com/trueberryless-org/mutanuq \
+  --revision HEAD \
+  --path manifest \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace mutanuq
+```
+
+Now you can hopefully see your website being deployed in the UI. This process can take some time because for example the certificate request needs to be approved. A healthy application should look something like this:
+
+![Argo CD Example Application UI](../../../assets/argocd/argocd_example_application_ui.png)
 
 ## Celebrate with a Coffee!
 
