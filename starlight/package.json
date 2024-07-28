@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@astrojs/check": "^0.7.0",
-        "@astrojs/starlight": "^0.24.1",
+        "@astrojs/starlight": "^0.24.5",
         "@expressive-code/plugin-collapsible-sections": "^0.35.3",
         "@fontsource-variable/big-shoulders-display": "^5.0.20",
         "@fontsource-variable/ibarra-real-nova": "^5.0.21",
@@ -20,10 +20,10 @@
         "@fontsource/nova-script": "^5.0.12",
         "@fontsource/nova-square": "^5.0.19",
         "@fontsource/tauri": "^5.0.20",
-        "astro": "^4.10.2",
+        "astro": "^4.12.2",
         "sharp": "^0.32.6",
-        "starlight-blog": "^0.7.1",
-        "starlight-view-modes": "^0.5.2",
-        "typescript": "^5.4.5"
+        "starlight-blog": "^0.11.1",
+        "starlight-view-modes": "^0.6.0",
+        "typescript": "^5.5.4"
     }
 }
