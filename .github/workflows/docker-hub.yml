@@ -66,3 +66,8 @@ jobs:
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: update deployment.json container image (automated)
+
+            - uses: ncipollo/release-action@v1
+              with:
+                tag: ${{ env.IMAGE_TAG }}
+                body: "A docker image has been deployed to [Docker Hub](https://hub.docker.com/r/${{ env.IMAGE_NAME }}/tags)."
