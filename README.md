@@ -2,8 +2,6 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L3QTFWA)
 
-![ArgoCD Application Status](https://argo-cd.trueberryless.org/api/badge?name=blog)
-
 ## Installation
 
 Please install [PnPm](https://pnpm.io/) beforehand.
