@@ -40,6 +40,7 @@ name: Deployment
 
 on:
     push:
+    
         branches: [main]
     merge_group:
     pull_request:

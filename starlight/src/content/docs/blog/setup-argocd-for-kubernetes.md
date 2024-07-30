@@ -113,7 +113,7 @@ kubectl edit cm argocd-cmd-params-cm -n argocd
 
 which will hopefully open a file in vim or neovim (otherwise would be cringe if you ask us, LMAO). The file should like something like this:
 
-```yaml {21-22}
+```yaml {21-24}
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
 # reopened with the relevant failures.
@@ -136,6 +136,8 @@ metadata:
     uid: 5f53d26b-3adf-4ed9-9807-c3da847335a2
 data:
     server.insecure: "true"
+    # application.namespaces: "*"
+    # statusbadge.enabled: "true"
 ```
 
 The last two lines will probably be not there at first, but this is exactly the setting we want to achieve. Go ahead and add those two lines (marked above) and save the file (`Esc` → `:wq` if you're cool).
