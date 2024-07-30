@@ -10,7 +10,7 @@ spec:
       github:
         owner: trueberryless-org
         repo: blog
-      requeueAfterSeconds: 1800
+      requeueAfterSeconds: 30
   template:
     metadata:
       name: 'blog-{{.branch}}-{{.number}}'
