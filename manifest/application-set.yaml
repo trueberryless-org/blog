@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: blog
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - pullRequest:
+      github:
+        owner: trueberryless-org
+        repo: blog
+      requeueAfterSeconds: 1800
+  template:
+    metadata:
+      name: 'blog-{{.branch}}-{{.number}}'
+    spec:
+      source:
+        repoURL: 'https://github.com/trueberryless-org/blog.git'
+        targetRevision: '{{.head_sha}}'
+        path: kubernetes/
+        helm:
+          parameters:
+          - name: "image.tag"
+            value: "pull-{{.head_sha}}"
+      project: "blog"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: blog
