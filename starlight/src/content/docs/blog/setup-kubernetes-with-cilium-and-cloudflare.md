@@ -40,7 +40,7 @@ rm cilium-linux-${CLI_ARCH}.tar.gz
 
 cilium install \
   --set k8sServiceHost=${API_SERVER_IP} \
-  --set k8sServicePort=6643 \
+  --set k8sServicePort=6443 \
   --set kubeProxyReplacement=true
 
 cilium status --wait
@@ -134,7 +134,7 @@ Then you can install Cilium with your Server IP-Address:
 ```bash
 cilium install \
   --set k8sServiceHost=${API_SERVER_IP} \
-  --set k8sServicePort=6643 \
+  --set k8sServicePort=6443 \
   --set kubeProxyReplacement=true
 ```
 
