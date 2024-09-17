@@ -250,6 +250,12 @@ cilium upgrade -f cilium-config.yaml
 
 In order to be able to create certificates for each subdomain, it is important to apply a certificate issuer which handles certificate requests and resolves them at some provider. We chose Cloudflare as our issuer and here is the setup which you need to apply to your kubernetes cluster. For further information you can check out the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/).
 
+But first, we need to install the cert-manager by running the following command:
+
+```bash
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set crds.enabled=true
+```
+
 ```yaml
 # cert-issuer.yaml
 apiVersion: cert-manager.io/v1
@@ -272,7 +278,7 @@ spec:
                           key: api-token
 ```
 
-You can apply a file to the Kubernetes cluster, by running this k8s command:
+You can apply a file to the Kubernetes cluster, by running this k8s (also k3s) command:
 
 ```bash
 kubectl apply -f cluster-issuer.yaml
