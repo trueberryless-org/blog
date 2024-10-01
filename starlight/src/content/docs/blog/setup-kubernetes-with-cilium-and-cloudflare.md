@@ -44,6 +44,8 @@ cilium install \
   --set kubeProxyReplacement=true
 
 cilium status --wait
+
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set crds.enabled=true
 ```
 
 ```yaml
