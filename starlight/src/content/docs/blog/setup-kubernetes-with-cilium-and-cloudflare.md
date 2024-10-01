@@ -1,7 +1,7 @@
 ---
 title: Setting up Kubernetes with Cilium and Cloudflare
 date: 2024-06-11
-lastUpdated: 2024-07-27
+lastUpdated: 2024-10-01
 tags:
     - Deployment
     - Kubernetes
