@@ -12,7 +12,12 @@ export default defineConfig({
             title: "Blog",
             social: {
                 github: "https://github.com/trueberryless-org/blog",
+                patreon: "https://www.patreon.com/trueberryless",
             },
+            editLink: {
+                baseUrl: "https://github.com/trueberryless-org/blog/tree/main/starlight/",
+            },
+            lastUpdated: true,
             logo: {
                 light: "./src/assets/light-logo.png",
                 dark: "./src/assets/dark-logo.png",
