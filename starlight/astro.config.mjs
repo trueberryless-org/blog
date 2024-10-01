@@ -41,6 +41,7 @@ export default defineConfig({
                             url: "https://www.linkedin.com/in/clemens-schlipfinger/",
                         },
                     },
+                    prevNextLinksOrder: 'chronological',
                 }),
                 starlightViewModes({
                     zenModeShowTableOfContents: false,
