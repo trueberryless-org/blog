@@ -25,7 +25,9 @@ export default defineConfig({
                 replacesTitle: true,
             },
             plugins: [
-                // starlightLinksValidator(),
+                starlightLinksValidator({
+                    exclude: ["/blog/tags/*"],
+                }),
                 // starlightImageZoom(),
                 starlightBlog({
                     title: "Deep Thoughts",
@@ -43,7 +45,7 @@ export default defineConfig({
                             url: "https://www.linkedin.com/in/clemens-schlipfinger/",
                         },
                     },
-                    prevNextLinksOrder: 'chronological',
+                    prevNextLinksOrder: "chronological",
                 }),
                 starlightViewModes({
                     zenModeShowTableOfContents: false,
