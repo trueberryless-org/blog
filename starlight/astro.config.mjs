@@ -3,6 +3,7 @@ import starlight from "@astrojs/starlight";
 import starlightBlog from "starlight-blog";
 import starlightViewModes from "starlight-view-modes";
 import starlightImageZoom from "starlight-image-zoom";
+import starlightLinksValidator from "starlight-links-validator";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 
 // https://astro.build/config
@@ -24,6 +25,7 @@ export default defineConfig({
                 replacesTitle: true,
             },
             plugins: [
+                // starlightLinksValidator(),
                 // starlightImageZoom(),
                 starlightBlog({
                     title: "Deep Thoughts",

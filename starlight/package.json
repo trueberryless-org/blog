@@ -24,6 +24,7 @@
         "sharp": "^0.32.6",
         "starlight-blog": "^0.11.1",
         "starlight-image-zoom": "^0.7.0",
+        "starlight-links-validator": "^0.12.4",
         "starlight-view-modes": "^0.6.0",
         "typescript": "^5.5.4"
     }

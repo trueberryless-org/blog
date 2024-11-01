@@ -13,7 +13,7 @@ authors:
 
 In today's post, we'll take a quick look at how to set up continuous deployment in a GitHub repository. We're pretty sure that this setup also works for other Git registries, but if you use another, keep in mind that this post is designed for GitHub only.
 
-This post also assumes that you use GitHub Actions combined with Argo CD for deploying your applications on a Kubernetes cluster. Follow other [deployment posts](./tags/deployment) of us for further instructions on how to set up both technologies on your personal server.
+This post also assumes that you use GitHub Actions combined with Argo CD for deploying your applications on a Kubernetes cluster. Follow other [deployment posts](/blog/tags/deployment) of us for further instructions on how to set up both technologies on your personal server.
 
 ## Preparations
 

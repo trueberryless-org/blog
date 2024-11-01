@@ -50,6 +50,9 @@ importers:
       starlight-image-zoom:
         specifier: ^0.7.0
         version: 0.7.0(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))
+      starlight-links-validator:
+        specifier: ^0.12.4
+        version: 0.12.4(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))(astro@4.12.2(typescript@5.5.4))
       starlight-view-modes:
         specifier: ^0.6.0
         version: 0.6.0(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))(astro@4.12.2(typescript@5.5.4))
@@ -710,6 +713,9 @@ packages:
   '@types/node@17.0.45':
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
 
+  '@types/picomatch@2.3.3':
+    resolution: {integrity: sha512-Yll76ZHikRFCyz/pffKGjrCwe/le2CDwOP5F210KQo27kpRE46U2rDnzikNlVn6/ezH3Mhn46bJMTfeVTtcYMg==}
+
   '@types/sax@1.2.7':
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
 
@@ -1308,6 +1314,10 @@ packages:
   inline-style-parser@0.2.3:
     resolution: {integrity: sha512-qlD8YNDqyTKTyuITrDOffsl6Tdhv+UC4hcdAVuQsK4IMQ99nSgd1MIA/Q+jQYoh9r3hVUXhYh7urSRmXPkW04g==}
 
+  is-absolute-url@4.0.1:
+    resolution: {integrity: sha512-/51/TKE88Lmm7Gc4/8btclNXWS+g50wXhYJq8HWIBAGUBnoAdRu1aXeh364t/O7wXDAcTJDP8PNuNKWUDWie+A==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
   is-alphabetical@2.0.1:
     resolution: {integrity: sha512-FWyyY60MeTNyeSRpkM2Iry0G9hpr7/9kD40mD/cGQEuilcZYS4okz8SN2Q6rLCJ8gbCt6fN+rC+6tMGS99LaxQ==}
 
@@ -1787,6 +1797,10 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
+  picomatch@4.0.2:
+    resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
+    engines: {node: '>=12'}
+
   pify@4.0.1:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
@@ -2020,6 +2034,13 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@astrojs/starlight': '>=0.22.0'
+
+  starlight-links-validator@0.12.4:
+    resolution: {integrity: sha512-4MJ/BoTpdlKxfCL/pk931TGHYf7kNt812gRyNbhnIdwubjjzUy4J6J57TBY1yXcDVizWjHpGqHrqTeK0QhbemQ==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.15.0'
+      astro: '>=4.0.0'
 
   starlight-view-modes@0.6.0:
     resolution: {integrity: sha512-mYMTE8Zsy9j8Yj+3ywl1FH0IW0uh66GSZLIuV+Hs4oeQRA8DYkfRcsKNKWic4bYGquBI9OMfHKDQl3XCwhCAMw==}
@@ -3062,6 +3083,8 @@ snapshots:
 
   '@types/node@17.0.45': {}
 
+  '@types/picomatch@2.3.3': {}
+
   '@types/sax@1.2.7':
     dependencies:
       '@types/node': 17.0.45
@@ -3860,6 +3883,8 @@ snapshots:
 
   inline-style-parser@0.2.3: {}
 
+  is-absolute-url@4.0.1: {}
+
   is-alphabetical@2.0.1: {}
 
   is-alphanumerical@2.0.1:
@@ -4589,6 +4614,8 @@ snapshots:
 
   picomatch@2.3.1: {}
 
+  picomatch@4.0.2: {}
+
   pify@4.0.1: {}
 
   pkg-dir@4.2.0:
@@ -4948,6 +4975,20 @@ snapshots:
       rehype-raw: 7.0.0
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
+
+  starlight-links-validator@0.12.4(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))(astro@4.12.2(typescript@5.5.4)):
+    dependencies:
+      '@astrojs/starlight': 0.24.5(astro@4.12.2(typescript@5.5.4))
+      '@types/picomatch': 2.3.3
+      astro: 4.12.2(typescript@5.5.4)
+      github-slugger: 2.0.0
+      hast-util-from-html: 2.0.1
+      hast-util-has-property: 3.0.0
+      is-absolute-url: 4.0.1
+      kleur: 4.1.5
+      mdast-util-to-string: 4.0.0
+      picomatch: 4.0.2
+      unist-util-visit: 5.0.0
 
   starlight-view-modes@0.6.0(@astrojs/starlight@0.24.5(astro@4.12.2(typescript@5.5.4)))(astro@4.12.2(typescript@5.5.4)):
     dependencies:
