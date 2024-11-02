@@ -28,7 +28,7 @@ export default defineConfig({
                 starlightLinksValidator({
                     exclude: ["/blog/tags/*"],
                 }),
-                // starlightImageZoom(),
+                starlightImageZoom(),
                 starlightBlog({
                     title: "Deep Thoughts",
                     authors: {
@@ -51,6 +51,9 @@ export default defineConfig({
                     zenModeShowTableOfContents: false,
                 }),
             ],
+            components: {
+                MarkdownContent: "./src/components/MarkdownContent.astro",
+            },
             customCss: [
                 "./src/styles/custom.css",
                 "@fontsource/nova-square/400.css",
