@@ -17,5 +17,5 @@ spec:
     spec:
       containers:
         - name: blog
-          image: 'trueberryless/blog:main-d19057e1af60f40fc4167794d15a4a012ec0d544'
+          image: 'trueberryless/blog:main-68e3eb4e102e87368ae37b63e41ded0647e7081c'
           imagePullPolicy: Always
