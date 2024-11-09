@@ -54,6 +54,6 @@ More information about contribution can be found unter [CONTRIBUTING.md](https:/
 
 ## License
 
-Licensed under the GNU General Public License v3.0, Copyright © trueberryless.
+Licensed under the MIT license, Copyright © trueberryless-org.
 
-See [LICENSE](https://github.com/trueberryless-org/blog/blob/main/LICENSE) for more information.
+See [LICENSE](/LICENSE) for more information.
