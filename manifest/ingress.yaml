@@ -17,6 +17,6 @@ spec:
                   number: 80
 
   tls:
-  - hosts:
-    - blog.trueberryless.org
-    secretName: blog
+    - hosts:
+        - blog.trueberryless.org
+      secretName: blog

@@ -9,4 +9,4 @@ spec:
     name: acme-issuer
     kind: ClusterIssuer
   dnsNames:
-    - 'blog.trueberryless.org'
+    - "blog.trueberryless.org"
