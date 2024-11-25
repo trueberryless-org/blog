@@ -1,12 +1,12 @@
 {
   "name": "blog-monorepo",
-  "homepage": "https://github.com/trueberryless-org/blog-monorepo",
+  "homepage": "https://github.com/trueberryless-org/blog",
   "bugs": {
-    "url": "https://github.com/trueberryless-org/blog-monorepo/issues"
+    "url": "https://github.com/trueberryless-org/blog/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trueberryless-org/blog-monorepo.git"
+    "url": "https://github.com/trueberryless-org/blog.git"
   },
   "license": "MIT",
   "author": "trueberryless <trueberryless@gmail.com> (https://trueberryless.org)",
