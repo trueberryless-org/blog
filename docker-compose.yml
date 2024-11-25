@@ -1,5 +1,0 @@
-services:
-    mutanuq:
-        image: trueberryless/blog
-        ports:
-            - "80:80"
