@@ -20,7 +20,7 @@
         "@fontsource/nova-script": "^5.0.12",
         "@fontsource/nova-square": "^5.0.19",
         "@fontsource/tauri": "^5.0.20",
-        "astro": "^4.12.2",
+        "astro": "^4.16.1",
         "sharp": "^0.32.6",
         "starlight-blog": "^0.11.1",
         "starlight-image-zoom": "^0.7.0",
