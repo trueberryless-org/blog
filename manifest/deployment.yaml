@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blog
-  namespace: blog
+  name: <%= repositoryName %>
+  namespace: <%= repositoryName %>
   labels:
-    app: blog
+    app: <%= repositoryName %>
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: blog
+      app: <%= repositoryName %>
   template:
     metadata:
       labels:
-        app: blog
+        app: <%= repositoryName %>
     spec:
       containers:
-        - name: blog
-          image: "trueberryless/blog"
+        - name: <%= repositoryName %>
+          image: "trueberryless/<%= repositoryName %>"
           imagePullPolicy: Always
