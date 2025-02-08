@@ -132,6 +132,8 @@ Take a look at a specific example of the final results at some point back in tim
 
 Isn't that bad compared to the [old README.md](https://github.com/trueberryless/trueberryless/blob/5dce4ad0033b00829f8ec3756827057017447a65/README.md). And don’t comment on why I listen to K-pop! It’s better than you think, trust me.
 
+Check out the live version on my [GitHub](https://github.com/trueberryless) — if I decided to keep it... — and leave a follow if you're already there if you enjoyed reading! ❤️
+
 ---
 
 ## Final Thoughts: Was It Worth It?
