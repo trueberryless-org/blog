@@ -45,6 +45,11 @@ export default defineConfig({
               picture: "/clemens.png", // Images in the `public` directory are supported.
               url: "https://www.linkedin.com/in/clemens-schlipfinger/",
             },
+            chatgpt: {
+              name: "ChatGPT",
+              picture: "/chatgpt.png", // Images in the `public` directory are supported.
+              url: "https://chatgpt.com/",
+            },
           },
           prevNextLinksOrder: "chronological",
         }),

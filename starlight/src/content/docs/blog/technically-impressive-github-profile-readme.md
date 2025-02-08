@@ -1,0 +1,147 @@
+---
+title: How I Built a GitHub Profile README That Shouldn’t Exist (But It Does)
+date: 2025-02-05
+tags:
+    - GitHub
+    - CI/CD
+    - Markdown
+excerpt: Creating a standout GitHub profile README isn’t just about adding a few badges — it’s about pushing technical boundaries. In this deep dive, I explore low-level SVG manipulation, HTML-to-SVG conversion, inline animations, and full automation with GitHub Actions to build what I believe is one of the most technically advanced GitHub READMEs. From a dynamic Bento Grid that updates every 5 minutes to embedding live SVGs without external requests, this project transformed my profile into a living, self-updating showcase of my work. Want to know how I did it? Let’s break it down. 🚀
+authors:
+    - trueberryless
+    - chatgpt
+---
+
+## The Beginning: A README That Looked Like a Wikipedia Dump
+
+Every great story starts with a problem, and mine was simple: my GitHub profile README was a complete mess. It was long. It had too much text. It was overflowing with badges — so many that it looked like I was hoarding every possible internet trophy. Hackathons, GitHub contributions, Astro, roadmap.sh — if there was a badge, I had it. 
+
+At first, I thought this was fine. It showed everything about me, right? But one day, I looked at it and realized: 
+
+> This is not stylish. This is a cluttered disaster.
+
+I needed something new. Something clean. Something visually striking. I wanted a **Bento Grid** that would make people stop and admire it, not scroll past in confusion. A design so well-executed that anyone who saw it would instantly want one for themselves.
+
+That was the dream. Now I just had to make it real.
+
+## Phase 1: The HTML Dream (and Markdown Nightmare)
+
+The first step was simple: mock up my perfect profile in HTML and CSS. And let me tell you, it looked amazing. It had the perfect layout, smooth animations, and just the right balance of content and space. Then reality hit me. This needed to work inside _GitHub-flavored Markdown_. No problem, right? Markdown supports HTML! So I copied my beautiful HTML into my README and hit save.
+
+> GitHub: *Absolutely not.*
+
+GitHub’s Markdown [strips out a not a huge number of HTML tags, but important ones](https://github.github.com/gfm/#disallowed-raw-html-extension). Security reasons, of course (and I completely respect that, GitHub, really ❤️), but this meant my perfect design was completely **unusable**.
+
+I tried tweaking it. Replacing unsupported tags with ones that worked. Maybe I could salvage some of it? _Nope_. Markdown’s limitations meant my dream layout was impossible.
+
+## Phase 2: The "Just Use a Python Script" Cope
+
+When in doubt, automate. If I couldn’t get my HTML in directly, maybe I could generate something dynamic with a script? So I threw together a Python script to fetch my latest GitHub repository and insert it into my README. Just leaving this random bytes which some would call Python code here:
+
+```python collapse={1-22}
+import requests
+
+github_username = "yourusername"
+repos_url = f"https://api.github.com/users/{github_username}/repos?sort=pushed"
+
+response = requests.get(repos_url)
+repos = response.json()
+
+latest_repo = repos[0]["name"] if repos else "No repositories found."
+
+with open("README.md", "r") as file:
+    readme_content = file.readlines()
+
+new_content = []
+for line in readme_content:
+    if "<!--LATEST_REPO-->" in line:
+        new_content.append(f"- Latest Repo: [{latest_repo}](https://github.com/{github_username}/{latest_repo})\n")
+    else:
+        new_content.append(line)
+
+with open("README.md", "w") as file:
+    file.writelines(new_content)
+```
+
+This seemed like a step in the right direction. It was automated. It was functional. But it didn’t solve my actual problem. 😢
+
+This wasn’t about dynamic content — it was about *design*. And no amount of Python scripting was going to make Markdown look beautiful.
+
+## Phase 3: "Fine, I'll Just Use a Screenshot" (Rock Bottom)
+
+At this point, I was desperate. I considered the unthinkable: *just take a screenshot of the HTML and put it in my README as an image.* It was a brute-force approach. It was lazy. It was... effective?
+
+For a moment, I actually thought about doing it. But I knew deep down that I would never forgive myself if I let this be my final solution.
+
+Just for the reference, I would have used [Puppeteer](https://www.npmjs.com/package/puppeteer) and [FFmpeg](https://www.ffmpeg.org/) — no idea what these tools are.
+
+## Phase 4: Enter SVG (The Light at the End of the Tunnel)
+
+I abandoned the cursed screenshot plan and looked for something more flexible.
+
+SVGs.
+
+SVGs could scale, they supported both text and images, and — most importantly — they could **embed** HTML inside them.
+
+So I tried something like this:
+
+```xml
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <h1>Hello from HTML inside SVG!</h1>
+    </body>
+  </foreignObject>
+</svg>
+```
+
+Promising! This could actually work!
+
+Then I got busy with other things, forgot to debug it, and never returned to this idea.
+
+![Throw away a good idea](../../../../public/online-classes-throw-away.gif)
+
+## Phase 5: SVGs Within SVGs Within SVGs (Inception Level 100)
+
+When I came back to the project, I was **determined** to make it work.
+
+I realized that if I couldn’t directly embed HTML into Markdown, I could fake it by using nested SVGs. (btw this is massively simplified; the actual process took days that felt like weeks if not months, but I know that you wouldn't read any of this anyway so who cares?)
+
+And then, after hours of research, I stumbled across a life-changing Stack Overflow answer:
+
+[https://stackoverflow.com/a/65049620/22573601](https://stackoverflow.com/a/65049620/22573601)
+
+This lead me to the current solution:
+
+1. Convert my HTML layout to SVG.
+2. Encode all images in **Base64** (because GitHub Markdown won’t load external images inside an SVG with HTML in it).
+3. Inline dynamic SVGs (like my GitHub stats, Spotify status, etc.).
+4. Automate everything with **GitHub Actions**.
+
+## The Grand Finale: The Ultimate GitHub Profile README
+
+- A sleek Bento Grid layout, perfectly structured in SVG.
+- A live-updating Spotify status, inlined as an SVG.
+- GitHub stats, dynamically inserted via automation.
+- Fully responsive, fully scalable, and fully insane to build.
+
+It updates itself every 5 minutes, runs completely on GitHub Actions, and doesn’t rely on any external services. It’s beautiful. It’s efficient. And most importantly, it’s technically absurd in the best way possible.
+
+Take a look at a specific example of the final results at some point back in time. 
+
+![Final result](https://raw.githubusercontent.com/trueberryless/trueberryless/7519c6f50094bdfd6fb47f610e6638ac8efdd6ad/html-wrapper.svg)
+
+Isn't that bad compared to the [old README.md](https://github.com/trueberryless/trueberryless/blob/5dce4ad0033b00829f8ec3756827057017447a65/README.md). And don’t comment on why I listen to K-pop! It’s better than you think, trust me.
+
+---
+
+## Final Thoughts: Was It Worth It?
+
+Absolutely.
+
+This journey was frustrating, time-consuming, and filled with more roadblocks than I ever expected. But I learned so much about SVGs, Markdown limitations, GitHub Actions, and automation along the way.
+
+Would I do it again? Definitely.
+
+Would I recommend it? Only if you have way too much patience. 😅
+
+But in the end, I created a GitHub profile README that *shouldn’t exist* — but it does. And I love it.
