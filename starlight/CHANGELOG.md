@@ -1,5 +1,11 @@
 # blog
 
+## 0.0.3
+
+### Patch Changes
+
+- [`15faf38`](https://github.com/trueberryless-org/blog/commit/15faf38c0f394b81dcfea9c2f72ba1527d1a195f) Thanks [@trueberryless](https://github.com/trueberryless)! - Add link to GH profile in README blog
+
 ## 0.0.2
 
 ### Patch Changes
