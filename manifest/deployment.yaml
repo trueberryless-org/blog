@@ -17,5 +17,5 @@ spec:
     spec:
       containers:
         - name: blog
-          image: "trueberryless/blog:0.0.3"
+          image: "trueberryless/blog:0.0.4"
           imagePullPolicy: Always
