@@ -1,5 +1,11 @@
 # blog
 
+## 0.0.4
+
+### Patch Changes
+
+- [`d95ae86`](https://github.com/trueberryless-org/blog/commit/d95ae86a93466447d10088664325d957ce3660c6) Thanks [@trueberryless](https://github.com/trueberryless)! - Add reference to formal post on trueberryless work website
+
 ## 0.0.3
 
 ### Patch Changes
