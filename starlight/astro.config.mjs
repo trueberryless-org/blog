@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightBlog from "starlight-blog";
 import starlightViewModes from "starlight-view-modes";
+import starlightThemeRapide from "starlight-theme-rapide";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
@@ -30,6 +31,7 @@ export default defineConfig({
           exclude: ["/blog/tags/*"],
         }),
         starlightImageZoom(),
+        starlightThemeRapide(),
         starlightBlog({
           title: "Deep Thoughts",
           authors: {
@@ -53,9 +55,9 @@ export default defineConfig({
           },
           prevNextLinksOrder: "chronological",
         }),
-        starlightViewModes({
-          zenModeShowTableOfContents: false,
-        }),
+        // starlightViewModes({
+        //   zenModeShowTableOfContents: false,
+        // }),
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",

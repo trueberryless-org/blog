@@ -25,6 +25,7 @@
     "starlight-blog": "^0.16.1",
     "starlight-image-zoom": "^0.10.1",
     "starlight-links-validator": "^0.14.2",
+    "starlight-theme-rapide": "^0.3.0",
     "starlight-view-modes": "^0.6.0",
     "typescript": "^5.5.4"
   },
