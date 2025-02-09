@@ -11,6 +11,10 @@ authors:
     - chatgpt
 ---
 
+:::note
+Read the more formal story [here](https://trueberryless.org/work/github-profile-readme/)
+:::
+
 ## The Beginning: A README That Looked Like a Wikipedia Dump
 
 Every great story starts with a problem, and mine was simple: my GitHub profile README was a complete mess. It was long. It had too much text. It was overflowing with badges — so many that it looked like I was hoarding every possible internet trophy. Hackathons, GitHub contributions, Astro, roadmap.sh — if there was a badge, I had it. 
