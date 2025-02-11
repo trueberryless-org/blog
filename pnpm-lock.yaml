@@ -62,6 +62,9 @@ importers:
       starlight-links-validator:
         specifier: ^0.14.2
         version: 0.14.2(@astrojs/starlight@0.31.1(astro@5.2.5(rollup@4.34.3)(typescript@5.7.2)(yaml@2.6.1)))
+      starlight-theme-rapide:
+        specifier: ^0.3.0
+        version: 0.3.0(@astrojs/starlight@0.31.1(astro@5.2.5(rollup@4.34.3)(typescript@5.7.2)(yaml@2.6.1)))
       starlight-view-modes:
         specifier: ^0.6.0
         version: 0.6.0(@astrojs/starlight@0.31.1(astro@5.2.5(rollup@4.34.3)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.2.5(rollup@4.34.3)(typescript@5.7.2)(yaml@2.6.1))
@@ -2190,6 +2193,12 @@ packages:
     engines: {node: '>=18.17.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.15.0'
+
+  starlight-theme-rapide@0.3.0:
+    resolution: {integrity: sha512-SNFvzgoYKWVTM//Sq2AHqamGC6rgOHpW3MkJ90/uYLPu4XSVIfENtKhN5YPqauU/e64GVFS+V1rAkfCdgCMh6Q==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.30.0'
 
   starlight-view-modes@0.6.0:
     resolution: {integrity: sha512-mYMTE8Zsy9j8Yj+3ywl1FH0IW0uh66GSZLIuV+Hs4oeQRA8DYkfRcsKNKWic4bYGquBI9OMfHKDQl3XCwhCAMw==}
@@ -5519,6 +5528,10 @@ snapshots:
       mdast-util-to-string: 4.0.0
       picomatch: 4.0.2
       unist-util-visit: 5.0.0
+
+  starlight-theme-rapide@0.3.0(@astrojs/starlight@0.31.1(astro@5.2.5(rollup@4.34.3)(typescript@5.7.2)(yaml@2.6.1))):
+    dependencies:
+      '@astrojs/starlight': 0.31.1(astro@5.2.5(rollup@4.34.3)(typescript@5.7.2)(yaml@2.6.1))
 
   starlight-view-modes@0.6.0(@astrojs/starlight@0.31.1(astro@5.2.5(rollup@4.34.3)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.2.5(rollup@4.34.3)(typescript@5.7.2)(yaml@2.6.1)):
     dependencies:
