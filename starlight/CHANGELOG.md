@@ -1,5 +1,11 @@
 # blog
 
+## 0.0.5
+
+### Patch Changes
+
+- [#33](https://github.com/trueberryless-org/blog/pull/33) [`91ca929`](https://github.com/trueberryless-org/blog/commit/91ca929342b808a95753d1840d9454546bebc7ee) Thanks [@trueberryless](https://github.com/trueberryless)! - Remove view modes and add rapide theme from [@HiDeoo](https://github.com/hideoo) + adjust logo
+
 ## 0.0.4
 
 ### Patch Changes
