@@ -1,5 +1,11 @@
 # blog
 
+## 0.0.6
+
+### Patch Changes
+
+- [#35](https://github.com/trueberryless-org/blog/pull/35) [`076f653`](https://github.com/trueberryless-org/blog/commit/076f6539fd191ea7688cf2258488295df2e75637) Thanks [@trueberryless](https://github.com/trueberryless)! - Add Mastodon verification by including head tags
+
 ## 0.0.5
 
 ### Patch Changes
