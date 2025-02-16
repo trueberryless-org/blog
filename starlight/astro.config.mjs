@@ -26,6 +26,15 @@ export default defineConfig({
         dark: "./src/assets/dark-logo.png",
         replacesTitle: true,
       },
+      head: [
+        {
+          tag: "meta",
+          attrs: {
+            name: "fediverse:creator",
+            content: "@trueberryless@mastodon.social",
+          },
+        },
+      ],
       plugins: [
         starlightLinksValidator({
           exclude: ["/blog/tags/*"],
