@@ -1,5 +1,15 @@
 # blog
 
+## 0.1.0
+
+### Minor Changes
+
+- [#39](https://github.com/trueberryless-org/blog/pull/39) [`34ec087`](https://github.com/trueberryless-org/blog/commit/34ec087ccaffb44ac8d96a0a18b54329f971c2b4) Thanks [@trueberryless](https://github.com/trueberryless)! - Upgrade to Starlight 0.32 and Blog 0.17
+
+### Patch Changes
+
+- [#37](https://github.com/trueberryless-org/blog/pull/37) [`7c0ef3f`](https://github.com/trueberryless-org/blog/commit/7c0ef3fdba371a1b741ac10daf851bdb00bda30a) Thanks [@trueberryless](https://github.com/trueberryless)! - Make final result image in gh readme blog not zoomable
+
 ## 0.0.6
 
 ### Patch Changes
