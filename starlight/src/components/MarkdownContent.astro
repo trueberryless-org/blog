@@ -1,8 +1,9 @@
 ---
-import type { Props } from '@astrojs/starlight/props'
-import Default from "starlight-blog/overrides/MarkdownContent.astro"
+import Default from '@astrojs/starlight/components/MarkdownContent.astro'
 import ImageZoom from 'starlight-image-zoom/components/ImageZoom.astro'
+import StarlightBlogMarkdownContent from 'starlight-blog/components/MarkdownContent.astro'
 ---
 
 <ImageZoom />
-<Default {...Astro.props}><slot /></Default>
+<StarlightBlogMarkdownContent><slot /></StarlightBlogMarkdownContent>
+<Default><slot /></Default>
