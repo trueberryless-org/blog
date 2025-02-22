@@ -1,31 +1,5 @@
-/* Dark mode colors. */
 :root {
-  --sl-color-accent-low: #002837;
-  --sl-color-accent: #007498;
-  --sl-color-accent-high: #88d4f7;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #ebeef2;
-  --sl-color-gray-2: #bec2c7;
-  --sl-color-gray-3: #848c95;
-  --sl-color-gray-4: #525961;
-  --sl-color-gray-5: #323940;
-  --sl-color-gray-6: #21282e;
-  --sl-color-black: #15181c;
-}
-/* Light mode colors. */
-:root[data-theme="light"] {
-  --sl-color-accent-low: #a9e0fb;
-  --sl-color-accent: #00769b;
-  --sl-color-accent-high: #00384b;
-  --sl-color-white: #15181c;
-  --sl-color-gray-1: #21282e;
-  --sl-color-gray-2: #323940;
-  --sl-color-gray-3: #525961;
-  --sl-color-gray-4: #848c95;
-  --sl-color-gray-5: #bec2c7;
-  --sl-color-gray-6: #ebeef2;
-  --sl-color-gray-7: #f5f6f8;
-  --sl-color-black: #ffffff;
+  --starlight-image-zoom-backdrop-bg: none;
 }
 
 .hero-html {
@@ -46,4 +20,8 @@
 
 :is(code, code *) {
   font-family: "JetBrains Mono Variable", sans-serif !important;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(10px) brightness(0.8);
 }
