@@ -1,5 +1,11 @@
 # blog
 
+## 0.1.1
+
+### Patch Changes
+
+- [#41](https://github.com/trueberryless-org/blog/pull/41) [`7e5b9a3`](https://github.com/trueberryless-org/blog/commit/7e5b9a3efe6e3e438c2843b8fa6da921bf0bbf31) Thanks [@trueberryless](https://github.com/trueberryless)! - Add image zoom background blur effect
+
 ## 0.1.0
 
 ### Minor Changes
