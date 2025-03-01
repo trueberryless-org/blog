@@ -1,5 +1,11 @@
 # blog
 
+## 0.1.2
+
+### Patch Changes
+
+- [#43](https://github.com/trueberryless-org/blog/pull/43) [`e2fad33`](https://github.com/trueberryless-org/blog/commit/e2fad33432ea9a0758eb768ac72f88ea47a516b6) Thanks [@trueberryless](https://github.com/trueberryless)! - Fix: double blog content (custom MarkdownContent override problem)
+
 ## 0.1.1
 
 ### Patch Changes
