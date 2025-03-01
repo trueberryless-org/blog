@@ -1,11 +1,10 @@
 import starlightConfig from "virtual:starlight/user-config";
-import config from "virtual:starlight-blog-config";
 
 export function isAnyBlogPostPage(slug: string) {
   return (
     new RegExp(
       `^${getPathWithLocale(
-        config.prefix,
+        "blog",
         getLocaleFromPath(slug)
       )}/(?!(\\d+/?|tags/.+|authors/.+)$).+$`
     ).exec(slug) !== null
