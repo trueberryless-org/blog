@@ -1,11 +1,11 @@
-import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
+import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
-import starlightViewModes from "starlight-view-modes";
-import starlightThemeRapide from "starlight-theme-rapide";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
-import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
+import starlightThemeRapide from "starlight-theme-rapide";
+import starlightViewModes from "starlight-view-modes";
 
 // https://astro.build/config
 export default defineConfig({
