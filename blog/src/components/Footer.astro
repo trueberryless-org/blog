@@ -1,0 +1,78 @@
+---
+import ThemeToggleButton from "./ThemeToggleButton.svelte";
+const today = new Date();
+---
+
+<hr />
+<footer>
+  &copy; {today.getFullYear()} Your name here. All rights reserved.
+  <div class="social-links">
+    <a href="https://bsky.app/profile/astro.build" target="_blank">
+      <span class="sr-only">Follow Astro on BlueSky</span>
+      <svg width="32" height="32" aria-hidden="true" viewBox="0 0 600 530"
+        ><path
+          fill="currentColor"
+          d="M135.7 44c66.5 50 138 151.2 164.3 205.5C326.3 195.2 397.8 94 464.3 44 512.3 8 590-19.9 590 68.8c0 17.7-10.2 148.8-16.1 170-20.7 74-96.2 93-163.3 81.5 117.3 20 147.2 86.1 82.7 152.2C371 598.1 317.4 441 303.7 400.8c-2.5-7.4-3.7-10.9-3.7-8 0-2.9-1.2.6-3.7 8C282.6 441 229 598 106.7 472.5c-64.5-66-34.6-132.2 82.7-152.2C122.2 331.7 46.8 313 26 239 20.1 217.6 10 86.5 10 68.9 10-20 87.7 8 135.7 44z"
+        ></path></svg
+      >
+    </a>
+    <a href="https://github.com/withastro/astro" target="_blank">
+      <span class="sr-only">Go to Astro's GitHub repo</span>
+      <svg width="32" height="32" aria-hidden="true" viewBox="0 0 16 16"
+        ><path
+          fill="currentColor"
+          d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"
+        ></path></svg
+      >
+    </a>
+    <a href="/rss.xml" target="_blank">
+      <span class="sr-only">Follow our RSS feed</span>
+      <svg
+        width="32"
+        height="32"
+        aria-hidden="true"
+        fill="none"
+        viewBox="0 0 24 24"
+        ><path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16M6 19a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        ></path></svg
+      >
+    </a>
+    <div class="theme-toggle-container">
+      <ThemeToggleButton client:load />
+    </div>
+  </div>
+</footer>
+<style>
+  hr {
+    margin: 0;
+  }
+  footer {
+    padding: 2em 1em;
+    background: rgb(var(--white));
+    color: rgb(var(--black));
+    text-align: center;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+  }
+  .social-links :is(a, .theme-toggle-container) {
+    text-decoration: none;
+    color: rgb(var(--gray));
+  }
+  .social-links :is(a, .theme-toggle-container):hover {
+    color: rgb(var(--gray-dark));
+  }
+  @media (min-width: 721px) {
+    .theme-toggle-container {
+      display: none;
+    }
+  }
+</style>
