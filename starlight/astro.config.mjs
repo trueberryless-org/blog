@@ -12,10 +12,23 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Blog",
-      social: {
-        github: "https://github.com/trueberryless-org/blog",
-        patreon: "https://www.patreon.com/trueberryless",
-      },
+      social: [
+        {
+          icon: "blueSky",
+          label: "BlueSky",
+          href: "https://bsky.app/profile/trueberryless.org",
+        },
+        {
+          icon: "mastodon",
+          label: "Mastodon",
+          href: "https://mastodon.social/@trueberryless",
+        },
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/trueberryless-org/blog",
+        },
+      ],
       editLink: {
         baseUrl:
           "https://github.com/trueberryless-org/blog/tree/main/starlight/",
