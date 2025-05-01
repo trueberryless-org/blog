@@ -56,6 +56,9 @@ export default defineConfig({
         starlightThemeRapide(),
         starlightBlog({
           title: "Deep Thoughts",
+          recentPostCount: 3,
+          prevNextLinksOrder: "chronological",
+          navigation: "none",
           authors: {
             trueberryless: {
               name: "trueberryless",
@@ -75,11 +78,8 @@ export default defineConfig({
               url: "https://chatgpt.com/",
             },
           },
-          prevNextLinksOrder: "chronological",
         }),
-        // starlightViewModes({
-        //   zenModeShowTableOfContents: false,
-        // }),
+        // starlightViewModes(),
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
