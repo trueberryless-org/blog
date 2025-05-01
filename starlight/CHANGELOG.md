@@ -1,5 +1,13 @@
 # blog
 
+## 0.2.0
+
+### Minor Changes
+
+- [#50](https://github.com/trueberryless-org/blog/pull/50) [`3cdb309`](https://github.com/trueberryless-org/blog/commit/3cdb30919d39ea0317a90817b0d1820fcbcd2ecc) Thanks [@trueberryless](https://github.com/trueberryless)! - Update Starlight Blog to 0.21
+
+- [#52](https://github.com/trueberryless-org/blog/pull/52) [`e9c9a5d`](https://github.com/trueberryless-org/blog/commit/e9c9a5de19d466c53f7fb5b06dd1484d8e9b0066) Thanks [@trueberryless](https://github.com/trueberryless)! - Add Starlight Sidebar CSS adjustment guide
+
 ## 0.1.2
 
 ### Patch Changes
