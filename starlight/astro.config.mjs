@@ -56,6 +56,9 @@ export default defineConfig({
         starlightThemeRapide(),
         starlightBlog({
           title: "Deep Thoughts",
+          recentPostCount: 3,
+          prevNextLinksOrder: "chronological",
+          navigation: "none",
           authors: {
             trueberryless: {
               name: "trueberryless",

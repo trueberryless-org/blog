@@ -25,3 +25,7 @@
 dialog::backdrop {
   backdrop-filter: blur(10px) brightness(0.8);
 }
+
+img {
+  border-radius: 0.5rem;
+}
