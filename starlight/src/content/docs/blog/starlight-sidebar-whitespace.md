@@ -119,7 +119,7 @@ sl-sidebar-state-persist ul.top-level > li > a {
 
 ## Recommendations
 
-Summing everything up, I recommend that you apply some mix of some of the mentioned customization options above, which you can conveniently see here in one single `.css` file. 
+Summing everything up, I recommend that you apply some mix of the above customization options, which you can conveniently see in a single `.css` file.
 
 Note that I also use [Cascade Layers][starlight-css-cascade-layers], supported since [Starlight 0.34.0][starlight-0-34], and recommend using them to specify the order in which CSS styles are applied.
 
