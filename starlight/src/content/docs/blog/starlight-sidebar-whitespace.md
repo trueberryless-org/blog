@@ -89,8 +89,9 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 
 ### Adjust the color of sidebar items
 
-A small but very subtle change: I made the color of root-level items a bit dimmer as you can see in the code block below, if they are not selected. If you choose to use this design as well, I recommend that you only apply the second CSS manipulation since the first one is just for demonstrating how you could adjust the styling of selected root-level items - this rule also applies to the other code blocks in this blog if they are marked as `default value`.
+A small but subtle change: I made unselected root-level items appear dimmer in the code block below.
 
+If you choose to use this design as well, I recommend that you only apply the second CSS manipulation since the first one is just for demonstrating how you could adjust the styling of selected root-level items – this rule also applies to the other code blocks in this blog if they are marked as `default value`.
 ```css {6}
 // src/styles/custom.css
 sl-sidebar-state-persist ul.top-level > li > a[aria-current="page"] {
