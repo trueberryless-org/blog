@@ -2,4 +2,4 @@
 "blog": minor
 ---
 
-Write Starlight Sidebar CSS adjustment guide
+Add Starlight Sidebar CSS adjustment guide
