@@ -13,11 +13,11 @@ cover:
   image: ../../../assets/covers/starlightcss.png
 ---
 
-Have you ever wondered why your [Starlight][starlight] sidebar doesn't look that appealing? Did you know how important the space between items in your sidebar unconsiously is? The font size, the weight and little color differences? In this guide, we'll take a look at how you can customize the appearance of your Starlight sidebar with some quick and easy steps.
+Have you ever wondered why your [Starlight][starlight] sidebar doesn't look that appealing? Did you know how important the space between items in your sidebar unconsciously is? The font size, the weight and little color differences? In this guide, we'll take a look at how you can customize the appearance of your Starlight sidebar with some quick and easy steps.
 
 ## Prerequisites
 
-First of all, you need to [set up your Starlight site][starlight-getting-started]. Afterwards, Starlight offers a [guide on how to customize the styles applied to your Starlight site][starlight-css], which is exactly the feature we will use in today's blog post. 
+First, you need to [set up your Starlight site][starlight-getting-started]. Afterward, Starlight offers a [guide on customizing styles applied to your Starlight site][starlight-css], which is the feature we'll use in today's post.
 
 As described in [this guide][starlight-css-custom], you need to create a `.css` file somewhere inside your `src/` directory, where you can define your CSS styles. Don't forget to add the path to this `.css` file to Starlight’s `customCss` array in `astro.config.mjs`:
 
@@ -43,10 +43,10 @@ After completing these preparation steps, you are ready to try out some nice adj
 
 ## Customizations
 
-There are endless different possibilities that you can play around with just with your custom CSS. I will give you some ideas that I found very helpful while playing around with the sidebar design myself. While some of these ideads might look stupid to you, I promise that the combination of a few of them will make your Starlight sidebar look even better.
+There are endless different possibilities that you can play around with just with your custom CSS. I will give you some ideas that I found very helpful while playing around with the sidebar design myself. While some of these ideas might look silly to you, I promise that the combination of a few of them will make your Starlight sidebar look even better.
 
 :::note
-One thing to note though, is that in this blog post, the focus heavily lies on adjusting the styling of **root-level items** (the ones without children) in the sidebar.
+One thing to note though is that in this blog post the focus lies on adjusting the styling of **root-level items** (the ones without children) in the sidebar.
 :::
 
 But before I do that, I'll show you how the default styling of the Starlight sidebar currently looks like:
@@ -80,7 +80,7 @@ Perhaps, this will not be as useful to you because you don't use root-level page
 sl-sidebar-state-persist ul.top-level > li > a[aria-current="page"] {
   font-weight: 600; /* default value */
 }
-sl-sidebar-state-persist ul.top-level > li > a[aria-current="false"] {
+sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
   font-weight: 400;
 }
 ```
@@ -96,7 +96,7 @@ A small but very subtle change: I made the color of root-level items a bit dimme
 sl-sidebar-state-persist ul.top-level > li > a[aria-current="page"] {
   color: var(--sl-color-text-invert); /* default value */
 }
-sl-sidebar-state-persist ul.top-level > li > a[aria-current="false"] {
+sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
   color: var(--sl-color-gray-2);
 }
 ```
@@ -120,7 +120,7 @@ sl-sidebar-state-persist ul.top-level > li > a {
 
 Summing everything up, I recommend that you apply some mix of some of the mentioned customization options above, which you can conveniently see here in one single `.css` file. 
 
-Note that I also use [Cascade Layers][starlight-css-cascade-layers], which is supported since [Starlight 0.34.0][starlight-0-34] and I really recommend using to clearly specify the order in which the CSS styles are applied.
+Note that I also use [Cascade Layers][starlight-css-cascade-layers], supported since [Starlight 0.34.0][starlight-0-34], and recommend using them to specify the order in which CSS styles are applied.
 
 ```css
 // src/styles/custom.css
@@ -130,7 +130,7 @@ Note that I also use [Cascade Layers][starlight-css-cascade-layers], which is su
   sl-sidebar-state-persist ul.top-level > li:not(:has(details)) {
     margin-block: 0rem;
   }
-  sl-sidebar-state-persist ul.top-level > li > a[aria-current="false"] {
+  sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
     font-weight: 400;
     color: var(--sl-color-gray-2);
   }
