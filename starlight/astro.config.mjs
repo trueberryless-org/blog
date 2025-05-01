@@ -78,11 +78,8 @@ export default defineConfig({
               url: "https://chatgpt.com/",
             },
           },
-          prevNextLinksOrder: "chronological",
         }),
-        // starlightViewModes({
-        //   zenModeShowTableOfContents: false,
-        // }),
+        // starlightViewModes(),
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",

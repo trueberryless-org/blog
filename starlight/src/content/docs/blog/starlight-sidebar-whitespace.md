@@ -13,7 +13,7 @@ cover:
   image: ../../../assets/covers/starlightcss.png
 ---
 
-Have you ever wondered why your [Starlight][starlight] sidebar doesn't look that appealing? Did you know how important the space between items in your sidebar unconsiously is? The font size, the weight and little color differences? Today we'll take a look at how you can customize the appearance of your Starlight sidebar with some quick and easy steps.
+Have you ever wondered why your [Starlight][starlight] sidebar doesn't look that appealing? Did you know how important the space between items in your sidebar unconsiously is? The font size, the weight and little color differences? In this guide, we'll take a look at how you can customize the appearance of your Starlight sidebar with some quick and easy steps.
 
 ## Prerequisites
 
@@ -27,19 +27,19 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-integrations: [
-  starlight({
-    title: 'Docs With Custom CSS',
-    customCss: [
-+				// Relative path to your custom CSS file
-+				'./src/styles/custom.css',
-    ],
-  }),
-],
+  integrations: [
+    starlight({
+      title: 'Docs With Custom CSS',
+      customCss: [
++        // Relative path to your custom CSS file
++        './src/styles/custom.css',
+      ],
+    }),
+  ],
 });
 ```
 
-After completing these preparation steps, you are ready to try out some nice adjustments of Starlight's sidebar design.
+After completing these preparation steps, you are ready to try out some nice adjustments to Starlight's sidebar design.
 
 ## Customizations
 
