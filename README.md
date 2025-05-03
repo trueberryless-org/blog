@@ -1,3 +1,5 @@
+# Deep Thoughts in my blog
+
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fd887bd4-d5e4-428b-9fdd-f19d8feee43d/deploy-status)](https://app.netlify.com/sites/trueberryless-blog/deploys)
 
