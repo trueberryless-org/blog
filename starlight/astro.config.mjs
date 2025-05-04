@@ -80,6 +80,19 @@ export default defineConfig({
           },
         }),
         // starlightViewModes(),
+        {
+          name: "blog-separation-character",
+          hooks: {
+            "i18n:setup"({ injectTranslations }) {
+              injectTranslations({
+                en: {
+                  "starlightBlog.post.lastUpdate": " • Last update: {{date}}",
+                },
+              });
+            },
+            "config:setup"() {},
+          },
+        },
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
