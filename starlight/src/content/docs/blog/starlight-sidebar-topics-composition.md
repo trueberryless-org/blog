@@ -12,7 +12,6 @@ authors:
 cover:
   alt: A beautiful cover image with the text "History Time"
   image: ../../../assets/covers/historytime.png
-draft: true
 ---
 
 Maybe you have heard about this cool documentation framework before. I talk about it quite often and use it regularly. Not only because I'm an active contributor, but also because [Starlight](https://starlight.astro.build) just grew to my heart. Its features: Simplicity and minimalism but everything you need. Its performance: [Faster than 98% of other websites out there](https://www.websitecarbon.com/website/starlight-astro-build-getting-started/). Its accessibility: Not even a question!
@@ -33,7 +32,7 @@ And so comes the day when HiDeoo contacts me to tell me that the Starlight Sideb
 
 ## The Union
 
-Eventually, I decided to refactor my plugin into a component - this refactor casually eliminated exactly [1210 lines of code and added 68 lines of changelog](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown/pull/40) - and I noticed, how little code it now took to turn the `Topics.astro` list into a dropdown from a user's perspective. I was confident that this really was the right direction for the ~plugin~ component. And so I updated the whole documentation - more like: deleted more than 200 lines of text (feels good) - and released the new [version 0.5](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown/releases/tag/starlight-sidebar-topics-dropdown%400.5.0).
+Eventually, I decided to refactor my plugin into a component - this refactoring casually eliminated exactly [1210 lines of code and added 68 lines of changelog](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown/pull/40) - and I noticed, how little code it now took to turn the `Topics.astro` list into a dropdown from a user's perspective. I was confident that this really was the right direction for the ~plugin~ component. And so I updated the whole documentation - more like: deleted more than 200 lines of text (feels good) - and released the new [version 0.5](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown/releases/tag/starlight-sidebar-topics-dropdown%400.5.0).
 
 Now you might wonder how such mature plugins could still improve over time. To be honest, I myself was very surprised when HiDeoo casually dropped a bomb in my Discord DMs. His idea was and still is ingenious. Otherwise, I wouldn't even think about this _topic_ anymore. But here I am, writing a whopping 800 words just to prepare you for what's to come. Drum roll please! Fasten your seatbelt! This statement from HiDeoo is going to blow your mind:
 
