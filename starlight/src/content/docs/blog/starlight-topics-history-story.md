@@ -41,4 +41,4 @@ Now you might wonder how such mature plugins could still improve over time. To b
 
 Profound. Timeless. Golden.
 
-And that single, beautiful spark of an idea? It’s precisely what I’ll guide you through in [the post "Starlight Topics Dropdown and List together"](/blog/starlight-dropdown-or-list/).
+And that single, beautiful spark of an idea? It’s precisely what I’ll guide you through in [the post "Starlight Topics Dropdown and List together"](/blog/starlight-dropdown-and-list-together/).
