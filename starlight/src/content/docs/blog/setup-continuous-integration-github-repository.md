@@ -1,5 +1,6 @@
 ---
 title: Setting up Continuous deployment in a GitHub repository
+descrption: Today we'll take a look at how to set up a GitHub repository which will be deployed to a k3s cluster via Argo CD.
 date: 2024-07-28
 tags:
     - CI/CD

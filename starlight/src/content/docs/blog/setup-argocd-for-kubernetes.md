@@ -1,5 +1,6 @@
 ---
 title: Setting up Argo CD in a k3s cluster
+description: Today we'll take a look at how to set up Argo CD in a k3s cluster.
 date: 2024-07-27
 lastUpdated: 2024-07-28
 tags:
