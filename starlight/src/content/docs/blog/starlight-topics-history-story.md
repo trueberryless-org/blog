@@ -1,6 +1,6 @@
 ---
 title: A short history of Starlight Sidebar Topics plugins
-description: In this blog post, I'll show you the evolution of Starlight plugins with a case study of the [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics) plugin.
+description: In this blog post, I'll show you the evolution of Starlight plugins with a case study of the Starlight Sidebar Topics plugin.
 date: 2025-05-05
 tags:
     - Starlight
