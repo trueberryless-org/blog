@@ -1,37 +1,13 @@
 import starlightConfig from "virtual:starlight/user-config";
 
-export function isAnyBlogPostPage(slug: string) {
+export function sameStringIgnoreLeadingAndTrailingSlashes(
+  href: string,
+  id: string
+): boolean {
   return (
-    new RegExp(
-      `^${getPathWithLocale(
-        "blog",
-        getLocaleFromPath(slug)
-      )}/(?!(\\d+/?|tags/.+|authors/.+)$).+$`
-    ).exec(slug) !== null
+    stripLeadingSlash(stripTrailingSlash(href)) ===
+    stripLeadingSlash(stripTrailingSlash(id))
   );
-}
-
-function getPathWithLocale(path: string, locale: Locale): string {
-  const pathLocale = getLocaleFromPath(path);
-  if (pathLocale === locale) return path;
-  locale = locale ?? "";
-  if (pathLocale === path) return locale;
-  if (pathLocale)
-    return stripTrailingSlash(
-      path.replace(`${pathLocale}/`, locale ? `${locale}/` : "")
-    );
-  return path
-    ? `${stripTrailingSlash(locale)}/${stripLeadingSlash(path)}`
-    : locale;
-}
-
-function getLocaleFromPath(path: string): Locale {
-  const baseSegment = path.split("/")[0];
-  return starlightConfig.locales &&
-    baseSegment &&
-    baseSegment in starlightConfig.locales
-    ? baseSegment
-    : undefined;
 }
 
 function stripLeadingSlash(path: string) {
@@ -49,5 +25,3 @@ function stripTrailingSlash(path: string) {
 
   return path.slice(0, -1);
 }
-
-type Locale = string | undefined;

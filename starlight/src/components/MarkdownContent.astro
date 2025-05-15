@@ -3,14 +3,17 @@ import Default from "@astrojs/starlight/components/MarkdownContent.astro";
 
 import ImageZoom from "starlight-image-zoom/components/ImageZoom.astro";
 import StarlightBlogMarkdownContent from "starlight-blog/components/MarkdownContent.astro";
-import { isAnyBlogPostPage } from "./utils";
+import { sameStringIgnoreLeadingAndTrailingSlashes } from "./utils";
 
 const { id } = Astro.locals.starlightRoute;
+const { posts } = Astro.locals.starlightBlog;
 ---
 
 <ImageZoom />
 {
-  isAnyBlogPostPage(id) ? (
+  posts.some((post) =>
+    sameStringIgnoreLeadingAndTrailingSlashes(post.href, id)
+  ) ? (
     <StarlightBlogMarkdownContent>
       <slot />
     </StarlightBlogMarkdownContent>
