@@ -1,5 +1,6 @@
 ---
 title: Setting up Kubernetes with Cilium and Cloudflare
+description: Today we'll take a look at how to set up a Kubernetes cluster with K3s and Cilium.
 date: 2024-06-11
 lastUpdated: 2024-10-01
 tags:

@@ -1,5 +1,6 @@
 ---
 title: How to make your Starlight sidebar items look better
+description: In this blog post, we'll take a look at how small changes can make a big difference when it comes to whitespaces, font sizes, weights, and colors in your Starlight sidebar.
 date: 2025-04-27
 tags:
     - Starlight
