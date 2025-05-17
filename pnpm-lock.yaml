@@ -66,8 +66,8 @@ importers:
         specifier: ^0.14.2
         version: 0.14.3(@astrojs/starlight@0.34.1(astro@5.7.5(rollup@4.40.1)(typescript@5.7.3)(yaml@2.7.1)))
       starlight-theme-rapide:
-        specifier: ^0.5.0
-        version: 0.5.0(@astrojs/starlight@0.34.1(astro@5.7.5(rollup@4.40.1)(typescript@5.7.3)(yaml@2.7.1)))
+        specifier: ^0.5.1
+        version: 0.5.1(@astrojs/starlight@0.34.1(astro@5.7.5(rollup@4.40.1)(typescript@5.7.3)(yaml@2.7.1)))
       starlight-view-modes:
         specifier: ^0.10.2
         version: 0.10.2(@astrojs/starlight@0.34.1(astro@5.7.5(rollup@4.40.1)(typescript@5.7.3)(yaml@2.7.1)))
@@ -2142,8 +2142,8 @@ packages:
     peerDependencies:
       '@astrojs/starlight': '>=0.15.0'
 
-  starlight-theme-rapide@0.5.0:
-    resolution: {integrity: sha512-ozY0M6XhcLJdtVrEq8dxr/D4dBCPqTYIttCWK499d+bINI+e6CHa/YCtN9TsiewLYisX0fZ63p+ZIRtyC8K4FA==}
+  starlight-theme-rapide@0.5.1:
+    resolution: {integrity: sha512-QRF6mzcYHLEX5UpUvOPXVVwISS298siIJLcKextoMLhXcnF12nX+IYJ0LNxFk9XaPbX9uDXIieSBJf5Pztkteg==}
     engines: {node: '>=18'}
     peerDependencies:
       '@astrojs/starlight': '>=0.34.0'
@@ -5336,7 +5336,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  starlight-theme-rapide@0.5.0(@astrojs/starlight@0.34.1(astro@5.7.5(rollup@4.40.1)(typescript@5.7.3)(yaml@2.7.1))):
+  starlight-theme-rapide@0.5.1(@astrojs/starlight@0.34.1(astro@5.7.5(rollup@4.40.1)(typescript@5.7.3)(yaml@2.7.1))):
     dependencies:
       '@astrojs/starlight': 0.34.1(astro@5.7.5(rollup@4.40.1)(typescript@5.7.3)(yaml@2.7.1))
 
