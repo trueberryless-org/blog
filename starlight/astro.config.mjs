@@ -86,7 +86,8 @@ export default defineConfig({
             "i18n:setup"({ injectTranslations }) {
               injectTranslations({
                 en: {
-                  "starlightBlog.post.lastUpdate": " • Last update: {{date}}",
+                  "starlightBlog.post.lastUpdate":
+                    ' • Last update: <time datetime="{{isoDate}}">{{date, datetime(dateStyle: medium)}}</time>',
                 },
               });
             },
