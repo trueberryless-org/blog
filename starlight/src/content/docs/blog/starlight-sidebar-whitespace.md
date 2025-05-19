@@ -5,7 +5,6 @@ date: 2025-04-27
 tags:
     - Starlight
     - CSS
-    - Sidebar
 excerpt: In this blog post, we'll take a look at how small changes can make a big difference when it comes to whitespaces in your Starlight sidebar.
 authors:
     - trueberryless

@@ -4,9 +4,8 @@ description: Today we'll take a look at how to set up Argo CD in a k3s cluster.
 date: 2024-07-27
 lastUpdated: 2024-07-28
 tags:
-    - ArgoCD
+    - Automation
     - Deployment
-    - Kubernetes
 excerpt: Continuing to improve our k3s cluster and especially the CI/CD workflow, we now take a look at the GitOps tool called Argo CD, and how we can integrate it into our cluster. Our tech stack for deployment uses these services&#58; k3s, Helm, Cilium & after this tutorial Argo CD as well
 authors:
     - trueberryless
