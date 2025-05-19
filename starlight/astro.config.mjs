@@ -61,21 +61,31 @@ export default defineConfig({
           navigation: "none",
           authors: {
             trueberryless: {
-              name: "trueberryless",
-              title: "Felix Schneider",
-              picture: "/trueberryless.png", // Images in the `public` directory are supported.
+              name: "Felix Schneider",
+              title: "trueberryless",
+              picture: "/trueberryless.png",
               url: "https://trueberryless.org",
             },
             clemens: {
               name: "clemens",
               title: "Clemens Schlipfinger",
-              picture: "/clemens.png", // Images in the `public` directory are supported.
+              picture: "/clemens.png",
               url: "https://www.linkedin.com/in/clemens-schlipfinger/",
             },
-            chatgpt: {
-              name: "ChatGPT",
-              picture: "/chatgpt.png", // Images in the `public` directory are supported.
-              url: "https://chatgpt.com/",
+            hideoo: {
+              name: "HiDeoo",
+              picture: "/hideoo.png",
+              url: "https://hideoo.dev",
+            },
+            frostybee: {
+              name: "Frostybee",
+              picture: "/frostybee.png",
+              url: "https://github.com/frostybee",
+            },
+            ai: {
+              name: "Artificial Intelligence",
+              title: "Written with the help of AI",
+              picture: "/ai.jpg",
             },
           },
         }),
