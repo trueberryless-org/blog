@@ -4,8 +4,6 @@ description: In this blog post, I'll show you the evolution of Starlight plugins
 date: 2025-05-05
 tags:
     - Starlight
-    - Evolution
-    - Topics
     - Plugins
 excerpt: In this post, I'll show you the evolution of Starlight plugins with a case study of the [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics) plugin. Be prepared to find out some impressive facts about people and code around Starlight.
 authors:
