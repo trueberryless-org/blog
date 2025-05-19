@@ -8,6 +8,7 @@ tags:
 excerpt: In this post, I'll show you the evolution of Starlight plugins with a case study of the [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics) plugin. Be prepared to find out some impressive facts about people and code around Starlight.
 authors:
     - trueberryless
+    - ai
 cover:
   alt: A beautiful cover image with the text "History Time"
   image: ../../../../public/blog/starlight-topics-history-story.png

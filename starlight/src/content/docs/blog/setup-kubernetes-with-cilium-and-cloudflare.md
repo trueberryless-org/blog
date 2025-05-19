@@ -8,6 +8,7 @@ tags:
 excerpt: This blog posts describes the process of setting up a kubernetes cluster with k3s and cilium. We use Helm as the package manager and Cloudflare as the certificate issuer. We used the tips and tricks from Vegard S. Hagen from [his article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/). Essentially, this blog explains, how all the trueberryless.org websites are deployed.
 authors:
     - trueberryless
+    - clemens
 cover:
   alt: A beautiful cover image with the text "Kubernetes"
   image: ../../../../public/blog/setup-kubernetes-with-cilium-and-cloudflare.png
