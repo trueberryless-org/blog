@@ -1,5 +1,4 @@
 import starlight from "@astrojs/starlight";
-import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlightImageZoom from "starlight-image-zoom";
@@ -127,9 +126,6 @@ export default defineConfig({
       ],
       pagination: false,
       credits: true,
-      expressiveCode: {
-        plugins: [pluginCollapsibleSections()],
-      },
     }),
   ],
   redirects: {
