@@ -44,7 +44,7 @@ I tried tweaking it. Replacing unsupported tags with ones that worked. Maybe I c
 
 When in doubt, automate. If I couldn’t get my HTML in directly, maybe I could generate something dynamic with a script? So I threw together a Python script to fetch my latest GitHub repository and insert it into my README. Just leaving this random bytes which some would call Python code here:
 
-```python collapse={1-22}
+```python collapse={1-22} showLineNumbers=false
 import requests
 
 github_username = "yourusername"
@@ -91,7 +91,7 @@ SVGs could scale, they supported both text and images, and — most importantly 
 
 So I tried something like this:
 
-```xml
+```xml showLineNumbers=false
 <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="100%" height="100%">
     <body xmlns="http://www.w3.org/1999/xhtml">

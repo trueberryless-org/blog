@@ -57,7 +57,7 @@ But before I do that, I'll show you how the default styling of the Starlight sid
 
 On the root level of your Starlight sidebar, there are two different types of elements: **pages** and **groups**. While the default styling is pretty decent, I found the whitespaces - this is the margin between items which itself doesn't include any content - to be a bit too large, especially between root-level items. With this example of custom CSS down below, I made the margin between root-level items smaller while keeping the margin between groups the same. The important CSS styling is highlighted in the code block.
 
-```css {3}
+```css {3} showLineNumbers=false
 // src/styles/custom.css
 sl-sidebar-state-persist ul.top-level > li:not(:has(details)) {
   margin-top: 0rem;
@@ -75,7 +75,7 @@ Perhaps, this will not be as useful to you because you don't use root-level page
 
 [Imho][imho] the one thing that triggers me the most about Starlight's root-level items in the sidebar, is their boldness. This is probably a very opinionated take, but if you ask me, one single page can't possibly be as important as an entire group of pages in your documentation. Therefore, I made the font weight of root-level items thinner as you can see in the code block below.
 
-```css {6}
+```css {6} showLineNumbers=false
 // src/styles/custom.css
 sl-sidebar-state-persist ul.top-level > li > a[aria-current="page"] {
   font-weight: 600; /* default value */
@@ -92,7 +92,8 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 A small but subtle change: I made unselected root-level items appear dimmer in the code block below.
 
 If you choose to use this design as well, I recommend that you only apply the second CSS manipulation since the first one is just for demonstrating how you could adjust the styling of selected root-level items – this rule also applies to the other code blocks in this blog if they are marked as `default value`.
-```css {6}
+
+```css {6} showLineNumbers=false
 // src/styles/custom.css
 sl-sidebar-state-persist ul.top-level > li > a[aria-current="page"] {
   color: var(--sl-color-text-invert); /* default value */
@@ -108,7 +109,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 
 Although I don't recommend it, you can also adjust the font size of sidebar items. With this example of custom CSS down below, I made the font size of root-level items smaller.
 
-```css {3}
+```css {3} showLineNumbers=false
 // src/styles/custom.css
 sl-sidebar-state-persist ul.top-level > li > a {
   font-size: var(--sl-text-sm);
@@ -123,7 +124,7 @@ Summing everything up, I recommend that you apply some mix of the above customiz
 
 Note that I also use [Cascade Layers][starlight-css-cascade-layers], supported since [Starlight 0.34.0][starlight-0-34], and recommend using them to specify the order in which CSS styles are applied.
 
-```css
+```css showLineNumbers=false
 // src/styles/custom.css
 @layer starlight, my-starlight-sidebar;
 

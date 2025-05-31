@@ -6,7 +6,7 @@ tags:
     - Starlight
     - Components
     - CSS
-excerpt: Learn how to create a vertical progress indicator for your Starlight site. We will show you one option with some clever CSS tricks and another with a little bit of JavaScript.
+excerpt: Learn how to create a vertical progress indicator for your Starlight site.
 authors:
     - frostybee
     - trueberryless
@@ -14,8 +14,6 @@ cover:
   alt: A beautiful cover image with the text "Progress Bar"
   image: ../../../assets/covers/progressbar.png
 ---
-
-import { Tabs, TabItem, Steps } from "@astrojs/starlight/components";
 
 In this post, we would like to show you how [FrostyBee](https://github.com/frostybee) created a clean vertical progress indicator for Starlight sites.
 
@@ -27,16 +25,11 @@ You will need to have an existing Starlight website.
 
 Let's create a new component called `ProgressIndicator.astro` in the `src/components/` directory. This component will be responsible for rendering the progress indicator.
 
-### With JavaScript
-
 First, let's take a look at a classic solution using JavaScript. 
 
 We create a container which spans across the whole width with the progress bar `<div>` inside. The width of the inner `<div>` is the updated whenever the user scrolls (and when the page loads) to reflect the current scroll position. 
 
-```astro title="src/components/ProgressIndicator.astro" collapse={30-80}
----
----
-
+```astro title="src/components/ProgressIndicator.astro" collapse={27-43}
 <div class="progress-scroll-container" aria-hidden="true">
   <div id="progress-scroll"></div>
 </div>
@@ -64,8 +57,7 @@ We create a container which spans across the whole width with the progress bar `
 </script>
 
 <style>
-  html:is(:not([data-has-hero]), [data-has-sidebar], [data-has-toc])
-    .progress-scroll-container {
+  html:is(:not([data-has-hero]), [data-has-sidebar], [data-has-toc]) .progress-scroll-container {
     position: fixed;
     top: var(--sl-nav-height);
     left: 0;
@@ -79,39 +71,6 @@ We create a container which spans across the whole width with the progress bar `
     height: 100%;
     width: 0px;
     background-color: var(--sl-color-accent-high);
-    transition-property:
-      color,
-      background-color,
-      border-color,
-      text-decoration-color,
-      fill,
-      stroke,
-      opacity,
-      box-shadow,
-      transform,
-      filter,
-      -webkit-backdrop-filter;
-    transition-property:
-      color, background-color, border-color, text-decoration-color, fill,
-      stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property:
-      color,
-      background-color,
-      border-color,
-      text-decoration-color,
-      fill,
-      stroke,
-      opacity,
-      box-shadow,
-      transform,
-      filter,
-      backdrop-filter,
-      -webkit-backdrop-filter;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 0.15s;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: 0.3s;
-    opacity: 1;
   }
 </style>
 
@@ -124,7 +83,9 @@ We create a container which spans across the whole width with the progress bar `
 
 In the hidden lines is the styling which makes sure that the progress bar looks like a typical progress bar. It is also suited to Starlight because the bar is automatically hidden when the site has no sidebar and table of contents, but a hero element as most landing pages do.
 
-One thing to point out is what the global CSS does: It pushes the mobile table of contents dropdown menu down to create more whitespace to the progress bar. This is a personal preference and you can remove it if you want.
+One thing to point out is what the global CSS (line 45) does: It pushes the mobile table of contents dropdown menu down to create more whitespace to the progress bar. This is a personal preference and you can remove it if you want.
+
+## Starlight Override
 
 Now we can use this component in a [Starlight override](https://starlight.astro.build/guides/overriding-components/). In this case it makes sense to override the [`Header.astro` component](https://starlight.astro.build/reference/overrides/#header-1) like this:
 
@@ -157,14 +118,10 @@ export default defineConfig({
 });
 ```
 
-However, this variant ships some unnecessary JavaScript to the client, which we can smartly avoid as you can read in the next section.
+## Source Code
 
-### Without JavaScript
+You can find the whole project code on [GitHub](https://github.com/trueberryless/starlight-progress-indicator) and in [this Stackblitz example](https://stackblitz.com/github/trueberryless/starlight-progress-indicator?file=src%2Fcomponents%2FProgressIndicator.astro).
 
-Following [this clever article](https://css-tricks.com/books/greatest-css-tricks/scroll-indicator/), which describes how Mike Riethmuller created a scroll indicator with pure CSS, we can create a vertical progress indicator for our Starlight site without any JavaScript. 
+## Conclusion
 
-The whole `Header.astro` component override part is the same as in the ["With JavaScript" section](#with-javascript), but here we can implement the `ProgressIndicator.astro` component without any JavaScript. 
-
-```astro title="src/components/ProgressIndicator.astro" 
-
-```
+With this setup, the progress indicator will be displayed on every page (except landing pages) of your Starlight site. 🥳
