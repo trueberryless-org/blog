@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
-import starlightNextjsTheme from 'starlight-nextjs-theme'
+import starlightNextjsTheme from "starlight-nextjs-theme";
 import starlightViewModes from "starlight-view-modes";
 
 // https://astro.build/config
