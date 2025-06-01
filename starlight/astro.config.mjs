@@ -47,6 +47,14 @@ export default defineConfig({
             content: "@trueberryless@mastodon.social",
           },
         },
+        {
+          tag: "script",
+          attrs: {
+            src: "https://rybbit-be.lou.gg/api/script.js",
+            "data-site-id": "3",
+            defer: true,
+          },
+        },
       ],
       plugins: [
         starlightLinksValidator({
