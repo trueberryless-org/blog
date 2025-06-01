@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
-import starlightThemeRapide from "starlight-theme-rapide";
+import starlightNextjsTheme from 'starlight-nextjs-theme'
 import starlightViewModes from "starlight-view-modes";
 
 // https://astro.build/config
@@ -53,7 +53,7 @@ export default defineConfig({
           exclude: ["/blog/tags/*"],
         }),
         starlightImageZoom(),
-        starlightThemeRapide(),
+        starlightNextjsTheme(),
         starlightBlog({
           title: "Deep Thoughts",
           recentPostCount: 3,
