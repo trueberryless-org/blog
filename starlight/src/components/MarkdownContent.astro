@@ -1,25 +1,7 @@
 ---
-import Default from "@astrojs/starlight/components/MarkdownContent.astro";
-
-import ImageZoom from "starlight-image-zoom/components/ImageZoom.astro";
-import StarlightBlogMarkdownContent from "starlight-blog/components/MarkdownContent.astro";
-import { sameStringIgnoreLeadingAndTrailingSlashes } from "./utils";
-
-const { id } = Astro.locals.starlightRoute;
-const { posts } = Astro.locals.starlightBlog;
+import StarlightBlog from "starlight-blog/overrides/MarkdownContent.astro";
+import StarlightImageZoom from "starlight-image-zoom/components/ImageZoom.astro";
 ---
 
-<ImageZoom />
-{
-  posts.some((post) =>
-    sameStringIgnoreLeadingAndTrailingSlashes(post.href, id)
-  ) ? (
-    <StarlightBlogMarkdownContent>
-      <slot />
-    </StarlightBlogMarkdownContent>
-  ) : (
-    <Default>
-      <slot />
-    </Default>
-  )
-}
+<StarlightImageZoom />
+<StarlightBlog><slot /></StarlightBlog>

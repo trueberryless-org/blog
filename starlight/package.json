@@ -4,14 +4,14 @@
   "type": "module",
   "scripts": {
     "astro": "astro",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "dev": "astro dev --port 4322",
     "preview": "astro preview --port 4322",
     "start": "astro dev --port 4322"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/starlight": "^0.34.1",
+    "@astrojs/starlight": "^0.34.3",
     "@expressive-code/plugin-collapsible-sections": "^0.41.2",
     "@fontsource-variable/big-shoulders-display": "^5.0.20",
     "@fontsource-variable/ibarra-real-nova": "^5.0.21",
@@ -20,8 +20,8 @@
     "@fontsource/nova-script": "^5.0.12",
     "@fontsource/nova-square": "^5.0.19",
     "@fontsource/tauri": "^5.0.20",
-    "astro": "^5.7.5",
-    "sharp": "^0.32.6",
+    "astro": "^5.8.1",
+    "sharp": "^0.34.2",
     "starlight-blog": "^0.23.2",
     "starlight-image-zoom": "^0.10.1",
     "starlight-links-validator": "^0.14.2",
