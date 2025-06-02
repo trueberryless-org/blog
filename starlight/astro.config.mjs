@@ -9,6 +9,7 @@ import starlightViewModes from "starlight-view-modes";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://blog.trueberryless.org",
   integrations: [
     starlight({
       title: "Blog",
