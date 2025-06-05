@@ -57,6 +57,7 @@ export default defineConfig({
           },
         },
       ],
+      routeMiddleware: "./src/routeData.ts",
       plugins: [
         starlightLinksValidator({
           exclude: ["/blog/tags/*"],

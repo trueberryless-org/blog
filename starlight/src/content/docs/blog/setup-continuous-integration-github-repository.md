@@ -12,7 +12,7 @@ authors:
     - trueberryless
 cover:
   alt: A beautiful cover image with the text "Github CD"
-  image: ../../../assets/covers/githubcd.png
+  image: ../../../../public/blog/setup-continuous-integration-github-repository.png
 ---
 
 In today's post, we'll take a quick look at how to set up continuous deployment in a GitHub repository. We're pretty sure that this setup also works for other Git registries, but if you use another, keep in mind that this post is designed for GitHub only.
