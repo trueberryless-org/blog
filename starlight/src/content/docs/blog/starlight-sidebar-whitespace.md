@@ -10,7 +10,7 @@ authors:
     - trueberryless
 cover:
   alt: A beautiful cover image with the text "Starlight CSS"
-  image: ../../../assets/covers/starlightcss.png
+  image: ../../../../public/blog/starlight-sidebar-whitespace.png
 ---
 
 Have you ever wondered why your [Starlight][starlight] sidebar doesn't look that appealing? Did you know how important the space between items in your sidebar unconsciously is? The font size, the weight and little color differences? In this guide, we'll take a look at how you can customize the appearance of your Starlight sidebar with some quick and easy steps.

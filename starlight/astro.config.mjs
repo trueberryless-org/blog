@@ -8,6 +8,7 @@ import starlightViewModes from "starlight-view-modes";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://blog.trueberryless.org",
   integrations: [
     starlight({
       title: "Blog",
@@ -46,7 +47,16 @@ export default defineConfig({
             content: "@trueberryless@mastodon.social",
           },
         },
+        {
+          tag: "script",
+          attrs: {
+            src: "https://rybbit-be.lou.gg/api/script.js",
+            "data-site-id": "3",
+            defer: true,
+          },
+        },
       ],
+      routeMiddleware: "./src/routeData.ts",
       plugins: [
         starlightLinksValidator({
           exclude: ["/blog/tags/*"],

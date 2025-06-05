@@ -10,7 +10,7 @@ authors:
     - trueberryless
 cover:
   alt: A beautiful cover image with the text "Kubernetes"
-  image: ../../../assets/covers/kubernetes.png
+  image: ../../../../public/blog/setup-kubernetes-with-cilium-and-cloudflare.png
 ---
 
 Working with Docker Containers can be hard. However, there are tools which enhance the management of containers, like Kubernetes. Actually, Kubernetes is the only tool to my knowledge which acts as a management software for Docker Containers. Kubernetes is well-integrated in almost all cloud providers, like Google Cloud, Azure and AWS. As a result, it has a standardized `yaml`-syntax, which is great for small developers because they can switch between `The Big Three` with low effort.
