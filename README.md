@@ -48,6 +48,12 @@ pnpm run preview
 
 in order to run the project in build mode not in dev mode.
 
+## Cover Images
+
+All cover images are generated with the [Release Image Generator](https://github.com/trueberryless-org/release-image-generator).
+
+Here is an example URL: https://release-image-generator.trueberryless.org/?text=Blog&width=960&height=480
+
 ## Contribution
 
 If you wanna contribute to the blog website, just edit or create the Markdown files you wanna change and create a pull request.  
