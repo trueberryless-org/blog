@@ -11,11 +11,11 @@
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
-  font-family: "Nova Square", system-ui;
+  font-family: "Nova Square", system-ui, sans-serif;
 }
 
 .content-panel :is(p, ul) {
-  font-family: "Inria Sans", sans-serif;
+  font-family: "Inria Sans", system-ui, sans-serif;
 }
 
 :is(code, code *) {

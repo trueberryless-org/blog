@@ -3,13 +3,12 @@ title: How I Built a GitHub Profile README That Shouldn’t Exist (But It Does)
 description: A deep dive into the technical challenges and solutions behind my GitHub profile README, featuring SVG manipulation, automation, and a dynamic Bento Grid.
 date: 2025-02-05
 tags:
+    - Automation
     - GitHub
-    - CI/CD
-    - Markdown
 excerpt: Creating a standout GitHub profile README isn’t just about adding a few badges — it’s about pushing technical boundaries. In this deep dive, I explore low-level SVG manipulation, HTML-to-SVG conversion, inline animations, and full automation with GitHub Actions to build what I believe is one of the most technically advanced GitHub READMEs. From a dynamic Bento Grid that updates every 5 minutes to embedding live SVGs without external requests, this project transformed my profile into a living, self-updating showcase of my work. Want to know how I did it? Let’s break it down. 🚀
 authors:
     - trueberryless
-    - chatgpt
+    - ai
 cover:
   alt: A beautiful cover image with the text "GitHub Profile"
   image: ../../../../public/blog/technically-impressive-github-profile-readme.png
@@ -45,7 +44,7 @@ I tried tweaking it. Replacing unsupported tags with ones that worked. Maybe I c
 
 When in doubt, automate. If I couldn’t get my HTML in directly, maybe I could generate something dynamic with a script? So I threw together a Python script to fetch my latest GitHub repository and insert it into my README. Just leaving this random bytes which some would call Python code here:
 
-```python collapse={1-22}
+```python collapse={1-22} showLineNumbers=false
 import requests
 
 github_username = "yourusername"
@@ -92,7 +91,7 @@ SVGs could scale, they supported both text and images, and — most importantly 
 
 So I tried something like this:
 
-```xml
+```xml showLineNumbers=false
 <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="100%" height="100%">
     <body xmlns="http://www.w3.org/1999/xhtml">

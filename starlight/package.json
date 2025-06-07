@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/starlight": "^0.34.3",
     "@expressive-code/plugin-collapsible-sections": "^0.41.2",
+    "@expressive-code/plugin-line-numbers": "^0.41.2",
     "@fontsource-variable/big-shoulders-display": "^5.0.20",
     "@fontsource-variable/ibarra-real-nova": "^5.0.21",
     "@fontsource-variable/jetbrains-mono": "^5.0.21",
