@@ -88,6 +88,11 @@ export default defineConfig({
               picture: "/hideoo.png",
               url: "https://hideoo.dev",
             },
+            frostybee: {
+              name: "Frostybee",
+              picture: "/frostybee.png",
+              url: "https://github.com/frostybee",
+            },
             ai: {
               name: "Artificial Intelligence",
               title: "Written with the help of AI",
