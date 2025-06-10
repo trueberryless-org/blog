@@ -70,7 +70,7 @@ export default defineConfig({
           navigation: "none",
           metrics: {
             readingTime: true,
-            words: "rounded"
+            words: "rounded",
           },
           authors: {
             trueberryless: {
