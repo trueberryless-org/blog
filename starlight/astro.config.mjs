@@ -37,7 +37,7 @@ export default defineConfig({
       logo: {
         light: "./src/assets/light-logo.png",
         dark: "./src/assets/dark-logo.png",
-        replacesTitle: true,
+        // replacesTitle: true,
       },
       head: [
         {
@@ -67,6 +67,7 @@ export default defineConfig({
           title: "Deep Thoughts",
           recentPostCount: 3,
           prevNextLinksOrder: "chronological",
+          prefix: "/blog",
           navigation: "none",
           metrics: {
             readingTime: true,
