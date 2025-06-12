@@ -120,6 +120,26 @@ export default defineConfig({
             "config:setup"() {},
           },
         },
+        {
+          name: "blog-reading-time-routes",
+          hooks: {
+            "config:setup"({ logger, addIntegration }) {
+              addIntegration({
+                name: "blog-reading-time-routes",
+                hooks: {
+                  "astro:config:setup"({ injectRoute }) {
+                    injectRoute({
+                      pattern: "/reading-time/[length]",
+                      entrypoint: "./src/components/ReadingTimeRoutes.astro",
+                      prerender: true,
+                    });
+                  },
+                },
+              });
+              logger.info("Starlight Plugin Example has been loaded.");
+            },
+          },
+        },
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
