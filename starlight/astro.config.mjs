@@ -65,6 +65,7 @@ export default defineConfig({
         starlightThemeRapide(),
         starlightBlog({
           title: "Deep Thoughts",
+          postCount: 7,
           recentPostCount: 3,
           prevNextLinksOrder: "chronological",
           navigation: "none",
