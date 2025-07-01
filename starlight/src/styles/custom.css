@@ -1,5 +1,6 @@
 :root {
   --starlight-image-zoom-backdrop-bg: none;
+  --sl-font: "Atkinson Hyperlegible Next Variable", system-ui, sans-serif;
 }
 
 .hero-html {
@@ -11,11 +12,11 @@
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
-  font-family: "Nova Square", system-ui, sans-serif;
+  font-family: "Atkinson Hyperlegible Next Variable", system-ui, sans-serif;
 }
 
 .content-panel :is(p, ul) {
-  font-family: "Inria Sans", system-ui, sans-serif;
+  font-family: "Atkinson Hyperlegible Next Variable", system-ui, sans-serif;
 }
 
 :is(code, code *) {
