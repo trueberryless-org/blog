@@ -1,6 +1,7 @@
 import starlight from "@astrojs/starlight";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
+import starlightCoolerCredit from "starlight-cooler-credit";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
@@ -62,6 +63,9 @@ export default defineConfig({
         }),
         starlightImageZoom(),
         starlightThemeRapide(),
+        starlightCoolerCredit({
+          credit: "Starlight Blog",
+        }),
         starlightBlog({
           title: "Deep Thoughts",
           postCount: 7,
@@ -129,7 +133,6 @@ export default defineConfig({
         "@fontsource-variable/jetbrains-mono/wght.css",
       ],
       pagination: false,
-      credits: true,
     }),
   ],
   redirects: {
