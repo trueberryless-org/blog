@@ -1,0 +1,110 @@
+---
+import type { GetImageResult, ImageMetadata } from "astro";
+import { getImage, Image } from "astro:assets";
+
+interface Props {
+  heading: string;
+  description: string;
+  link?: string | undefined;
+  imagePath?: string | ImageMetadata | undefined;
+  imageAlt?: string | undefined;
+  imageWidth?: number | undefined;
+  imageHeight?: number | undefined;
+}
+
+const {
+  heading,
+  description,
+  link,
+  imagePath,
+  imageAlt,
+  imageWidth,
+  imageHeight,
+} = Astro.props;
+
+let image: GetImageResult | undefined;
+if (imagePath) {
+  image = await getImage({
+    src: imagePath,
+  });
+}
+---
+
+<aside class="not-content">
+  <a href={link}>
+    <h2>{heading}</h2>
+    <div>
+      <div>
+        <p>{description}</p>
+      </div>
+      {
+        imagePath && imageAlt && imageWidth && imageHeight && image && (
+          <div>
+            <Image
+              src={image.src}
+              alt={imageAlt}
+              width={imageWidth}
+              height={imageHeight}
+            />
+          </div>
+        )
+      }
+    </div>
+  </a>
+</aside>
+
+<style>
+  aside {
+    position: relative;
+    background-color: var(--sl-color-gray-6);
+    padding: 1rem;
+    margin-block: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--sl-color-text-accent);
+    box-shadow: var(--sl-shadow-md);
+    overflow-y: hidden;
+  }
+  a:link {
+    text-decoration: none !important;
+  }
+  a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  a > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  h2 {
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-h5);
+    font-weight: 600;
+    text-decoration: none !important;
+    line-height: var(--sl-line-height-headings);
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: var(--sl-text-xs);
+    line-height: normal;
+    text-decoration: none !important;
+    color: var(--sl-color-gray-3);
+    overflow-wrap: anywhere;
+  }
+  aside > a > div > div:last-child {
+    display: flex;
+    align-items: end;
+  }
+  img {
+    margin-bottom: -2rem;
+    transition: transform 0.3s;
+    transform: translateY(2px);
+    width: 4.5rem;
+    height: auto;
+  }
+  aside:hover img {
+    transform: translateY(0px);
+  }
+</style>
