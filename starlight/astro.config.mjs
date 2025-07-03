@@ -104,24 +104,6 @@ export default defineConfig({
             },
           },
         }),
-        {
-          name: "blog-separation-character",
-          hooks: {
-            "i18n:setup"({ injectTranslations }) {
-              injectTranslations({
-                en: {
-                  "starlightBlog.post.lastUpdate":
-                    ' • Last update: <time datetime="{{isoDate}}">{{date, datetime(dateStyle: medium)}}</time>',
-                  "starlightBlog.metrics.readingTime.minutes":
-                    " • {{count}} min read",
-                  "starlightBlog.metrics.words_one": " • {{count}} word",
-                  "starlightBlog.metrics.words_other": " • {{count}} words",
-                },
-              });
-            },
-            "config:setup"() {},
-          },
-        },
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
