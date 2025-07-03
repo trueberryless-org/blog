@@ -31,6 +31,6 @@ img {
   border-radius: 0.5rem;
 }
 
-.sl-markdown-content blockquote:not(:where(.not-content *)) {
+.sl-markdown-content blockquote:not(:where(.not-content *)):hover {
   border-inline-start: 1px solid var(--sl-color-accent-high);
 }
