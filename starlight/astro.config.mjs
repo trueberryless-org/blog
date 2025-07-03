@@ -4,7 +4,6 @@ import starlightBlog from "starlight-blog";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
-import starlightViewModes from "starlight-view-modes";
 
 // https://astro.build/config
 export default defineConfig({
@@ -102,7 +101,6 @@ export default defineConfig({
             },
           },
         }),
-        // starlightViewModes(),
         {
           name: "blog-separation-character",
           hooks: {
