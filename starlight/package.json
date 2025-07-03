@@ -22,7 +22,6 @@
     "starlight-image-zoom": "^0.10.1",
     "starlight-links-validator": "^0.14.2",
     "starlight-theme-rapide": "^0.5.1",
-    "starlight-view-modes": "^0.10.2",
     "typescript": "^5.5.4"
   },
   "packageManager": "pnpm@10.10.0"
