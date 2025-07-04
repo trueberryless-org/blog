@@ -28,7 +28,7 @@ jobs:
             continuous-translation-
       - uses: pelikhan/action-continuous-translation@v0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_AI_TRANSLATIONS_GITHUB_TOKENTOKEN }}
           lang: fr,de
           starlight_dir: starlight
           files: |

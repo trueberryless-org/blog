@@ -108,6 +108,8 @@ export default defineConfig({
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
         TableOfContents: "./src/components/TableOfContents.astro",
+        Hero: "./src/components/Hero.astro",
+        PageTitle: "./src/components/PageTitle.astro",
       },
       customCss: [
         "./src/styles/custom.css",
