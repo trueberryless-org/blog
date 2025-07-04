@@ -33,6 +33,21 @@ export default defineConfig({
         baseUrl:
           "https://github.com/trueberryless-org/blog/tree/main/starlight/",
       },
+      defaultLocale: "root",
+      locales: {
+        root: {
+          label: "English",
+          lang: "en",
+        },
+        fr: {
+          label: "French",
+          lang: "fr",
+        },
+        de: {
+          label: "Deutsch",
+          lang: "de",
+        },
+      },
       lastUpdated: true,
       logo: {
         light: "./src/assets/light-logo.png",
