@@ -1,0 +1,6 @@
+{
+  "starlightBlog.post.lastUpdate": " • Zuletzt aktualisiert: <time datetime=\"{{isoDate}}\">{{date, datetime(dateStyle: medium)}}</time>",
+  "starlightBlog.metrics.readingTime.minutes": " • {{count}} min Lesezeit",
+  "starlightBlog.metrics.words_one": " • {{count}} Wort",
+  "starlightBlog.metrics.words_other": " • {{count}} Wörter"
+}

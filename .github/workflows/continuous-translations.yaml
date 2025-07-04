@@ -1,0 +1,40 @@
+name: Continuous Translation
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "starlight/src/content/docs/**/*.md"
+      - "starlight/src/content/docs/**/*.mdx"
+      - "!starlight/src/content/docs/fr/**"
+      - "!starlight/src/content/docs/de/**"
+permissions:
+  contents: write
+  models: read
+concurrency:
+  group: \${{ github.workflow }}-\${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  continuous_translation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: .genaiscript/cache/**
+          key: continuous-translation-${{ github.run_id }}
+          restore-keys: |
+            continuous-translation-
+      - uses: pelikhan/action-continuous-translation@v0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          lang: fr,de
+          starlight_dir: starlight
+          files: |
+            starlight/src/content/docs/**/*
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          file_pattern: "translations/*.json **.md* translations/*.json"
+          commit_message: "[cai] translated docs"
+          commit_user_name: "genaiscript"
