@@ -27,6 +27,7 @@ jobs:
           restore-keys: |
             continuous-translation-
       - uses: pelikhan/action-continuous-translation@v0
+        continue-on-error: true
         with:
           github_token: ${{ secrets.GITHUB_AI_TRANSLATIONS_GITHUB_TOKENTOKEN }}
           lang: fr,de
@@ -35,6 +36,6 @@ jobs:
             starlight/src/content/docs/**/*
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          file_pattern: "translations/*.json **.md* translations/*.json"
+          file_pattern: "**.md*"
           commit_message: "[cai] translated docs"
           commit_user_name: "genaiscript"
