@@ -60,6 +60,7 @@ export default defineConfig({
       plugins: [
         starlightLinksValidator({
           exclude: ["/blog/tags/*"],
+          errorOnRelativeLinks: false,
         }),
         starlightImageZoom(),
         starlightThemeRapide(),
