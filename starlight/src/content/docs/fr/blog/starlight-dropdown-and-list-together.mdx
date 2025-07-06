@@ -1,7 +1,7 @@
 ---
 title: Starlight Topics Dropdown et Liste ensemble
-description: Découvrez comment combiner une liste de bureau et un menu déroulant
-  mobile pour vos sujets de barre latérale Starlight.
+description: Apprenez à combiner une liste de bureau et un menu déroulant mobile
+  pour vos sujets de barre latérale Starlight.
 date: 2025-05-13
 tags:
   - Starlight
@@ -9,7 +9,7 @@ tags:
   - Plugins
   - CSS
 excerpt: Combinez deux plugins Starlight Sidebar Topics pour afficher une liste
-  de sujets sur un bureau et un menu déroulant dans la barre latérale mobile.
+  de sujets sur le bureau et un menu déroulant dans la barre latérale mobile.
 authors:
   - hideoo
   - trueberryless
@@ -21,15 +21,15 @@ cover:
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
-En utilisant le plugin [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics) avec le composant [Starlight Sidebar Topics Dropdown](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown), vous pouvez créer un site web qui affiche une liste de sujets sur un bureau et un menu déroulant sur mobile.
+En utilisant le plugin [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics) conjointement avec le composant [Starlight Sidebar Topics Dropdown](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown), vous pouvez créer un site web doté d’une liste de sujets sur le bureau et d’un menu déroulant sur mobile.
 
 ## Prérequis
 
-Vous devrez avoir un site Starlight existant.
+Vous devrez disposer d’un site Starlight existant.
 
 ## Installer les packages
 
-Tout d'abord, installez le plugin `starlight-sidebar-topics` ainsi que le composant `starlight-sidebar-topics-dropdown` :
+Tout d’abord, installez le plugin `starlight-sidebar-topics` ainsi que le composant `starlight-sidebar-topics-dropdown` :
 
 <Tabs syncKey="pkg">
   <TabItem label="npm">
@@ -51,11 +51,11 @@ Tout d'abord, installez le plugin `starlight-sidebar-topics` ainsi que le compos
   </TabItem>
 </Tabs>
 
-Ensuite, suivez les guides d'installation de [Starlight Sidebar Topics](https://starlight-sidebar-topics.netlify.app/docs/getting-started/#installation) et de [Starlight Sidebar Topics Dropdown](https://starlight-sidebar-topics-dropdown.trueberryless.org/docs/getting-started/#installation).
+Ensuite, suivez les guides d’installation de [Starlight Sidebar Topics](https://starlight-sidebar-topics.netlify.app/docs/getting-started/#installation) et de [Starlight Sidebar Topics Dropdown](https://starlight-sidebar-topics-dropdown.trueberryless.org/docs/getting-started/#installation).
 
-## Modifier le composant de la barre latérale
+## Modifier le composant Sidebar
 
-Dans le guide d'installation du composant dropdown, vous avez créé un composant de barre latérale qui n'affiche que le menu déroulant. Maintenant, vous devez modifier ce composant pour qu'il affiche aussi la barre latérale par défaut si l'utilisateur est sur un bureau.
+Dans le guide d’installation du composant menu déroulant, vous avez créé un composant de barre latérale qui affiche uniquement le menu déroulant. Maintenant, vous devez modifier ce composant pour qu'il affiche également la barre latérale par défaut si l'utilisateur est sur un bureau.
 
 ```astro
 ---
@@ -102,7 +102,7 @@ import TopicsDropdown from 'starlight-sidebar-topics-dropdown/TopicsDropdown.ast
 
 Si vous suivez ces étapes, votre barre latérale ressemblera à ceci :
 
-![Résultat final avec vue de bureau à gauche et vue mobile à droite](../../../../assets/dropdown-or-list.png)
+![Résultat final avec vue sur bureau à gauche et vue sur mobile à droite](../../../../assets/dropdown-or-list.png)
 
 Vous pouvez trouver le code source complet de ce guide dans cet [exemple StackBlitz](https://stackblitz.com/edit/withastro-starlight-qgraahmp?file=astro.config.mjs).
 
@@ -110,4 +110,4 @@ Vous pouvez trouver le code source complet de ce guide dans cet [exemple StackBl
 
 Vous pourriez également faire l'inverse (liste sur mobile, menu déroulant sur bureau) en inversant les propriétés `display: block` et `display: none` dans le CSS.
 
-De plus, vous pourriez également créer votre propre composant d'affichage, qui utilise les données de route du plugin Starlight Sidebar Topics et rend les sujets d'une manière personnalisée. C'est un peu plus avancé, mais vous pouvez trouver plus d'informations sur cela dans la documentation ["Custom Topics List"](https://starlight-sidebar-topics.netlify.app/docs/guides/custom-topic-list/).
+En outre, vous pouvez également créer votre propre composant d'affichage, qui utilise les données de route du plugin Starlight Sidebar Topics et rend les sujets de manière personnalisée. C’est un peu plus avancé, mais vous pouvez trouver plus d'informations à ce sujet dans la documentation ["Custom Topics List"](https://starlight-sidebar-topics.netlify.app/docs/guides/custom-topic-list/).
