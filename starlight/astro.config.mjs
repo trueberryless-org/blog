@@ -1,11 +1,11 @@
 import starlight from "@astrojs/starlight";
+import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
-import lunaria from '@lunariajs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
@@ -75,7 +75,7 @@ export default defineConfig({
       routeMiddleware: "./src/routeData.ts",
       plugins: [
         lunaria({
-            sync: true,
+          sync: true,
         }),
         starlightLinksValidator({
           exclude: ["/blog/tags/*"],
