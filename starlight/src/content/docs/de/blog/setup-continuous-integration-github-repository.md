@@ -1,18 +1,18 @@
 ---
 title: Einrichten von Continuous Deployment in einem GitHub-Repository
 description: Heute werfen wir einen Blick darauf, wie man ein GitHub-Repository
-  einrichtet, das über Argo CD auf einem k3s-Cluster bereitgestellt wird.
+  einrichtet, das über Argo CD in einem k3s-Cluster bereitgestellt wird.
 date: 2024-07-28
 tags:
   - Automation
   - Deployment
   - GitHub
 excerpt: Heute werfen wir einen Blick darauf, wie man ein GitHub-Repository
-  einrichtet, das über Argo CD auf einem k3s-Cluster bereitgestellt wird.
-  Zusammenfassend umfasst der Artikel Workflow-Dateien, eine Dockerfile,
-  Manifeste (Deployment) und Docker Hub-Repositories. Bitte sehen Sie sich
+  einrichtet, das über Argo CD in einem k3s-Cluster bereitgestellt wird.
+  Zusammengefasst wird der Artikel Workflow-Dateien, Dockerfile, Manifeste
+  (Deployment) und Docker Hub-Repositories beinhalten. Bitte sehen Sie sich
   [unseren Argo CD-Blog](./setup-argocd-for-kubernetes) an, da dies eine
-  Fortsetzung des anderen Beitrags ist.
+  Fortsetzung des vorherigen Beitrags sein wird.
 authors:
   - trueberryless
 cover:
@@ -21,28 +21,28 @@ cover:
 
 ---
 
-Im heutigen Beitrag werfen wir einen kurzen Blick darauf, wie man Continuous Deployment in einem GitHub-Repository einrichtet. Wir sind uns ziemlich sicher, dass dieses Setup auch für andere Git-Registrys funktioniert. Wenn Sie jedoch eine andere verwenden, beachten Sie, dass dieser Beitrag speziell für GitHub ausgelegt ist.
+In diesem Artikel werfen wir einen kurzen Blick darauf, wie man Continuous Deployment in einem GitHub-Repository einrichtet. Wir sind uns ziemlich sicher, dass diese Einrichtung auch für andere Git-Registries funktioniert, aber wenn Sie eine andere verwenden, beachten Sie bitte, dass dieser Beitrag speziell für GitHub gedacht ist.
 
-Dieser Beitrag setzt außerdem voraus, dass Sie GitHub-Actions in Kombination mit Argo CD verwenden, um Ihre Anwendungen auf einem Kubernetes-Cluster bereitzustellen. Folgen Sie unseren anderen [Deployment-Beiträgen](../../blog/tags/deployment/) für weitere Anweisungen, wie Sie beide Technologien auf Ihrem persönlichen Server einrichten können.
+Dieser Beitrag setzt voraus, dass Sie GitHub Actions zusammen mit Argo CD verwenden, um Ihre Anwendungen in einem Kubernetes-Cluster bereitzustellen. Folgen Sie unseren anderen [Deployment-Beiträgen](../../blog/tags/deployment/) für weitere Anleitungen, wie Sie beide Technologien auf Ihrem persönlichen Server einrichten können.
 
 ## Vorbereitungen
 
-Wir empfehlen, ein [Docker Hub](https://hub.docker.com/)-Konto zu erstellen oder eine andere Docker-Registry Ihrer Wahl zu benutzen.
+Wir empfehlen, ein [Docker Hub](https://hub.docker.com/) Konto zu erstellen oder eine andere Docker-Registry zu wählen, wenn Sie möchten.
 
 Ihr GitHub-Repository muss folgende Bedingungen erfüllen:
 
-* Enthält eine Dockerfile (idealerweise im Root-Ordner)
-* Besitzt zwei GitHub-Secrets ([GitHub-Secret erstellen](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)):
+* Hat ein Dockerfile (idealerweise im Root-Verzeichnis)
+* Hat zwei GitHub Secrets ([GitHub Secret erstellen](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)):
   * DOCKER\_USERNAME: Ihr Docker-Benutzername
-  * DOCKER\_PASSWORD: Ihr Docker-Passwort (oder [Access Token](https://docs.docker.com/security/for-developers/access-tokens/))
+  * DOCKER\_PASSWORD: Ihr Docker-Passwort (oder [Access-Token](https://docs.docker.com/security/for-developers/access-tokens/))
 
 ## Workflow-Datei(en) erstellen
 
-GitHub-Actions sind spezielle Jobs in GitHub, die meistens auf Linux-Servern ausgeführt werden und durch das Erstellen von `yaml`-Dateien im Verzeichnis `.github/workflows` gesteuert werden können. Diese speziellen Dateien kontrollieren, bei welchen Ereignissen diese Jobs ausgeführt werden sollen, und bieten Ihnen viel Freiheit. Aus meiner Erfahrung als regelmäßiger GitHub-Actions-Nutzer kann ich Ihnen sagen, dass Sie sich daran gewöhnen sollten, Ihre `yaml`-Dateien ziemlich oft zu überarbeiten, da man oft kleine Details übersieht. Doch ohne weitere Umschweife, lassen Sie uns direkt mit dem Erstellen einer passenden `deployment.yaml`-Datei beginnen, die einige Aufgaben für uns übernimmt:
+GitHub Actions sind spezielle Jobs in GitHub, die meist auf Linux-Servern laufen und durch das Erstellen von `yaml`-Dateien im Verzeichnis `.github/workflows` gesteuert werden können. Diese speziellen Dateien legen fest, nach welchen Ereignissen diese Jobs ausgeführt werden sollen, und bieten Ihnen eine große Freiheit. Als regelmäßiger GitHub-Action-Nutzer kann ich Ihnen sagen: Gewöhnen Sie sich daran, Ihre `yaml`-Dateien ziemlich oft umzuschreiben, da Sie oft vergessen, an die kleinen Details zu denken. Aber ohne weitere Umschweife lassen Sie uns direkt mit der Erstellung einer passenden `deployment.yaml`-Datei beginnen, die einige Jobs für uns erledigt:
 
-* Eine neue Docker-Image-Version zu Docker Hub pushen (mit der neuesten Version).
-* Die Datei `manifest/deployment.yaml` aktualisieren, damit Argo CD über das neu versionierte Image benachrichtigt wird.
-* (optional) Einen neuen Release auf GitHub erstellen, damit die Release-Zeiten an der richtigen Stelle dokumentiert sind.
+* Eine neue Docker-Image-Version auf Docker Hub hochladen (mit der neuesten Version).
+* Die Datei `manifest/deployment.yaml` aktualisieren, damit Argo CD über das neue Tagged-Image informiert wird.
+* (Optional) Eine neue Veröffentlichung auf GitHub erstellen, damit die Zeitpunkte der Veröffentlichungen dokumentiert werden, wo sie sollten.
 
 ```yaml {20}
 # deployment.yaml
@@ -122,7 +122,7 @@ jobs:
                   body: "A docker image has been deployed to [Docker Hub](https://hub.docker.com/r/${{ env.IMAGE_NAME }}/tags)."
 ```
 
-Hier ist eine überholte `docker-hub.yaml`, die wir früher genutzt haben, da sie gute Versionierungsstrategien bietet:
+Hier ist eine veraltete `docker-hub.yaml`, die wir früher verwendet haben, da sie schöne Versionierungsstrategien bietet:
 
 ```yaml collapse={1-145}
 # docker-hub.yaml
@@ -272,12 +272,12 @@ jobs:
                   commit_message: update deployment.json container image (automated)
 ```
 
-Nachdem Sie die Inhalte unserer `deployment.yaml`-Datei kopiert und die neue Datei im Ordner `.github/workflows` erstellt haben, müssen Sie einige sehr **wichtige Anpassungen** vornehmen:
+Nach dem Kopieren des Inhalts unserer `deployment.yaml`-Datei und dem Erstellen der neuen Datei im Ordner `.github/workflows` müssen Sie einige sehr **wichtige Anpassungen** vornehmen:
 
-* Ändern Sie den `IMAGE_NAME` zu Ihrem persönlichen Docker Hub-Repository. Der Image-Name besteht aus Ihrem Konto- und Repository-Namen. Wenn Sie nicht sicher sind, was Ihr Image-Name ist, können Sie einen Blick auf die URL des Docker Hub-Repositories werfen, dort sollte er irgendwo stehen.
+* Ändern Sie den `IMAGE_NAME` zu Ihrem persönlichen Docker Hub-Repository. Der Image-Name besteht aus Ihrem Kontonamen und dem Repository-Namen. Wenn Sie sich nicht sicher sind, was Ihr Image-Name ist, können Sie sich die URL des Docker Hub-Repositories ansehen, dort sollte er irgendwo zu finden sein.
 
-Jetzt sollten Sie bereit sein, das Schlüsselwort `deploy` in jede Commit-Nachricht auf dem Hauptbranch Ihres Repositories aufzunehmen. Es sollte automatisch ein Docker-Image zu Docker Hub pushen und das Manifest für Argo CD aktualisieren.
+Nun sollten Sie bereit sein, das Stichwort `deploy` in eine beliebige Commit-Nachricht des Hauptzweiges Ihres Repositories einzufügen, und es sollte automatisch ein Docker-Image zu Docker Hub hochladen und das Manifest für Argo CD aktualisieren.
 
-## Feiern mit einem Kaffee!
+## Feiern Sie mit einem Kaffee!
 
-Herzlichen Glückwunsch, Sie haben Argo CD erfolgreich mit k3s und Cilium eingerichtet! Sie haben sich eine Kaffeepause redlich verdient. Genießen Sie eine wohlverdiente Tasse, und wenn Sie mir virtuell einen Kaffee spendieren möchten, können Sie meine Arbeit gerne auf [Ko-fi](https://ko-fi.com/trueberryless) unterstützen. Vielen Dank!
+Herzlichen Glückwunsch, Sie haben Argo CD mit k3s und Cilium erfolgreich eingerichtet! Sie haben sich eine Kaffeepause verdient. Genießen Sie eine wohlverdiente Tasse, und wenn Sie mir einen virtuellen Kaffee spendieren möchten, unterstützen Sie meine Arbeit auf [Ko-fi](https://ko-fi.com/trueberryless). Vielen Dank!

@@ -1,15 +1,15 @@
 ---
 title: So machen Sie Ihre Starlight-Sidebar-Elemente ansprechender
 description: In diesem Blogbeitrag werfen wir einen Blick darauf, wie kleine
-  Änderungen bei Leerzeichen, Schriftgrößen, Gewichtungen und Farben einen
-  großen Unterschied in Ihrer Starlight-Sidebar machen können.
+  Änderungen einen großen Unterschied machen können, wenn es um Leerzeichen,
+  Schriftgrößen, Schriftgewichte und Farben in Ihrer Starlight-Sidebar geht.
 date: 2025-04-27
 tags:
   - Starlight
   - CSS
 excerpt: In diesem Blogbeitrag werfen wir einen Blick darauf, wie kleine
-  Änderungen bei Leerzeichen in Ihrer Starlight-Sidebar einen großen Unterschied
-  machen können.
+  Änderungen einen großen Unterschied machen können, wenn es um Leerzeichen in
+  Ihrer Starlight-Sidebar geht.
 authors:
   - trueberryless
 cover:
@@ -18,13 +18,13 @@ cover:
 
 ---
 
-Haben Sie sich jemals gefragt, warum Ihre \[Starlight]\[starlight]-Sidebar nicht besonders ansprechend aussieht? Wussten Sie, wie wichtig der Abstand zwischen den Elementen in Ihrer Sidebar unbewusst ist? Die Schriftgröße, das Gewicht und kleine Farbunterschiede? In diesem Leitfaden werfen wir einen Blick darauf, wie Sie das Erscheinungsbild Ihrer Starlight-Sidebar mit einigen schnellen und einfachen Schritten anpassen können.
+Haben Sie sich jemals gefragt, warum Ihre \[Starlight]\[starlight]-Sidebar nicht so ansprechend aussieht? Wussten Sie, wie wichtig der Raum zwischen den Elementen in Ihrer Sidebar unbewusst ist? Die Schriftgröße, das Gewicht und kleine Farbunterschiede? In diesem Leitfaden zeigen wir Ihnen, wie Sie das Erscheinungsbild Ihrer Starlight-Sidebar mit einigen schnellen und einfachen Schritten anpassen können.
 
 ## Voraussetzungen
 
-Zuerst müssen Sie Ihre \[Starlight-Seite einrichten]\[starlight-getting-started]. Anschließend bietet Starlight eine \[Anleitung zur Anpassung der auf Ihrer Starlight-Seite angewendeten Stile]\[starlight-css], die wir in diesem Beitrag verwenden werden.
+Zuerst müssen Sie Ihre \[Starlight-Website einrichten]\[starlight-getting-started]. Anschließend bietet Starlight eine \[Anleitung zur Anpassung der auf Ihre Starlight-Website angewandten Stile]\[starlight-css], die wir in diesem Beitrag nutzen werden.
 
-Wie in \[dieser Anleitung]\[starlight-css-custom] beschrieben, müssen Sie eine `.css`-Datei irgendwo in Ihrem `src/`-Verzeichnis erstellen, in der Sie Ihre CSS-Stile definieren können. Vergessen Sie nicht, den Pfad zu dieser `.css`-Datei im `customCss`-Array von Starlight in `astro.config.mjs` hinzuzufügen:
+Wie in \[dieser Anleitung]\[starlight-css-custom] beschrieben, müssen Sie eine `.css`-Datei irgendwo in Ihrem Verzeichnis `src/` erstellen, in der Sie Ihre CSS-Stile definieren können. Vergessen Sie nicht, den Pfad zu dieser `.css`-Datei zur `customCss`-Liste in der Datei `astro.config.mjs` von Starlight hinzuzufügen:
 
 ```diff lang="js"
 // astro.config.mjs
@@ -48,19 +48,19 @@ Nachdem Sie diese Vorbereitungsschritte abgeschlossen haben, können Sie einige 
 
 ## Anpassungen
 
-Es gibt unendlich viele Möglichkeiten, mit denen Sie nur mit Ihrem eigenen CSS spielen können. Ich werde Ihnen einige Ideen geben, die ich selbst sehr hilfreich fand, während ich mit dem Design der Sidebar experimentiert habe. Während einige dieser Ideen für Sie vielleicht albern aussehen, verspreche ich, dass die Kombination einiger davon Ihre Starlight-Sidebar noch besser aussehen lässt.
+Es gibt unendlich viele Möglichkeiten, mit denen Sie allein mit Ihrem benutzerdefinierten CSS experimentieren können. Ich werde Ihnen einige Ideen geben, die ich sehr nützlich fand, als ich selbst mit dem Design der Sidebar experimentierte. Während einige dieser Ideen für Sie albern erscheinen mögen, verspreche ich, dass die Kombination einiger von ihnen Ihre Starlight-Sidebar noch besser aussehen lassen wird.
 
 :::note
-Eine Sache, die es zu beachten gilt: In diesem Blogbeitrag liegt der Fokus auf der Anpassung des Stylings von **Elementen auf oberster Ebene** (denjenigen ohne Kinder) in der Sidebar.
+Eine Sache, die es zu beachten gilt, ist, dass sich in diesem Blogpost der Fokus auf die Anpassung der **Root-Elemente** (diejenigen ohne Kinder) in der Sidebar liegt.
 :::
 
-Doch bevor ich das tue, zeige ich Ihnen, wie das Standard-Styling der Starlight-Sidebar momentan aussieht:
+Aber bevor ich das tue, zeige ich Ihnen, wie das Standarddesign der Starlight-Sidebar derzeit aussieht:
 
-![Standard-Styling der Starlight-Sidebar](../../../../assets/sidebar-css/no-css.png)
+![Standarddesign der Starlight-Sidebar](../../../../assets/sidebar-css/no-css.png)
 
-### Die Leerzeichen zwischen den Sidebar-Elementen anpassen
+### Leerzeichen zwischen Sidebar-Elementen manipulieren
 
-Auf der obersten Ebene Ihrer Starlight-Sidebar gibt es zwei verschiedene Arten von Elementen: **Seiten** und **Gruppen**. Während das Standard-Styling ziemlich anständig ist, fand ich die Leerzeichen – das ist der Abstand zwischen den Elementen, der selbst keinen Inhalt enthält – etwas zu groß, besonders zwischen Elementen auf oberster Ebene. Mit diesem Beispiel für ein benutzerdefiniertes CSS weiter unten habe ich den Abstand zwischen Elementen auf oberster Ebene verkleinert, während der Abstand zwischen Gruppen gleich bleibt. Das wichtige CSS-Styling ist im Codeblock hervorgehoben.
+Auf der Root-Ebene Ihrer Starlight-Sidebar gibt es zwei verschiedene Arten von Elementen: **Seiten** und **Gruppen**. Während das Standarddesign ziemlich ansprechend ist, fand ich die Leerzeichen - das ist der Abstand zwischen Elementen, der selbst keinen Inhalt enthält - etwas zu groß, besonders zwischen Root-Elementen. Mit diesem Beispiel für benutzerdefiniertes CSS unten habe ich den Abstand zwischen Root-Elementen kleiner gemacht, während der Abstand zwischen Gruppen gleich bleibt. Die wichtigen CSS-Stile sind im Codeblock hervorgehoben.
 
 ```css {3} showLineNumbers=false
 // src/styles/custom.css
@@ -72,13 +72,13 @@ sl-sidebar-state-persist ul.top-level > li:has(details) {
 }
 ```
 
-![Starlight-Sidebar, bei der der Abstand zwischen den Elementen auf oberster Ebene kleiner ist](../../../../assets/sidebar-css/whitespaces.png)
+![Starlight-Sidebar, bei der der Abstand zwischen Root-Elementen kleiner ist](../../../../assets/sidebar-css/whitespaces.png)
 
-Vielleicht ist dies für Sie nicht so nützlich, weil Sie in Ihrer Sidebar keine Seiten auf oberster Ebene verwenden, sodass dieser Effekt für Sie nicht sichtbar ist. Aber wenn Sie es tun, probieren Sie es aus.
+Vielleicht wird dies für Sie nicht so nützlich sein, da Sie keine Root-Seiten in Ihrer Sidebar verwenden und dieser Effekt daher für Sie nicht erkennbar sein wird. Aber wenn Sie es tun, probieren Sie es aus.
 
-### Das Schriftgewicht der Sidebar-Elemente anpassen
+### Schriftgewicht der Sidebar-Elemente anpassen
 
-\[Meiner Meinung nach]\[imho] ist das, was mich an den Elementen auf oberster Ebene in der Starlight-Sidebar am meisten stört, ihre Fettigkeit. Dies ist wahrscheinlich eine sehr subjektive Meinung, aber wenn Sie mich fragen, kann eine einzelne Seite unmöglich so wichtig sein wie eine ganze Gruppe von Seiten in Ihrer Dokumentation. Daher habe ich das Schriftgewicht der Elemente auf oberster Ebene dünner gemacht, wie Sie im folgenden Codeblock sehen können.
+\[Meiner Meinung nach]\[imho] ist das Einzige, was mich am meisten an den Root-Elementen in der Sidebar von Starlight stört, deren Fettigkeit. Das ist wahrscheinlich eine sehr subjektive Meinung, aber wenn Sie mich fragen, kann eine einzelne Seite niemals so wichtig sein wie eine gesamte Gruppe von Seiten in Ihrer Dokumentation. Daher habe ich das Schriftgewicht der Root-Elemente dünner gemacht, wie Sie im folgenden Codeblock sehen können.
 
 ```css {6} showLineNumbers=false
 // src/styles/custom.css
@@ -90,13 +90,13 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight-Sidebar mit leichterem Schriftgewicht](../../../../assets/sidebar-css/font-weight.png)
+![Starlight-Sidebar mit dünnerem Schriftgewicht](../../../../assets/sidebar-css/font-weight.png)
 
-### Die Farbe der Sidebar-Elemente anpassen
+### Farbe der Sidebar-Elemente anpassen
 
-Eine kleine, aber subtile Änderung: Ich habe nicht ausgewählte Elemente auf oberster Ebene in den folgenden Codeänderungen dunkler erscheinen lassen.
+Eine kleine, aber subtile Änderung: Ich habe nicht ausgewählte Root-Elemente in der Sidebar durch den untenstehenden Codeblock gedimmter erscheinen lassen.
 
-Wenn Sie sich entscheiden, dieses Design ebenfalls zu verwenden, empfehle ich, nur die zweite CSS-Manipulation anzuwenden, da die erste nur dafür gedacht ist, zu demonstrieren, wie Sie das Styling für ausgewählte Elemente auf oberster Ebene anpassen könnten – diese Regel gilt auch für die anderen Codeblöcke in diesem Blog, wenn sie mit `default value` markiert sind.
+Falls Sie dieses Design ebenfalls verwenden möchten, empfehle ich Ihnen, nur die zweite CSS-Manipulation anzuwenden, da die erste lediglich demonstriert, wie Sie die Gestaltung der markierten Root-Elemente anpassen könnten – diese Regel gilt auch für die anderen Codeblöcke in diesem Blog, wenn sie als `Standardwert` gekennzeichnet sind.
 
 ```css {6} showLineNumbers=false
 // src/styles/custom.css
@@ -108,11 +108,11 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight-Sidebar mit dunkleren Farben](../../../../assets/sidebar-css/color.png)
+![Starlight-Sidebar mit gedimmten Farben](../../../../assets/sidebar-css/color.png)
 
-### Die Schriftgröße der Sidebar-Elemente anpassen
+### Schriftgröße der Sidebar-Elemente anpassen
 
-Auch wenn ich es nicht empfehle, können Sie die Schriftgröße der Sidebar-Elemente anpassen. Mit diesem Beispiel für ein benutzerdefiniertes CSS weiter unten habe ich die Schriftgröße der Elemente auf oberster Ebene verkleinert.
+Obwohl ich es nicht empfehle, können Sie auch die Schriftgröße der Sidebar-Elemente anpassen. Mit diesem Beispiel für benutzerdefiniertes CSS unten habe ich die Schriftgröße der Root-Elemente kleiner gemacht.
 
 ```css {3} showLineNumbers=false
 // src/styles/custom.css
@@ -125,7 +125,7 @@ sl-sidebar-state-persist ul.top-level > li > a {
 
 ## Empfehlungen
 
-Zusammenfassend empfehle ich, eine Mischung der oben genannten Anpassungsoptionen anzuwenden, die Sie bequem in einer einzigen `.css`-Datei sehen können.
+Zusammenfassend empfehle ich, einige Mischungen der oben genannten Anpassungsoptionen anzuwenden, die Sie bequem in einer einzigen `.css`-Datei sehen können.
 
 Beachten Sie, dass ich auch \[Cascade Layers]\[starlight-css-cascade-layers] verwende, die seit \[Starlight 0.34.0]\[starlight-0-34] unterstützt werden, und empfehle, diese zu verwenden, um die Reihenfolge zu spezifizieren, in der CSS-Stile angewendet werden.
 
