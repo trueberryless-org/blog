@@ -21,13 +21,15 @@
     "@lunariajs/core": "^0.1.1",
     "@lunariajs/starlight": "^0.1.1",
     "astro": "^5.8.1",
+    "hastscript": "^9.0.1",
     "sharp": "^0.34.2",
     "starlight-blog": "^0.24.0",
     "starlight-cooler-credit": "^0.4.0",
     "starlight-image-zoom": "^0.10.1",
     "starlight-links-validator": "^0.14.2",
     "starlight-theme-rapide": "^0.5.1",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "unist-util-visit": "^5.0.0"
   },
   "packageManager": "pnpm@10.10.0"
 }
