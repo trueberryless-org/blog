@@ -7,6 +7,8 @@ import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
 
+import rehypeGitHubAvatarLinks from "./src/lib/rehype";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.trueberryless.org",
@@ -141,5 +143,8 @@ export default defineConfig({
   ],
   redirects: {
     "/": "/blog",
+  },
+  markdown: {
+    rehypePlugins: [rehypeGitHubAvatarLinks],
   },
 });

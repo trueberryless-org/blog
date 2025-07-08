@@ -5,3 +5,19 @@ import StarlightImageZoom from "starlight-image-zoom/components/ImageZoom.astro"
 
 <StarlightImageZoom />
 <StarlightBlog><slot /></StarlightBlog>
+
+<script>
+  // Shortly highlight fragments to find faster on page
+  window.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash;
+    const target = document.querySelector(hash);
+    if (target) {
+      if (target.classList.contains("fragment-highlight")) {
+        target.classList.add("highlight-now");
+        setTimeout(() => {
+          target.classList.remove("highlight-now");
+        }, 4000); // Duration matches CSS animation
+      }
+    }
+  });
+</script>
