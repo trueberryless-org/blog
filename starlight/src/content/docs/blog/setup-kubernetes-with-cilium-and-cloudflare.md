@@ -181,7 +181,7 @@ spec:
           stop: "192.168.0.249"
 ```
 
-Additionally you should upgrade the cilium config. In order to do that with the proper values, first create this file in the root directory where you wanna manage the k3s cluster. Later you could also apply some hubble and prometheus related properties if you want to use [Grafana](https://grafana.com/) or so (open the collapsed lines if you want to use our config as well).
+Additionally you should upgrade the cilium config. In order to do that with the proper values, first create this file in the root directory where you wanna manage the k3s cluster. Later you could also apply some hubble and prometheus related properties if you want to use [Grafana](https://github.com/Grafana) or so (open the collapsed lines if you want to use our config as well).
 
 ```yaml collapse={32-59}
 #cilium-config.yaml
