@@ -7,7 +7,8 @@ import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
 
-import rehypeGitHubAvatarLinks from "./src/lib/rehype";
+import rehypeExternalLinkCaret from "./src/lib/rehype-external-link-caret";
+import rehypeGitHubBadgeLinks from "./src/lib/rehype-github-badge-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -145,6 +146,6 @@ export default defineConfig({
     "/": "/blog",
   },
   markdown: {
-    rehypePlugins: [rehypeGitHubAvatarLinks],
+    rehypePlugins: [rehypeGitHubBadgeLinks],
   },
 });

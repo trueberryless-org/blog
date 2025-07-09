@@ -81,3 +81,12 @@ img {
   width: 1.3em;
   height: 1.3em;
 }
+
+.tiny-caret {
+  font-size: 0.7em; /* smaller font size */
+  vertical-align: 0.4em; /* raise it a bit */
+  user-select: none;
+
+  display: inline-block; /* required for transform */
+  transform: scaleX(1) scaleY(0.7); /* wider horizontally, flatter vertically */
+}

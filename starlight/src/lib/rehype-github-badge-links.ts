@@ -30,8 +30,8 @@ export default function rehypeGitHubBadgeLinks() {
               "border-radius:9999px;vertical-align:middle;margin-right:0.4em;",
           });
 
-          // Replace children: [img, username]
-          node.children = [avatarImg, { type: "text", value: username }];
+          // Prepend avatar image to original children
+          node.children.unshift(avatarImg);
         }
       }
     });
