@@ -280,4 +280,4 @@ Maintenant, vous devriez être prêt à ajouter le mot-clé `deploy` dans tout m
 
 ## Célébrez avec un café !
 
-Félicitations, vous avez configuré avec succès Argo CD avec k3s et Cilium ! Vous méritez une pause café. Profitez d'une tasse bien méritée, et si vous souhaitez partager un café virtuel avec moi, n'hésitez pas à soutenir mon travail sur [Ko-fi](https://ko-fi.com/trueberryless). Merci !
+Félicitations, vous avez réussi à configurer Argo CD avec k3s et [Cilium](https://github.com/cilium) ! Vous méritez une pause café. Savourez une tasse bien méritée, et si vous souhaitez partager un café virtuel avec moi, n'hésitez pas à soutenir mon travail sur [Ko-fi](https://ko-fi.com/trueberryless). Merci !

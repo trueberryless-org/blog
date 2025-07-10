@@ -20,7 +20,7 @@ cover:
 
 ---
 
-Nach der Lektüre des Artikels von Vegard S. Hagen “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” und der Entscheidung, dass deren Lösung nicht für unseren Cluster geeignet ist, haben wir uns direkt in die Standard-Argo-CD-“[Getting Started](https://argo-cd.readthedocs.io/en/stable/getting_started/)”-Anleitung gestürzt. Jetzt werden wir Sie durch die Herausforderungen der Einrichtung von Argo CD auf k3s und Cilium führen, ausgehend vom Kapitel “[Setup Certificate Manager with Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare/)” unseres neuesten Artikels “[Setting up Kubernetes with Cilium and Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare/)”. In eben jenem kürzlich veröffentlichten Artikel haben wir am Ende auch [Keel](https://keel.sh/) eingerichtet, aber dieser Schritt ist nun überflüssig, da wir Argo CD verwenden werden, um den neuesten Stand der Technik aus jedem GitHub-Repository zu holen. Viel Spaß beim Lesen!
+Nachdem wir Vegard S. Hagens Artikel “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” gelesen und entschieden hatten, dass ihre Lösung nicht der richtige Ansatz für unseren Cluster war, sind wir direkt in die Standard-Argo-CD-Anleitung “[Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)” eingetaucht. Jetzt führen wir Sie durch die Herausforderung, [Argo CD](https://github.com/argoproj) auf [k3s](https://github.com/k3s-io) und [Cilium](https://github.com/cilium) einzurichten, als Fortsetzung des Kapitels “[Setup Certificate Manager with Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare/)” unseres letzten Blogposts “[Setting up Kubernetes with Cilium and Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare/)”. In diesem letzten Beitrag haben wir außerdem [Keel](https://github.com/keel-hq) eingerichtet, aber dieser Schritt ist jetzt überflüssig, da wir Argo CD verwenden, um den neuesten Stand der Technik aus jedem GitHub-Repository zu beziehen. Viel Spaß beim Lesen!
 
 :::note
 Wir gehen davon aus, dass Sie [unserem anderen Blogpost](../../blog/setup-kubernetes-with-cilium-and-cloudflare/) gefolgt sind.
@@ -112,7 +112,7 @@ Wenden Sie diese Ressource an, indem Sie `kubectl apply -f argocd-ingress.yaml` 
 
 ## Deaktivieren von TSL innerhalb von Argo CD
 
-Mit dem Zertifikat ist die Verbindung zwischen Client und Server gesichert. Allerdings gibt es innerhalb der Argo-CD-Dienste noch ein selbstsigniertes Zertifikat, das wir nicht unbedingt benötigen. Wir können daher die Sicherheit des Argo-CD-Servers deaktivieren, indem wir die Eigenschaft `server.insecure` bearbeiten.
+Mit dem Zertifikat ist die Verbindung zwischen Client und Server gesichert. Innerhalb der [Argo CD](https://github.com/argoproj)-Dienste gibt es jedoch immer noch ein selbst-signiertes Zertifikat, das wir nicht unbedingt benötigen. Wir können daher die Sicherheitsfunktion des Argo-CD-Servers deaktivieren, indem wir die Eigenschaft `server.insecure` bearbeiten.
 
 Um dies zu tun, führen wir zunächst diesen Befehl aus:
 
@@ -170,7 +170,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 ## Manifest in Repository hinzufügen
 
-Um eine neue Anwendung in Argo CD zu erstellen (entweder über die UI oder die CLI — wir nutzen die UI, da wir die CLI nicht eingerichtet haben), müssen wir das Git-Repository vorbereiten. Da das Repository die einzige Quelle der Wahrheit ist, ist dies auch der Ort, an dem wir alle Kubernetes-Ressourcen definieren, die von Argo CD erstellt werden sollen.
+Um eine neue Anwendung in [Argo CD](https://github.com/argoproj) zu erstellen (entweder über die UI oder CLI — wir verwenden die UI, da wir die CLI nicht eingerichtet haben), müssen wir das Git-Repository vorbereiten. Da das Repository die einzige Quelle der Wahrheit ist, definieren wir hier auch alle Kubernetes-Ressourcen, die von Argo CD erstellt werden sollen.
 
 Wir empfehlen, einen neuen Ordner im Git-Repository zu erstellen, der so etwas wie `manifest` genannt wird. In diesem Ordner erstellen wir ein paar Dateien:
 
@@ -266,7 +266,7 @@ Diese Dateien sind im Grunde genau dieselben Dateien, die in dem [anderen Artike
 
 ## Neue Anwendung in Argo CD UI erstellen
 
-Sie werden wahrscheinlich den großen `NEW APP`-Button in der Argo-CD-UI sehen. Klicken Sie darauf und erstellen Sie eine neue Anwendung mit den unten angepassten Eigenschaften:
+Sie werden wahrscheinlich den großen `NEW APP`-Knopf in der UI von [Argo CD](https://github.com/argoproj) sehen. Klicken Sie darauf und erstellen Sie eine neue Anwendung mit den unten angepassten Eigenschaften:
 
 * Anwendungsname: `mutanuq`
 * Projektname: `default`
@@ -295,7 +295,7 @@ Nun sollten Sie hoffentlich Ihre Website in der UI bereitgestellt sehen. Dieser 
 
 ## Feiern Sie mit einem Kaffee!
 
-Herzlichen Glückwunsch, Sie haben Argo CD mit k3s und Cilium erfolgreich eingerichtet! Sie haben sich eine Kaffeepause verdient. Genießen Sie eine wohlverdiente Tasse, und wenn Sie mir einen virtuellen Kaffee spendieren möchten, unterstützen Sie meine Arbeit auf [Ko-fi](https://ko-fi.com/trueberryless). Vielen Dank!
+Herzlichen Glückwunsch, Sie haben erfolgreich [Argo CD](https://github.com/argoproj) auf einem [k3s](https://github.com/k3s-io)-Cluster eingerichtet! Sie haben sich eine Kaffeepause verdient. Genießen Sie eine wohlverdiente Tasse, und wenn Sie mir einen virtuellen Kaffee spendieren möchten, unterstützen Sie meine Arbeit gerne auf [Ko-fi](https://ko-fi.com/trueberryless). Vielen Dank!
 
 ## Weiterführung
 

@@ -280,4 +280,4 @@ Nun sollten Sie bereit sein, das Stichwort `deploy` in eine beliebige Commit-Nac
 
 ## Feiern Sie mit einem Kaffee!
 
-Herzlichen Glückwunsch, Sie haben Argo CD mit k3s und Cilium erfolgreich eingerichtet! Sie haben sich eine Kaffeepause verdient. Genießen Sie eine wohlverdiente Tasse, und wenn Sie mir einen virtuellen Kaffee spendieren möchten, unterstützen Sie meine Arbeit auf [Ko-fi](https://ko-fi.com/trueberryless). Vielen Dank!
+Herzlichen Glückwunsch, Sie haben Argo CD erfolgreich mit k3s und [Cilium](https://github.com/cilium) eingerichtet! Sie verdienen eine Kaffeepause. Genießen Sie eine wohlverdiente Tasse, und wenn Sie mir virtuell einen Kaffee spendieren möchten, unterstützen Sie gerne meine Arbeit auf [Ko-fi](https://ko-fi.com/trueberryless). Vielen Dank!
