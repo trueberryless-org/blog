@@ -422,7 +422,7 @@ spec:
 
 ## Setup Keel
 
-We always wanted a clean Continuous Integration (CI) and Continuous Delivery (CD) solution for our websites. This means, that a specific commit message should trigger an automated process over GitHub, Docker Hub and our server, which in the end updates the corresponding website after about two minutes.
+We always wanted a clean Continuous Integration (CI) and Continuous Delivery (CD) solution for our websites. This means, that a specific commit message should trigger an automated process over [GitHub](https://github.com/github), Docker Hub and our server, which in the end updates the corresponding website after about two minutes.
 
 Keel is a robust software tool which enables this feature for Kubernetes. We used Keel for pulling new Docker Images from Docker Hub by polling every few minutes. Moreover, Keel provides a beautiful dashboard where you can control the polling as well.
 
