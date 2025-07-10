@@ -273,4 +273,4 @@ Now you should be good to go to add the keyword `deploy` into any commit message
 
 ## Celebrate with a Coffee!
 
-Congratulations, you've successfully set up Argo CD with k3s and Cilium! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
+Congratulations, you've successfully set up Argo CD with k3s and [Cilium](https://github.com/cilium)! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!

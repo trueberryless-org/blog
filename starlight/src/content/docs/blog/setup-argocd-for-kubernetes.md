@@ -14,7 +14,7 @@ cover:
   image: ../../../../public/blog/setup-argocd-for-kubernetes.png
 ---
 
-Having read Vegard S. Hagen's article “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” and decided that their solution was not the way to go for our cluster, we jumped straight into the default Argo CD “[Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)” guide. And now we will walk you through the pain of setting up Argo CD on k3s and cilium, continuing from the chapter “[Setup Certificate Manager with Cloudflare](/blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare)” of our most recent post “[Setting up Kubernetes with Cilium and Cloudflare](/blog/setup-kubernetes-with-cilium-and-cloudflare)”. In this exact recent post we also set up [Keel](https://keel.sh/) at the end, but this step will now be unnecessary because we'll use Argo CD for getting the newest state-of-the-art code from each GitHub repo. Enjoy reading!
+Having read Vegard S. Hagen's article “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” and decided that their solution was not the way to go for our cluster, we jumped straight into the default Argo CD “[Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)” guide. And now we will walk you through the pain of setting up [Argo CD](https://github.com/argoproj) on [k3s](https://github.com/k3s-io) and [Cilium](https://github.com/cilium), continuing from the chapter “[Setup Certificate Manager with Cloudflare](/blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare)” of our most recent post “[Setting up Kubernetes with Cilium and Cloudflare](/blog/setup-kubernetes-with-cilium-and-cloudflare)”. In this exact recent post we also set up [Keel](https://github.com/keel-hq) at the end, but this step will now be unnecessary because we'll use Argo CD for getting the newest state-of-the-art code from each GitHub repo. Enjoy reading!
 
 :::note
 We assume that you followed [our other blog post](/blog/setup-kubernetes-with-cilium-and-cloudflare).
@@ -106,7 +106,7 @@ Apply this resource by running `kubectl apply -f argocd-ingress.yaml`.
 
 ## Deactivate TSL within Argo CD
 
-With the certificate the connection between the client and server is secured. However, there is still a self-signed certificate within the Argo CD services, which we don't necessarily need. We can therefore deactivate the security of the Argo CD server, by editing the property `server.insecure`.
+With the certificate the connection between the client and server is secured. However, there is still a self-signed certificate within the [Argo CD](https://github.com/argoproj) services, which we don't necessarily need. We can therefore deactivate the security of the Argo CD server, by editing the property `server.insecure`.
 
 In order to do that, we first run this command:
 
@@ -165,7 +165,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 ## Add manifest to repository
 
-Now in order to create a new application in Argo CD (either UI or CLI — we use UI cause we didn't setup CLI), we need to prepare the Git repository. Because the repository is the single source of truth, this is also the place, where we define all the kubernetes resources which should be created by Argo CD.
+Now in order to create a new application in [Argo CD](https://github.com/argoproj) (either UI or CLI — we use UI cause we didn't setup CLI), we need to prepare the Git repository. Because the repository is the single source of truth, this is also the place, where we define all the kubernetes resources which should be created by Argo CD.
 
 We recommend creating a new folder in the git repository called something like `manifest`. In this folder, we'll create a few files:
 
@@ -261,7 +261,7 @@ These files are basically the exact same files mentioned in the [other post](/bl
 
 ## Create new application in Argo CD UI
 
-You'll probably see the big `NEW APP` button in the Argo CD UI. Click it and create a new application with adapted properties from below:
+You'll probably see the big `NEW APP` button in the UI of [Argo CD](https://github.com/argoproj). Click it and create a new application with adapted properties from below:
 
 -   Application Name: `mutanuq`
 -   Project Name: `default`
@@ -290,7 +290,7 @@ Now you can hopefully see your website being deployed in the UI. This process ca
 
 ## Celebrate with a Coffee!
 
-Congratulations, you've successfully set up Argo CD with k3s and Cilium! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
+Congratulations, you've successfully set up [Argo CD](https://github.com/argoproj) on a [k3s](https://github.com/k3s-io) cluster! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
 
 ## Continuation
 

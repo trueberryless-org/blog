@@ -14,7 +14,7 @@ cover:
   image: ../../../../public/blog/setup-kubernetes-with-cilium-and-cloudflare.png
 ---
 
-Working with Docker Containers can be hard. However, there are tools which enhance the management of containers, like Kubernetes. Actually, Kubernetes is the only tool to my knowledge which acts as a management software for Docker Containers. Kubernetes is well-integrated in almost all cloud providers, like Google Cloud, Azure and AWS. As a result, it has a standardized `yaml`-syntax, which is great for small developers because they can switch between `The Big Three` with low effort.
+Working with [Docker](https://github.com/docker) Containers can be hard. However, there are tools which enhance the management of containers, like [Kubernetes](https://github.com/kubernetes). Actually, Kubernetes is the only tool to my knowledge which acts as a management software for Docker Containers. Kubernetes is well-integrated in almost all cloud providers, like Google Cloud, Azure and AWS. As a result, it has a standardized `yaml`-syntax, which is great for small developers because they can switch between `The Big Three` with low effort.
 
 ## tl;dr
 
@@ -98,7 +98,7 @@ curl -sfL https://get.k3s.io | sh -s - \
   --cluster-init
 ```
 
-After the installation, there should be some pods running (3). Don't be shocked if the pods are in the `ContainerCreating` or `Pending` state. This is because the pods can't communicate between each other because we disabled the CNI (`--flannel-backend=none`). We will later install Cilium, which will be the replacement of the Flannel CNI.
+After the installation, there should be some pods running (3). Don't be shocked if the pods are in the `ContainerCreating` or `Pending` state. This is because the pods can't communicate between each other because we disabled the CNI (`--flannel-backend=none`). We will later install [Cilium](https://github.com/cilium), which will be the replacement of the Flannel CNI.
 
 ```bash
 kubectl get pods -A
@@ -106,7 +106,7 @@ kubectl get pods -A
 
 ## Install Helm
 
-Helm is the package manager for Kubernetes, so you should either install it directly (follow the [Helm docs](https://helm.sh/docs/intro/install/)) or use parts of Helm which are shipped with Cilium. We chose to install Helm directly, which is easily possible with this command:
+Helm is the package manager for [Kubernetes](https://github.com/kubernetes), so you should either install it directly (follow the [Helm docs](https://helm.sh/docs/intro/install/)) or use parts of Helm which are shipped with Cilium. We chose to install Helm directly, which is easily possible with this command:
 
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
@@ -114,7 +114,7 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 ## Install Cilium
 
-Cilium is a networking and security software for Kubernetes. Cilium is very fast, scalable and secure because it's built upon eBPF -- a revolutionary technology that can run sandboxed programs in the Linux kernel without recompiling the kernel or loading kernel modules.
+[Cilium](https://github.com/cilium) is a networking and security software for Kubernetes. Cilium is very fast, scalable and secure because it's built upon eBPF -- a revolutionary technology that can run sandboxed programs in the Linux kernel without recompiling the kernel or loading kernel modules.
 
 We could install Cilium with Helm like shown here:
 
@@ -253,7 +253,7 @@ cilium upgrade -f cilium-config.yaml
 
 ## Setup Certificate Manager with Cloudflare
 
-In order to be able to create certificates for each subdomain, it is important to apply a certificate issuer which handles certificate requests and resolves them at some provider. We chose Cloudflare as our issuer and here is the setup which you need to apply to your kubernetes cluster. For further information you can check out the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/).
+In order to be able to create certificates for each subdomain, it is important to apply a certificate issuer which handles certificate requests and resolves them at some provider. We chose [Cloudflare](https://github.com/cloudflare) as our issuer and here is the setup which you need to apply to your Kubernetes cluster. For further information you can check out the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/).
 
 But first, we need to install the cert-manager by running the following command:
 
@@ -283,7 +283,7 @@ spec:
                           key: api-token
 ```
 
-You can apply a file to the Kubernetes cluster, by running this k8s (also k3s) command:
+You can apply a file to the [Kubernetes](https://github.com/kubernetes) cluster, by running this k8s (also k3s) command:
 
 ```bash
 kubectl apply -f cluster-issuer.yaml
@@ -297,7 +297,7 @@ kubectl delete -f cluster-issuer.yaml
 
 As you may have spotted above, we also need a secret for the API token which authenticates that this issuer is allowed to request certificates. Therefore, we create a secret with an unencrypted `API Token` from Cloudflare.
 
-Nowadays we create a token by going to your Cloudflare dashboard, then click on your profile and select the tab `API Tokens`. Here you can generate a specific token for your issuer or use the Global API Key (not recommended any more). The recommended solution is to create a API token with two permissions (custom token):
+Nowadays we create a token by going to your [Cloudflare](https://github.com/cloudflare) dashboard, then click on your profile and select the tab `API Tokens`. Here you can generate a specific token for your issuer or use the Global API Key (not recommended any more). The recommended solution is to create a API token with two permissions (custom token):
 
 -   Zone - DNS - Edit
 -   Zone - Zone - Read
@@ -711,7 +711,7 @@ spec:
 
 ## Celebrate with a Coffee!
 
-Congratulations, you've successfully set up Kubernetes with Cilium and Cloudflare! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
+Congratulations, you've successfully set up [Kubernetes](https://github.com/kubernetes) with [Cilium](https://github.com/cilium) and [Cloudflare](https://github.com/cloudflare)! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
 
 ## Troubleshooting
 
