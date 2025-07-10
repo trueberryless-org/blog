@@ -7,11 +7,14 @@ lastUpdated: 2024-07-28
 tags:
   - Automation
   - Deployment
-excerpt: "En continuant à améliorer notre cluster k3s et en particulier le
-  workflow CI/CD, nous examinons maintenant l'outil GitOps appelé Argo CD, et
-  comment nous pouvons l'intégrer dans notre cluster. Notre pile technologique
-  pour le déploiement utilise ces services : k3s, Helm, Cilium et, après ce
-  tutoriel, Argo CD également."
+excerpt: En continuant à améliorer notre cluster k3s et en particulier le
+  workflow CI/CD, nous examinons maintenant l'outil GitOps appelé <a
+  class="gh-badge" href="https://github.com/argoproj"><img
+  src="https://github.com/argoproj.png" alt="Argo CD" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;">Argo
+  CD</a>, et comment nous pouvons l'intégrer dans notre cluster. Notre pile
+  technologique pour le déploiement utilise ces services&#58; k3s, Helm, Cilium
+  et, après ce tutoriel, également Argo CD.
 authors:
   - trueberryless
 cover:
@@ -20,7 +23,7 @@ cover:
 
 ---
 
-Après avoir lu l'article de Vegard S. Hagen “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” et décidé que leur solution ne convenait pas pour notre cluster, nous sommes directement passés au guide par défaut d'Argo CD “[Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)”. Et maintenant, nous allons vous guider à travers les difficultés de la configuration de [Argo CD](https://github.com/argoproj) sur [k3s](https://github.com/k3s-io) et [Cilium](https://github.com/cilium), en poursuivant depuis le chapitre “[Configuration du gestionnaire de certificats avec Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare/)” de notre article le plus récent “[Configuration de Kubernetes avec Cilium et Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare/)”. Dans ce même article précédent, nous avons également configuré [Keel](https://github.com/keel-hq) à la fin, mais cette étape sera désormais inutile car nous utiliserons Argo CD pour récupérer le code le plus récent de pointe de chaque dépôt GitHub. Bonne lecture !
+Après avoir lu l'article de Vegard S. Hagen “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” et décidé que leur solution ne convenait pas à notre cluster, nous avons directement suivi le guide par défaut "[Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)" d'Argo CD. Nous allons maintenant partager avec vous les détails de la configuration d'[Argo CD](https://github.com/argoproj) sur [k3s](https://github.com/k3s-io) et [Cilium](https://github.com/cilium), en poursuivant depuis le chapitre “[Setup Certificate Manager with Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare/)” de notre récent article “[Setting up Kubernetes with Cilium and Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare/)”. Dans cet article récent, nous avions également configuré [Keel](https://github.com/keel-hq) à la fin, mais cette étape ne sera désormais plus nécessaire, car nous utiliserons Argo CD pour récupérer le dernier code de pointe de chaque dépôt [GitHub](https://github.com/github). Bonne lecture !
 
 :::note
 Nous supposons que vous avez suivi [notre autre article de blog](../../blog/setup-kubernetes-with-cilium-and-cloudflare/).
@@ -262,7 +265,7 @@ Nous recommandons de créer un nouveau dossier dans le dépôt Git appelé quelq
       secretName: mutanuq
   ```
 
-Ces fichiers sont essentiellement les mêmes fichiers mentionnés dans [l'autre article](../../blog/setup-kubernetes-with-cilium-and-cloudflare#example-app-mutanuq/), mais séparés en quatre fichiers car cela nous donne l'avantage de pouvoir manipuler le manifest à partir des GitHub Actions. Mais chaque chose en son temps, vous verrez comment configurer le manifest avec les GitHub Actions dans le [prochain article](../../blog/setup-continuous-integration-github-repository/).
+Ces fichiers sont en gros les mêmes que ceux mentionnés dans [l'autre article](../../blog/setup-kubernetes-with-cilium-and-cloudflare#example-app-mutanuq/) mais séparés en quatre fichiers, car cela nous donne l'avantage de manipuler le manifeste depuis [GitHub](https://github.com/github) Actions. Mais commençons par les bases, vous verrez dans [le prochain article](../../blog/setup-continuous-integration-github-repository/) comment configurer le manifeste avec les actions GitHub.
 
 ## Créer une nouvelle application dans l'interface utilisateur d'Argo CD
 
@@ -299,4 +302,4 @@ Félicitations, vous avez réussi à configurer [Argo CD](https://github.com/arg
 
 ## Continuer
 
-À suivre dans notre [prochain article de blog](../../blog/setup-continuous-integration-github-repository/), qui décrira comment configurer un dépôt GitHub pouvant ensuite être déployé via Argo CD.
+À suivre dans notre [prochain article de blog](../../blog/setup-continuous-integration-github-repository/) qui décrira comment configurer un dépôt [GitHub](https://github.com/github) qui pourra ensuite être déployé via Argo CD.

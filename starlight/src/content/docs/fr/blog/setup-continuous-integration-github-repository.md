@@ -7,11 +7,17 @@ tags:
   - Automation
   - Deployment
   - GitHub
-excerpt: Aujourd'hui, nous allons examiner comment configurer un dépôt GitHub
+excerpt: Aujourd'hui, nous allons examiner comment configurer un dépôt <a
+  class="gh-badge" href="https://github.com/github"><img
+  src="https://github.com/github.png" alt="github" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;">GitHub</a>
   qui sera déployé sur un cluster k3s via Argo CD. En résumé, l'article inclura
-  des fichiers de workflow, un Dockerfile, des manifestes (déploiement) et des
-  dépôts Docker Hub. Veuillez consulter [notre blog sur Argo
-  CD](./setup-argocd-for-kubernetes), car ceci sera une continuation de l'autre
+  des fichiers de Workflow, un Dockerfile, des manifests (déploiement) et des
+  dépôts <a class="gh-badge" href="https://github.com/docker"><img
+  src="https://github.com/docker.png" alt="Docker Hub" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;">Docker
+  Hub</a>. Veuillez consulter [notre blog sur Argo
+  CD](./setup-argocd-for-kubernetes) car ceci sera une continuité de l'autre
   article.
 authors:
   - trueberryless
@@ -21,9 +27,9 @@ cover:
 
 ---
 
-Dans le post d'aujourd'hui, nous allons examiner rapidement comment configurer un déploiement continu dans un dépôt GitHub. Nous sommes assez sûrs que cette configuration fonctionne également pour d'autres registres Git, mais si vous en utilisez un autre, gardez à l'esprit que ce post est conçu uniquement pour GitHub.
+Dans l'article d'aujourd'hui, nous allons examiner rapidement comment configurer le déploiement continu dans un dépôt [GitHub](https://github.com/github). Nous sommes presque certains que cette configuration fonctionne également pour d'autres registres Git, mais si vous en utilisez un autre, gardez à l'esprit que cet article est spécifiquement conçu pour GitHub.
 
-Ce post suppose également que vous utilisez GitHub Actions combiné avec Argo CD pour déployer vos applications sur un cluster Kubernetes. Suivez d'autres [articles de déploiement](../../blog/tags/deployment/) de notre part pour des instructions supplémentaires sur la façon de configurer ces deux technologies sur votre serveur personnel.
+Cet article suppose également que vous utilisez [GitHub](https://github.com/github) Actions combiné avec Argo CD pour déployer vos applications sur un cluster Kubernetes. Consultez nos autres [articles sur le déploiement](../../blog/tags/deployment/) pour des instructions supplémentaires sur la manière de configurer ces deux technologies sur votre serveur personnel.
 
 ## Préparatifs
 

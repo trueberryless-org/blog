@@ -8,16 +8,19 @@ date: 2025-02-05
 tags:
   - Automation
   - GitHub
-excerpt: Créer un README de profil GitHub remarquable ne consiste pas seulement
-  à ajouter quelques badges — c'est une question de repousser les limites
-  techniques. Dans cette analyse approfondie, j'explore la manipulation de SVG
-  de bas niveau, la conversion HTML-vers-SVG, les animations en ligne, et une
-  automatisation complète avec GitHub Actions pour construire ce que je crois
-  être l'un des READMEs GitHub les plus avancés techniquement. D'une Bento Grid
-  dynamique qui se met à jour toutes les 5 minutes à l'intégration de SVG en
-  direct sans requêtes externes, ce projet a transformé mon profil en une
-  vitrine vivante et auto-mise à jour de mon travail. Vous voulez savoir comment
-  j'ai fait ? Décomposons cela. 🚀
+excerpt: Créer un README de profil <a class="gh-badge"
+  href="https://github.com/github"><img src="https://github.com/github.png"
+  alt="github" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;">GitHub</a>
+  remarquable ne se résume pas à ajouter quelques badges — il s’agit de
+  repousser les limites techniques. Dans cette plongée approfondie, j'explore la
+  manipulation SVG à bas niveau, la conversion HTML en SVG, les animations
+  intégrées et une automatisation complète avec GitHub Actions pour concevoir ce
+  que je crois être l'un des READMEs GitHub les plus avancés techniquement.
+  D’une Bento Grid dynamique qui se met à jour toutes les 5 minutes à
+  l’intégration de SVG en direct sans requêtes externes, ce projet a transformé
+  mon profil en une vitrine vivante qui se met à jour automatiquement. Vous
+  voulez savoir comment j’ai fait ? Décortiquons cela. 🚀
 authors:
   - trueberryless
   - ai
@@ -33,7 +36,7 @@ Lisez l'histoire plus formelle [ici](https://trueberryless.org/work/github-profi
 
 ## Le début : un README ressemblant à un amas de texte Wikipédia
 
-Chaque grande histoire commence par un problème, et le mien était simple : mon README de profil GitHub était un véritable désastre. Il était long. Il contenait trop de texte. Il débordait de badges — tellement qu'on aurait dit que je collectionnais tous les trophées possibles d'internet. Hackathons, contributions GitHub, Astro, roadmap.sh — s'il existait un badge, je l'avais.
+Chaque grande histoire commence par un problème, et le mien était simple : mon README de [profil GitHub](https://github.com/trueberryless) était un véritable chaos. Il était long. Il avait trop de texte. Il débordait de badges — tellement qu’on aurait dit que je collectionnais tous les trophées d’internet possibles. Hackathons, contributions GitHub, Astro, roadmap.sh — s'il existait un badge, je l’avais.
 
 Au début, je pensais que c'était bien. Cela montrait tout sur moi, non ? Mais un jour, je l'ai regardé et réalisé :
 
@@ -47,7 +50,7 @@ C'était le rêve. Maintenant, il fallait simplement le rendre réel.
 
 La première étape était simple : maquettiser mon profil parfait en HTML et CSS. Et laissez-moi vous dire, ça avait l'air incroyable. Le design avait une mise en page parfaite, des animations fluides et juste le bon équilibre entre contenu et espace. Puis la réalité m'a rattrapé. Cela devait fonctionner dans du *Markdown au goût de GitHub*. Pas de problème, non ? Le Markdown supporte le HTML ! Alors j'ai copié mon magnifique HTML dans mon README et appuyé sur enregistrer.
 
-> GitHub : *Absolument pas.*
+> [GitHub](https://github.com/github) : *Absolument pas.*
 
 Le Markdown de GitHub [supprime un certain nombre de balises HTML, mais des balises importantes](https://github.github.com/gfm/#disallowed-raw-html-extension). Pour des raisons de sécurité, bien sûr (et je respecte entièrement cela, GitHub, vraiment ❤️), mais cela signifiait que mon superbe design était complètement **inutilisable**.
 
@@ -154,7 +157,7 @@ import { Image } from 'astro:assets'
 
 Ce n'est pas si mauvais en comparaison de l'[ancien README.md](https://github.com/trueberryless/trueberryless/blob/5dce4ad0033b00829f8ec3756827057017447a65/README.md). Et ne commentez pas sur le fait que j'écoute de la K-pop ! C'est mieux que vous ne le pensez, croyez-moi.
 
-Consultez la version en ligne sur mon [GitHub](https://github.com/trueberryless) — si j'ai décidé de la garder... — et laissez un follow si vous êtes déjà là et que vous avez apprécié la lecture ! ❤️
+Découvrez la version en direct sur mon GitHub [trueberryless](https://github.com/trueberryless) — si j’ai décidé de la garder... — et laissez un follow si vous y êtes déjà et que vous avez aimé lire ! ❤️
 
 ***
 
@@ -168,4 +171,4 @@ Le referais-je ? Certainement.
 
 Le recommanderais-je ? Seulement si vous avez énormément de patience. 😅
 
-Mais au final, j'ai créé un README de profil GitHub qui *ne devrait pas exister* — mais il existe. Et je l'adore.
+Mais au final, j'ai créé un README de profil [GitHub](https://github.com/github) qui *ne devrait pas exister* — mais il existe. Et je l'adore.

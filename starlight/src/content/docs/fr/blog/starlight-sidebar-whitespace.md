@@ -10,7 +10,11 @@ tags:
   - CSS
 excerpt: Dans cet article de blog, nous examinerons comment de petits
   changements peuvent faire une grande différence en ce qui concerne les espaces
-  blancs dans votre barre latérale Starlight.
+  blancs dans votre <a class="gh-badge"
+  href="https://github.com/withastro/starlight"><img src="/starlight.png"
+  alt="Starlight" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;">Starlight</a>
+  barre latérale.
 authors:
   - trueberryless
 cover:
