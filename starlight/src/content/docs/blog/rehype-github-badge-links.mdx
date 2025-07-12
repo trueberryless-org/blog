@@ -51,10 +51,6 @@ export default function rehypeGitHubBadgeLinks() {
           const avatarImg = h("img", {
             src: `https://github.com/${username}.png`,
             alt: username,
-            width: 16,
-            height: 16,
-            style:
-              "border-radius:9999px;vertical-align:middle;margin-right:0.4em;",
           });
 
           // Prepend avatar image to original children
