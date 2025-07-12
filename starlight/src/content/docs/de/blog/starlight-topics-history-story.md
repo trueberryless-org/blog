@@ -7,11 +7,14 @@ date: 2025-05-05
 tags:
   - Starlight
   - Plugins
-excerpt: In diesem Beitrag zeige ich Ihnen die Entwicklung von Starlight-Plugins
-  anhand einer Fallstudie des [Starlight Sidebar
+excerpt: In diesem Beitrag zeige ich Ihnen die Entwicklung von <a
+  class="gh-badge" href="https://github.com/withastro/starlight"><img
+  src="/starlight.png" alt="Starlight" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />Starlight</a>-Plugins anhand einer Fallstudie des [Starlight Sidebar
   Topics](https://github.com/hideoo/starlight-sidebar-topics)-Plugins. Seien Sie
-  gespannt auf beeindruckende Fakten über die Menschen und den Code rund um
-  Starlight.
+  bereit, beeindruckende Fakten über Menschen und Code rund um Starlight zu
+  erfahren.
 authors:
   - trueberryless
   - ai

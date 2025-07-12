@@ -10,8 +10,8 @@ tags:
 excerpt: Dans cet article, je vais vous montrer l'évolution des plugins <a
   class="gh-badge" href="https://github.com/withastro/starlight"><img
   src="/starlight.png" alt="Starlight" width="16" height="16"
-  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;">Starlight</a>
-  avec une étude de cas sur le plugin [Starlight Sidebar
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />Starlight</a> avec une étude de cas sur le plugin [Starlight Sidebar
   Topics](https://github.com/hideoo/starlight-sidebar-topics). Préparez-vous à
   découvrir des faits impressionnants sur les personnes et le code autour de
   Starlight.
