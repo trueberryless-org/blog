@@ -5,7 +5,7 @@ date: 2025-05-05
 tags:
     - Starlight
     - Plugins
-excerpt: In this post, I'll show you the evolution of <a class="gh-badge" href="https://github.com/withastro/starlight"><img src="/starlight.png" alt="Starlight" width="16" height="16">Starlight</a> plugins with a case study of the [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics) plugin. Be prepared to find out some impressive facts about people and code around Starlight.
+excerpt: In this post, I'll show you the evolution of <a class="gh-badge" href="https://github.com/withastro/starlight"><img src="/starlight.png" alt="Starlight" />Starlight</a> plugins with a case study of the [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics) plugin. Be prepared to find out some impressive facts about people and code around Starlight.
 authors:
     - trueberryless
     - ai

@@ -6,10 +6,10 @@ lastUpdated: 2024-07-28
 tags:
     - Automation
     - Deployment
-excerpt: Continuing to improve our k3s cluster and especially the CI/CD workflow, we now take a look at the GitOps tool called <a class="gh-badge" href="https://github.com/argoproj"><img src="https://github.com/argoproj.png" alt="Argo CD" width="16" height="16">Argo CD</a>, and how we can integrate it into our cluster. Our tech stack for deployment uses these services&#58; k3s, Helm, Cilium & after this tutorial Argo CD as well
+excerpt: Continuing to improve our k3s cluster and especially the CI/CD workflow, we now take a look at the GitOps tool called <a class="gh-badge" href="https://github.com/argoproj"><img src="https://github.com/argoproj.png" alt="Argo CD" />Argo CD</a>, and how we can integrate it into our cluster. Our tech stack for deployment uses these services&#58; k3s, Helm, Cilium & after this tutorial Argo CD as well
 authors:
     - trueberryless
-cover:
+cover:s
   alt: A beautiful cover image with the text "Argo CD"
   image: ../../../../public/blog/setup-argocd-for-kubernetes.png
 ---

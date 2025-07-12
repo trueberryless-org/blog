@@ -5,7 +5,7 @@ date: 2025-04-27
 tags:
     - Starlight
     - CSS
-excerpt: In this blog post, we'll take a look at how small changes can make a big difference when it comes to whitespaces in your <a class="gh-badge" href="https://github.com/withastro/starlight"><img src="/starlight.png" alt="Starlight" width="16" height="16">Starlight</a> sidebar.
+excerpt: In this blog post, we'll take a look at how small changes can make a big difference when it comes to whitespaces in your <a class="gh-badge" href="https://github.com/withastro/starlight"><img src="/starlight.png" alt="Starlight" />Starlight</a> sidebar.
 authors:
     - trueberryless
 cover:
