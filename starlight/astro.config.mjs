@@ -91,7 +91,8 @@ export default defineConfig({
         }),
         starlightBlog({
           title: "Deep Thoughts",
-          recentPostCount: 3,
+          postCount: 7,
+          recentPostCount: 5,
           prevNextLinksOrder: "chronological",
           navigation: "none",
           metrics: {
