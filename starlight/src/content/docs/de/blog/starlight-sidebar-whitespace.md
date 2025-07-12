@@ -9,7 +9,10 @@ tags:
   - CSS
 excerpt: In diesem Blogbeitrag werfen wir einen Blick darauf, wie kleine
   Änderungen einen großen Unterschied machen können, wenn es um Leerzeichen in
-  Ihrer Starlight-Sidebar geht.
+  Ihrer <a class="gh-badge" href="https://github.com/withastro/starlight"><img
+  src="/starlight.png" alt="Starlight" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />Starlight</a>-Sidebar geht.
 authors:
   - trueberryless
 cover:

@@ -7,12 +7,19 @@ tags:
   - Automation
   - Deployment
   - GitHub
-excerpt: Heute werfen wir einen Blick darauf, wie man ein GitHub-Repository
-  einrichtet, das über Argo CD in einem k3s-Cluster bereitgestellt wird.
-  Zusammengefasst wird der Artikel Workflow-Dateien, Dockerfile, Manifeste
-  (Deployment) und Docker Hub-Repositories beinhalten. Bitte sehen Sie sich
-  [unseren Argo CD-Blog](./setup-argocd-for-kubernetes) an, da dies eine
-  Fortsetzung des vorherigen Beitrags sein wird.
+excerpt: Heute werfen wir einen Blick darauf, wie man ein <a class="gh-badge"
+  href="https://github.com/github"><img src="https://github.com/github.png"
+  alt="github" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />GitHub</a>-Repository einrichtet, das über Argo CD in einem k3s-Cluster
+  bereitgestellt wird. Zusammengefasst wird der Artikel Workflow-Dateien,
+  Dockerfile, Manifeste (Deployment) und <a class="gh-badge"
+  href="https://github.com/docker"><img src="https://github.com/docker.png"
+  alt="Docker Hub" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />Docker Hub</a>-Repositories umfassen. Bitte sehen Sie sich [unseren Argo
+  CD-Blog](./setup-argocd-for-kubernetes) an, da dies eine Fortsetzung des
+  anderen Beitrags sein wird.
 authors:
   - trueberryless
 cover:
@@ -21,9 +28,9 @@ cover:
 
 ---
 
-In diesem Artikel werfen wir einen kurzen Blick darauf, wie man Continuous Deployment in einem GitHub-Repository einrichtet. Wir sind uns ziemlich sicher, dass diese Einrichtung auch für andere Git-Registries funktioniert, aber wenn Sie eine andere verwenden, beachten Sie bitte, dass dieser Beitrag speziell für GitHub gedacht ist.
+Im heutigen Beitrag werfen wir einen kurzen Blick darauf, wie man Continuous Deployment in einem [GitHub](https://github.com/github)-Repository einrichtet. Wir sind uns ziemlich sicher, dass dieses Setup auch mit anderen Git-Registries funktioniert. Wenn Sie jedoch eine andere verwenden, bedenken Sie, dass dieser Beitrag nur für GitHub konzipiert ist.
 
-Dieser Beitrag setzt voraus, dass Sie GitHub Actions zusammen mit Argo CD verwenden, um Ihre Anwendungen in einem Kubernetes-Cluster bereitzustellen. Folgen Sie unseren anderen [Deployment-Beiträgen](../../blog/tags/deployment/) für weitere Anleitungen, wie Sie beide Technologien auf Ihrem persönlichen Server einrichten können.
+Dieser Beitrag geht auch davon aus, dass Sie [GitHub](https://github.com/github) Actions in Kombination mit Argo CD verwenden, um Ihre Anwendungen auf einem Kubernetes-Cluster bereitzustellen. Folgen Sie unseren [Deployment-Beiträgen](../../blog/tags/deployment/), um weitere Anweisungen zum Einrichten beider Technologien auf Ihrem persönlichen Server zu erhalten.
 
 ## Vorbereitungen
 

@@ -7,18 +7,19 @@ tags:
   - Automation
   - Deployment
   - GitHub
-excerpt: Aujourd'hui, nous allons examiner comment configurer un dépôt <a
+excerpt: Aujourd'hui, nous allons voir comment configurer un dépôt <a
   class="gh-badge" href="https://github.com/github"><img
   src="https://github.com/github.png" alt="github" width="16" height="16"
-  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;">GitHub</a>
-  qui sera déployé sur un cluster k3s via Argo CD. En résumé, l'article inclura
-  des fichiers de Workflow, un Dockerfile, des manifests (déploiement) et des
-  dépôts <a class="gh-badge" href="https://github.com/docker"><img
-  src="https://github.com/docker.png" alt="Docker Hub" width="16" height="16"
-  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;">Docker
-  Hub</a>. Veuillez consulter [notre blog sur Argo
-  CD](./setup-argocd-for-kubernetes) car ceci sera une continuité de l'autre
-  article.
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />GitHub</a> qui sera déployé sur un cluster k3s via Argo CD. En résumé,
+  l'article inclura des fichiers de workflow, un Dockerfile, des manifestes
+  (déploiement) et des dépôts <a class="gh-badge"
+  href="https://github.com/docker"><img src="https://github.com/docker.png"
+  alt="Docker Hub" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />Docker Hub</a>. Veuillez consulter [notre blog sur Argo
+  CD](./setup-argocd-for-kubernetes), car cet article est une continuation de
+  l'autre publication.
 authors:
   - trueberryless
 cover:
