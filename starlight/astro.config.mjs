@@ -143,9 +143,6 @@ export default defineConfig({
       pagination: false,
     }),
   ],
-  redirects: {
-    "/": "/blog",
-  },
   markdown: {
     rehypePlugins: [rehypeGitHubBadgeLinks],
   },

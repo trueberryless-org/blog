@@ -11,7 +11,7 @@ interface Props {
 const { icon, label, link } = Astro.props;
 ---
 
-<p class="sl-flex">
+<p class="ai-notice sl-flex">
   <Icon name={icon} size="1.5em" color="var(--sl-color-blue-high)" />
   {!link ? <span>{label}</span> : null}
   {link ? <a href={link}>{label}</a> : null}
