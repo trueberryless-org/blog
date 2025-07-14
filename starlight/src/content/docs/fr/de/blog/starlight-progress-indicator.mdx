@@ -1,0 +1,131 @@
+---
+title: Comment créer un indicateur de progression horizontal pour votre page Starlight
+description: Découvrez comment créer un indicateur de progression horizontal
+  pour votre page Starlight.
+date: 2025-06-10
+tags:
+  - Starlight
+  - Components
+  - CSS
+excerpt: Découvrez comment créer un indicateur de progression horizontal pour
+  votre <a class="gh-badge" href="https://github.com/withastro/starlight"><img
+  src="/starlight.png" alt="Starlight" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />Starlight</a>.
+authors:
+  - frostybee
+  - trueberryless
+cover:
+  alt: A beautiful cover image with the text "Progress Bar"
+  image: ../../../../../../public/blog/starlight-progress-indicator.png
+
+---
+
+Dans cet article, nous souhaitons vous montrer comment [FrostyBee](https://github.com/frostybee) a créé un indicateur de progression horizontal élégant pour les pages Starlight.
+
+## Pré-requis
+
+Vous aurez besoin d’un site web Starlight existant.
+
+## Création du composant Indicateur de Progression
+
+Créons un nouveau composant nommé `ProgressIndicator.astro` dans le répertoire `src/components/`. Ce composant est responsable de l’affichage de l’indicateur de progression.
+
+Nous créons un conteneur qui s'étend sur toute la largeur avec la barre de progression `<div>` à l'intérieur. La largeur de l'élément interne `<div>` est mise à jour chaque fois que l'utilisateur fait défiler (et quand la page se charge) pour refléter la position de défilement actuelle.
+
+```astro title="src/components/ProgressIndicator.astro" collapse={27-43}
+<div class="progress-scroll-container" aria-hidden="true">
+  <div id="progress-scroll"></div>
+</div>
+
+<script>
+  window.addEventListener("scroll", function () {
+    updateProgressScroll();
+  });
+  window.addEventListener("load", function () {
+    updateProgressScroll();
+  });
+
+  function updateProgressScroll() {
+    if (document) {
+      const progressScroll = document.getElementById("progress-scroll");
+      if (progressScroll) {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var scrollHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / scrollHeight) * 100;
+        progressScroll.style.width = progress + "%";
+      }
+    }
+  }
+</script>
+
+<style>
+  html:is(:not([data-has-hero]), [data-has-sidebar], [data-has-toc]) .progress-scroll-container {
+    position: fixed;
+    top: var(--sl-nav-height);
+    left: 0;
+    height: 0.25rem;
+    width: 100%;
+    background-color: transparent;
+    z-index: 3;
+  }
+
+  #progress-scroll {
+    height: 100%;
+    width: 0px;
+    background-color: var(--sl-color-accent-high);
+  }
+</style>
+
+<style is:global>
+  #starlight__on-this-page--mobile {
+    margin-top: 0.25rem;
+  }
+</style>
+```
+
+Les lignes masquées contiennent le style qui garantit que la barre de progression ressemble à une barre de progression typique. Elle est également adaptée à Starlight, car la barre est automatiquement masquée si la page ne comporte ni barre latérale, ni table des matières, mais contient un élément Héros, comme c'est le cas pour la plupart des pages d'atterrissage.
+
+Un point à souligner est ce que fait le CSS global (ligne 45) : il décale le menu déroulant de la table des matières mobile vers le bas afin de créer plus d'espace vide pour la barre de progression. Cela relève d'une préférence personnelle, et vous pouvez le supprimer si vous le souhaitez.
+
+## Surcharger Starlight
+
+Nous pouvons maintenant utiliser ce composant dans une [surcharge de Starlight](https://starlight.astro.build/guides/overriding-components/). Dans ce cas, il est pertinent de remplacer le composant [`Header.astro`](https://starlight.astro.build/reference/overrides/#header-1) comme suit :
+
+```astro title="src/components/Header.astro"
+---
+import Default from "@astrojs/starlight/components/Header.astro";
+import ScrollIndicator from "./ScrollIndicator.astro";
+---
+
+<Default><slot /></Default>
+<ScrollIndicator />
+```
+
+N'oubliez pas d'ajouter cette surcharge de composant dans votre fichier `astro.config.mjs` :
+
+```diff lang="js" title="astro.config.mjs"
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Docs with a Progress Indicator',
++      components: {
++        // Override the default `Header` component.
++        Header: './src/components/Header.astro',
++      },
+    }),
+  ],
+});
+```
+
+## Code source
+
+Vous pouvez trouver l'intégralité du code du projet sur [GitHub](https://github.com/trueberryless/starlight-progress-indicator) et dans cet [exemple Stackblitz](https://stackblitz.com/github/trueberryless/starlight-progress-indicator?file=src%2Fcomponents%2FProgressIndicator.astro).
+
+## Conclusion
+
+Avec cette configuration, l'indicateur de progression apparaîtra sur chaque page (sauf les pages d'atterrissage) de votre site Starlight. 🥳

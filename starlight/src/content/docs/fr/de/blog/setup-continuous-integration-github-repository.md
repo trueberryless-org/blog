@@ -1,51 +1,55 @@
 ---
-title: Configurer le déploiement continu dans un repository GitHub
-description: Aujourd'hui, nous allons voir comment configurer un repository
-  GitHub qui sera déployé sur un cluster k3s via Argo CD.
+title: Configuration du déploiement continu dans un dépôt GitHub
+description: Aujourd'hui, nous allons examiner comment configurer un dépôt
+  GitHub qui est déployé dans un cluster k3s via Argo CD.
 date: 2024-07-28
 tags:
   - Automation
   - Deployment
   - GitHub
-excerpt: Aujourd'hui, nous allons voir comment configurer un <a class="gh-badge"
-  href="https://github.com/github"><img src="https://github.com/github.png"
-  alt="github" />GitHub</a> repository qui sera déployé sur un cluster k3s via
-  Argo CD. En résumé, l'article inclura des fichiers Workflow, un Dockerfile,
-  des manifestes (déploiement) et des repositories <a class="gh-badge"
+excerpt: Aujourd'hui, nous allons examiner comment configurer un <a
+  class="gh-badge" href="https://github.com/github"><img
+  src="https://github.com/github.png" alt="github" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />GitHub</a>-dépôt qui est déployé via Argo CD dans un cluster k3s. En résumé,
+  cet article couvrira les fichiers de workflow, Dockerfile, manifestes
+  (déploiement) et les dépôts <a class="gh-badge"
   href="https://github.com/docker"><img src="https://github.com/docker.png"
-  alt="Docker Hub" />Docker Hub</a>. Veuillez consulter [notre blog sur Argo
-  CD](./setup-argocd-for-kubernetes) car ce billet sera une continuation de
-  l'autre article.
+  alt="Docker Hub" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />Docker Hub</a>. Veuillez consulter [notre blog Argo
+  CD](./setup-argocd-for-kubernetes), car il s'agit d'une continuation d'un
+  autre article.
 authors:
   - trueberryless
 cover:
   alt: A beautiful cover image with the text "Github CD"
-  image: ../../../../../public/blog/setup-continuous-integration-github-repository.png
+  image: ../../../../../../public/blog/setup-continuous-integration-github-repository.png
 
 ---
 
-Dans le billet d'aujourd'hui, nous allons voir rapidement comment configurer un déploiement continu dans un repository [GitHub](https://github.com/github). Nous sommes presque certains que cette configuration fonctionne également pour d'autres registres Git, mais si vous utilisez un autre, gardez à l'esprit que cet article est conçu uniquement pour GitHub.
+Dans l'article d'aujourd'hui, nous allons jeter un bref coup d'œil sur la manière de configurer un déploiement continu dans un dépôt [GitHub](https://github.com/github). Nous sommes assez confiants que cette configuration fonctionnera également avec d'autres registres Git. Cependant, si vous en utilisez un autre, gardez à l'esprit que cet article est conçu uniquement pour GitHub.
 
-Cet article suppose également que vous utilisez [GitHub](https://github.com/github) Actions combinées avec Argo CD pour déployer vos applications sur un cluster Kubernetes. Consultez nos [autres articles sur les déploiements](../../blog/tags/deployment/) pour obtenir des instructions supplémentaires sur la façon de configurer ces deux technologies sur votre serveur personnel.
+Cet article suppose également que vous utilisez [GitHub](https://github.com/github) Actions en combinaison avec Argo CD pour déployer vos applications sur un cluster Kubernetes. Suivez nos [articles sur le déploiement](../../blog/tags/deployment/) pour obtenir d'autres instructions sur la configuration de ces deux technologies sur votre serveur personnel.
 
-## Préparatifs
+## Préparations
 
-Nous vous recommandons de créer un compte [Docker Hub](https://hub.docker.com/) ou de choisir un autre registre Docker si vous le souhaitez.
+Nous recommandons de créer un compte [Docker Hub](https://hub.docker.com/) ou de choisir un autre registre Docker, si vous le souhaitez.
 
-Votre repository GitHub doit remplir ces conditions :
+Votre dépôt GitHub doit remplir les conditions suivantes :
 
-* Contient un Dockerfile (idéalement dans le dossier racine)
-* Contient deux Secrets GitHub ([créer un Secret GitHub](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)) :
+* Contient un Dockerfile (de préférence dans le répertoire racine)
+* Contient deux secrets GitHub ([Créer un secret GitHub](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)) :
   * DOCKER\\\_USERNAME : Votre nom d'utilisateur Docker
   * DOCKER\_PASSWORD : Votre mot de passe Docker (ou [jeton d'accès](https://docs.docker.com/security/for-developers/access-tokens/))
 
-## Créer des fichiers workflow
+## Créer un ou plusieurs fichiers de workflow
 
-Les GitHub Actions sont des tâches spéciales dans GitHub qui s'exécutent principalement sur des serveurs Linux et peuvent être contrôlées en créant des fichiers `yaml` dans le répertoire `.github/workflows`. Ces fichiers spéciaux permettent de définir après quels événements ces tâches doivent s'exécuter et offrent beaucoup de flexibilité. En tant qu'utilisateur régulier des Actions GitHub, je peux vous dire que vous devrez souvent réécrire vos fichiers `yaml`, car vous oubliez souvent certains petits détails. Mais sans plus attendre, passons directement à la création d'un fichier `deployment.yaml` adapté, qui effectuera quelques tâches pour nous :
+GitHub Actions sont des tâches spécifiques dans GitHub, exécutées principalement sur des serveurs Linux et contrôlées par la création de fichiers `yaml` dans le répertoire `.github/workflows`. Ces fichiers définissent les événements déclenchant ces tâches, et vous offrent une grande flexibilité. En tant qu'utilisateur régulier de GitHub Action, je peux vous le dire : habituez-vous à réécrire vos fichiers `yaml` assez souvent, car il est facile d'oublier de petits détails. Mais sans plus attendre, lançons-nous dans la création d'un fichier `deployment.yaml` adapté, qui effectuera plusieurs tâches pour nous :
 
-* Pousser une nouvelle image docker sur Docker Hub (avec la version la plus récente).
-* Mettre à jour le fichier `manifest/deployment.yaml` pour qu'Argo CD soit notifié de la nouvelle image marquée.
-* (optionnel) Créer une nouvelle release sur GitHub, afin que les dates des releases soient documentées là où elles devraient l'être.
+* Téléverser une nouvelle version d'image Docker sur Docker Hub (avec la dernière version).
+* Mettre à jour le fichier `manifest/deployment.yaml` pour informer Argo CD de la nouvelle image taguée.
+* (Facultatif) Créer une nouvelle publication sur GitHub pour documenter les moments où les versions ont été publiées.
 
 ```yaml {20}
 # deployment.yaml
@@ -125,7 +129,7 @@ jobs:
                   body: "A docker image has been deployed to [Docker Hub](https://hub.docker.com/r/${{ env.IMAGE_NAME }}/tags)."
 ```
 
-Voici un fichier `docker-hub.yaml`, désormais obsolète, que nous utilisions auparavant parce qu'il intègre des stratégies de versionnement intéressantes :
+Voici un fichier `docker-hub.yaml` obsolète que nous utilisions auparavant, car il offre de belles stratégies de versionnage :
 
 ```yaml collapse={1-145}
 # docker-hub.yaml
@@ -275,12 +279,12 @@ jobs:
                   commit_message: update deployment.json container image (automated)
 ```
 
-Après avoir copié le contenu de notre fichier `deployment.yaml` et créé le nouveau fichier dans le dossier `.github/workflows`, vous devez procéder à quelques ajustements très **importants** :
+Après avoir copié le contenu de notre fichier `deployment.yaml` et créé le nouveau fichier dans le dossier `.github/workflows`, vous devez effectuer quelques ajustements **très importants** :
 
-* Modifiez le `IMAGE_NAME` pour qu'il corresponde à votre dépôt personnel sur Docker Hub. Le nom de l'image se compose de votre nom de compte et du nom du dépôt. Si vous n'êtes pas sûr de ce qu'est le nom de votre image, vous pouvez consulter l'URL de votre dépôt Docker Hub, il devrait y être mentionné quelque part.
+* Modifiez le `IMAGE_NAME` pour qu'il corresponde à votre dépôt personnel Docker Hub. Le nom de l'image est composé de votre nom de compte et du nom du dépôt. Si vous ne savez pas quel est le nom de votre image, vous pouvez consulter l'URL de votre dépôt Docker Hub, il devrait y figurer quelque part.
 
-Vous êtes maintenant prêt à ajouter le mot-clé `deploy` dans n'importe quel message de commit de la branche principale de votre dépôt, et cela devrait automatiquement envoyer une image Docker vers Docker Hub et mettre à jour le manifeste pour Argo CD.
+Vous devriez maintenant être prêt à inclure le mot-clé `deploy` dans n'importe quel message de commit de la branche principale de votre dépôt, et cela devrait automatiquement télécharger une image Docker sur Docker Hub et mettre à jour le manifeste pour Argo CD.
 
-## Fêtez avec un café !
+## Célébrez avec un café !
 
-Félicitations, vous avez configuré avec succès Argo CD avec k3s et [Cilium](https://github.com/cilium) ! Vous méritez une pause café. Savourez une tasse bien méritée, et si vous souhaitez partager un café virtuel avec moi, n'hésitez pas à soutenir mon travail sur [Ko-fi](https://ko-fi.com/trueberryless). Merci !
+Félicitations, vous avez configuré avec succès Argo CD avec k3s et [Cilium](https://github.com/cilium) ! Vous méritez une pause-café. Profitez d'une tasse bien méritée, et si vous souhaitez me remercier virtuellement en m'offrant un café, n'hésitez pas à soutenir mon travail sur [Ko-fi](https://ko-fi.com/trueberryless). Merci beaucoup !
