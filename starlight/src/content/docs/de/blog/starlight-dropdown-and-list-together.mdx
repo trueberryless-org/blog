@@ -1,19 +1,18 @@
 ---
-title: Starlight-Themen-Dropdown und Liste zusammen
+title: Starlight-Themen Dropdown und Liste zusammen
 description: Erfahren Sie, wie Sie eine Desktop-Liste und ein mobiles
-  Dropdown-Menü für Ihre Starlight-Sidebar-Themen kombinieren können.
+  Dropdown-Menü für Ihre Starlight-Sidebar-Themen kombinieren.
 date: 2025-05-13
 tags:
   - Starlight
   - Components
   - Plugins
   - CSS
-excerpt: >-
-  Kombinieren Sie zwei <a class="gh-badge"
-    href="https://github.com/withastro/starlight"><img src="/starlight.png"
-    alt="Starlight" width="16" height="16"
-    style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
-    />Starlight</a> Sidebar Topics Plugins, um eine Liste von Themen auf dem Desktop und ein Dropdown-Menü in der mobilen Sidebar anzuzeigen.
+excerpt: Kombinieren Sie zwei <a class="gh-badge"
+  href="https://github.com/withastro/starlight"><img src="/starlight.png"
+  alt="Starlight" />Starlight</a>-Sidebar-Topics-Plugins, um eine Liste von
+  Themen auf dem Desktop und ein Dropdown-Menü in der mobilen Sidebar
+  anzuzeigen.
 authors:
   - hideoo
   - trueberryless
@@ -25,7 +24,7 @@ cover:
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
-Mit dem [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics)-Plugin zusammen mit der [Starlight Sidebar Topics Dropdown](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown)-Komponente können Sie eine Website erstellen, die eine Liste von Themen auf dem Desktop und ein Dropdown-Menü auf mobilen Geräten hat.
+Durch die Verwendung des [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics)-Plugins zusammen mit der [Starlight Sidebar Topics Dropdown](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown)-Komponente können Sie eine Website erstellen, die auf dem Desktop eine Themenliste und im mobilen Bereich ein Dropdown-Menü anzeigt.
 
 ## Voraussetzungen
 
@@ -33,7 +32,7 @@ Sie benötigen eine bestehende Starlight-Website.
 
 ## Installieren Sie die Pakete
 
-Zuerst installieren Sie das `starlight-sidebar-topics`-Plugin sowie die `starlight-sidebar-topics-dropdown`-Komponente:
+Zuerst installieren Sie das Plugin `starlight-sidebar-topics` und die Komponente `starlight-sidebar-topics-dropdown`:
 
 <Tabs syncKey="pkg">
   <TabItem label="npm">
@@ -55,11 +54,11 @@ Zuerst installieren Sie das `starlight-sidebar-topics`-Plugin sowie die `starlig
   </TabItem>
 </Tabs>
 
-Folgen Sie anschließend den Einrichtungsanleitungen von [Starlight Sidebar Topics](https://starlight-sidebar-topics.netlify.app/docs/getting-started/#installation) und [Starlight Sidebar Topics Dropdown](https://starlight-sidebar-topics-dropdown.trueberryless.org/docs/getting-started/#installation).
+Anschließend folgen Sie den Setup-Anleitungen von [Starlight Sidebar Topics](https://starlight-sidebar-topics.netlify.app/docs/getting-started/#installation) und [Starlight Sidebar Topics Dropdown](https://starlight-sidebar-topics-dropdown.trueberryless.org/docs/getting-started/#installation).
 
 ## Ändern Sie die Sidebar-Komponente
 
-In der Einrichtungsanleitung der Dropdown-Komponente haben Sie eine Sidebar-Komponente erstellt, die nur das Dropdown-Menü rendert. Nun müssen Sie diese Komponente so modifizieren, dass sie auch die Standard-Sidebar rendert, wenn der Benutzer auf einem Desktop ist.
+In der Setup-Anleitung der Dropdown-Komponente haben Sie eine Sidebar-Komponente erstellt, die nur das Dropdown-Menü rendert. Jetzt müssen Sie diese Komponente so ändern, dass sie auch die standardmäßige Sidebar rendert, wenn der Benutzer einen Desktop verwendet.
 
 ```astro
 ---
@@ -104,14 +103,14 @@ import TopicsDropdown from 'starlight-sidebar-topics-dropdown/TopicsDropdown.ast
 
 ## Ergebnis
 
-Wenn Sie diese Schritte befolgen, sieht Ihre Sidebar wie folgt aus:
+Wenn Sie diese Schritte befolgen, sieht Ihre Sidebar folgendermaßen aus:
 
-![Endergebnis mit Desktopansicht auf der linken Seite und mobiler Ansicht auf der rechten Seite](../../../../assets/dropdown-or-list.png)
+![Final result with desktop view on the left and mobile view on the right](../../../../assets/dropdown-or-list.png)
 
-Sie können den vollständigen Quellcode dieses Leitfadens in diesem [StackBlitz-Beispiel](https://stackblitz.com/edit/withastro-starlight-qgraahmp?file=astro.config.mjs) finden.
+Sie finden den vollständigen Quellcode dieses Guides in diesem [StackBlitz-Beispiel](https://stackblitz.com/edit/withastro-starlight-qgraahmp?file=astro.config.mjs).
 
 ## Unendliche Möglichkeiten
 
-Sie könnten es auch anders herum machen (Liste auf Mobilgeräten, Dropdown auf dem Desktop), indem Sie die CSS-Eigenschaften `display: block` und `display: none` austauschen.
+Sie könnten es auch umgekehrt machen (Liste auf Mobilgeräten, Dropdown auf Desktops), indem Sie die Eigenschaften `display: block` und `display: none` im CSS vertauschen.
 
-Darüber hinaus könnten Sie auch Ihre eigene Anzeigekomponente erstellen, die die Routendaten aus dem Starlight-Sidebar-Topics-Plugin verwendet und die Themen auf eine benutzerdefinierte Weise rendert. Dies ist etwas fortgeschrittener, aber Sie finden weitere Informationen darüber in der ["Custom Topics List"-Dokumentation](https://starlight-sidebar-topics.netlify.app/docs/guides/custom-topic-list/).
+Außerdem könnten Sie auch Ihre eigene Anzeige-Komponente erstellen, die die Routendaten aus dem Starlight Sidebar Topics-Plugin verwendet und die Themen auf eine benutzerdefinierte Weise rendert. Dies ist etwas fortgeschrittener, aber Sie finden weitere Informationen dazu in der Dokumentation ["Benutzerdefinierte Themenliste"](https://starlight-sidebar-topics.netlify.app/docs/guides/custom-topic-list/).
