@@ -1,16 +1,18 @@
 ---
-title: Wie Sie einen horizontalen Fortschrittsanzeiger für Ihre Starlight-Seite
-  erstellen
-description: Erfahren Sie, wie Sie einen horizontalen Fortschrittsanzeiger für
+title: Wie man einen horizontalen Fortschrittsindikator für Ihre Starlight-Seite
+  erstellt
+description: Erfahren Sie, wie Sie einen horizontalen Fortschrittsindikator für
   Ihre Starlight-Seite erstellen.
 date: 2025-06-10
 tags:
   - Starlight
   - Components
   - CSS
-excerpt: Erfahren Sie, wie Sie einen horizontalen Fortschrittsanzeiger für Ihre
+excerpt: Erfahren Sie, wie Sie einen horizontalen Fortschrittsindikator für Ihre
   <a class="gh-badge" href="https://github.com/withastro/starlight"><img
-  src="/starlight.png" alt="Starlight" />Starlight</a>-Seite erstellen.
+  src="/starlight.png" alt="Starlight" width="16" height="16"
+  style="border-radius:9999px;vertical-align:middle;margin-right:0.4em;"
+  />Starlight</a>-Seite erstellen.
 authors:
   - frostybee
   - trueberryless
@@ -20,17 +22,17 @@ cover:
 
 ---
 
-In diesem Beitrag möchten wir Ihnen zeigen, wie [FrostyBee](https://github.com/frostybee) einen einfachen horizontalen Fortschrittsanzeiger für Starlight-Seiten erstellt hat.
+In diesem Beitrag möchten wir Ihnen zeigen, wie [FrostyBee](https://github.com/frostybee) einen sauberen horizontalen Fortschrittsindikator für Starlight-Seiten erstellt hat.
 
 ## Voraussetzungen
 
 Sie benötigen eine bestehende Starlight-Website.
 
-## Erstellen Sie die Fortschrittsanzeiger-Komponente
+## Erstellen des Fortschrittsindikator-Komponents
 
-Lassen Sie uns eine neue Komponente namens `ProgressIndicator.astro` im Verzeichnis `src/components/` erstellen. Diese Komponente ist für die Darstellung des Fortschrittsanzeigers verantwortlich.
+Lassen Sie uns eine neue Komponente namens `ProgressIndicator.astro` im Verzeichnis `src/components/` erstellen. Diese Komponente ist für das Rendering des Fortschrittsindikators verantwortlich.
 
-Wir erstellen einen Container, der die gesamte Breite einnimmt, mit der Fortschrittsleiste `<div>` darin. Die Breite des inneren `<div>` wird aktualisiert, wann immer der Benutzer scrollt (und wenn die Seite lädt), um die aktuelle Scroll-Position widerzuspiegeln.
+Wir erstellen einen Container, der sich über die gesamte Breite erstreckt, mit der Fortschrittsleiste `<div>` darin. Die Breite des inneren `<div>` wird jedes Mal aktualisiert, wenn der Benutzer scrollt (und wenn die Seite lädt), um die aktuelle Scroll-Position widerzuspiegeln.
 
 ```astro title="src/components/ProgressIndicator.astro" collapse={27-43}
 <div class="progress-scroll-container" aria-hidden="true">
@@ -84,9 +86,9 @@ Wir erstellen einen Container, der die gesamte Breite einnimmt, mit der Fortschr
 </style>
 ```
 
-In den ausgeblendeten Zeilen befindet sich das Styling, das sicherstellt, dass die Fortschrittsleiste wie eine typische Fortschrittsleiste aussieht. Sie ist auch an Starlight angepasst, da die Leiste automatisch ausgeblendet wird, wenn die Website keine Seitenleiste und Inhaltsübersicht hat, aber ein Hero-Element wie die meisten Landingpages besitzt.
+In den ausgeblendeten Zeilen befindet sich das Styling, das sicherstellt, dass die Fortschrittsleiste wie eine typische Fortschrittsleiste aussieht. Sie ist auch an Starlight angepasst, da die Leiste automatisch ausgeblendet wird, wenn die Seite keine Seitenleiste und Inhaltsangabe, sondern ein Hero-Element hat, wie es die meisten Landingpages tun.
 
-Ein wichtiger Punkt ist, was das globale CSS (Zeile 45) bewirkt: Es schiebt das Dropdown-Menü der mobilen Inhaltsübersicht nach unten, um mehr Leerraum für die Fortschrittsleiste zu schaffen. Dies ist eine persönliche Präferenz, und Sie können es entfernen, wenn Sie möchten.
+Ein Punkt, der hervorgehoben werden sollte, ist, was das globale CSS (Zeile 45) bewirkt: Es verschiebt das Dropdown-Menü für das mobile Inhaltsverzeichnis nach unten, um mehr Leerraum für die Fortschrittsleiste zu schaffen. Dies ist eine persönliche Präferenz, und Sie können es entfernen, wenn Sie möchten.
 
 ## Starlight-Override
 
@@ -102,7 +104,7 @@ import ScrollIndicator from "./ScrollIndicator.astro";
 <ScrollIndicator />
 ```
 
-Vergessen Sie nicht, diesen Komponenten-Override in Ihrer `astro.config.mjs`-Datei hinzuzufügen:
+Vergessen Sie nicht, diese Komponenten-Override in Ihrer `astro.config.mjs`-Datei hinzuzufügen:
 
 ```diff lang="js" title="astro.config.mjs"
 import { defineConfig } from 'astro/config';
@@ -123,8 +125,8 @@ export default defineConfig({
 
 ## Quellcode
 
-Den gesamten Projektcode finden Sie auf [GitHub](https://github.com/trueberryless/starlight-progress-indicator) und in diesem [Stackblitz-Beispiel](https://stackblitz.com/github/trueberryless/starlight-progress-indicator?file=src%2Fcomponents%2FProgressIndicator.astro).
+Sie können den gesamten Projektcode auf [GitHub](https://github.com/trueberryless/starlight-progress-indicator) und in [diesem Stackblitz-Beispiel](https://stackblitz.com/github/trueberryless/starlight-progress-indicator?file=src%2Fcomponents%2FProgressIndicator.astro) finden.
 
 ## Fazit
 
-Mit dieser Konfiguration wird der Fortschrittsanzeiger auf jeder Seite (außer Landingpages) Ihrer Starlight-Seite angezeigt. 🥳
+Mit diesem Setup wird der Fortschrittsindikator auf jeder Seite (außer Landingpages) Ihrer Starlight-Website angezeigt. 🥳
