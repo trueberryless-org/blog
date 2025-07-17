@@ -1,0 +1,150 @@
+---
+title: Wie man ein Rehype-Plugin erstellt, das GitHub-Links in schöne Badges umwandelt
+description: Erfahren Sie, wie Sie ein einfaches, aber ansprechendes
+  Rehype-Plugin erstellen, das GitHub-Profillinks automatisch in stilvolle,
+  badge-ähnliche Links mit Profilbildern verwandelt – perfekt, um Ihrem Blog
+  oder Ihren Dokumenten Persönlichkeit zu verleihen.
+date: 2025-07-12
+tags:
+  - Plugins
+authors:
+  - trueberryless
+excerpt: Entdecken Sie, wie ein kleines Rehype-Plugin Ihren GitHub-Links ein
+  großes visuelles Upgrade verleihen kann. Mit nur wenigen Zeilen Code wandeln
+  wir normale Profillinks in elegante Badges mit Avataren um, inspiriert von
+  Antfus Website und unterstützt von Astro + Starlight.
+cover:
+  alt: A beautiful cover image with the text "Badge Links"
+  image: ../../../../../public/blog/rehype-github-badge-links.png
+tableOfContents: false
+
+---
+
+import StarlightBadgeLink from "../../../../components/StarlightBadgeLink.astro";
+
+Kürzlich habe ich diesem Blog eine kleine, aber feine Funktion hinzugefügt, die Ihnen möglicherweise als regelmäßiger Leser aufgefallen ist. Es ist nichts Großes, aber es verleiht jedem Blog diese kleine, liebevolle Note, nach der ich mich schon lange gesehnt habe. Ich spreche, pardon, schreibe über all diese grünen Badges mit Profilbildern, die Sie in diesem Blog sehen können.
+
+Die Inspiration, sie zu erstellen, kam von niemand Geringerem als [Antfu](https://github.com/antfu) selbst, da er diese Badges überall auf seiner Website hat (zum Zeitpunkt der Erstellung dieses Artikels).
+
+Anfangs dachte ich, dass es eine lange und mühsame Programmier-Session erfordern würde, um dieselbe visuelle Schönheit zu erreichen. Aber nach einer Runde „Vibe Coding“ – wie [Andrej Karpathy den Begriff geprägt hat](https://x.com/karpathy/status/1886192184808149383) – wurde mir schnell klar, dass diese Badges nur ein kleines [rehype](https://github.com/rehypejs) Plugin entfernt von der Existenz waren.
+
+Hier ist der gesamte Code des Rehype-Plugins:
+
+```ts
+// src/lib/rehype-github-badge-links.ts
+import { h } from "hastscript";
+import { visit } from "unist-util-visit";
+
+export default function rehypeGitHubBadgeLinks() {
+  return (tree) => {
+    visit(tree, "element", (node) => {
+      if (
+        node.tagName === "a" &&
+        typeof node.properties?.href === "string" &&
+        node.properties.href.startsWith("https://github.com/")
+      ) {
+        const match = node.properties.href.match(
+          /^https:\/\/github\.com\/([\w-]+)\/?$/
+        );
+        if (match) {
+          const username = match[1];
+
+          // Add GitHub badge class
+          node.properties.className = (node.properties.className || []).concat(
+            "gh-badge"
+          );
+
+          // Build avatar image
+          const avatarImg = h("img", {
+            src: `https://github.com/${username}.png`,
+            alt: username,
+          });
+
+          // Prepend avatar image to original children
+          node.children.unshift(avatarImg);
+        }
+      }
+    });
+  };
+}
+```
+
+Im Grunde durchsucht dieses Plugin das HTML nach Links, die auf ein GitHub-Profil verweisen. Wenn das Plugin einen solchen Link findet, fügt es ein `<img>`-Tag vor dem Textinhalt mit dem Profilbild des GitHub-Benutzers oder der Organisation ein. Dies ist dank der GitHub-Funktion, das Bild als Ressource hinter dem Profillink mit der Endung `.png` bereitzustellen, sehr konsistent möglich. Lesen Sie mehr über diese Funktion in [diesem großartigen Artikel auf `dev.to`](https://dev.to/10xlearner/how-to-get-the-profile-picture-of-a-github-account-1d82).
+
+Mit ein wenig zusätzlichem Styling sieht es meiner Meinung nach wirklich niedlich aus. Bitte beachten Sie, dass ich, da dies eine <StarlightBadgeLink />-Seite ist, verfügbare CSS-Variablen verwende, wie in Zeile vier:
+
+```css "var(--sl-color-accent-low)" "var(--sl-color-accent)"
+// src/styles/custom.css
+.gh-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--sl-color-accent-low);
+  border-radius: 9999px;
+  padding: 0em 0.5em 0 0.3em;
+  font-size: 0.9em;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  transform: translateY(0.29rem);
+  border: 1px solid var(--sl-color-accent);
+}
+
+.gh-badge:hover {
+  background-color: var(--sl-color-accent);
+}
+
+.gh-badge img {
+  border-radius: 9999px;
+  width: 1.3em;
+  height: 1.3em;
+}
+```
+
+Um nun alles zusammenzufügen, müssen Sie beispielsweise nur das Rehype-Plugin in die Konfiguration Ihrer Astro-Site einfügen, wie hier gezeigt:
+
+```ts ins={6-8}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import rehypeGitHubBadgeLinks from "./src/lib/rehype-github-badge-links";
+
+export default defineConfig({
+  markdown: {
+    rehypePlugins: [rehypeGitHubBadgeLinks]
+  }
+})
+```
+
+Lesen Sie mehr über die Integration von Rehype-Plugins in Astro in [deren Konfigurationsreferenz](https://docs.astro.build/en/reference/configuration-reference/#markdownrehypeplugins).
+
+Vergessen Sie nicht, das CSS ähnlich je nach Framework hinzuzufügen – in Starlight können Sie benutzerdefinierte globale CSS-Stile konfigurieren, indem Sie [diese Anleitung](https://docs.astro.build/en/guides/styling/#scoped-styles) befolgen – und schon können Sie Ihre eigenen Badge-Links bewundern. Teilen Sie diesen Beitrag gerne mit jedem, den Sie überzeugen möchten, diese Features ebenfalls zu nutzen.
+
+<details>
+  <summary>✨ Bonus-Tipp</summary>
+
+  Wenn Sie solche Badges auch für andere Links verwenden möchten, empfehle ich Ihnen, ein kleines Astro-Komponenten wie diese hier zu erstellen:
+
+  ```astro
+  ---
+  // src/components/BadgeLink.astro
+  const { href, src, text, className = "gh-badge" } = Astro.props;
+  ---
+
+  <a href={href} class={className}>
+    <img src={src} alt={text} />
+    {text}
+  </a>
+  ```
+
+  Achten Sie einfach darauf, dass das CSS global ist (oder [scopen](https://docs.astro.build/en/guides/styling/#scoped-styles) Sie es in der obigen Komponente), und es ist bereit zur Verwendung:
+
+  ```mdx
+  import BadgeLink from "../components/BadgeLink.astro";
+
+  <BadgeLink
+    href="https://github.com/withastro/starlight"
+    src="/starlight.png"
+    text="Starlight"
+  />
+  ```
+</details>
