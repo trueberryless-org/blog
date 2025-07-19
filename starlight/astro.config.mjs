@@ -1,10 +1,14 @@
 import starlight from "@astrojs/starlight";
+import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
+
+import rehypeExternalLinkCaret from "./src/lib/rehype-external-link-caret";
+import rehypeGitHubBadgeLinks from "./src/lib/rehype-github-badge-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -33,6 +37,21 @@ export default defineConfig({
         baseUrl:
           "https://github.com/trueberryless-org/blog/tree/main/starlight/",
       },
+      defaultLocale: "root",
+      locales: {
+        root: {
+          label: "English",
+          lang: "en",
+        },
+        fr: {
+          label: "French",
+          lang: "fr",
+        },
+        de: {
+          label: "Deutsch",
+          lang: "de",
+        },
+      },
       lastUpdated: true,
       logo: {
         light: "./src/assets/light-logo.png",
@@ -58,8 +77,12 @@ export default defineConfig({
       ],
       routeMiddleware: "./src/routeData.ts",
       plugins: [
+        lunaria({
+          sync: true,
+        }),
         starlightLinksValidator({
           exclude: ["/blog/tags/*"],
+          errorOnRelativeLinks: false,
         }),
         starlightImageZoom(),
         starlightThemeRapide(),
@@ -69,7 +92,7 @@ export default defineConfig({
         starlightBlog({
           title: "Deep Thoughts",
           postCount: 7,
-          recentPostCount: 3,
+          recentPostCount: 5,
           prevNextLinksOrder: "chronological",
           navigation: "none",
           metrics: {
@@ -109,6 +132,8 @@ export default defineConfig({
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
         TableOfContents: "./src/components/TableOfContents.astro",
+        Hero: "./src/components/Hero.astro",
+        PageTitle: "./src/components/PageTitle.astro",
       },
       customCss: [
         "./src/styles/custom.css",
@@ -118,7 +143,7 @@ export default defineConfig({
       pagination: false,
     }),
   ],
-  redirects: {
-    "/": "/blog",
+  markdown: {
+    rehypePlugins: [rehypeGitHubBadgeLinks],
   },
 });

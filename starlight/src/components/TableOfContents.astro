@@ -11,10 +11,10 @@ import fontStampImage from "../assets/font_stamp.png";
 <BottomTableOfContentsWrapper>
   <ReferenceCard
     heading="Atkinson Hyperlegible Next™"
-    description="The main font I use on this website →"
+    description={Astro.locals.t("blog.fontReference.description")}
     link="https://www.brailleinstitute.org/freefont/"
     imagePath={fontStampImage}
-    imageAlt="A golden circular stamp with a lowercase 'f', on a textured, transparent background."
+    imageAlt={Astro.locals.t("blog.fontReference.imageAlt")}
     imageWidth={360}
     imageHeight={360}
   />

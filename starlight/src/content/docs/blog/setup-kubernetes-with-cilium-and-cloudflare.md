@@ -5,16 +5,19 @@ date: 2024-06-11
 lastUpdated: 2024-10-01
 tags:
     - Deployment
-excerpt: This blog posts describes the process of setting up a kubernetes cluster with k3s and cilium. We use Helm as the package manager and Cloudflare as the certificate issuer. We used the tips and tricks from Vegard S. Hagen from [his article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/). Essentially, this blog explains, how all the trueberryless.org websites are deployed.
+excerpt: This blog posts describes the process of setting up a <a class="gh-badge" href="https://github.com/kubernetes"><img src="https://github.com/kubernetes.png" alt="Kubernetes" />Kubernetes</a> cluster with <a class="gh-badge" href="https://github.com/k3s-io"><img src="https://github.com/k3s-io.png" alt="k3s" />k3s</a> and <a class="gh-badge" href="https://github.com/cilium"><img src="https://github.com/cilium.png" alt="Cilium" />Cilium</a>. We use <a class="gh-badge" href="https://github.com/helm"><img src="https://github.com/helm.png" alt="Helm" />Helm</a> as the package manager and <a class="gh-badge" href="https://github.com/cloudflare"><img src="https://github.com/cloudflare.png" alt="Cloudflare" />Cloudflare</a> as the certificate issuer. We used the tips and tricks from Vegard S. Hagen from [his article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/). Essentially, this blog explains, how all the trueberryless.org websites are deployed (not any more).
 authors:
     - trueberryless
     - clemens
 cover:
   alt: A beautiful cover image with the text "Kubernetes"
   image: ../../../../public/blog/setup-kubernetes-with-cilium-and-cloudflare.png
+metrics:
+  readingTime: 360
+  words: 1099
 ---
 
-Working with Docker Containers can be hard. However, there are tools which enhance the management of containers, like Kubernetes. Actually, Kubernetes is the only tool to my knowledge which acts as a management software for Docker Containers. Kubernetes is well-integrated in almost all cloud providers, like Google Cloud, Azure and AWS. As a result, it has a standardized `yaml`-syntax, which is great for small developers because they can switch between `The Big Three` with low effort.
+Working with [Docker](https://github.com/docker) Containers can be hard. However, there are tools which enhance the management of containers, like [Kubernetes](https://github.com/kubernetes). Actually, Kubernetes is the only tool to my knowledge which acts as a management software for Docker Containers. Kubernetes is well-integrated in almost all cloud providers, like Google Cloud, Azure and AWS. As a result, it has a standardized `yaml`-syntax, which is great for small developers because they can switch between `The Big Three` with low effort.
 
 ## tl;dr
 
@@ -98,7 +101,7 @@ curl -sfL https://get.k3s.io | sh -s - \
   --cluster-init
 ```
 
-After the installation, there should be some pods running (3). Don't be shocked if the pods are in the `ContainerCreating` or `Pending` state. This is because the pods can't communicate between each other because we disabled the CNI (`--flannel-backend=none`). We will later install Cilium, which will be the replacement of the Flannel CNI.
+After the installation, there should be some pods running (3). Don't be shocked if the pods are in the `ContainerCreating` or `Pending` state. This is because the pods can't communicate between each other because we disabled the CNI (`--flannel-backend=none`). We will later install [Cilium](https://github.com/cilium), which will be the replacement of the Flannel CNI.
 
 ```bash
 kubectl get pods -A
@@ -106,7 +109,7 @@ kubectl get pods -A
 
 ## Install Helm
 
-Helm is the package manager for Kubernetes, so you should either install it directly (follow the [Helm docs](https://helm.sh/docs/intro/install/)) or use parts of Helm which are shipped with Cilium. We chose to install Helm directly, which is easily possible with this command:
+Helm is the package manager for [Kubernetes](https://github.com/kubernetes), so you should either install it directly (follow the [Helm docs](https://helm.sh/docs/intro/install/)) or use parts of Helm which are shipped with Cilium. We chose to install Helm directly, which is easily possible with this command:
 
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
@@ -114,7 +117,7 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 ## Install Cilium
 
-Cilium is a networking and security software for Kubernetes. Cilium is very fast, scalable and secure because it's built upon eBPF -- a revolutionary technology that can run sandboxed programs in the Linux kernel without recompiling the kernel or loading kernel modules.
+[Cilium](https://github.com/cilium) is a networking and security software for Kubernetes. Cilium is very fast, scalable and secure because it's built upon eBPF -- a revolutionary technology that can run sandboxed programs in the Linux kernel without recompiling the kernel or loading kernel modules.
 
 We could install Cilium with Helm like shown here:
 
@@ -181,7 +184,7 @@ spec:
           stop: "192.168.0.249"
 ```
 
-Additionally you should upgrade the cilium config. In order to do that with the proper values, first create this file in the root directory where you wanna manage the k3s cluster. Later you could also apply some hubble and prometheus related properties if you want to use [Grafana](https://grafana.com/) or so (open the collapsed lines if you want to use our config as well).
+Additionally you should upgrade the cilium config. In order to do that with the proper values, first create this file in the root directory where you wanna manage the k3s cluster. Later you could also apply some hubble and prometheus related properties if you want to use [Grafana](https://github.com/Grafana) or so (open the collapsed lines if you want to use our config as well).
 
 ```yaml collapse={32-59}
 #cilium-config.yaml
@@ -253,7 +256,7 @@ cilium upgrade -f cilium-config.yaml
 
 ## Setup Certificate Manager with Cloudflare
 
-In order to be able to create certificates for each subdomain, it is important to apply a certificate issuer which handles certificate requests and resolves them at some provider. We chose Cloudflare as our issuer and here is the setup which you need to apply to your kubernetes cluster. For further information you can check out the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/).
+In order to be able to create certificates for each subdomain, it is important to apply a certificate issuer which handles certificate requests and resolves them at some provider. We chose [Cloudflare](https://github.com/cloudflare) as our issuer and here is the setup which you need to apply to your Kubernetes cluster. For further information you can check out the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/).
 
 But first, we need to install the cert-manager by running the following command:
 
@@ -283,7 +286,7 @@ spec:
                           key: api-token
 ```
 
-You can apply a file to the Kubernetes cluster, by running this k8s (also k3s) command:
+You can apply a file to the [Kubernetes](https://github.com/kubernetes) cluster, by running this k8s (also k3s) command:
 
 ```bash
 kubectl apply -f cluster-issuer.yaml
@@ -297,7 +300,7 @@ kubectl delete -f cluster-issuer.yaml
 
 As you may have spotted above, we also need a secret for the API token which authenticates that this issuer is allowed to request certificates. Therefore, we create a secret with an unencrypted `API Token` from Cloudflare.
 
-Nowadays we create a token by going to your Cloudflare dashboard, then click on your profile and select the tab `API Tokens`. Here you can generate a specific token for your issuer or use the Global API Key (not recommended any more). The recommended solution is to create a API token with two permissions (custom token):
+Nowadays we create a token by going to your [Cloudflare](https://github.com/cloudflare) dashboard, then click on your profile and select the tab `API Tokens`. Here you can generate a specific token for your issuer or use the Global API Key (not recommended any more). The recommended solution is to create a API token with two permissions (custom token):
 
 -   Zone - DNS - Edit
 -   Zone - Zone - Read
@@ -422,7 +425,7 @@ spec:
 
 ## Setup Keel
 
-We always wanted a clean Continuous Integration (CI) and Continuous Delivery (CD) solution for our websites. This means, that a specific commit message should trigger an automated process over GitHub, Docker Hub and our server, which in the end updates the corresponding website after about two minutes.
+We always wanted a clean Continuous Integration (CI) and Continuous Delivery (CD) solution for our websites. This means, that a specific commit message should trigger an automated process over [GitHub](https://github.com/github), Docker Hub and our server, which in the end updates the corresponding website after about two minutes.
 
 Keel is a robust software tool which enables this feature for Kubernetes. We used Keel for pulling new Docker Images from Docker Hub by polling every few minutes. Moreover, Keel provides a beautiful dashboard where you can control the polling as well.
 
@@ -711,7 +714,7 @@ spec:
 
 ## Celebrate with a Coffee!
 
-Congratulations, you've successfully set up Kubernetes with Cilium and Cloudflare! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
+Congratulations, you've successfully set up [Kubernetes](https://github.com/kubernetes) with [Cilium](https://github.com/cilium) and [Cloudflare](https://github.com/cloudflare)! You deserve a coffee break. Enjoy a well-earned cup, and if you'd like to share a virtual coffee with me, feel free to support my work on [Ko-fi](https://ko-fi.com/trueberryless). Thank you!
 
 ## Troubleshooting
 

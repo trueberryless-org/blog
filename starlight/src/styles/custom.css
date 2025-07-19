@@ -34,3 +34,64 @@ img {
 .sl-markdown-content blockquote:not(:where(.not-content *)):hover {
   border-inline-start: 1px solid var(--sl-color-accent-high);
 }
+
+@keyframes highlightPink {
+  0% {
+    color: inherit;
+    background: inherit;
+    border-radius: unset;
+    padding-block: unset;
+  }
+  40%,
+  60% {
+    color: var(--sl-color-accent-low);
+    background: var(--sl-color-accent-high);
+    padding-block: 1rem;
+    border-radius: 1rem;
+  }
+  100% {
+    color: inherit;
+    background: inherit;
+    border-radius: unset;
+    padding-block: unset;
+  }
+}
+
+.fragment-highlight.highlight-now {
+  animation: highlightPink 4s cubic-bezier(1, 0, 0.7, 0.97);
+}
+
+.gh-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--sl-color-accent-low);
+  border-radius: 9999px;
+  padding: 0em 0.5em 0 0.3em;
+  font-size: 0.9em;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  transform: translateY(0.29rem);
+  border: 1px solid var(--sl-color-accent);
+}
+
+.gh-badge:hover {
+  background-color: var(--sl-color-accent);
+}
+
+.gh-badge img {
+  border-radius: 9999px;
+  width: 1.3em;
+  height: 1.3em;
+  margin-right: 0.4em;
+}
+
+.tiny-caret {
+  font-size: 0.7em; /* smaller font size */
+  vertical-align: 0.4em; /* raise it a bit */
+  user-select: none;
+
+  display: inline-block; /* required for transform */
+  transform: scaleX(1) scaleY(0.7); /* wider horizontally, flatter vertically */
+}
