@@ -26,7 +26,7 @@ jobs:
           key: continuous-translation-${{ github.run_id }}
           restore-keys: |
             continuous-translation-
-      - uses: pelikhan/action-continuous-translation@c717c7fd9d8414bc7b8294141510b3aeca3d7581
+      - uses: pelikhan/action-continuous-translation@02b14720ce7ec1cbe8d1d1e9ca0e34fcfcb3079f
         continue-on-error: true
         with:
           github_token: ${{ secrets.AI_TRANSLATIONS_GITHUB_TOKEN }}
