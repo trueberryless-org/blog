@@ -1,0 +1,27 @@
+@layer blog {
+  @keyframes highlightPink {
+    0% {
+      color: inherit;
+      background: inherit;
+      border-radius: unset;
+      padding-block: unset;
+    }
+    40%,
+    60% {
+      color: var(--sl-color-accent-low);
+      background: var(--sl-color-accent-high);
+      padding-block: 1rem;
+      border-radius: 1rem;
+    }
+    100% {
+      color: inherit;
+      background: inherit;
+      border-radius: unset;
+      padding-block: unset;
+    }
+  }
+
+  .fragment-highlight.highlight-now {
+    animation: highlightPink 4s cubic-bezier(1, 0, 0.7, 0.97);
+  }
+}

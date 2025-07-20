@@ -1,0 +1,27 @@
+@layer blog {
+  .gh-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--sl-color-accent-low);
+    border-radius: 9999px;
+    padding: 0em 0.5em 0 0.3em;
+    font-size: 0.9em;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    transform: translateY(0.29rem);
+    border: 1px solid var(--sl-color-accent);
+  }
+
+  .gh-badge:hover {
+    background-color: var(--sl-color-accent);
+  }
+
+  .gh-badge img {
+    border-radius: 9999px;
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: 0.4em;
+  }
+}

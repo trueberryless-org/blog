@@ -1,0 +1,9 @@
+@layer blog {
+  .hero-html {
+    --size: 12rem;
+
+    font-size: var(--size);
+    justify-content: center;
+    line-height: var(--size);
+  }
+}

@@ -2,7 +2,7 @@ import { h } from "hastscript";
 import { visit } from "unist-util-visit";
 
 export default function rehypeGitHubBadgeLinks() {
-  return (tree) => {
+  return (tree: any) => {
     visit(tree, "element", (node) => {
       if (
         node.tagName === "a" &&
