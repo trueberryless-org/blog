@@ -1,14 +1,16 @@
 import starlight from "@astrojs/starlight";
 import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
 
-import rehypeExternalLinkCaret from "./src/lib/rehype-external-link-caret";
-import rehypeGitHubBadgeLinks from "./src/lib/rehype-github-badge-links";
+import { rehypeHeadingIds } from '@astrojs/markdown-remark'
+import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
+import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -136,14 +138,26 @@ export default defineConfig({
         PageTitle: "./src/components/PageTitle.astro",
       },
       customCss: [
-        "./src/styles/custom.css",
-        "@fontsource-variable/atkinson-hyperlegible-next/wght.css",
-        "@fontsource-variable/jetbrains-mono/wght.css",
+        "./src/styles/layers.css",
+        "./src/styles/badges.css",
+        "./src/styles/fonts.css",
+        "./src/styles/fragment-highlight.css",
+        "./src/styles/headings.css",
+        "./src/styles/hero.css",
+        "./src/styles/images.css",
+        "./src/styles/links.css",
       ],
+      markdown: {
+        headingLinks: false,
+      },
       pagination: false,
     }),
   ],
   markdown: {
-    rehypePlugins: [rehypeGitHubBadgeLinks],
+    rehypePlugins: [
+      rehypeHeadingIds,
+      rehypeAutolinkHeadings,
+      rehypeGitHubBadgeLinks,
+    ],
   },
 });
