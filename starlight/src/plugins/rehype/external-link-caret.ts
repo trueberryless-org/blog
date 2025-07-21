@@ -6,7 +6,7 @@ import { visit } from "unist-util-visit";
 export default function rehypeExternalLinkCaret() {
   const domain = ["localhost", "blog.trueberryless.org"];
 
-  return function (tree) {
+  return function (tree: any) {
     visit(tree, "element", (node) => {
       if (
         node.tagName === "a" &&
@@ -27,7 +27,7 @@ export default function rehypeExternalLinkCaret() {
           node.children.push({
             type: "element",
             tagName: "span",
-            properties: { className: ["tiny-caret"] },
+            properties: { className: ["external-link-tiny-caret"] },
             children: [{ type: "text", value: "^" }],
           });
         }
