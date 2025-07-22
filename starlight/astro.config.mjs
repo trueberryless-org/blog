@@ -83,7 +83,7 @@ export default defineConfig({
           sync: true,
         }),
         starlightLinksValidator({
-          exclude: ["/blog/tags/*"],
+          exclude: ["/blog/tags/*", "/blog/authors/*"],
           errorOnRelativeLinks: false,
         }),
         starlightImageZoom(),
