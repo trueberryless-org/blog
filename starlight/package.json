@@ -6,10 +6,10 @@
     "astro": "astro",
     "build": "astro build",
     "dev": "astro dev",
-    "preview": "astro preview",
-    "start": "astro dev",
     "lunaria:build": "lunaria build",
-    "lunaria:preview": "lunaria preview"
+    "lunaria:preview": "lunaria preview",
+    "preview": "astro preview",
+    "start": "astro dev"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
