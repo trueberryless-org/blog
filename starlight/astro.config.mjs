@@ -1,7 +1,6 @@
 import starlight from "@astrojs/starlight";
 import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
 import starlightImageZoom from "starlight-image-zoom";
