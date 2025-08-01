@@ -1,3 +1,4 @@
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
 import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
@@ -7,7 +8,6 @@ import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
 
-import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
 import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
 
