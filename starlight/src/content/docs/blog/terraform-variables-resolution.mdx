@@ -18,7 +18,7 @@ Today, I want to talk about a small VS Code extension that I vibe-coded in a sin
 
 ## What is Terraform?
 
-Terraform is a language which lets you define your entire infrastructure in Azure, AWS, Google Cloud or any other supported providers as code. The dedicated language syntax, invented by [HashiCorp](https://github.com/hashicorp) is called HCL (HashiCorp configuration language) and is structured very intuitively. The _native syntax_ has the advantage that the learning curve is low, it is consistent for all providers and pleasant to read and write for humans, whilst the JSON-based variant is easier for machines to generate and parse.
+Terraform is an infrastructure-as-code (IaC) tool that lets you define your entire cloud or on-prem infrastructure as code. Its configuration language, invented by HashiCorp, is called HCL (HashiCorp Configuration Language) and features an intuitive, human-readable syntax. The _native syntax_ has the advantage that the learning curve is low, it is consistent for all providers and pleasant to read and write for humans, whilst the JSON-based variant is easier for machines to generate and parse.
 
 What makes Terraform very powerful are two basic features: **variables** and **modules**. Variables enable you to create resources where the actual values can be inserted from somewhere else and modules group any number of resources, which has the advantage of reusability and nesting. While both features sound very basic, the combination of the two makes a dream team. Because the openness of Terraform enables you to define input variables for each module and also export variables via outputs.
 
