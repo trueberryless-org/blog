@@ -357,5 +357,6 @@
   "The Final Result": "Le Résultat Final",
   "Try out the extension yourself by clicking on the button below. There are still .53D329C6D712DEFF0967": "Essayez l'extension par vous-même en cliquant sur le bouton ci-dessous. Il reste encore de nombreuses améliorations à apporter, donc si vous êtes intéressé pour aider, n'hésitez pas à contribuer sur [GitHub](https://github.com/trueberryless/terraform-variables-resolution).",
   "Install Terraform Variables Resolution": "Installer Terraform Variables Resolution",
-  "Here you can see the example from [the Terraform explanation](#what-is-terraform.772358BC6F4987371F60": "Voici un exemple tiré de [l'explication de Terraform](#what-is-terraform), montrant comment cette extension ajoute visuellement les valeurs des variables dans VS Code :"
+  "Here you can see the example from [the Terraform explanation](#what-is-terraform.772358BC6F4987371F60": "Voici un exemple tiré de [l'explication de Terraform](#what-is-terraform), montrant comment cette extension ajoute visuellement les valeurs des variables dans VS Code :",
+  "You can also check out [FrostyBee's](https://github.com/frostybee) [Starlight Sc.2885FB180F098A43BD51": "Vous pouvez également consulter le [plugin Starlight Scroll To Top de FrostyBee](https://github.com/frostybee/starlight-scroll-to-top) qui prend également en charge un [Progress Ring intégré](https://frostybee.github.io/starlight-scroll-to-top/configuration/#showprogressring) depuis la version `0.3.1`. 🙌"
 }
