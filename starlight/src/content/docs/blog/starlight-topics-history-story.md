@@ -12,6 +12,7 @@ authors:
 cover:
   alt: A beautiful cover image with the text "History Time"
   image: ../../../../public/blog/starlight-topics-history-story.png
+giscus: false
 ---
 
 Maybe you have heard about this cool documentation framework before. I talk about it quite often and use it regularly. Not only because I'm an active contributor, but also because [Starlight](https://starlight.astro.build) just grew to my heart. Its features: Simplicity and minimalism, but everything you need. Its performance: [Faster than 98% of other websites out there](https://www.websitecarbon.com/website/starlight-astro-build-getting-started/). Its accessibility: Not even a question!

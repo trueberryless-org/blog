@@ -12,6 +12,7 @@ authors:
 cover:
   alt: A beautiful cover image with the text "Argo CD"
   image: ../../../../public/blog/setup-argocd-for-kubernetes.png
+giscus: false
 ---
 
 Having read Vegard S. Hagen's article “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” and decided that their solution was not the way to go for our cluster, we jumped straight into the default Argo CD “[Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)” guide. And now we will walk you through the pain of setting up [Argo CD](https://github.com/argoproj) on [k3s](https://github.com/k3s-io) and [Cilium](https://github.com/cilium), continuing from the chapter “[Setup Certificate Manager with Cloudflare](/blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare)” of our most recent post “[Setting up Kubernetes with Cilium and Cloudflare](/blog/setup-kubernetes-with-cilium-and-cloudflare)”. In this exact recent post we also set up [Keel](https://github.com/keel-hq) at the end, but this step will now be unnecessary because we'll use Argo CD for getting the newest state-of-the-art code from each [GitHub](https://github.com/github) repo. Enjoy reading!
