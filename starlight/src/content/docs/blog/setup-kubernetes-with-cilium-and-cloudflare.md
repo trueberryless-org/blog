@@ -15,7 +15,6 @@ cover:
 metrics:
   readingTime: 360
   words: 1099
-giscus: false
 ---
 
 Working with [Docker](https://github.com/docker) Containers can be hard. However, there are tools which enhance the management of containers, like [Kubernetes](https://github.com/kubernetes). Actually, Kubernetes is the only tool to my knowledge which acts as a management software for Docker Containers. Kubernetes is well-integrated in almost all cloud providers, like Google Cloud, Azure and AWS. As a result, it has a standardized `yaml`-syntax, which is great for small developers because they can switch between `The Big Three` with low effort.

@@ -10,7 +10,7 @@ export const collections = {
     schema: docsSchema({
       extend: (context) =>
         blogSchema(context).extend({
-          giscus: z.boolean().optional().default(true),
+          giscus: z.boolean().default(false),
         }),
     }),
   }),

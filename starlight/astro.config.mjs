@@ -14,10 +14,16 @@ import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
 import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
 
 const { GISCUS_REPO_ID, GISCUS_CATEGORY_ID } = loadEnv(
-  process.env.NODE_ENV,
+  process.env.NODE_ENV ?? "development",
   process.cwd(),
-  ""
+  "GISCUS_"
 );
+
+if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
+  console.warn(
+    "[giscus] Skipping Giscus integration: GISCUS_REPO_ID or GISCUS_CATEGORY_ID not set."
+  );
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -138,13 +144,17 @@ export default defineConfig({
             },
           },
         }),
-        starlightGiscus({
-          repo: "trueberryless-org/blog",
-          repoId: GISCUS_REPO_ID,
-          category: "Comments",
-          categoryId: GISCUS_CATEGORY_ID,
-          lazy: true,
-        }),
+        ...(GISCUS_REPO_ID && GISCUS_CATEGORY_ID
+          ? [
+              starlightGiscus({
+                repo: "trueberryless-org/blog",
+                repoId: GISCUS_REPO_ID,
+                category: "Comments",
+                categoryId: GISCUS_CATEGORY_ID,
+                lazy: true,
+              }),
+            ]
+          : []),
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
