@@ -359,7 +359,7 @@ spec:
         - "mutanuq.trueberryless.org"
 ```
 
-In der Regel dauert es etwa 90 Sekunden, bis der Antrag nach der Anwendung authentifiziert ist. Sie können den aktuellen Status der Anfrage überprüfen, indem Sie diesen Kubernetes-Befehl ausführen. Falls es länger als 2 Minuten dauert, können möglicherweise einige Tipps unter [#Fehlerbehebung](#keine-cloudflare-zertifikatsgenehmigung) helfen.
+In der Regel dauert es etwa 90 Sekunden, bis der Antrag nach der Anwendung authentifiziert ist. Sie können den aktuellen Status der Anfrage überprüfen, indem Sie diesen Kubernetes-Befehl ausführen. Falls es länger als 2 Minuten dauert, können möglicherweise einige Tipps unter [#Fehlerbehebung](#no-cloudflare-certificate-approval) helfen.
 
 ```bash
 kubectl describe certificaterequests.cert-manager.io -n mutanuq

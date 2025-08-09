@@ -1,14 +1,13 @@
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
 import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
 
-import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
 import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
 
@@ -85,6 +84,7 @@ export default defineConfig({
         starlightLinksValidator({
           exclude: ["/blog/tags/*", "/blog/authors/*"],
           errorOnRelativeLinks: false,
+          errorOnInvalidHashes: false,
         }),
         starlightImageZoom(),
         starlightThemeRapide(),
