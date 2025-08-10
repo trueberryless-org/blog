@@ -13,7 +13,7 @@ import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://blog.trueberryless.org",
+  site: "https://trueberryless-blog.netlify.app",
   integrations: [
     starlight({
       title: "Deep Thoughts",

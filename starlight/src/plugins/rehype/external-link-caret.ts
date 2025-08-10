@@ -4,7 +4,11 @@ import { visit } from "unist-util-visit";
  * Rehype plugin to append "^" to all external links
  */
 export default function rehypeExternalLinkCaret() {
-  const domain = ["localhost", "blog.trueberryless.org"];
+  const domain = [
+    "localhost",
+    "blog.trueberryless.org",
+    "trueberryless-blog.netlify.app",
+  ];
 
   return function (tree: any) {
     visit(tree, "element", (node) => {

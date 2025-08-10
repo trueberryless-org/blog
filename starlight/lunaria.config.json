@@ -31,7 +31,7 @@
     "favicon": {
       "external": [
         {
-          "link": "https://blog.trueberryless.org/favicon.svg",
+          "link": "https://trueberryless-blog.netlify.app/favicon.svg",
           "type": "image/svg+xml"
         }
       ]
