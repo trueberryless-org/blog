@@ -27,7 +27,7 @@ if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://trueberryless-blog.netlify.app",
+  site: "https://blog.trueberryless.org",
   integrations: [
     starlight({
       title: "Deep Thoughts",
