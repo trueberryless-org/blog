@@ -536,7 +536,7 @@ jobs:
           }'
 
           # Only look at direct files in ./starlight/src/content/docs
-          for file in ./starlight/src/content/docs/*; do
+          for file in /starlight/src/content/docs/*; do
             [ -f "$file" ] || continue
             for us in $(echo "$MAPPING" | jq -r 'keys[]'); do
               uk=$(echo "$MAPPING" | jq -r --arg us "$us" '.[$us]')
