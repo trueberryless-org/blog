@@ -16,7 +16,7 @@ export default defineConfig({
   site: "https://blog.trueberryless.org",
   integrations: [
     starlight({
-      title: "Blog",
+      title: "Deep Thoughts",
       social: [
         {
           icon: "blueSky",
