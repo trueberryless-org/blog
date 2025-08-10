@@ -1,6 +1,6 @@
 ---
 title: How to make your Starlight sidebar items look better
-description: In this blog post, we'll take a look at how small changes can make a big difference when it comes to whitespaces, font sizes, weights, and colors in your Starlight sidebar.
+description: In this blog post, we'll take a look at how small changes can make a big difference when it comes to whitespaces, font sizes, weights, and colours in your Starlight sidebar.
 date: 2025-04-27
 tags:
     - Starlight
@@ -13,7 +13,7 @@ cover:
   image: ../../../../public/blog/starlight-sidebar-whitespace.png
 ---
 
-Have you ever wondered why your [Starlight][starlight] sidebar doesn't look that appealing? Did you know how important the space between items in your sidebar unconsciously is? The font size, the weight and little color differences? In this guide, we'll take a look at how you can customize the appearance of your Starlight sidebar with some quick and easy steps.
+Have you ever wondered why your [Starlight][starlight] sidebar doesn't look that appealing? Did you know how important the space between items in your sidebar unconsciously is? The font size, the weight and little colour differences? In this guide, we'll take a look at how you can customize the appearance of your Starlight sidebar with some quick and easy steps.
 
 ## Prerequisites
 
@@ -87,7 +87,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 
 ![Starlight sidebar with lighter font weight](../../../assets/sidebar-css/font-weight.png)
 
-### Adjust the color of sidebar items
+### Adjust the colour of sidebar items
 
 A small but subtle change: I made unselected root-level items appear dimmer in the code block below.
 

@@ -1,27 +1,27 @@
 ---
-title: Configuration de Kubernetes avec Cilium et Cloudflare
+title: Mise en place de Kubernetes avec Cilium et Cloudflare
 description: Aujourd'hui, nous allons voir comment configurer un cluster
   Kubernetes avec K3s et Cilium.
 date: 2024-06-11
 lastUpdated: 2024-10-01
 tags:
   - Deployment
-excerpt: Cet article de blog décrit le processus de création d'un cluster <a
-  class="gh-badge" href="https://github.com/kubernetes"><img
+excerpt: Cet article de blog décrit le processus de configuration d'un cluster
+  <a class="gh-badge" href="https://github.com/kubernetes"><img
   src="https://github.com/kubernetes.png" alt="Kubernetes" />Kubernetes</a> avec
   <a class="gh-badge" href="https://github.com/k3s-io"><img
   src="https://github.com/k3s-io.png" alt="k3s" />k3s</a> et <a class="gh-badge"
   href="https://github.com/cilium"><img src="https://github.com/cilium.png"
   alt="Cilium" />Cilium</a>. Nous utilisons <a class="gh-badge"
   href="https://github.com/helm"><img src="https://github.com/helm.png"
-  alt="Helm" />Helm</a> comme gestionnaire de paquets et <a class="gh-badge"
+  alt="Helm" />Helm</a> comme gestionnaire de packages et <a class="gh-badge"
   href="https://github.com/cloudflare"><img
   src="https://github.com/cloudflare.png" alt="Cloudflare" />Cloudflare</a>
   comme émetteur de certificats. Nous avons utilisé les astuces et conseils de
   Vegard S. Hagen tirés de [son
   article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/).
-  Essentiellement, ce blog explique comment tous les sites web trueberryless.org
-  étaient déployés (plus maintenant).
+  En gros, ce blog explique comment tous les sites trueberryless.org sont
+  déployés (ce n'est plus le cas).
 authors:
   - trueberryless
   - clemens
@@ -34,11 +34,11 @@ metrics:
 
 ---
 
-Travailler avec des conteneurs [Docker](https://github.com/docker) peut être difficile. Cependant, il existe des outils qui améliorent la gestion des conteneurs, comme [Kubernetes](https://github.com/kubernetes). En fait, Kubernetes est le seul outil à ma connaissance qui agit comme un logiciel de gestion pour les conteneurs Docker. Kubernetes est bien intégré dans presque tous les fournisseurs de cloud, comme Google Cloud, Azure et AWS. En conséquence, il possède une syntaxe standardisée en `yaml`, ce qui est idéal pour les petits développeurs car ils peuvent basculer entre les "Big Three" avec peu d'effort.
+Travailler avec les conteneurs [Docker](https://github.com/docker) peut être difficile. Cependant, il existe des outils qui facilitent la gestion des conteneurs, comme [Kubernetes](https://github.com/kubernetes). En fait, Kubernetes est le seul outil, à ma connaissance, qui agit comme un logiciel de gestion pour les conteneurs Docker. Kubernetes est bien intégré dans presque tous les fournisseurs de cloud, comme Google Cloud, Azure et AWS. Par conséquent, il utilise une syntaxe standardisée en `yaml`, ce qui est idéal pour les petits développeurs, car ils peuvent basculer entre « Les Trois Grands » avec peu d'effort.
 
-## en bref
+## résumé
 
-Installez tout puis appliquez cert-manager. facile
+Installez tout, puis appliquez cert-manager. Facile.
 
 ```bash
 curl -sfL https://get.k3s.io | sh -s - \
@@ -106,7 +106,7 @@ spec:
 
 ## Installer k3s
 
-Comme Hagen l'explique dans [son article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/), nous voulons installer `k3s` sans configurations, avec tout désactivé. Il décrit en détail quels composants ne sont pas installés.
+Comme Hagen l'explique dans [son article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/), nous voulons installer `k3s` sans configurations et avec tout désactivé. Il décrit en détail quels composants ne sont pas installés.
 
 ```bash
 curl -sfL https://get.k3s.io | sh -s - \
@@ -118,7 +118,7 @@ curl -sfL https://get.k3s.io | sh -s - \
   --cluster-init
 ```
 
-Après l'installation, quelques pods devraient être en cours d'exécution (3). Ne soyez pas choqué si les pods sont dans l'état `ContainerCreating` ou `Pending`. Cela est dû au fait que les pods ne peuvent pas communiquer entre eux puisque nous avons désactivé le CNI (`--flannel-backend=none`). Nous installerons plus tard [Cilium](https://github.com/cilium), qui remplacera le CNI Flannel.
+Après l'installation, quelques pods devraient être en cours d'exécution (3). Ne soyez pas choqués si les pods sont dans l'état `ContainerCreating` ou `Pending`. Cela est dû au fait que les pods ne peuvent pas communiquer entre eux parce que nous avons désactivé le CNI (`--flannel-backend=none`). Nous installerons plus tard [Cilium](https://github.com/cilium), qui remplacera le CNI Flannel.
 
 ```bash
 kubectl get pods -A
@@ -126,7 +126,7 @@ kubectl get pods -A
 
 ## Installer Helm
 
-Helm est le gestionnaire de paquets pour [Kubernetes](https://github.com/kubernetes), vous devriez donc soit l'installer directement (suivez la [documentation Helm](https://helm.sh/docs/intro/install/)) soit utiliser les parties de Helm fournies avec Cilium. Nous avons choisi d'installer Helm directement, ce qui est facilement possible avec cette commande :
+Helm est le gestionnaire de packages pour [Kubernetes](https://github.com/kubernetes), vous pouvez soit l'installer directement (suivez la [documentation Helm](https://helm.sh/docs/intro/install/)), soit utiliser les composants d'Helm inclus avec Cilium. Nous avons choisi d'installer Helm directement, ce qui est facilement faisable avec cette commande :
 
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
@@ -134,7 +134,7 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 ## Installer Cilium
 
-[Cilium](https://github.com/cilium) est un logiciel de réseau et de sécurité pour Kubernetes. Cilium est très rapide, évolutif et sécurisé car il est construit sur eBPF -- une technologie révolutionnaire qui peut exécuter des programmes sandboxés dans le noyau Linux sans recompiler le noyau ou charger des modules du noyau.
+[Cilium](https://github.com/cilium) est un logiciel de mise en réseau et de sécurité pour Kubernetes. Cilium est très rapide, évolutif et sécurisé car il repose sur eBPF - une technologie révolutionnaire qui peut exécuter des programmes isolés dans le noyau Linux sans recompiler le noyau ou charger des modules noyau.
 
 Nous pourrions installer Cilium avec Helm comme indiqué ici :
 
@@ -144,7 +144,7 @@ helm repo update
 helm install cilium cilium/cilium
 ```
 
-Cependant, nous avons voulu l'installer avec leur CLI et voici comment vous pouvez le faire. Tout d'abord, installez le CLI de Cilium en exécutant cet extrait de code :
+Cependant, nous avons voulu l'installer avec leur CLI, et voici comment vous pouvez le faire. Tout d'abord, installez la CLI de Cilium en exécutant ce script :
 
 ```bash
 CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
@@ -169,13 +169,13 @@ Nous attendons maintenant que Cilium indique que tout est `OK` ou `disabled` :
 cilium status --wait
 ```
 
-Après un certain temps, tous les pods devraient être en état `Running`.
+Au bout d'un moment, tous les pods devraient être en état `Running`.
 
 ```bash
 kubectl get pods -A
 ```
 
-En dernier lieu, vous pouvez appliquer certaines ressources pour Cilium :
+Enfin, vous pouvez appliquer certaines ressources pour Cilium :
 
 ```yaml
 # announce.yaml
@@ -201,7 +201,7 @@ spec:
           stop: "192.168.0.249"
 ```
 
-De plus, vous devriez mettre à jour la configuration de Cilium. Pour ce faire avec les valeurs appropriées, commencez par créer ce fichier dans le répertoire racine où vous souhaitez gérer le cluster k3s. Plus tard, vous pourriez également appliquer certaines propriétés liées à Hubble et Prometheus si vous souhaitez utiliser [Grafana](https://github.com/Grafana) ou un autre outil similaire (ouvrez les lignes repliées si vous voulez utiliser aussi notre configuration).
+De plus, vous devriez mettre à jour la configuration de Cilium. Pour cela, créez d'abord ce fichier dans le répertoire racine où vous souhaitez gérer le cluster k3s. Plus tard, vous pourrez également appliquer des propriétés liées à Hubble et Prometheus si vous souhaitez utiliser [Grafana](https://github.com/Grafana) ou un outil similaire (ouvrez les lignes repliées si vous souhaitez utiliser notre configuration également).
 
 ```yaml collapse={32-59}
 #cilium-config.yaml
@@ -265,7 +265,7 @@ prometheus:
         enabled: true
 ```
 
-Exécutez cette commande pour effectuer la mise à jour :
+Exécutez cette commande pour mettre à jour :
 
 ```bash
 cilium upgrade -f cilium-config.yaml
@@ -273,7 +273,7 @@ cilium upgrade -f cilium-config.yaml
 
 ## Configurer le gestionnaire de certificats avec Cloudflare
 
-Pour pouvoir créer des certificats pour chaque sous-domaine, il est important d'appliquer un émetteur de certificats qui gère les demandes et les résout auprès d'un fournisseur. Nous avons choisi [Cloudflare](https://github.com/cloudflare) comme émetteur et voici la configuration que vous devez appliquer à votre cluster Kubernetes. Pour plus d'informations, vous pouvez consulter la [documentation de cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/).
+Pour pouvoir créer des certificats pour chaque sous-domaine, il est important d'appliquer un émetteur de certificats qui gère les demandes de certificats et les résout auprès d'un fournisseur. Nous avons choisi [Cloudflare](https://github.com/cloudflare) comme notre émetteur, et voici la configuration que vous devez appliquer à votre cluster Kubernetes. Pour plus d'informations, vous pouvez consulter la [documentation de cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/).
 
 Mais d'abord, nous devons installer le cert-manager en exécutant la commande suivante :
 
@@ -315,18 +315,18 @@ Si vous souhaitez supprimer la ressource dans le cluster Kubernetes, la commande
 kubectl delete -f cluster-issuer.yaml
 ```
 
-Comme vous l'avez peut-être remarqué ci-dessus, nous avons également besoin d'un secret pour le jeton API qui authentifie cet émetteur comme étant autorisé à demander des certificats. Par conséquent, nous créons un secret avec un `API Token` non chiffré de Cloudflare.
+Comme vous l'avez peut-être remarqué ci-dessus, nous avons également besoin d'un secret pour le jeton API qui authentifie que ce générateur est autorisé à demander des certificats. Par conséquent, nous créons un secret avec un `API Token` non chiffré de Cloudflare.
 
-De nos jours, nous créons un jeton en accédant à votre tableau de bord [Cloudflare](https://github.com/cloudflare), puis en cliquant sur votre profil et en sélectionnant l'onglet `API Tokens`. Ici, vous pouvez générer un jeton spécifique pour votre émetteur ou utiliser la clé API globale (plus recommandé). La solution recommandée est de créer un jeton API avec deux permissions (jeton personnalisé) :
+De nos jours, nous créons un jeton en accédant à votre tableau de bord [Cloudflare](https://github.com/cloudflare), puis en cliquant sur votre profil et en sélectionnant l'onglet `API Tokens`. Ici, vous pouvez générer un jeton spécifique pour votre générateur ou utiliser la clé API globale (non recommandée). La solution recommandée est de créer un jeton API avec deux permissions (jeton personnalisé) :
 
 * Zone - DNS - Modifier
-* Zone - Zone - Lire
+* Zone - Zone - Lecture
 
 ![Jeton API Cloudflare](../../../../assets/cloudflare/cloudflare_api_token.png)
 
-Une description plus détaillée des jetons peut être trouvée dans la [documentation Cloudflare](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
+Une description plus détaillée des jetons peut être trouvée dans les [docs Cloudflare](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
 
-Après avoir appliqué ce secret à Kubernetes, l'émetteur devrait être prêt à résoudre certains problèmes !
+Après avoir appliqué ce secret à Kubernetes, le générateur devrait être prêt à résoudre quelques vilains problèmes !
 
 ```yaml
 # secret-cloudflare.yaml
@@ -340,7 +340,7 @@ stringData:
     api-key: <Cloudflare API Token (not encrypted)>
 ```
 
-Vous pouvez maintenant utiliser cet émetteur en appliquant ce fichier qui, espérons-le, créera un certificat :
+Vous pouvez maintenant utiliser ce générateur en appliquant ce fichier qui, espérons-le, créera un certificat :
 
 ```yaml
 # mutanuq-certificat.yaml
@@ -358,14 +358,14 @@ spec:
         - "mutanuq.trueberryless.org"
 ```
 
-Cela prend généralement environ 90 secondes pour authentifier la demande une fois appliquée. Vous pouvez vérifier l'état actuel de la demande en exécutant cette commande Kubernetes. Si cela prend plus de 2 minutes, peut-être que quelques conseils dans [#Troubleshooting](#no-cloudflare-certificate-approval) peuvent vous aider.
+Cela prend généralement environ 90 secondes pour authentifier la demande une fois appliquée. Vous pouvez vérifier l'état actuel de la demande en exécutant cette commande kubernetes. Si cela prend plus de 2 minutes, peut-être que quelques astuces dans [#Dépannage](#no-cloudflare-certificate-approval) peuvent vous aider.
 
 ```bash
 kubectl describe certificaterequests.cert-manager.io -n mutanuq
 ```
 
 :::tip
-L'option `-n` correspond à l'espace de noms.
+L'option `-n` signifie namespace.
 :::
 
 ## Exemple d'application [`mutanuq`](https://mutanuq.trueberryless.org)
@@ -441,14 +441,14 @@ spec:
 
 ## Configurer Keel
 
-Nous avons toujours voulu une solution propre d'Intégration Continue (CI) et de Livraison Continue (CD) pour nos sites web. Cela signifie qu'un message de commit spécifique devrait déclencher un processus automatisé sur [GitHub](https://github.com/github), Docker Hub et notre serveur, ce qui, au final, met à jour le site correspondant après environ deux minutes.
+Nous avons toujours voulu une solution propre d'Intégration Continue (CI) et de Livraison Continue (CD) pour nos sites web. Cela signifie qu'un message de commit spécifique devrait déclencher un processus automatisé via [GitHub](https://github.com/github), Docker Hub et notre serveur, qui, à la fin, met à jour le site web correspondant en environ deux minutes.
 
-Keel est un outil logiciel robuste qui active cette fonctionnalité pour Kubernetes. Nous avons utilisé Keel pour tirer de nouvelles images Docker depuis Docker Hub par un sondage toutes les quelques minutes. De plus, Keel offre un superbe tableau de bord où vous pouvez également contrôler les sondages.
+Keel est un outil logiciel robuste qui permet cette fonctionnalité pour Kubernetes. Nous avons utilisé Keel pour tirer de nouvelles images Docker de Docker Hub en interrogeant toutes les quelques minutes. De plus, Keel fournit un magnifique tableau de bord où vous pouvez contrôler l'interrogation également.
 
-Pour configurer Keel avec le tableau de bord administrateur, nous avons créé les fichiers suivants :
+Pour configurer Keel avec le tableau de bord d'administration, nous avons créé ces fichiers :
 
 * `secret-dashboard.yaml` pour le nom d'utilisateur et le mot de passe administrateur (tout le monde ne devrait pas pouvoir accéder au tableau de bord)
-* `keel.yaml` pour les configurations k3s réelles (copiées et adaptées depuis [KeelHQ](https://github.com/keel-hq/keel/blob/9f0a7160bbdc3a107ad148933a4269f30e4e479c/deployment/deployment-template.yaml))
+* `keel.yaml` pour les configurations réelles de k3s (copié et adapté de [KeelHQ](https://github.com/keel-hq/keel/blob/9f0a7160bbdc3a107ad148933a4269f30e4e479c/deployment/deployment-template.yaml))
 
 ```yaml
 # secret-dashboard.yaml
@@ -660,7 +660,7 @@ spec:
             app: keel
 ```
 
-Après avoir appliqué les deux fichiers et géré le certificat supplémentaire pour `keel.trueberryless.org`, le tableau de bord Keel fonctionne parfaitement. De plus, chaque `Deployment` Kubernetes peut opter pour un sondage automatisé de Docker Hub en définissant quelques annotations :
+Après avoir appliqué les deux fichiers et géré le certificat supplémentaire pour `keel.trueberryless.org`, le tableau de bord Keel fonctionne parfaitement. De plus, chaque `Deployment` Kubernetes peut opter pour un sondage Docker Hub automatisé en ajoutant quelques annotations :
 
 ```yaml {8-12} collapse={15-63}
 apiVersion: apps/v1
@@ -728,7 +728,7 @@ spec:
           secretName: mutanuq
 ```
 
-## Fêtez avec un café !
+## Célébrez avec un café !
 
 Félicitations, vous avez réussi à configurer [Kubernetes](https://github.com/kubernetes) avec [Cilium](https://github.com/cilium) et [Cloudflare](https://github.com/cloudflare) ! Vous méritez une pause café. Profitez d'une tasse bien méritée, et si vous souhaitez partager un café virtuel avec moi, n'hésitez pas à soutenir mon travail sur [Ko-fi](https://ko-fi.com/trueberryless). Merci !
 
@@ -762,18 +762,18 @@ ingressController:
 ```
 
 :::note
-Dans certains cas, d'autres contrôleurs d'ingress obtiennent l'adresse annotée avant que le Cilium IC ne puisse y accéder, donc elle pourrait rester en attente...
+Dans certains cas, d'autres contrôleurs d'entrée obtiennent l'adresse annotée avant que le contrôleur d'entrée de Cilium puisse y accéder, donc elle resterait en attente...
 :::
 
-Si vous ne déployez pas localement mais sur l'un des `Big Three`, veuillez consulter une autre documentation pour savoir pourquoi l'IP externe est toujours en attente. C'est principalement leur responsabilité de vous fournir une adresse.
+Si vous ne déployez pas localement mais sur l'une des `Big Three`, veuillez consulter d'autres documentations sur les raisons pour lesquelles l'IP externe reste en attente. Il est principalement de leur responsabilité de vous fournir une adresse.
 
-### Absence d'approbation du certificat Cloudflare
+### Pas d'approbation de certificat Cloudflare
 
-Il peut y avoir un problème lorsque le certificat n'est pas approuvé par Cloudflare.
+Il peut y avoir un problème lorsque le certificat ne reçoit pas l'approbation de Cloudflare.
 
 #### Jeton API incorrect
 
-Assurez-vous d'abord que le jeton API de Cloudflare est correct. Pour être sûr à 100 %, créez-en un nouveau et placez-le (non encodé en base64) dans ce fichier :
+Tout d'abord, assurez-vous que le jeton API Cloudflare est correct. Pour être sûr à 100 %, créez-en un nouveau et insérez-le (non encodé en base64) dans ce fichier :
 
 ```yaml
 apiVersion: v1
@@ -786,13 +786,13 @@ stringData:
     api-key: <Cloudflare API Token (not encrypted)>
 ```
 
-#### Nombre maximum d'échecs d'authentification atteint
+#### Maximum d'échecs d'authentification atteint
 
-Nous avons rencontré une fois l'erreur `Error: 9109: Max auth failures reached, please check your Authorization header.`. Attendez simplement quelques heures, supprimez la ressource et appliquez-la à nouveau :
+Nous avons rencontré une fois l'erreur `Error: 9109: Max auth failures reached, please check your Authorization header.`. Il suffit d'attendre quelques heures, de supprimer la ressource et de l'appliquer à nouveau :
 
 ```bash
 kubectl delete -f certificate.yaml
 kubectl apply -f certificate.yaml
 ```
 
-Avec un peu de chance, tout est bon maintenant !
+Espérons que tout fonctionne maintenant !

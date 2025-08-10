@@ -1,5 +1,5 @@
 ---
-title: Vibe-coding une extension VS Code pour les projets Terraform
+title: Vibe-coding une extension VS Code pour des projets Terraform
 description: Comment j'ai créé une extension pour Visual Studio Code qui ajoute
   des résolutions en ligne aux variables dans les projets Terraform.
 date: 2025-08-01
@@ -16,29 +16,29 @@ cover:
 
 import { FileTree, LinkButton } from "@astrojs/starlight/components"
 
-Aujourd'hui, je veux parler d'une petite extension VS Code que j'ai codée sur un coup de tête en une seule journée pour rendre le travail avec Terraform plus facile. Je vais d'abord expliquer ce qu'est Terraform, puis passer directement à la fonctionnalité et aux raisons derrière cette extension. N'hésitez pas à sauter la première section si vous êtes déjà familier avec Terraform.
+Aujourd'hui, je veux parler d'une petite extension VS Code que j'ai codée intuitivement en une seule journée pour rendre le travail avec Terraform plus facile. Je vais d'abord expliquer ce qu'est Terraform, puis plonger directement dans les fonctionnalités et les raisons derrière cette extension. N'hésitez pas à passer à la section suivante si vous êtes déjà familier avec Terraform.
 
 {/* excerpt */}
 
 ## Qu'est-ce que Terraform ?
 
-Terraform est un outil d'infrastructure-as-code (IaC) qui vous permet de définir toute votre infrastructure cloud ou sur site comme du code. Son langage de configuration, inventé par [HashiCorp](https://github.com/hashicorp), s'appelle HCL (HashiCorp Configuration Language). Il offre une syntaxe intuitive et lisible par les humains. La *syntaxe native* a l'avantage d'avoir une courbe d'apprentissage basse, d'être cohérente pour tous les fournisseurs, et agréable à lire et écrire pour les humains, tandis que la variante basée sur JSON est plus facile à générer et analyser pour les machines.
+Terraform est un outil d'infrastructure en tant que code (IaC) qui vous permet de définir l'intégralité de votre infrastructure cloud ou sur site sous forme de code. Son langage de configuration, inventé par [HashiCorp](https://github.com/hashicorp), s'appelle HCL (HashiCorp Configuration Language) et présente une syntaxe intuitive et lisible par les humains. La *syntaxe native* a l'avantage de présenter une courbe d'apprentissage faible, d'être cohérente pour tous les fournisseurs, et agréable à lire et écrire pour les humains, tandis que la variante basée sur JSON est plus facile à générer et à analyser pour les machines.
 
-Ce qui rend Terraform très puissant, ce sont deux fonctionnalités de base : **les variables** et **les modules**. Les variables permettent de créer des ressources où les valeurs réelles peuvent être insérées depuis ailleurs, et les modules regroupent un nombre quelconque de ressources, ce qui offre l'avantage de réutilisabilité et d'imbrication. Bien que ces deux fonctionnalités semblent très basiques, leur combinaison forme une équipe de rêve. L'ouverture de Terraform vous permet de définir des variables d'entrée pour chaque module, ainsi que d'exporter des variables via des outputs.
+Ce qui rend Terraform très puissant, ce sont deux fonctionnalités de base : **les variables** et **les modules**. Les variables vous permettent de créer des ressources dont les valeurs réelles peuvent être insérées depuis un autre endroit, et les modules regroupent un certain nombre de ressources, ce qui offre l’avantage de la réutilisabilité et de l’imbrication. Bien que ces deux fonctionnalités paraissent très basiques, leur combinaison en fait une équipe de rêve. Cela parce que l'ouverture de Terraform vous permet de définir des variables d'entrée pour chaque module et également d'exporter des variables via des sorties.
 
-Un module simple est donc structuré comme ceci :
+Un module simple est structuré comme ceci :
 
 <FileTree>
-  * azure-resource-group/
-    * main.tf
+  * groupe-de-ressources-azure/
+    * principal.tf
     * variables.tf
-    * outputs.tf
+    * sorties.tf
     * README.md
 </FileTree>
 
-Tous les fichiers sauf `main.tf` sont facultatifs (le `README.md` n'est pas spécifique à Terraform), mais je préfère suivre les meilleures pratiques, donc l'exemple les inclut.
+Tous les fichiers sauf `principal.tf` sont optionnels (le `README.md` n’est pas spécifique à Terraform), mais je préfère suivre les bonnes pratiques, donc l’exemple les inclut.
 
-Regardons un exemple simple. Imaginez que nous voulons gérer un groupe de ressources dans Azure avec Terraform. Dans le fichier `variables.tf`, nous définissons les entrées que nous attendons à l'intérieur du module. Chaque bloc représente la variable et les propriétés de la variable, comme la `description` ou le `type` :
+Examinons un exemple simple. Imaginez que nous voulons gérer un groupe de ressources dans Azure avec Terraform. Dans le fichier `variables.tf`, nous définissons quelles entrées nous attendons dans le module. Chacun des deux blocs représente la variable et les propriétés de la variable, comme la `description` ou le `type` :
 
 ```hcl
 // variables.tf
@@ -54,7 +54,7 @@ variable "location" {
 }
 ```
 
-Vous avez peut-être remarqué que la variable `location` a également une propriété `default`, ce qui rend la variable facultative et fournit une valeur de secours si aucune n'est spécifiée. Ces variables peuvent ensuite être utilisées à l'intérieur du fichier `main.tf`. Ici, nous définissons les ressources réelles que nous voulons générer :
+Vous avez peut-être remarqué que la variable `location` a également une propriété `default`, ce qui rend la variable optionnelle et fournit une valeur de secours si aucune n'est spécifiée. Ces variables peuvent ensuite être utilisées dans le fichier `principal.tf`, où nous définissons les ressources réelles que nous voulons générer :
 
 ```hcl
 // main.tf
@@ -68,7 +68,7 @@ resource "azurerm_resource_group" "this" {
 }
 ```
 
-Dans ce cas, nous définissons simplement notre groupe de ressources, que vous pouvez imaginer comme un dossier dans Azure – une explication très simplifiée. Maintenant, la dernière partie que nous pouvons implémenter est le fichier `outputs.tf` :
+Dans ce cas, nous définissons simplement notre groupe de ressources, que vous pouvez imaginer comme un dossier dans Azure - explication très simpliste. Maintenant, la dernière partie que nous pouvons implémenter est le fichier `sorties.tf` :
 
 ```hcl
 // outputs.tf
@@ -78,9 +78,9 @@ output "resource_group_id" {
 }
 ```
 
-C'est très utile si nous souhaitons utiliser des informations comme l'identifiant du groupe de ressources plus tard dans d'autres parties de notre projet Terraform.
+Cela est très utile si nous voulons utiliser des informations comme l'ID du groupe de ressources plus tard dans d'autres parties de notre projet Terraform.
 
-Comme je l'ai déjà écrit, le `README.md` ne fait pas réellement partie des définitions Terraform, mais nous aide à comprendre le but du module :
+Comme je l'ai déjà mentionné, le `README.md` ne fait pas vraiment partie des définitions Terraform, mais aide à comprendre l'objectif du module :
 
 ````md
 # Azure Resource Group Module
@@ -97,7 +97,7 @@ module "rg" {
 ```
 ````
 
-Comme le `README.md` le suggère déjà, nous pouvons maintenant utiliser ce module pour créer un groupe de ressources Azure n'importe où dans notre projet. Nous devons juste nous assurer que le chemin vers le dossier du module est correct et que Terraform sait comment interpréter les fichiers `main.tf`, `variables.tf` et `outputs.tf`. Dans ce cas, comme nous ne spécifions pas la variable `location`, elle sera définie sur `"westeurope"`.
+Comme le `README.md` le suggère déjà, nous pouvons maintenant utiliser ce module pour créer un groupe de ressources Azure n'importe où dans notre projet. Nous devons juste nous assurer que le chemin vers le dossier du module est correct et que Terraform sait comment interpréter les fichiers `main.tf`, `variables.tf` et `outputs.tf`. Dans ce cas, étant donné que nous ne spécifions pas la variable `location`, elle sera définie sur `"westeurope"`.
 
 ```hcl
 module "rg" {
@@ -110,21 +110,21 @@ J'espère que cette section vous a donné une meilleure compréhension de base d
 
 ## La tâche fastidieuse de Terraform
 
-Vous avez peut-être remarqué que le champ `source` d'un module offre une flexibilité immense pour tout le projet, car vous pouvez définir des modules n'importe où et les utiliser n'importe où dans le projet.
+Vous avez peut-être remarqué que le champ `source` d’un module crée une flexibilité incroyable pour l’ensemble du projet puisque vous pouvez définir des modules n’importe où et les utiliser n’importe où dans le projet.
 
-Cependant, cette fonctionnalité a également un inconvénient majeur en termes de maintenabilité : résoudre les valeurs réelles derrière les variables peut être très fastidieux. Bien que dans cet exemple simple cela puisse sembler facile à gérer, plus le projet devient grand, plus il est imbriqué, plus il devient difficile et chronophage de comprendre et d'adapter le code Terraform. C'est pourquoi j'ai créé une extension.
+Cependant, cette fonctionnalité a aussi un énorme inconvénient en termes de maintenabilité : résoudre les valeurs réelles derrière les variables peut être très fastidieux. Bien que dans cet exemple simple, cela puisse sembler facile à gérer, plus le projet grandit, plus il devient imbriqué, et plus il est difficile et chronophage de comprendre et d'adapter le code Terraform. C'est pourquoi j'ai créé une extension.
 
-**Que devrait faire l'extension ?** L'objectif principal de l'extension est de fournir les valeurs réelles des variables partout où elles sont utilisées. Si un module est appelé depuis plusieurs endroits ou plusieurs fois, l'information devrait indiquer quel cas d'utilisation assigne la variable à quelle valeur. Si les modules sont profondément imbriqués, les valeurs devraient se résoudre jusqu'à atteindre les fichiers `.tfvars`. Ce sont les fichiers où l'on peut définir les valeurs codées en dur pour les variables.
+**Que doit faire l'extension ?** Le principal objectif de l’extension est de fournir les valeurs réelles des variables partout où elles sont utilisées. Si un module est appelé à partir de plusieurs endroits ou simplement plusieurs fois, les informations doivent indiquer quel cas d’utilisation définit la variable avec quelle valeur. Si les modules sont profondément imbriqués, les valeurs doivent être résolues jusqu'à ce que nous atteignions les fichiers `.tfvars`. Ce sont les fichiers où vous pouvez définir des valeurs codées en dur pour les variables.
 
 ## Comment démarrer une extension VS Code
 
-Créer le projet modèle de base pour une extension VS Code est aussi simple que de lancer cette commande lorsque [Node](https://github.com/nodejs) est installé :
+Créer le projet modèle de base pour une extension VS Code est aussi simple que d'exécuter cette commande lorsque vous avez [Node](https://github.com/nodejs) installé :
 
 ```bash
 npx --package yo --package generator-code -- yo code
 ```
 
-Cette commande installe temporairement Yeoman (un logiciel de génération) et entre dans un mode interactif où certaines questions doivent être répondues, comme le nom du projet, son type et sa description. Dans le bloc suivant, vous pouvez voir toutes les questions et réponses par défaut :
+Cette commande installe temporairement Yeoman (un logiciel générateur), et entre dans un mode interactif où certaines questions doivent être répondues, comme le nom du projet, le type et la description. Dans le bloc suivant, vous pouvez voir toutes les questions et les réponses par défaut :
 
 ```bash
 # ? What type of extension do you want to create? New Extension (TypeScript)
@@ -140,32 +140,35 @@ Cette commande installe temporairement Yeoman (un logiciel de génération) et e
 # ? Do you want to open the new folder with Visual Studio Code? Open with `code`
 ```
 
-Pour plus d'informations concernant les extensions VS Code, je souhaite renvoyer à [la documentation officielle](https://code.visualstudio.com/api/get-started/your-first-extension), car elle est toujours à jour contrairement à mes explications ici.
+Pour plus d'informations sur les extensions VS Code, je tiens à renvoyer à [la documentation officielle](https://code.visualstudio.com/api/get-started/your-first-extension), car elle est toujours à jour contrairement à mes explications ici.
 
 ## 3… 2… 1… Vibe-Coding !
 
-J'aime commencer de nouveaux projets en posant des questions techniques générales à [ChatGPT](https://github.com/openai), comme :
+J'aime commencer de nouveaux projets en posant des questions techniques générales à [ChatGPT](https://github.com/openai) comme :
 
 * Comment suggéreriez-vous de réaliser un tel projet ?
-* Combien de temps estimez-vous qu'il me faudra ?
-* Quel degré de difficulté cela représente-t-il ?
+* Combien de temps estimez-vous que cela me prendra ?
+* À quel point cela sera-t-il difficile ?
 
-Faire un brainstorming avec des bots IA semble être une méthode très judicieuse pour mieux cerner les nouveaux projets, en particulier lorsque vous explorez des terrains complètement inconnus. Créer une extension VS Code était exactement un tel cas d'utilisation parce que je n'avais jamais créé quoi que ce soit pour VS Code ou un autre IDE auparavant. Après cette phase initiale de brainstorming, je préfère utiliser [Claude](https://github.com/anthropics) pour programmer tous les fichiers nécessaires à une telle extension, car, selon mon expérience, ce bot IA a vraiment la capacité de produire un code impeccable. J'ai rarement rencontré des bugs ou des problèmes d'exécution avec le code de Claude, c'est donc pour ce type d'utilisation – les projets de démarrage – que je l'utilise. L'inconvénient de Claude est son très limité essai gratuit, ce qui me pousse à être toujours prudent dans le choix de mes mots et à essayer de prévoir autant d'erreurs potentielles que l'IA pourrait commettre à l'avance. Voici donc comment cela a commencé : j'ai pris le temps de formuler mon scénario exact et mes demandes dans les fenêtres de contexte limitées d'une machine à mots aléatoires appelée Claude, et j'ai immédiatement reçu une immense implémentation `extension.ts`. Bien sûr, il y avait des différences évidentes entre ma vision et la communication avec ce LLM, donc j'ai dû lui dire une autre fois quelles étaient les considérations importantes et, afin de pouvoir recevoir plus de code, j'ai également utilisé mon astuce magique : "Si c'est trop grand pour un fichier, donnez-moi simplement tout l'extension.ts en plusieurs fichiers, ce qui devrait fonctionner bien sûr."
+Brainstormer avec des bots d'IA semble être un moyen très sensé d'avoir une meilleure vue d'ensemble des nouveaux projets, surtout lorsqu'on s'aventure dans des terrains complètement inconnus.
+Créer une extension VS Code était exactement un tel cas d'utilisation, car je n'avais jamais créé quelque chose pour VS Code ou tout autre IDE auparavant.
+Après cette phase initiale de brainstorming, je préfère utiliser [Claude](https://github.com/anthropics) pour programmer tous les fichiers nécessaires à une telle extension, car, selon mon expérience, ce bot IA a vraiment la capacité de produire des codes impeccables. J’ai rarement rencontré des bugs ou problèmes d’exécution avec le code de Claude, alors je l’utilise exactement pour ces cas d’utilisation - les premiers pas. L’inconvénient de Claude est sa version d’essai gratuite très limitée, ce qui fait que je suis toujours prudent dans le choix de mes mots et que j’essaie de prévoir autant d'erreurs potentielles que l'IA pourrait faire.
+C’est ainsi que tout a commencé : j’ai pris le temps de formuler mon scénario et mon souhait exact dans les fenêtres de contexte limitées d’une machine à mots aléatoires appelée Claude et j’ai immédiatement reçu une implémentation massive du fichier `extension.ts`. Bien sûr, il y avait des différences évidentes entre ma vision et la communication avec ce LLM, alors j’ai dû lui dire une autre fois quelles sont les considérations importantes, et pour pouvoir recevoir davantage de code, j’ai également utilisé mon astuce magique : "Si cela est trop grand pour un fichier, donne-moi simplement l’ensemble de `extension.ts` en plusieurs fichiers, ce qui devrait bien sûr fonctionner."
 
-Claude a alors entrepris un long voyage.
+Claude s'est alors lancé dans un long périple.
 
-Après avoir eu quelques difficultés à le faire avancer, mes jetons étaient tous utilisés et j'ai dû terminer le code restant moi-même. Néanmoins, j'ai réussi à obtenir une version fonctionnelle, car il ne manquait pas grand-chose, et j'ai immédiatement réalisé quelques améliorations qui étaient passées inaperçues jusque-là. En attendant que mes jetons se rechargent, c'est exactement ce que j'ai fait.
+Après quelques difficultés à le maintenir opérationnel, tous mes jetons étaient utilisés et j'ai dû terminer le reste du code moi-même. Néanmoins, j'ai réussi à obtenir une version fonctionnelle, car il ne manquait pas grand-chose, et j'ai immédiatement identifié quelques améliorations qui étaient passées inaperçues jusqu'à maintenant. Étant donné que je devais attendre le rechargement de mes jetons, c'est exactement ce que j'ai fait.
 
-Le lendemain matin, la session d'amélioration a commencé, et après deux longues conversations, la fenêtre de contexte était complètement pleine et je ne pouvais même plus envoyer de messages dans le même chat, bien que mes jetons ne soient pas encore expirés. Cependant, tout ce que je voulais accomplir et récupérer de Claude était désormais disponible et je pouvais effectuer des tests sur l'un de mes plus grands projets. Après avoir confirmé et ajusté manuellement une partie du code, j'étais satisfait pour le moment et j'ai décidé que la première version publique était prête.
+Le lendemain matin, la session d'amélioration a commencé, et après deux longues conversations, la fenêtre de contexte était complètement remplie et je ne pouvais même plus envoyer de messages dans le même chat, bien que mes jetons ne soient pas encore expirés. Cependant, tout ce que je voulais accomplir et obtenir de Claude était désormais disponible et je pouvais effectuer des tests dans l'un de mes projets plus importants. Après avoir confirmé et ajusté manuellement quelques morceaux de code, j'étais satisfait pour le moment et j'ai décidé que la première version publique était prête.
 
-Après quelques essais et erreurs avec [GitHub Actions](https://github.com/github), j'ai réussi à [configurer le publisher](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#create-a-publisher) pour une extension VS Code. Et deux versions correctives plus tard, j'étais assez satisfait des résultats.
+Après quelques essais et erreurs avec [GitHub Actions](https://github.com/github), j'ai réussi à [configurer le publisher](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#create-a-publisher) pour une extension VS Code. Et après deux versions correctives, j'étais assez satisfait des résultats.
 
 ## Le Résultat Final
 
-Essayez l'extension par vous-même en cliquant sur le bouton ci-dessous. Il reste encore de nombreuses améliorations à apporter, donc si vous êtes intéressé pour aider, n'hésitez pas à contribuer sur [GitHub](https://github.com/trueberryless/terraform-variables-resolution).
+Essayez l'extension vous-même en cliquant sur le bouton ci-dessous. Il reste encore de nombreuses améliorations à apporter, donc si vous êtes intéressé pour aider, n'hésitez pas à contribuer sur [GitHub](https://github.com/trueberryless/terraform-variables-resolution).
 
 <LinkButton href="vscode:extension/trueberryless.terraform-variables-resolution">Installer Terraform Variables Resolution</LinkButton>
 
 Voici un exemple tiré de [l'explication de Terraform](#what-is-terraform), montrant comment cette extension ajoute visuellement les valeurs des variables dans VS Code :
 
-![Exemple de Résolution de Variables Terraform](../../../../assets/terraform/terraform-variables-resolution-example.png)
+![Exemple de Résolution des Variables de Terraform](../../../../assets/terraform/terraform-variables-resolution-example.png)
