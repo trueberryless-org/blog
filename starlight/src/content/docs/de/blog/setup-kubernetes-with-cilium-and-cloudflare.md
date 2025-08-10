@@ -323,7 +323,7 @@ Heutzutage erstellen wir ein Token, indem wir zum [Cloudflare](https://github.co
 * Zone - DNS - Bearbeiten
 * Zone - Zone - Lesen
 
-![Cloudflare-API-Token](../../../../assets/cloudflare/cloudflare_api_token.png)
+![Cloudflare-API-Token](../../../../../assets/cloudflare/cloudflare_api_token.png)
 
 Eine detailliertere Beschreibung der Tokens finden Sie in den [Cloudflare-Dokumenten](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
 

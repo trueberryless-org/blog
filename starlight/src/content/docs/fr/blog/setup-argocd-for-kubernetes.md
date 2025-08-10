@@ -159,7 +159,7 @@ kubectl rollout status deploy argocd-server -n argocd
 
 Après toutes ces étapes, nous devrions maintenant voir l'interface utilisateur sous [`https://argo-cd.trueberryless.org`](https://argo-cd.trueberryless.org) (protégée par mot de passe).
 
-![Tableau de bord de l'interface utilisateur d'Argo CD](../../../../assets/argocd/argocd_ui_dashboard.png)
+![Tableau de bord de l'interface utilisateur d'Argo CD](../../../../../assets/argocd/argocd_ui_dashboard.png)
 
 :::note
 Les identifiants de l'interface utilisateur d'Argo CD se composent d'un nom d'utilisateur et d'un mot de passe. Le nom d'utilisateur est toujours `admin` et vous pouvez obtenir votre mot de passe en exécutant :
@@ -292,7 +292,7 @@ argocd app create mutanuq \
 
 Vous devriez maintenant voir votre site web en cours de déploiement dans l'interface utilisateur. Ce processus peut prendre du temps, par exemple parce que la demande de certificat doit être approuvée. Une application en bonne santé devrait ressembler à ceci :
 
-![Interface utilisateur d'application d'exemple Argo CD](../../../../assets/argocd/argocd_example_application_ui.png)
+![Interface utilisateur d'application d'exemple Argo CD](../../../../../assets/argocd/argocd_example_application_ui.png)
 
 ## Fêtez avec un café !
 
