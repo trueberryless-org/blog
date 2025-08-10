@@ -4,12 +4,26 @@ import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
+import starlightGiscus from "starlight-giscus";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
+import { loadEnv } from "vite";
 
 import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
 import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
+
+const { GISCUS_REPO_ID, GISCUS_CATEGORY_ID } = loadEnv(
+  process.env.NODE_ENV ?? "development",
+  process.cwd(),
+  "GISCUS_"
+);
+
+if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
+  console.warn(
+    "[giscus] Skipping Giscus integration: GISCUS_REPO_ID or GISCUS_CATEGORY_ID not set."
+  );
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -82,7 +96,7 @@ export default defineConfig({
           sync: true,
         }),
         starlightLinksValidator({
-          exclude: ["/blog/tags/*"],
+          exclude: ["/blog/tags/*", "/blog/authors/*"],
           errorOnRelativeLinks: false,
           errorOnInvalidHashes: false,
         }),
@@ -130,12 +144,24 @@ export default defineConfig({
             },
           },
         }),
+        ...(GISCUS_REPO_ID && GISCUS_CATEGORY_ID
+          ? [
+              starlightGiscus({
+                repo: "trueberryless-org/blog",
+                repoId: GISCUS_REPO_ID,
+                category: "Comments",
+                categoryId: GISCUS_CATEGORY_ID,
+                lazy: true,
+              }),
+            ]
+          : []),
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
         TableOfContents: "./src/components/TableOfContents.astro",
         Hero: "./src/components/Hero.astro",
         PageTitle: "./src/components/PageTitle.astro",
+        Pagination: "./src/components/Pagination.astro",
       },
       customCss: [
         "./src/styles/layers.css",
