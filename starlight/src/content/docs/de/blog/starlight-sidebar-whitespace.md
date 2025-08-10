@@ -58,7 +58,7 @@ Ein Hinweis: In diesem Blogbeitrag liegt der Fokus auf der Anpassung des Stils v
 
 Bevor ich das jedoch mache, zeige ich Ihnen, wie das Standarddesign der Starlight-Sidebar derzeit aussieht:
 
-![Default styling of the Starlight sidebar](../../../../assets/sidebar-css/no-css.png)
+![Standard-Design der Starlight-Sidebar](../../../../../assets/sidebar-css/no-css.png)
 
 ### Leerraum zwischen Sidebar-Elementen anpassen
 
@@ -74,7 +74,7 @@ sl-sidebar-state-persist ul.top-level > li:has(details) {
 }
 ```
 
-![Starlight sidebar where the margin between root-level items is smaller](../../../../assets/sidebar-css/whitespaces.png)
+![Starlight-Sidebar, bei der der Abstand zwischen Elementen auf oberster Ebene kleiner ist](../../../../../assets/sidebar-css/whitespaces.png)
 
 Vielleicht wird dies für Sie nicht so nützlich sein, weil Sie keine Seiten auf oberster Ebene in Ihrer Sidebar verwenden, sodass dieser Effekt für Sie nicht sichtbar ist. Aber falls doch, probieren Sie es aus.
 
@@ -92,7 +92,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight sidebar with lighter font weight](../../../../assets/sidebar-css/font-weight.png)
+![Starlight-Sidebar mit leichterem Schriftgewicht](../../../../../assets/sidebar-css/font-weight.png)
 
 ### Farbe der Sidebar-Elemente anpassen
 
@@ -110,7 +110,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight sidebar with dimmer colors](../../../../assets/sidebar-css/color.png)
+![Starlight-Sidebar mit dezenteren Farben](../../../../../assets/sidebar-css/color.png)
 
 ### Schriftgröße der Sidebar-Elemente anpassen
 
@@ -123,7 +123,7 @@ sl-sidebar-state-persist ul.top-level > li > a {
 }
 ```
 
-![Starlight sidebar with smaller font size](../../../../assets/sidebar-css/font-size.png)
+![Starlight-Sidebar mit kleinerer Schriftgröße](../../../../../assets/sidebar-css/font-size.png)
 
 ## Empfehlungen
 

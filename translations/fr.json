@@ -358,5 +358,17 @@
   "Try out the extension yourself by clicking on the button below. There are still .53D329C6D712DEFF0967": "Essayez l'extension par vous-même en cliquant sur le bouton ci-dessous. Il reste encore de nombreuses améliorations à apporter, donc si vous êtes intéressé pour aider, n'hésitez pas à contribuer sur [GitHub](https://github.com/trueberryless/terraform-variables-resolution).",
   "Install Terraform Variables Resolution": "Installer Terraform Variables Resolution",
   "Here you can see the example from [the Terraform explanation](#what-is-terraform.772358BC6F4987371F60": "Voici un exemple tiré de [l'explication de Terraform](#what-is-terraform), montrant comment cette extension ajoute visuellement les valeurs des variables dans VS Code :",
-  "You can also check out [FrostyBee's](https://github.com/frostybee) [Starlight Sc.2885FB180F098A43BD51": "Vous pouvez également consulter le [plugin Starlight Scroll To Top de FrostyBee](https://github.com/frostybee/starlight-scroll-to-top) qui prend également en charge un [Progress Ring intégré](https://frostybee.github.io/starlight-scroll-to-top/configuration/#showprogressring) depuis la version `0.3.1`. 🙌"
+  "You can also check out [FrostyBee's](https://github.com/frostybee) [Starlight Sc.2885FB180F098A43BD51": "Vous pouvez également consulter le [plugin Starlight Scroll To Top de FrostyBee](https://github.com/frostybee/starlight-scroll-to-top) qui prend également en charge un [Progress Ring intégré](https://frostybee.github.io/starlight-scroll-to-top/configuration/#showprogressring) depuis la version `0.3.1`. 🙌",
+  "Welcome to my blog. Take a look at this minimalistic overview of all my blog pos.5A38D8470D9F24600ED2": "Bienvenue sur mon blog. Jetez un coup d'œil à cet aperçu minimaliste de tous mes articles de blog.",
+  "![Terraform Variables Resolution Example](../../../assets/terraform/terraform-va.94526691E47AD9D882F5": "Exemple de Résolution de Variables Terraform",
+  "![Throw away a good idea](../../../../public/online-classes-throw-away.gif)": "Jeter une bonne idée",
+  "![Default styling of the Starlight sidebar](../../../assets/sidebar-css/no-css.p.CD83DAFB82A4B2123FA6": "Style par défaut de la barre latérale Starlight",
+  "![Starlight sidebar where the margin between root-level items is smaller](../../.880AFEBFAC9D61C70E2C": "Barre latérale Starlight où la marge entre les éléments de niveau racine est réduite",
+  "![Starlight sidebar with lighter font weight](../../../assets/sidebar-css/font-w.7D96D24D62FE18FEF0C9": "Barre latérale Starlight avec une épaisseur de police plus légère",
+  "![Starlight sidebar with dimmer colors](../../../assets/sidebar-css/color.png)": "Barre latérale Starlight avec des couleurs plus atténuées",
+  "![Starlight sidebar with smaller font size](../../../assets/sidebar-css/font-siz.B88E6D3A46696C763ECA": "Barre latérale Starlight avec une taille de police plus petite",
+  "![Final result with desktop view on the left and mobile view on the right](../...6745D424D50B4DE3BC95": "Résultat final avec vue bureau à gauche et vue mobile à droite",
+  "![Cloudflare API Token](../../../assets/cloudflare/cloudflare_api_token.png)": "Jeton API Cloudflare",
+  "![Argo CD UI Dashboard](../../../assets/argocd/argocd_ui_dashboard.png)": "Tableau de bord de l'interface utilisateur d'Argo CD",
+  "![Argo CD Example Application UI](../../../assets/argocd/argocd_example_applicat.DFA9617B17D15540EAA3": "Interface utilisateur d'application d'exemple Argo CD"
 }

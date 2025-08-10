@@ -58,7 +58,7 @@ Une chose à noter cependant est que dans cet article de blog, l'accent est mis 
 
 Mais avant cela, je vais vous montrer à quoi ressemble actuellement le style par défaut de la barre latérale Starlight :
 
-![Default styling of the Starlight sidebar](../../../../assets/sidebar-css/no-css.png)
+![Style par défaut de la barre latérale Starlight](../../../../../assets/sidebar-css/no-css.png)
 
 ### Modifier les espaces entre les éléments de la barre latérale
 
@@ -74,7 +74,7 @@ sl-sidebar-state-persist ul.top-level > li:has(details) {
 }
 ```
 
-![Starlight sidebar where the margin between root-level items is smaller](../../../../assets/sidebar-css/whitespaces.png)
+![Barre latérale Starlight où la marge entre les éléments de niveau racine est réduite](../../../../../assets/sidebar-css/whitespaces.png)
 
 Cela ne vous sera peut-être pas aussi utile si vous n'utilisez pas de pages de niveau racine dans votre barre latérale, car cet effet ne sera pas visible pour vous. Mais si c'est le cas, essayez cela.
 
@@ -92,7 +92,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight sidebar with lighter font weight](../../../../assets/sidebar-css/font-weight.png)
+![Barre latérale Starlight avec une épaisseur de police plus légère](../../../../../assets/sidebar-css/font-weight.png)
 
 ### Ajuster la couleur des éléments de la barre latérale
 
@@ -110,7 +110,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight sidebar with dimmer colors](../../../../assets/sidebar-css/color.png)
+![Barre latérale Starlight avec des couleurs plus atténuées](../../../../../assets/sidebar-css/color.png)
 
 ### Ajuster la taille de la police des éléments de la barre latérale
 
@@ -123,7 +123,7 @@ sl-sidebar-state-persist ul.top-level > li > a {
 }
 ```
 
-![Starlight sidebar with smaller font size](../../../../assets/sidebar-css/font-size.png)
+![Barre latérale Starlight avec une taille de police plus petite](../../../../../assets/sidebar-css/font-size.png)
 
 ## Recommandations
 
