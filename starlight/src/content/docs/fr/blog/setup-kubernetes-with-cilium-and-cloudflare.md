@@ -322,7 +322,7 @@ De nos jours, nous créons un jeton en accédant à votre tableau de bord [Cloud
 * Zone - DNS - Modifier
 * Zone - Zone - Lecture
 
-![Jeton API Cloudflare](../../../../../assets/cloudflare/cloudflare_api_token.png)
+![Jeton API Cloudflare](../../../../assets/cloudflare/cloudflare_api_token.png)
 
 Une description plus détaillée des jetons peut être trouvée dans les [docs Cloudflare](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
 

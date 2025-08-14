@@ -58,7 +58,7 @@ Eine Sache, die zu beachten ist: In diesem Blogbeitrag liegt der Fokus auf der A
 
 Aber bevor ich das tue, zeige ich Ihnen, wie das Standarddesign der Starlight-Seitenleiste derzeit aussieht:
 
-![Standarddesign der Starlight-Seitenleiste](../../../../../assets/sidebar-css/no-css.png)
+![Standarddesign der Starlight-Seitenleiste](../../../../assets/sidebar-css/no-css.png)
 
 ### Anpassen der Leerzeichen zwischen den Elementen der Seitenleiste
 
@@ -74,7 +74,7 @@ sl-sidebar-state-persist ul.top-level > li:has(details) {
 }
 ```
 
-![Starlight-Seitenleiste, bei der der Abstand zwischen den Elementen auf Root-Ebene kleiner ist](../../../../../assets/sidebar-css/whitespaces.png)
+![Starlight-Seitenleiste, bei der der Abstand zwischen den Elementen auf Root-Ebene kleiner ist](../../../../assets/sidebar-css/whitespaces.png)
 
 Vielleicht ist dies für Sie nicht so nützlich, weil Sie keine Root-Level-Seiten in Ihrer Seitenleiste verwenden, sodass dieser Effekt für Sie nicht bemerkbar ist. Aber wenn doch, probieren Sie es aus.
 
@@ -92,7 +92,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight-Seitenleiste mit leichterem Schriftgewicht](../../../../../assets/sidebar-css/font-weight.png)
+![Starlight-Seitenleiste mit leichterem Schriftgewicht](../../../../assets/sidebar-css/font-weight.png)
 
 ### Anpassen der Farbe der Seitenleisten-Elemente
 
@@ -110,7 +110,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight-Seitenleiste mit abgeschwächten Farben](../../../../../assets/sidebar-css/color.png)
+![Starlight-Seitenleiste mit abgeschwächten Farben](../../../../assets/sidebar-css/color.png)
 
 ### Anpassen der Schriftgröße der Seitenleisten-Elemente
 
@@ -123,7 +123,7 @@ sl-sidebar-state-persist ul.top-level > li > a {
 }
 ```
 
-![Starlight-Seitenleiste mit kleinerer Schriftgröße](../../../../../assets/sidebar-css/font-size.png)
+![Starlight-Seitenleiste mit kleinerer Schriftgröße](../../../../assets/sidebar-css/font-size.png)
 
 ## Empfehlungen
 

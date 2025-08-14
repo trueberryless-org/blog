@@ -59,7 +59,7 @@ Une chose à noter cependant, dans cet article, l'accent est mis sur l'ajustemen
 
 Mais avant cela, je vais vous montrer à quoi ressemble actuellement le style par défaut de la barre latérale Starlight :
 
-![Style par défaut de la barre latérale Starlight](../../../../../assets/sidebar-css/no-css.png)
+![Style par défaut de la barre latérale Starlight](../../../../assets/sidebar-css/no-css.png)
 
 ### Manipuler les espaces blancs entre les éléments de la barre latérale
 
@@ -75,7 +75,7 @@ sl-sidebar-state-persist ul.top-level > li:has(details) {
 }
 ```
 
-![Barre latérale Starlight où la marge entre les éléments de niveau racine est réduite](../../../../../assets/sidebar-css/whitespaces.png)
+![Barre latérale Starlight où la marge entre les éléments de niveau racine est réduite](../../../../assets/sidebar-css/whitespaces.png)
 
 Peut-être que cela ne sera pas aussi utile pour vous parce que vous n'utilisez pas de pages de niveau racine dans votre barre latérale, donc cet effet ne sera pas perceptible pour vous. Mais si c'est le cas, essayez-le.
 
@@ -93,7 +93,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Barre latérale Starlight avec un poids de police réduit](../../../../../assets/sidebar-css/font-weight.png)
+![Barre latérale Starlight avec un poids de police réduit](../../../../assets/sidebar-css/font-weight.png)
 
 ### Ajuster la couleur des éléments de la barre latérale
 
@@ -111,7 +111,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Barre latérale Starlight avec des couleurs plus ternes](../../../../../assets/sidebar-css/color.png)
+![Barre latérale Starlight avec des couleurs plus ternes](../../../../assets/sidebar-css/color.png)
 
 ### Ajuster la taille de la police des éléments de la barre latérale
 
@@ -124,7 +124,7 @@ sl-sidebar-state-persist ul.top-level > li > a {
 }
 ```
 
-![Barre latérale Starlight avec une taille de police réduite](../../../../../assets/sidebar-css/font-size.png)
+![Barre latérale Starlight avec une taille de police réduite](../../../../assets/sidebar-css/font-size.png)
 
 ## Recommandations
 
