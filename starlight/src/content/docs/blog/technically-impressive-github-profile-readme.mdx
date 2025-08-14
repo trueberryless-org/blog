@@ -1,21 +1,21 @@
 ---
-title: How I Built a GitHub Profile README That Shouldn’t Exist (But It Does)
+title: How I Built a GitHub Profile README That Shouldn't Exist (But It Does)
 description: A deep dive into the technical challenges and solutions behind my GitHub profile README, featuring SVG manipulation, automation, and a dynamic Bento Grid.
 date: 2025-02-05
 tags:
-    - Automation
-    - GitHub
-excerpt: Creating a standout <a class="gh-badge" href="https://github.com/github"><img src="https://github.com/github.png" alt="github" />GitHub</a> profile README isn’t just about adding a few badges — it’s about pushing technical boundaries. In this deep dive, I explore low-level SVG manipulation, HTML-to-SVG conversion, inline animations, and full automation with GitHub Actions to build what I believe is one of the most technically advanced GitHub READMEs. From a dynamic Bento Grid that updates every 5 minutes to embedding live SVGs without external requests, this project transformed my profile into a living, self-updating showcase of my work. Want to know how I did it? Let’s break it down. 🚀
+  - Automation
+  - GitHub
+excerpt: Creating a standout <a class="gh-badge" href="https://github.com/github"><img src="https://github.com/github.png" alt="github" />GitHub</a> profile README isn't just about adding a few badges — it's about pushing technical boundaries. In this deep dive, I explore low-level SVG manipulation, HTML-to-SVG conversion, inline animations, and full automation with GitHub Actions to build what I believe is one of the most technically advanced GitHub READMEs. From a dynamic Bento Grid that updates every 5 minutes to embedding live SVGs without external requests, this project transformed my profile into a living, self-updating showcase of my work. Want to know how I did it? Let's break it down. 🚀
 authors:
-    - trueberryless
-    - ai
+  - trueberryless
+  - ai
 cover:
   alt: A beautiful cover image with the text "GitHub Profile"
   image: ../../../../public/blog/technically-impressive-github-profile-readme.png
 ---
 
 :::note
-Read the more formal story [here](https://trueberryless.org/work/github-profile-readme/)
+Read the more formal story [here](/blog/github-profile-readme/)
 :::
 
 ## The Beginning: A README That Looked Like a Wikipedia Dump
@@ -36,13 +36,13 @@ The first step was simple: mock up my perfect profile in HTML and CSS. And let m
 
 > [GitHub](https://github.com/github): *Absolutely not.*
 
-GitHub’s Markdown [strips out a not a huge number of HTML tags, but important ones](https://github.github.com/gfm/#disallowed-raw-html-extension). Security reasons, of course (and I completely respect that, GitHub, really ❤️), but this meant my perfect design was completely **unusable**.
+GitHub's Markdown [strips out a not a huge number of HTML tags, but important ones](https://github.github.com/gfm/#disallowed-raw-html-extension). Security reasons, of course (and I completely respect that, GitHub, really ❤️), but this meant my perfect design was completely **unusable**.
 
-I tried tweaking it. Replacing unsupported tags with ones that worked. Maybe I could salvage some of it? _Nope_. Markdown’s limitations meant my dream layout was impossible.
+I tried tweaking it. Replacing unsupported tags with ones that worked. Maybe I could salvage some of it? _Nope_. Markdown's limitations meant my dream layout was impossible.
 
 ## Phase 2: The "Just Use a Python Script" Cope
 
-When in doubt, automate. If I couldn’t get my HTML in directly, maybe I could generate something dynamic with a script? So I threw together a Python script to fetch my latest GitHub repository and insert it into my README. Just leaving this random bytes which some would call Python code here:
+When in doubt, automate. If I couldn't get my HTML in directly, maybe I could generate something dynamic with a script? So I threw together a Python script to fetch my latest GitHub repository and insert it into my README. Just leaving this random bytes which some would call Python code here:
 
 ```python collapse={1-22} showLineNumbers=false
 import requests
@@ -69,9 +69,9 @@ with open("README.md", "w") as file:
     file.writelines(new_content)
 ```
 
-This seemed like a step in the right direction. It was automated. It was functional. But it didn’t solve my actual problem. 😢
+This seemed like a step in the right direction. It was automated. It was functional. But it didn't solve my actual problem. 😢
 
-This wasn’t about dynamic content — it was about *design*. And no amount of Python scripting was going to make Markdown look beautiful.
+This wasn't about dynamic content — it was about *design*. And no amount of Python scripting was going to make Markdown look beautiful.
 
 ## Phase 3: "Fine, I'll Just Use a Screenshot" (Rock Bottom)
 
@@ -105,13 +105,13 @@ Promising! This could actually work!
 
 Then I got busy with other things, forgot to debug it, and never returned to this idea.
 
-![Throw away a good idea](../../../../public/online-classes-throw-away.gif)
+![Throw away a good idea](../../../assets/blog/technically-impressive-github-profile-readme/online-classes-throw-away.gif)
 
 ## Phase 5: SVGs Within SVGs Within SVGs (Inception Level 100)
 
 When I came back to the project, I was **determined** to make it work.
 
-I realised that if I couldn’t directly embed HTML into Markdown, I could fake it by using nested SVGs. (btw this is massively simplified; the actual process took days that felt like weeks if not months, but I know that you wouldn't read any of this anyway so who cares?)
+I realised that if I couldn't directly embed HTML into Markdown, I could fake it by using nested SVGs. (btw this is massively simplified; the actual process took days that felt like weeks if not months, but I know that you wouldn't read any of this anyway so who cares?)
 
 And then, after hours of research, I stumbled across a life-changing Stack Overflow answer:
 
@@ -120,7 +120,7 @@ And then, after hours of research, I stumbled across a life-changing Stack Overf
 This lead me to the current solution:
 
 1. Convert my HTML layout to SVG.
-2. Encode all images in **Base64** (because GitHub Markdown won’t load external images inside an SVG with HTML in it).
+2. Encode all images in **Base64** (because GitHub Markdown won't load external images inside an SVG with HTML in it).
 3. Inline dynamic SVGs (like my GitHub stats, Spotify status, etc.).
 4. Automate everything with **GitHub Actions**.
 
@@ -131,7 +131,7 @@ This lead me to the current solution:
 - GitHub stats, dynamically inserted via automation.
 - Fully responsive, fully scalable, and fully insane to build.
 
-It updates itself every 5 minutes, runs completely on GitHub Actions, and doesn’t rely on any external services. It’s beautiful. It’s efficient. And most importantly, it’s technically absurd in the best way possible.
+It updates itself every 5 minutes, runs completely on GitHub Actions, and doesn't rely on any external services. It's beautiful. It's efficient. And most importantly, it's technically absurd in the best way possible.
 
 Take a look at a specific example of the final results at some point back in time. 
 
@@ -139,7 +139,7 @@ import { Image } from 'astro:assets'
 
 <Image src={"https://raw.githubusercontent.com/trueberryless/trueberryless/7519c6f50094bdfd6fb47f610e6638ac8efdd6ad/html-wrapper.svg"} width={980} height={913} alt="Final result" data-zoom-off />
 
-Isn't that bad compared to the [old README.md](https://github.com/trueberryless/trueberryless/blob/5dce4ad0033b00829f8ec3756827057017447a65/README.md). And don’t comment on why I listen to K-pop! It’s better than you think, trust me.
+Isn't that bad compared to the [old README.md](https://github.com/trueberryless/trueberryless/blob/5dce4ad0033b00829f8ec3756827057017447a65/README.md). And don't comment on why I listen to K-pop! It's better than you think, trust me.
 
 Check out the live version on my GitHub [trueberryless](https://github.com/trueberryless) — if I decided to keep it... — and leave a follow if you're already there if you enjoyed reading! ❤️
 
@@ -155,4 +155,4 @@ Would I do it again? Definitely.
 
 Would I recommend it? Only if you have way too much patience. 😅
 
-But in the end, I created a [GitHub](https://github.com/github) profile README that *shouldn’t exist* — but it does. And I love it.
+But in the end, I created a [GitHub](https://github.com/github) profile README that *shouldn't exist* — but it does. And I love it.

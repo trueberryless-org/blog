@@ -3,11 +3,12 @@ title: How to make your Starlight sidebar items look better
 description: In this blog post, we'll take a look at how small changes can make a big difference when it comes to whitespaces, font sizes, weights, and colours in your Starlight sidebar.
 date: 2025-04-27
 tags:
-    - Starlight
-    - CSS
+  - Starlight
+  - CSS
+  - Education
 excerpt: In this blog post, we'll take a look at how small changes can make a big difference when it comes to whitespaces in your <a class="gh-badge" href="https://github.com/withastro/starlight"><img src="/starlight.png" alt="Starlight" />Starlight</a> sidebar.
 authors:
-    - trueberryless
+  - trueberryless
 cover:
   alt: A beautiful cover image with the text "Starlight CSS"
   image: ../../../../public/blog/starlight-sidebar-whitespace.png
@@ -51,7 +52,7 @@ One thing to note though is that in this blog post the focus lies on adjusting t
 
 But before I do that, I'll show you how the default styling of the Starlight sidebar currently looks like:
 
-![Default styling of the Starlight sidebar](../../../assets/sidebar-css/no-css.png)
+![Default styling of the Starlight sidebar](../../../assets/blog/starlight-sidebar-whitespace/no-css.png)
 
 ### Manipulate the whitespaces between sidebar items
 
@@ -67,7 +68,7 @@ sl-sidebar-state-persist ul.top-level > li:has(details) {
 }
 ```
 
-![Starlight sidebar where the margin between root-level items is smaller](../../../assets/sidebar-css/whitespaces.png)
+![Starlight sidebar where the margin between root-level items is smaller](../../../assets/blog/starlight-sidebar-whitespace/whitespaces.png)
 
 Perhaps, this will not be as useful to you because you don't use root-level pages in your sidebar, so this effect won't be noticeable to you. But if you do, give this a try.
 
@@ -85,7 +86,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight sidebar with lighter font weight](../../../assets/sidebar-css/font-weight.png)
+![Starlight sidebar with lighter font weight](../../../assets/blog/starlight-sidebar-whitespace/font-weight.png)
 
 ### Adjust the colour of sidebar items
 
@@ -103,7 +104,7 @@ sl-sidebar-state-persist ul.top-level > li > a:not([aria-current="page"]) {
 }
 ```
 
-![Starlight sidebar with dimmer colors](../../../assets/sidebar-css/color.png)
+![Starlight sidebar with dimmer colors](../../../assets/blog/starlight-sidebar-whitespace/color.png)
 
 ### Adjust the font size of sidebar items
 
@@ -116,7 +117,7 @@ sl-sidebar-state-persist ul.top-level > li > a {
 }
 ```
 
-![Starlight sidebar with smaller font size](../../../assets/sidebar-css/font-size.png)
+![Starlight sidebar with smaller font size](../../../assets/blog/starlight-sidebar-whitespace/font-size.png)
 
 ## Recommendations
 

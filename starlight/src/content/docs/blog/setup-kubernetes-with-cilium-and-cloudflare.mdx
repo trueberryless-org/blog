@@ -4,7 +4,8 @@ description: Today we'll take a look at how to set up a Kubernetes cluster with 
 date: 2024-06-11
 lastUpdated: 2024-10-01
 tags:
-    - Deployment
+  - Deployment Series
+  - Education
 excerpt: This blog posts describes the process of setting up a <a class="gh-badge" href="https://github.com/kubernetes"><img src="https://github.com/kubernetes.png" alt="Kubernetes" />Kubernetes</a> cluster with <a class="gh-badge" href="https://github.com/k3s-io"><img src="https://github.com/k3s-io.png" alt="k3s" />k3s</a> and <a class="gh-badge" href="https://github.com/cilium"><img src="https://github.com/cilium.png" alt="Cilium" />Cilium</a>. We use <a class="gh-badge" href="https://github.com/helm"><img src="https://github.com/helm.png" alt="Helm" />Helm</a> as the package manager and <a class="gh-badge" href="https://github.com/cloudflare"><img src="https://github.com/cloudflare.png" alt="Cloudflare" />Cloudflare</a> as the certificate issuer. We used the tips and tricks from Vegard S. Hagen from [his article](https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/). Essentially, this blog explains, how all the trueberryless.org websites are deployed (not any more).
 authors:
     - trueberryless
@@ -305,7 +306,7 @@ Nowadays we create a token by going to your [Cloudflare](https://github.com/clou
 -   Zone - DNS - Edit
 -   Zone - Zone - Read
 
-![Cloudflare API Token](../../../assets/cloudflare/cloudflare_api_token.png)
+![Cloudflare API Token](../../../assets/blog/setup-kubernetes-with-cilium-and-cloudflare/cloudflare_api_token.png)
 
 A more detailed description about the tokens, can be found in the [Cloudflare docs](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
 
