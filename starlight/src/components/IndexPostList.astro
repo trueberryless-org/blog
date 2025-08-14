@@ -1,4 +1,5 @@
 ---
+import { Badge } from "@astrojs/starlight/components";
 import type { StarlightBlogData } from "starlight-blog/data";
 const starlightBlogData = Astro.locals.starlightBlog;
 
@@ -15,9 +16,40 @@ const postsByYear = starlightBlogData.posts.reduce<
 const sortedYears = Object.keys(postsByYear).sort(
   (a, b) => Number(b) - Number(a)
 );
+
+const featuredPosts = starlightBlogData.posts.filter((post) => post.featured);
 ---
 
 <div class="not-content">
+  {
+    featuredPosts.length !== 0 && (
+      <div class="year-section">
+        <div class="year-label">Stars</div>
+        <div class="posts">
+          {featuredPosts
+            .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+            .map((post) => (
+              <div class="post">
+                <a href={post.href}>
+                  <span class="post-title">{post.title}</span>
+                  <span class="post-separator">•</span>
+                  <span class="post-meta">
+                    <span>
+                      {post.authors
+                        .map((a) => a.name)
+                        .filter((a) => a != "Artificial Intelligence")
+                        .join(", ")}
+                    </span>
+                    <span class="little-post-separator">•</span>
+                    <span>{post.metrics.readingTime.minutes}min</span>
+                  </span>
+                </a>
+              </div>
+            ))}
+        </div>
+      </div>
+    )
+  }
   {
     sortedYears.map((year) => (
       <div class="year-section">
@@ -39,6 +71,14 @@ const sortedYears = Object.keys(postsByYear).sort(
                     </span>
                     <span class="little-post-separator">•</span>
                     <span>{post.metrics.readingTime.minutes}min</span>
+                    {post.featured && (
+                      <>
+                        <span class="little-post-separator">•</span>
+                        <span>
+                          <Badge text="Featured" variant="note" />
+                        </span>
+                      </>
+                    )}
                   </span>
                 </a>
               </div>
