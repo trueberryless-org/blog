@@ -1,0 +1,35 @@
+---
+title: Entwerfen eines Ansatzes für Zeiterfassung ohne Konto und ohne Datenbank
+date: 2024-07-06
+description: Eine private Zeiterfassungs-App, die alle Daten in deinem Browser
+  speichert — keine Konten, keine Datenbank, nur einfache Erfassung.
+excerpt: True Tracker ist eine minimalistische Zeiterfassungs-App, die mit
+  Next.js entwickelt wurde und alle Daten in deinem Browser speichert — keine
+  Konten, keine Datenbank, einfach nur vollständige Privatsphäre und
+  Einfachheit.
+tags:
+  - Tool
+authors:
+  - trueberryless
+cover:
+  alt: A beautiful cover image with the text "True Tracker"
+  image: ../../../../../public/blog/true-tracker.png
+featured: true
+
+---
+
+Der Sommer 2024 markierte den Beginn eines aufregenden neuen Kapitels für mich als Entwickler. Bis zu diesem Zeitpunkt hatte ich hauptsächlich mit Angular gearbeitet, einem Framework, das ich für seinen strukturierten und meinungsstarken Ansatz schätzte. Aber ich war immer neugierig auf React gewesen – es fühlte sich leichter, flexibler und einfach… anders an. Als ich auf Next.js stieß, ein Framework von [Vercel](https://github.com/vercel), das auf React aufbaut und Funktionen wie serverseitiges Rendering und einen Fokus auf Performance bietet, wusste ich, dass es an der Zeit war, etwas Neues auszuprobieren.
+
+Zur gleichen Zeit war ich seit Langem über Tools zur Sitzungsverfolgung wie Toggl frustriert. Theoretisch sind sie großartig, aber ihre besten Funktionen schienen immer hinter teuren Bezahlwänden versteckt zu sein. Wie jeder Entwickler irgendwann dachte ich: *„Warum baue ich mir nicht einfach mein eigenes?“* Es ist praktisch ein Übergangsritus – jeder Programmierer muss mindestens einmal eine To-Do-App oder einen Tracker in seiner Karriere erstellen. Und so wurde True Tracker geboren.
+
+True Tracker sollte jedoch kein gewöhnlicher Tracker sein. Ich wollte etwas anderes machen. Zunächst wollte ich es einfach halten: Benutzer konnten Projekte hinzufügen, sie in Aufgaben unterteilen und ihre Zeit in Sitzungen erfassen. Kein Schnickschnack, keine unnötigen Funktionen. Doch hier kommt der Clou — True Tracker würde alles im lokalen Speicher speichern. Keine Konten, keine Cloud-Synchronisierung, und vor allem, niemand (nicht einmal ich) hätte Zugriff auf deine Daten. Es ist dein Tracker, und deine Daten bleiben deine.
+
+Natürlich war der Übergang von Angular zu Next.js nicht ohne Herausforderungen. Wenn ich jemandem, der ein neues Framework lernt, einen Rat geben könnte, dann wäre es dieser: *Lies die Dokumentation.* Ernsthaft, überspring sie nicht. Ich tat es nicht, und das führte zu Chaos. Next.js war kürzlich auf den App-Router umgestiegen, aber ich begann stur, mit dem Page-Router zu bauen. Das führte zu einem Berg von Problemen, als die App nicht richtig gebaut werden konnte, weil kein `app`-Verzeichnis vorhanden war. Ich musste eine leere `.gitkeep`-Datei im Ordner belassen, nur damit Git sie nicht löscht und alles erneut kaputt macht. Nicht mein stolzester Moment.
+
+Nach zwei Wochen ununterbrochenem Codieren, Debuggen und dem Gefühl, auf jeden erdenklichen Fehler zu stoßen, funktionierte True Tracker endlich. Ich erinnere mich an diesen ersten erfolgreichen Lauf – es fühlte sich an wie ein innerlicher Schrei *„Es lebt!“*.
+
+Das Projekt war auch nicht ohne seine Witze. Ein Freund meinte nach einem Blick auf das Branding der App: „Also … das ‚true‘ in True Tracker? Das ist ein bisschen zu viel, selbst für das Bild. Es ist *zu viel Wahrheit!*“ Sie hatten nicht unrecht, aber ich nahm es an. Schließlich, wenn man etwas brandet, sollte man es auch durchziehen.
+
+True Tracker wurde mein allererstes Next.js-Projekt – eine einfache, aber einzigartige App zur Zeiterfassung ohne Bedingungen. Sie ist jetzt live unter [https://true-tracker.trueberryless.org](https://true-tracker.trueberryless.org/).
+
+Die Reise lehrte mich mehr, als nur wie man Next.js verwendet. Sie lehrte mich, Herausforderungen zu überwinden, zwischen Frameworks zu wechseln und die Eigenheiten zu schätzen, die jedes Projekt einzigartig machen. True Tracker ist nicht nur eine App; es ist ein Meilenstein – ein kleiner Beweis dafür, dass auch kleine Ideen eine große Wirkung haben können.
