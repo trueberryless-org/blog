@@ -96,7 +96,14 @@ export default defineConfig({
           sync: true,
         }),
         starlightLinksValidator({
-          exclude: ["/blog/tags/*", "/blog/authors/*"],
+          exclude: [
+            "/blog/tags/*",
+            "/blog/authors/*",
+            "/de/blog/tags/*",
+            "/de/blog/authors/*",
+            "/fr/blog/tags/*",
+            "/fr/blog/authors/*",
+          ],
           errorOnRelativeLinks: false,
           errorOnInvalidHashes: false,
         }),

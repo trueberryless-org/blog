@@ -1,0 +1,36 @@
+---
+title: Concevoir une approche de suivi du temps sans compte et sans base de données
+date: 2024-07-06
+description: Une application de suivi du temps privée stockant toutes les
+  données dans votre navigateur — pas de comptes, pas de base de données, juste
+  un suivi simple.
+excerpt: True Tracker est une application minimaliste de suivi du temps
+  construite avec Next.js qui garde toutes les données dans votre navigateur —
+  pas de comptes, pas de base de données, juste une confidentialité et une
+  simplicité totales.
+tags:
+  - Tool
+authors:
+  - trueberryless
+cover:
+  alt: A beautiful cover image with the text "True Tracker"
+  image: ../../../../../public/blog/true-tracker.png
+featured: true
+
+---
+
+L'été 2024 a marqué le début d'un nouveau chapitre passionnant pour moi en tant que développeur. Jusqu'à ce moment-là, j'avais principalement travaillé avec Angular, un framework que j'appréciais pour son approche structurée et opinée. Mais j'ai toujours été curieux de découvrir React : cela semblait plus léger, plus flexible, et juste… différent. Lorsque je suis tombé sur Next.js, un framework de [Vercel](https://github.com/vercel) basé sur React qui offrait des fonctionnalités comme le rendu côté serveur et un accent mis sur les performances, j'ai su qu'il était temps d'explorer quelque chose de nouveau.
+
+En même temps, j'étais frustré depuis des années par les outils de suivi de sessions comme Toggl. Bien qu'ils soient théoriquement excellents, leurs meilleures fonctionnalités semblaient toujours enfermées derrière des paywalls premium. Comme tout développeur à un moment donné, je me suis dit, *« Pourquoi ne pas simplement créer le mien ? »* C'est pratiquement un rite de passage — chaque programmeur doit au moins une fois dans sa carrière créer une application de tâches ou un tracker. Et ainsi, True Tracker est né.
+
+True Tracker n'était pas un tracker comme les autres, cependant. Je voulais faire quelque chose de différent. Pour commencer, je voulais le garder simple : les utilisateurs pouvaient ajouter des projets, les diviser en tâches, et suivre leur temps en sessions. Aucun surplus, aucune fonctionnalité inutile. Mais voici la particularité — True Tracker enregistrerait tout dans le stockage local. Pas de comptes, pas de synchronisation avec le cloud, et surtout, personne (même pas moi) n'aurait accès à vos données. C'est votre tracker, et vos données restent les vôtres.
+
+Bien sûr, passer d'Angular à Next.js n'a pas été sans défis. Si je devais donner un seul conseil à quiconque apprend un nouveau framework, ce serait celui-ci : *Lisez la documentation.* Sérieusement, ne la sautez pas. Je ne l'ai pas fait, et cela a conduit au chaos. Next.js était récemment passé au routeur d'application, mais je m'étais obstinément lancé dans la construction avec le routeur de pages. Il s'avère que cela a causé une montagne de problèmes lorsque l'application ne voulait pas se construire correctement parce qu'il n'y avait pas de répertoire `app`. J'ai dû garder un fichier `.gitkeep` vide dans le dossier pour que Git ne le supprime pas et ne casse rien à nouveau. Pas mon moment de gloire.
+
+Après deux semaines de codage intensif, de débogage, et d'affrontement avec ce qui semblait être toutes les erreurs imaginables, True Tracker a enfin fonctionné. Je me souviens de cette première exécution réussie — j'avais l'impression de crier *« C'est vivant ! »* dans ma tête.
+
+Le projet n'était pas non plus sans ses blagues. Un ami, après avoir vu le branding de l'application, a plaisanté : « Donc... le "true" dans True Tracker ? C'est un peu exagéré, même pour l'image. C'est *trop de vérité !* » Ils n'avaient pas tort, mais je l'ai assumé. Après tout, si vous allez marquer quelque chose, autant y aller à fond.
+
+True Tracker est devenu mon tout premier projet Next.js — une application simple mais unique pour suivre le temps sans aucune contrainte. Elle est maintenant en ligne à l'adresse [https://true-tracker.trueberryless.org](https://true-tracker.trueberryless.org/).
+
+Le voyage m'a appris plus que simplement comment utiliser Next.js. Il m'a appris à surmonter les défis, à passer d'un framework à un autre, et à embrasser les particularités qui rendent chaque projet unique. True Tracker n'est pas juste une application ; c'est une étape importante — une petite preuve que même les petites idées peuvent avoir un grand impact.

@@ -1,0 +1,115 @@
+---
+title: Starlight Themen-Dropdown und Liste zusammen
+description: Erfahren Sie, wie Sie eine Desktop-Liste und ein mobiles
+  Dropdown-Menü für die Starlight-Sidebar-Themen kombinieren.
+date: 2025-05-13
+tags:
+  - Starlight
+  - Plugins
+  - CSS
+  - Education
+excerpt: Kombinieren Sie zwei <a class="gh-badge"
+  href="https://github.com/withastro/starlight"><img src="/starlight.png"
+  alt="Starlight" />Starlight</a> Sidebar Topics Plugins, um eine Themenliste
+  auf dem Desktop und ein Dropdown-Menü in der mobilen Sidebar anzuzeigen.
+authors:
+  - hideoo
+  - trueberryless
+cover:
+  alt: A beautiful cover image with the text "Dropdown and List?"
+  image: ../../../../../public/blog/starlight-dropdown-and-list-together.png
+
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+Mit dem [Starlight Sidebar Topics](https://github.com/hideoo/starlight-sidebar-topics) Plugin zusammen mit der [Starlight Sidebar Topics Dropdown](https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown) Komponente können Sie eine Website erstellen, die eine Themenliste auf dem Desktop und ein Dropdown-Menü auf mobilen Geräten bietet.
+
+## Voraussetzungen
+
+Sie benötigen eine bestehende Starlight-Website.
+
+## Pakete installieren
+
+Zuerst installieren Sie das `starlight-sidebar-topics` Plugin sowie die `starlight-sidebar-topics-dropdown` Komponente:
+
+<Tabs syncKey="pkg">
+  <TabItem label="npm">
+    ```bash
+    npm install starlight-sidebar-topics starlight-sidebar-topics-dropdown
+    ```
+  </TabItem>
+
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add starlight-sidebar-topics starlight-sidebar-topics-dropdown
+    ```
+  </TabItem>
+
+  <TabItem label="Yarn">
+    ```bash
+    yarn add starlight-sidebar-topics starlight-sidebar-topics-dropdown
+    ```
+  </TabItem>
+</Tabs>
+
+Anschließend folgen Sie den Einrichtungsanleitungen von [Starlight Sidebar Topics](https://starlight-sidebar-topics.trueberryless.org/docs/getting-started/#installation) und [Starlight Sidebar Topics Dropdown](https://starlight-sidebar-topics-dropdown.trueberryless.org/docs/getting-started/#installation).
+
+## Die Sidebar-Komponente anpassen
+
+In der Einrichtungsanleitung der Dropdown-Komponente haben Sie eine Sidebar-Komponente erstellt, die nur das Dropdown-Menü rendert. Nun müssen Sie diese Komponente anpassen, sodass sie auch die Standard-Sidebar rendert, wenn der Benutzer am Desktop ist.
+
+```astro
+---
+// src/components/Sidebar.astro
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+import Topics from 'starlight-sidebar-topics/components/Sidebar.astro';
+import TopicsDropdown from 'starlight-sidebar-topics-dropdown/TopicsDropdown.astro';
+---
+
+<div class="topics">
+  <Topics/>
+</div>
+<div class="topics-dropdown">
+  <TopicsDropdown/>
+</div>
+<Default><slot /></Default>
+
+<style>
+  /* Hide topics by default and show them on medium screens and larger */
+  .topics {
+    display: none;
+  }
+
+  @media (min-width: 800px) {
+    .topics {
+      display: block;
+    }
+  }
+
+  /* Show topics dropdown on small screens and hide it on medium screens and larger */
+  .topics-dropdown {
+    display: block;
+  }
+
+  @media (min-width: 800px) {
+    .topics-dropdown {
+      display: none;
+    }
+  }
+</style>
+```
+
+## Ergebnis
+
+Wenn Sie diese Schritte befolgen, sieht Ihre Sidebar folgendermaßen aus:
+
+![Endergebnis mit Desktop-Ansicht auf der linken und mobiler Ansicht auf der rechten Seite](../../../../assets/blog/starlight-dropdown-and-list-together/dropdown-or-list.png)
+
+Den vollständigen Quellcode dieser Anleitung finden Sie in diesem [StackBlitz-Beispiel](https://stackblitz.com/edit/withastro-starlight-qgraahmp?file=astro.config.mjs).
+
+## Unbegrenzte Möglichkeiten
+
+Sie könnten es auch umgekehrt machen (Liste auf mobilen Geräten, Dropdown auf dem Desktop), indem Sie die CSS-Eigenschaften `display: block` und `display: none` tauschen.
+
+Darüber hinaus könnten Sie auch eine eigene Anzeige-Komponente erstellen, die die Routendaten aus dem Starlight Sidebar Topics Plugin verwendet und die Themen auf eine benutzerdefinierte Weise rendert. Das ist etwas anspruchsvoller, aber Sie finden weitere Informationen dazu in der ["Custom Topics List"-Dokumentation](https://starlight-sidebar-topics.trueberryless.org/docs/guides/custom-topic-list/).
