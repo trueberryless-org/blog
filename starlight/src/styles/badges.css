@@ -9,13 +9,16 @@
     text-decoration: none;
     color: inherit;
     font-weight: 500;
-    transition: background-color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      background-color 0.2s ease;
     transform: translateY(0.29rem);
-    border: 1px solid var(--sl-color-accent);
+    border: 1px solid var(--sl-color-accent-high);
   }
 
   .gh-badge:hover {
-    background-color: var(--sl-color-accent);
+    background-color: var(--sl-color-accent-high);
+    color: var(--sl-color-black);
   }
 
   .gh-badge img {
