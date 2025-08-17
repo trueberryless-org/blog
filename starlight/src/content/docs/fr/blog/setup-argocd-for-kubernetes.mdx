@@ -24,10 +24,10 @@ giscus: true
 
 ---
 
-Après avoir lu l'article de Vegard S. Hagen “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” et décidé que leur solution n'était pas adaptée à notre cluster, nous sommes directement passés au guide “[Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)” par défaut d'Argo CD. Et maintenant, nous allons vous faire traverser les étapes de configuration d'[Argo CD](https://github.com/argoproj) sur [k3s](https://github.com/k3s-io) et [Cilium](https://github.com/cilium), en poursuivant à partir du chapitre “[Setup Certificate Manager with Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare/)” de notre article précédent “[Setting up Kubernetes with Cilium and Cloudflare](../../blog/setup-kubernetes-with-cilium-and-cloudflare/)”. Dans ce même article récent, nous avons également configuré [Keel](https://github.com/keel-hq) à la fin, mais cette étape sera désormais inutile car nous utiliserons Argo CD pour obtenir le code le plus récent et le plus avancé à partir de chaque dépôt [GitHub](https://github.com/github). Bonne lecture !
+Après avoir lu l'article de Vegard S. Hagen “[Argo CD Kustomize with Helm](https://blog.stonegarden.dev/articles/2023/09/argocd-kustomize-with-helm/)” et décidé que leur solution n'était pas adaptée à notre cluster, nous sommes directement passés au guide “[Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)” par défaut d'Argo CD. Et maintenant, nous allons vous faire traverser les étapes de configuration d'[Argo CD](https://github.com/argoproj) sur [k3s](https://github.com/k3s-io) et [Cilium](https://github.com/cilium), en poursuivant à partir du chapitre “[Setup Certificate Manager with Cloudflare](/fr/blog/setup-kubernetes-with-cilium-and-cloudflare#setup-certificate-manager-with-cloudflare)” de notre article précédent “[Setting up Kubernetes with Cilium and Cloudflare](/fr/blog/setup-kubernetes-with-cilium-and-cloudflare)”. Dans ce même article récent, nous avons également configuré [Keel](https://github.com/keel-hq) à la fin, mais cette étape sera désormais inutile car nous utiliserons Argo CD pour obtenir le code le plus récent et le plus avancé à partir de chaque dépôt [GitHub](https://github.com/github). Bonne lecture !
 
 :::note
-Nous supposons que vous avez suivi [notre autre article de blog](../../blog/setup-kubernetes-with-cilium-and-cloudflare/).
+Nous supposons que vous avez suivi [notre autre article de blog](/fr/blog/setup-kubernetes-with-cilium-and-cloudflare).
 :::
 
 ## Pré-requis
@@ -162,7 +162,7 @@ kubectl rollout status deploy argocd-server -n argocd
 
 Après toutes ces étapes, nous devrions maintenant voir l'interface utilisateur sur [`https://argo-cd.trueberryless.org`](https://argo-cd.trueberryless.org) (protégé par mot de passe).
 
-Tableau de bord de l'interface utilisateur d'Argo CD
+![Tableau de bord de l'interface utilisateur d'Argo CD](../../../../../assets/argocd/argocd_ui_dashboard.png)
 
 :::note
 Les identifiants de connexion à l'interface utilisateur d'Argo CD se composent d'un utilisateur et d'un mot de passe. L'utilisateur est toujours `admin` et vous pouvez obtenir votre mot de passe en exécutant :
@@ -266,7 +266,7 @@ Nous recommandons de créer un nouveau dossier dans le dépôt Git appelé quelq
       secretName: mutanuq
   ```
 
-Ces fichiers sont essentiellement les mêmes que ceux mentionnés dans [l'autre article](../../blog/setup-kubernetes-with-cilium-and-cloudflare#example-app-mutanuq/) mais séparés en quatre fichiers, car cela nous donne l'avantage de manipuler le manifest depuis [GitHub](https://github.com/github) Actions. Mais chaque chose en son temps, vous verrez comment configurer le manifest avec GitHub Actions dans le [prochain article](../../blog/setup-continuous-integration-github-repository/).
+Ces fichiers sont essentiellement les mêmes que ceux mentionnés dans [l'autre article](/fr/blog/setup-kubernetes-with-cilium-and-cloudflare#example-app-mutanuq) mais séparés en quatre fichiers, car cela nous donne l'avantage de manipuler le manifest depuis [GitHub](https://github.com/github) Actions. Mais chaque chose en son temps, vous verrez comment configurer le manifest avec GitHub Actions dans le [prochain article](/fr/blog/setup-continuous-integration-github-repository).
 
 ## Créer une nouvelle application dans l'interface utilisateur d'Argo CD
 
@@ -274,7 +274,7 @@ Vous verrez probablement le grand bouton `NEW APP` dans l'interface utilisateur 
 
 * Nom de l'application : `mutanuq`
 * Nom du projet : `défaut`
-* Politique de synchronisation : En savoir plus dans [cet article](../../blog/setup-continuous-integration-github-repository/) / laissez `Manuel` pour l'instant
+* Politique de synchronisation : En savoir plus dans [cet article](/fr/blog/setup-continuous-integration-github-repository) / laissez `Manuel` pour l'instant
 * URL du dépôt : `https://github.com/trueberryless-org/mutanuq`
 * Révision : `HEAD`
 * Chemin : `manifest`
@@ -295,7 +295,7 @@ argocd app create mutanuq \
 
 Vous devriez maintenant voir votre site web en cours de déploiement dans l'interface utilisateur. Ce processus peut prendre un certain temps, car, par exemple, la demande de certificat doit être approuvée. Une application saine devrait ressembler à ceci :
 
-Interface utilisateur d'exemple d'Argo CD
+![Interface utilisateur d'exemple d'Argo CD](../../../../../assets/argocd/argocd_example_application_ui.png)
 
 ## Célébrez avec un café !
 
@@ -303,4 +303,4 @@ Félicitations, vous avez configuré avec succès [Argo CD](https://github.com/a
 
 ## Continuation
 
-La suite dans notre [prochain article de blog](../../blog/setup-continuous-integration-github-repository/), qui décrira comment configurer un dépôt [GitHub](https://github.com/github) pouvant ensuite être déployé via Argo CD.
+La suite dans notre [prochain article de blog](/fr/blog/setup-continuous-integration-github-repository), qui décrira comment configurer un dépôt [GitHub](https://github.com/github) pouvant ensuite être déployé via Argo CD.
