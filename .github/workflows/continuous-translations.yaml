@@ -26,7 +26,7 @@ jobs:
           key: continuous-translation-${{ github.run_id }}
           restore-keys: |
             continuous-translation-
-      - uses: pelikhan/action-continuous-translation@c717c7fd9d8414bc7b8294141510b3aeca3d7581 # links too deep since https://github.com/trueberryless-org/blog/commit/90603ce23342848cccd834ec9d8953e29ef1f8d7
+      - uses: pelikhan/action-continuous-translation@a878c430e4518dbf5fc7a00fe1c79d2e0d163437 # links too deep since https://github.com/trueberryless-org/blog/commit/90603ce23342848cccd834ec9d8953e29ef1f8d7
         continue-on-error: true
         with:
           github_token: ${{ secrets.AI_TRANSLATIONS_GITHUB_TOKEN }}
