@@ -170,16 +170,7 @@ export default defineConfig({
         PageTitle: "./src/components/PageTitle.astro",
         Pagination: "./src/components/Pagination.astro",
       },
-      customCss: [
-        "./src/styles/layers.css",
-        "./src/styles/badges.css",
-        "./src/styles/fonts.css",
-        "./src/styles/fragment-highlight.css",
-        "./src/styles/headings.css",
-        "./src/styles/hero.css",
-        "./src/styles/images.css",
-        "./src/styles/links.css",
-      ],
+      customCss: ["./src/styles/index.css"],
       markdown: {
         headingLinks: false,
       },

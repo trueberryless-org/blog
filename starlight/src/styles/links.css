@@ -1,10 +1,8 @@
-@layer blog {
-  .external-link-tiny-caret {
-    font-size: 0.7em; /* smaller font size */
-    vertical-align: 0.4em; /* raise it a bit */
-    user-select: none;
+.external-link-tiny-caret {
+  font-size: 0.7em; /* smaller font size */
+  vertical-align: 0.4em; /* raise it a bit */
+  user-select: none;
 
-    display: inline-block; /* required for transform */
-    transform: scaleX(1) scaleY(0.7); /* wider horizontally, flatter vertically */
-  }
+  display: inline-block; /* required for transform */
+  transform: scaleX(1) scaleY(0.7); /* wider horizontally, flatter vertically */
 }

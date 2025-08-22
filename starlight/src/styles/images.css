@@ -1,11 +1,13 @@
-@layer blog {
-  dialog::backdrop {
-    backdrop-filter: blur(10px) brightness(0.8);
-  }
+:root {
+  --starlight-image-zoom-backdrop-bg: none;
+}
 
-  img {
-    border-radius: 0.5rem;
-  }
+dialog::backdrop {
+  backdrop-filter: blur(10px) brightness(0.8);
+}
+
+img {
+  border-radius: 0.5rem;
 }
 
 .album-grid {
