@@ -26,7 +26,7 @@ jobs:
           key: continuous-translation-${{ github.run_id }}
           restore-keys: |
             continuous-translation-
-      - uses: pelikhan/action-continuous-translation@c717c7fd9d8414bc7b8294141510b3aeca3d7581 # last version where it definitely worked
+      - uses: pelikhan/action-continuous-translation@3112142623ab0df468d1c50c4b0fdc93e7948af0 # trying out different commits to track down issue
         continue-on-error: true
         with:
           github_token: ${{ secrets.AI_TRANSLATIONS_GITHUB_TOKEN }}
@@ -37,13 +37,13 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: "ci: translated content"
+          commit-message: "ci: 🤖 translated content"
           sign-commits: true
           signoff: true
           branch: translation-updates
           delete-branch: true
           base: main
-          title: "[ci] Update translations"
+          title: "[ci] Update translations 🤖"
           labels: "🤖 bot"
           body: |
             This PR was automatically generated to add/update translations.
