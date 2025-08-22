@@ -112,7 +112,7 @@ spec:
 
 Wenden Sie diese Ressource an, indem Sie `kubectl apply -f argocd-ingress.yaml` ausführen.
 
-## Deaktivieren des TLS in Argo CD
+## TLS in Argo CD deaktivieren
 
 Mit dem Zertifikat ist die Verbindung zwischen Client und Server gesichert. Es gibt jedoch immer noch ein selbstsigniertes Zertifikat innerhalb der [Argo CD](https://github.com/argoproj)-Services, das wir nicht unbedingt benötigen. Daher können wir die Sicherheit des Argo-CD-Servers deaktivieren, indem wir die Eigenschaft `server.insecure` bearbeiten.
 
