@@ -33,7 +33,7 @@ importers:
         specifier: ^0.41.3
         version: 0.41.3
       '@expressive-code/plugin-line-numbers':
-        specifier: ^0.41.2
+        specifier: ^0.41.3
         version: 0.41.3
       '@fontsource-variable/atkinson-hyperlegible-next':
         specifier: ^5.2.4
