@@ -30,7 +30,7 @@ importers:
         specifier: ^0.34.3
         version: 0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1))
       '@expressive-code/plugin-collapsible-sections':
-        specifier: ^0.41.2
+        specifier: ^0.41.3
         version: 0.41.3
       '@expressive-code/plugin-line-numbers':
         specifier: ^0.41.2
