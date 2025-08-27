@@ -39,7 +39,7 @@ importers:
         specifier: ^5.2.4
         version: 5.2.4
       '@fontsource-variable/jetbrains-mono':
-        specifier: ^5.0.21
+        specifier: ^5.2.6
         version: 5.2.6
       '@lunariajs/core':
         specifier: ^0.1.1
