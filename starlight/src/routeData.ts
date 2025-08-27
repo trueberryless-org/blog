@@ -6,8 +6,6 @@ export const onRequest = defineRouteMiddleware((context) => {
     context.site
   );
 
-  console.log(ogImageUrl.href);
-
   const { head, entry } = context.locals.starlightRoute;
 
   head.push({
