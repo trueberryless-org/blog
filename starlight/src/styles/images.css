@@ -1,0 +1,33 @@
+:root {
+  --starlight-image-zoom-backdrop-bg: none;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(10px) brightness(0.8);
+}
+
+img {
+  border-radius: 0.5rem;
+}
+
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-block: 3rem;
+}
+
+.album-grid > * {
+  margin-top: 0;
+}
+
+.code-clues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+  margin-block: 3rem;
+}
+
+.code-clues-grid > * {
+  margin-top: 0;
+}

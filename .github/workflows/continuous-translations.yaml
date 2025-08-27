@@ -1,0 +1,60 @@
+name: Continuous Translation
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "starlight/src/content/docs/**/*.md"
+      - "starlight/src/content/docs/**/*.mdx"
+      - "!starlight/src/content/docs/fr/**"
+      - "!starlight/src/content/docs/de/**"
+permissions:
+  contents: write
+  models: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  continuous_translation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
+        with:
+          app_id: ${{ secrets.BOT_APP_ID }}
+          private_key: ${{ secrets.BOT_PRIVATE_KEY }}
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: .genaiscript/cache/**
+          key: continuous-translation-${{ github.run_id }}
+          restore-keys: |
+            continuous-translation-
+      - uses: pelikhan/action-continuous-translation@9e2640d927160a9a6efe87b9ba19c2d92f94a931 # trying out different commits to track down issue
+        continue-on-error: true
+        with:
+          github_token: ${{ secrets.AI_TRANSLATIONS_GITHUB_TOKEN }}
+          lang: fr,de
+          starlight_dir: starlight
+          files: |
+            starlight/src/content/docs/**/*
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7.0.8
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          commit-message: "ci: 🤖 translated content"
+          sign-commits: true
+          signoff: true
+          branch: translation-updates
+          delete-branch: true
+          base: main
+          title: "[ci] Update translations 🤖"
+          labels: "🤖 bot"
+          body: |
+            This PR was automatically generated to add/update translations.
+            Please review the changes before merging.
+          add-paths: |
+            **.md*
+            translations/*.json

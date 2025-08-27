@@ -1,0 +1,22 @@
+---
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
+import BottomTableOfContentsWrapper from "starlight-cooler-credit/components/BottomTableOfContentsWrapper.astro";
+import CreditReferenceCard from "starlight-cooler-credit/components/CreditReferenceCard.astro";
+import ReferenceCard from "./ReferenceCard.astro";
+
+import fontStampImage from "../assets/font_stamp.png";
+---
+
+<Default><slot /></Default>
+<BottomTableOfContentsWrapper>
+  <ReferenceCard
+    heading="Atkinson Hyperlegible Next™"
+    description={Astro.locals.t("blog.fontReference.description")}
+    link="https://www.brailleinstitute.org/freefont/"
+    imagePath={fontStampImage}
+    imageAlt={Astro.locals.t("blog.fontReference.imageAlt")}
+    imageWidth={360}
+    imageHeight={360}
+  />
+  <CreditReferenceCard />
+</BottomTableOfContentsWrapper>

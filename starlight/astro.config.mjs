@@ -1,17 +1,36 @@
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
+import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
+import starlightCoolerCredit from "starlight-cooler-credit";
+import starlightGiscus from "starlight-giscus";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
-import starlightViewModes from "starlight-view-modes";
+import { loadEnv } from "vite";
+
+import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
+import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
+
+const { GISCUS_REPO_ID, GISCUS_CATEGORY_ID } = loadEnv(
+  process.env.NODE_ENV ?? "development",
+  process.cwd(),
+  "GISCUS_"
+);
+
+if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
+  console.warn(
+    "[giscus] Skipping Giscus integration: GISCUS_REPO_ID or GISCUS_CATEGORY_ID not set."
+  );
+}
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.trueberryless.org",
   integrations: [
     starlight({
-      title: "Blog",
+      title: "Deep Thoughts",
       social: [
         {
           icon: "blueSky",
@@ -32,6 +51,21 @@ export default defineConfig({
       editLink: {
         baseUrl:
           "https://github.com/trueberryless-org/blog/tree/main/starlight/",
+      },
+      defaultLocale: "root",
+      locales: {
+        root: {
+          label: "English",
+          lang: "en",
+        },
+        fr: {
+          label: "French",
+          lang: "fr",
+        },
+        de: {
+          label: "Deutsch",
+          lang: "de",
+        },
       },
       lastUpdated: true,
       logo: {
@@ -58,14 +92,30 @@ export default defineConfig({
       ],
       routeMiddleware: "./src/routeData.ts",
       plugins: [
+        lunaria({
+          sync: true,
+        }),
         starlightLinksValidator({
-          exclude: ["/blog/tags/*"],
+          exclude: [
+            "/blog/tags/*",
+            "/blog/authors/*",
+            "/de/blog/tags/*",
+            "/de/blog/authors/*",
+            "/fr/blog/tags/*",
+            "/fr/blog/authors/*",
+          ],
+          errorOnRelativeLinks: false,
+          errorOnInvalidHashes: false,
         }),
         starlightImageZoom(),
         starlightThemeRapide(),
+        starlightCoolerCredit({
+          credit: "Starlight Blog",
+        }),
         starlightBlog({
           title: "Deep Thoughts",
-          recentPostCount: 3,
+          postCount: 7,
+          recentPostCount: 5,
           prevNextLinksOrder: "chronological",
           navigation: "none",
           metrics: {
@@ -101,60 +151,37 @@ export default defineConfig({
             },
           },
         }),
-        // starlightViewModes(),
-        {
-          name: "blog-separation-character",
-          hooks: {
-            "i18n:setup"({ injectTranslations }) {
-              injectTranslations({
-                en: {
-                  "starlightBlog.post.lastUpdate":
-                    ' • Last update: <time datetime="{{isoDate}}">{{date, datetime(dateStyle: medium)}}</time>',
-                  "starlightBlog.metrics.readingTime.minutes":
-                    " • {{count}} min read",
-                  "starlightBlog.metrics.words_one": " • {{count}} word",
-                  "starlightBlog.metrics.words_other": " • {{count}} words",
-                },
-              });
-            },
-            "config:setup"() {},
-          },
-        },
-        {
-          name: "blog-reading-time-routes",
-          hooks: {
-            "config:setup"({ logger, addIntegration }) {
-              addIntegration({
-                name: "blog-reading-time-routes",
-                hooks: {
-                  "astro:config:setup"({ injectRoute }) {
-                    injectRoute({
-                      pattern: "/reading-time/[length]",
-                      entrypoint: "./src/components/ReadingTimeRoutes.astro",
-                      prerender: true,
-                    });
-                  },
-                },
-              });
-              logger.info("Starlight Plugin Example has been loaded.");
-            },
-          },
-        },
+        ...(GISCUS_REPO_ID && GISCUS_CATEGORY_ID
+          ? [
+              starlightGiscus({
+                repo: "trueberryless-org/blog",
+                repoId: GISCUS_REPO_ID,
+                category: "Comments",
+                categoryId: GISCUS_CATEGORY_ID,
+                lazy: true,
+              }),
+            ]
+          : []),
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
+        TableOfContents: "./src/components/TableOfContents.astro",
+        Hero: "./src/components/Hero.astro",
+        PageTitle: "./src/components/PageTitle.astro",
+        Pagination: "./src/components/Pagination.astro",
       },
-      customCss: [
-        "./src/styles/custom.css",
-        "@fontsource/nova-square/400.css",
-        "@fontsource/inria-sans/400.css",
-        "@fontsource-variable/jetbrains-mono/wght.css",
-      ],
+      customCss: ["./src/styles/index.css"],
+      markdown: {
+        headingLinks: false,
+      },
       pagination: false,
-      credits: true,
     }),
   ],
-  redirects: {
-    "/": "/blog",
+  markdown: {
+    rehypePlugins: [
+      rehypeHeadingIds,
+      rehypeAutolinkHeadings,
+      rehypeGitHubBadgeLinks,
+    ],
   },
 });

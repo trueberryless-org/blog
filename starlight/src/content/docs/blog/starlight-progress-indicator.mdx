@@ -3,13 +3,13 @@ title: How to create a horizontal progress indicator for your Starlight site
 description: Learn how to create a horizontal progress indicator for your Starlight site.
 date: 2025-06-10
 tags:
-    - Starlight
-    - Components
-    - CSS
-excerpt: Learn how to create a horizontal progress indicator for your Starlight site.
+  - Starlight
+  - CSS
+  - Education
+excerpt: Learn how to create a horizontal progress indicator for your <a class="gh-badge" href="https://github.com/withastro/starlight"><img src="/starlight.png" alt="Starlight" />Starlight</a> site.
 authors:
-    - frostybee
-    - trueberryless
+  - frostybee
+  - trueberryless
 cover:
   alt: A beautiful cover image with the text "Progress Bar"
   image: ../../../../public/blog/starlight-progress-indicator.png
@@ -24,8 +24,6 @@ You will need to have an existing Starlight website.
 ## Create the progress indicator component
 
 Let's create a new component called `ProgressIndicator.astro` in the `src/components/` directory. This component will be responsible for rendering the progress indicator.
-
-First, let's take a look at a classic solution using JavaScript. 
 
 We create a container which spans across the whole width with the progress bar `<div>` inside. The width of the inner `<div>` is the updated whenever the user scrolls (and when the page loads) to reflect the current scroll position. 
 
@@ -125,3 +123,5 @@ You can find the whole project code on [GitHub](https://github.com/trueberryless
 ## Conclusion
 
 With this setup, the progress indicator will be displayed on every page (except landing pages) of your Starlight site. 🥳
+
+You can also check out [FrostyBee's](https://github.com/frostybee) [Starlight Scroll To Top plugin](https://github.com/frostybee/starlight-scroll-to-top) which also supports a built in [Progress Ring](https://frostybee.github.io/starlight-scroll-to-top/configuration/#showprogressring) since version `0.3.1`. 🙌

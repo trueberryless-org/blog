@@ -1,0 +1,183 @@
+---
+import { Badge } from "@astrojs/starlight/components";
+import type { StarlightBlogData } from "starlight-blog/data";
+const starlightBlogData = Astro.locals.starlightBlog;
+
+const postsByYear = starlightBlogData.posts.reduce<
+  Record<string, StarlightBlogData["posts"]>
+>((acc, post) => {
+  const year = post.createdAt.getFullYear().toString();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {});
+
+// Sort years descending
+const sortedYears = Object.keys(postsByYear).sort(
+  (a, b) => Number(b) - Number(a)
+);
+
+const featuredPosts = starlightBlogData.posts.filter((post) => post.featured);
+---
+
+<div class="not-content">
+  {
+    featuredPosts.length !== 0 && (
+      <div class="year-section">
+        <div class="year-label">Stars</div>
+        <div class="posts">
+          {featuredPosts
+            .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+            .map((post) => (
+              <div class="post">
+                <a href={post.href}>
+                  <span class="post-title">{post.title}</span>
+                  <span class="post-separator">•</span>
+                  <span class="post-meta">
+                    <span>
+                      {post.authors
+                        .map((a) => a.name)
+                        .filter((a) => a != "Artificial Intelligence")
+                        .join(", ")}
+                    </span>
+                    <span class="little-post-separator">•</span>
+                    <span>{post.metrics.readingTime.minutes}min</span>
+                  </span>
+                </a>
+              </div>
+            ))}
+        </div>
+      </div>
+    )
+  }
+  {
+    sortedYears.map((year) => (
+      <div class="year-section">
+        <div class="year-label">{year}</div>
+        <div class="posts">
+          {postsByYear[year]
+            .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+            .map((post) => (
+              <div class="post">
+                <a href={post.href}>
+                  <span class="post-title">{post.title}</span>
+                  <span class="post-separator">•</span>
+                  <span class="post-meta">
+                    <span>
+                      {post.authors
+                        .map((a) => a.name)
+                        .filter((a) => a != "Artificial Intelligence")
+                        .join(", ")}
+                    </span>
+                    <span class="little-post-separator">•</span>
+                    <span>{post.metrics.readingTime.minutes}min</span>
+                    {post.featured && (
+                      <>
+                        <span class="little-post-separator">•</span>
+                        <span>
+                          <Badge text="Featured" variant="note" />
+                        </span>
+                      </>
+                    )}
+                  </span>
+                </a>
+              </div>
+            ))}
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .year-section {
+    position: relative;
+    margin-bottom: 6rem;
+  }
+
+  .year-label {
+    font-size: 16rem;
+    top: -14rem;
+    left: 0;
+    color: var(--sl-color-gray-7);
+    font-weight: bold;
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .posts {
+    position: relative;
+    z-index: 1;
+    margin-top: 12rem;
+    margin-inline: 4rem;
+  }
+
+  .post,
+  .post > a {
+    padding-block: 0.5rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-separator {
+    display: inline;
+    color: var(--sl-color-white);
+    margin-inline: 1rem;
+  }
+
+  .little-post-separator {
+    margin-inline: 0.5rem;
+  }
+
+  .post-title {
+    display: inline;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.1s ease-in-out;
+  }
+
+  .post > a:hover > .post-title {
+    color: var(--sl-color-accent);
+  }
+
+  .post-meta {
+    color: var(--sl-color-gray-3);
+    font-size: 0.875rem;
+    transition: color 0.1s ease-in-out;
+  }
+
+  .post > a:hover > .post-meta {
+    color: var(--sl-color-gray-2);
+  }
+
+  @media (max-width: 72rem) {
+    :is(.year-section, .posts, .post, .post-title, .post-meta) {
+      text-align: center;
+    }
+
+    .year-label {
+      font-size: 8rem;
+      top: -5rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .post-title {
+      display: block;
+    }
+
+    .post-separator {
+      display: none;
+    }
+  }
+</style>
+
+<style is:global>
+  .sl-container:has(h1) {
+    display: none;
+  }
+</style>

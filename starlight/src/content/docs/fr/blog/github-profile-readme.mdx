@@ -1,0 +1,35 @@
+---
+title: Concevoir un profil qui fonctionne dans les règles de GitHub
+date: 2025-02-05
+description: Comment j’ai conçu un README de profil GitHub qui ne devrait pas
+  exister, mais qui existe
+tags:
+  - GitHub
+  - Markdown
+authors:
+  - trueberryless
+cover:
+  alt: A beautiful cover image with the text "GitHub Profile README"
+  image: ../../../../../public/blog/github-profile-readme.png
+
+---
+
+Tout grand projet commence par la prise de conscience d’un problème. Mon README de profil GitHub était en désordre, rempli d’une quantité excessive d’informations, trop de badges, et un contenu accablant qui manquait de style et de structure. Il contenait des réalisations de hackathon, des graphiques de contributions GitHub, divers badges techniques, et bien plus, ce qui le rendait visuellement peu attrayant et difficile à naviguer. Au début, je pensais que c'était une manière efficace de me présenter, mais avec le temps, il est devenu clair que l'information était plus accablante qu'informative. Je voulais quelque chose de nouveau, une approche plus raffinée et visuellement attrayante pour présenter mon profil, et l’idée d’implémenter une grille « bento » m’est venue à l’esprit. L’objectif était de créer une mise en page qui soit non seulement fonctionnelle, mais également esthétiquement impressionnante et structurée.
+
+{/* excerpt */}
+
+La première étape consistait à concevoir une mise en page idéale en utilisant HTML et CSS. Le résultat était prometteur, une conception structurée et visuellement agréable qui transmettait efficacement les informations prévues. Cependant, l’implémentation directe de ceci dans mon README de profil GitHub n’était pas simple. Le Markdown propre à GitHub impose des limitations strictes sur les éléments HTML pris en charge en raison des contraintes de sécurité. De nombreuses balises HTML essentielles étaient limitées, rendant impossible l'intégration de la conception telle qu'elle avait été envisagée. Comprendre ces limitations signifiait repenser complètement l’approche.
+
+Confronté à ces restrictions, j’ai envisagé des moyens alternatifs pour générer et présenter dynamiquement le contenu. Une approche consistait à automatiser les mises à jour du contenu à l’aide d’un script Python pour récupérer mon dernier dépôt GitHub et l’insérer dynamiquement dans le README. Le script accédait à l’API GitHub, récupérait le dépôt mis à jour le plus récemment, et modifiait le README en conséquence. Bien que cela ait été une expérimentation intéressante d’automatisation, cela ne résolvait pas le problème central, qui était la nécessité d’un design structuré et visuellement attrayant.
+
+Envisageant des approches alternatives, j’ai brièvement envisagé l’idée de prendre une capture d’écran de la mise en page HTML conçue et de l’intégrer comme une image statique dans le README. Bien que cela aurait visuellement résolu le problème, cela semblait être une solution peu élégante qui manquait de flexibilité et de réactivité. Avançant, j’ai cherché une méthode qui permettait à la fois la structure et l’adaptabilité tout en maintenant les mises à jour dynamiques du contenu.
+
+Les SVGs se sont révélés être une solution potentielle. Ils assurent l’évolutivité, maintiennent une clarté visuelle sur différentes résolutions, et permettent l’intégration de texte et d’autres éléments. Une première expérimentation impliquait l’intégration de HTML dans un SVG en utilisant la balise `foreignObject`. Bien que conceptuellement prometteuse, la mise en œuvre s'est avérée complexe et a été mise de côté temporairement. En revenant au problème plus tard, une approche plus structurée était nécessaire.
+
+L’approche finale consistait à utiliser une structure SVG composite. La solution se composait de plusieurs éléments clés : convertir la mise en page HTML originale en une représentation SVG, encoder les images en Base64 pour garantir leur chargement correct, intégrer des éléments dynamiques tels que des statistiques GitHub et des mises à jour du statut Spotify sous forme de SVG inline, et automatiser les mises à jour via GitHub Actions. En utilisant ces techniques, la mise en page en grille « bento » est devenue entièrement fonctionnelle, capable de se mettre à jour automatiquement tout en conservant une apparence propre et structurée, respectant les contraintes du Markdown propre à GitHub.
+
+Un point tournant critique a été la découverte d’un post sur Stack Overflow détaillant une méthode pour convertir HTML en SVG de manière efficace et efficiente. Cette méthode fournissait un moyen structuré de générer les éléments SVG nécessaires tout en préservant le design prévu. En combinant cela avec l’encodage Base64 pour les images et les GitHub Actions pour l’automatisation, cela a permis d’obtenir une solution complète répondant à toutes les exigences initiales.
+
+La mise en œuvre finale consiste en un README de profil GitHub raffiné et visuellement remarquable qui intègre des mises à jour dynamiques tout en conservant une structure élégante. Il présente les informations clairement sans surcharge inutile et est entièrement automatisé, se mettant à jour toutes les cinq minutes sans intervention manuelle. Le projet a nécessité des recherches importantes et des expérimentations avec les SVGs, les GitHub Actions, et les limitations du Markdown. Le processus a demandé de la persévérance et de la résolution de problèmes pour travailler dans les contraintes de la plateforme tout en obtenant un résultat techniquement impressionnant. Le résultat est un README de profil GitHub qui équilibre efficacement design, automatisation et fonctionnalité dans les limitations de la plateforme.
+
+Si vous êtes maintenant inspiré pour créer vous-même un README de profil GitHub impressionnant, lisez mon [article de blog technique et amusant](../../../../../blog/technically-impressive-github-profile-readme/) ou consultez directement mon dépôt [github.com/trueberryless/trueberryless](https://github.com/trueberryless/trueberryless/tree/7519c6f50094bdfd6fb47f610e6638ac8efdd6ad). Et si vous trouvez mon travail utile, pensez à lui donner un ⭐ et à me suivre sur GitHub à [trueberryless](https://github.com/trueberryless)! 🚀
