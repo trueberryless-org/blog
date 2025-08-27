@@ -34,8 +34,8 @@
     "typescript": "^5.5.4",
     "unist-util-visit": "^5.0.0"
   },
-  "packageManager": "pnpm@10.10.0",
   "devDependencies": {
     "vite": "^6.3.5"
-  }
+  },
+  "packageManager": "pnpm@10.10.0"
 }
