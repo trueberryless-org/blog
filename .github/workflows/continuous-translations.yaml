@@ -32,7 +32,7 @@ jobs:
           key: continuous-translation-${{ github.run_id }}
           restore-keys: |
             continuous-translation-
-      - uses: pelikhan/action-continuous-translation@b33a6be280edf273c301292d309371d0a705f5e1 # trying out different commits to track down issue
+      - uses: pelikhan/action-continuous-translation@2fbce13fcb82711df7ffe381ca031d05bcfeffa0 # trying out different commits to track down issue
         continue-on-error: true
         with:
           github_token: ${{ secrets.AI_TRANSLATIONS_GITHUB_TOKEN }}
