@@ -31,7 +31,7 @@
     "starlight-image-zoom": "^0.10.1",
     "starlight-links-validator": "^0.14.2",
     "starlight-theme-rapide": "^0.5.1",
-    "typescript": "^5.5.4",
+    "typescript": "^5.9.2",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
