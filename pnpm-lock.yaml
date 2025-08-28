@@ -60,7 +60,7 @@ importers:
         specifier: ^0.34.2
         version: 0.34.3
       starlight-blog:
-        specifier: ^0.24.0
+        specifier: ^0.24.1
         version: 0.24.1(@astrojs/starlight@0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1)))(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1))
       starlight-cooler-credit:
         specifier: ^0.4.0
