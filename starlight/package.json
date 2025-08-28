@@ -25,7 +25,7 @@
     "hastscript": "^9.0.1",
     "rehype-autolink-headings": "^7.1.0",
     "sharp": "^0.34.2",
-    "starlight-blog": "^0.24.0",
+    "starlight-blog": "^0.24.1",
     "starlight-cooler-credit": "^0.4.0",
     "starlight-giscus": "^0.6.1",
     "starlight-image-zoom": "^0.10.1",
