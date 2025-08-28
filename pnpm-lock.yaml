@@ -57,7 +57,7 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       sharp:
-        specifier: ^0.34.2
+        specifier: ^0.34.3
         version: 0.34.3
       starlight-blog:
         specifier: ^0.24.0

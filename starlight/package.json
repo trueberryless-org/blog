@@ -24,7 +24,7 @@
     "astro": "^5.8.1",
     "hastscript": "^9.0.1",
     "rehype-autolink-headings": "^7.1.0",
-    "sharp": "^0.34.2",
+    "sharp": "^0.34.3",
     "starlight-blog": "^0.24.0",
     "starlight-cooler-credit": "^0.4.0",
     "starlight-giscus": "^0.6.1",
