@@ -21,7 +21,7 @@
     "@fontsource-variable/jetbrains-mono": "^5.0.21",
     "@lunariajs/core": "^0.1.1",
     "@lunariajs/starlight": "^0.1.1",
-    "astro": "^5.8.1",
+    "astro": "^5.13.5",
     "hastscript": "^9.0.1",
     "rehype-autolink-headings": "^7.1.0",
     "sharp": "^0.34.2",
