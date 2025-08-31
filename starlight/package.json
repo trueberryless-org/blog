@@ -28,7 +28,7 @@
     "starlight-blog": "^0.24.0",
     "starlight-cooler-credit": "^0.4.0",
     "starlight-giscus": "^0.6.1",
-    "starlight-image-zoom": "^0.10.1",
+    "starlight-image-zoom": "^0.13.0",
     "starlight-links-validator": "^0.14.2",
     "starlight-theme-rapide": "^0.5.1",
     "typescript": "^5.5.4",

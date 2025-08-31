@@ -69,8 +69,8 @@ importers:
         specifier: ^0.6.1
         version: 0.6.1(@astrojs/starlight@0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1)))
       starlight-image-zoom:
-        specifier: ^0.10.1
-        version: 0.10.1(@astrojs/starlight@0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1)))
+        specifier: ^0.13.0
+        version: 0.13.0(@astrojs/starlight@0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1)))
       starlight-links-validator:
         specifier: ^0.14.2
         version: 0.14.3(@astrojs/starlight@0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1)))
@@ -2323,11 +2323,11 @@ packages:
     peerDependencies:
       '@astrojs/starlight': '>=0.32.0'
 
-  starlight-image-zoom@0.10.1:
-    resolution: {integrity: sha512-1uEwijShhFFcYA++lDmFV32WmZkpp/VMvD4+PC5h+7InnyPGMiT+mSVJzbddNEit44OxM5kxbO6/OqcBtjKpOA==}
+  starlight-image-zoom@0.13.0:
+    resolution: {integrity: sha512-7K/7gshnKooYd4ePy5vtyv1jFoFVNUb8IoXWDcnY69+nxvmLATNrmOzD2M4TJ/aKynPSBSM6j9ia4s/PPy/JGA==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@astrojs/starlight': '>=0.30.0'
+      '@astrojs/starlight': '>=0.32.0'
 
   starlight-links-validator@0.14.3:
     resolution: {integrity: sha512-2CvQs0ZdIVExrEQ1bn0r2aFx4n+VSOb6vDWK+gTNb5N1c+nXJ7VjUbEsQhj+9Lb7XgY6Nxqz9JXUM9364hJ3ZA==}
@@ -5679,12 +5679,15 @@ snapshots:
     dependencies:
       '@astrojs/starlight': 0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1))
 
-  starlight-image-zoom@0.10.1(@astrojs/starlight@0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1))):
+  starlight-image-zoom@0.13.0(@astrojs/starlight@0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1))):
     dependencies:
       '@astrojs/starlight': 0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1))
+      mdast-util-mdx-jsx: 3.2.0
       rehype-raw: 7.0.0
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
+    transitivePeerDependencies:
+      - supports-color
 
   starlight-links-validator@0.14.3(@astrojs/starlight@0.34.8(astro@5.13.2(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.1))):
     dependencies:
