@@ -32,7 +32,7 @@ jobs:
           key: continuous-translation-${{ github.run_id }}
           restore-keys: |
             continuous-translation-
-      - uses: pelikhan/action-continuous-translation@5e494ac288fae6e3305b0d839ee69e247eef08da # trying out different commits to track down issue
+      - uses: pelikhan/action-continuous-translation@86d7d6c68af14252976f51bcb15bda42582f4c39 # trying out different commits to track down issue
         continue-on-error: true
         with:
           github_token: ${{ secrets.AI_TRANSLATIONS_GITHUB_TOKEN }}
@@ -41,7 +41,7 @@ jobs:
           files: |
             starlight/src/content/docs/**/*
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7.0.8
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
         with:
           token: ${{ steps.generate_token.outputs.token }}
           commit-message: "ci: 🤖 translated content"
