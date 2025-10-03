@@ -35,7 +35,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "vite": "^6.3.5"
+    "vite": "^7.1.9"
   },
   "packageManager": "pnpm@10.10.0"
 }
