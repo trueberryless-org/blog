@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - "starlight/src/content/docs/**/*.md"
-      - "starlight/src/content/docs/**/*.mdx"
-      - "!starlight/src/content/docs/fr/**"
-      - "!starlight/src/content/docs/de/**"
+      - "src/content/docs/**/*.md"
+      - "src/content/docs/**/*.mdx"
+      - "!src/content/docs/fr/**"
+      - "!src/content/docs/de/**"
 permissions:
   contents: write
   models: read
@@ -39,7 +39,7 @@ jobs:
           lang: fr,de
           starlight_dir: starlight
           files: |
-            starlight/src/content/docs/**/*
+            src/content/docs/**/*
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7.0.8
         with:

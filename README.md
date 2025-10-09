@@ -15,12 +15,6 @@ To get started, clone the repo with this command:
 git clone https://github.com/trueberryless-org/blog
 ```
 
-Go into the starlight folder.
-
-```
-cd ./starlight/
-```
-
 Run
 
 ```
@@ -56,7 +50,7 @@ Here is an example URL: https://release-image-generator.trueberryless.org/?text=
 
 ## Contribution
 
-If you wanna contribute to the blog website, just edit or create the Markdown files you wanna change and create a pull request.  
+If you wanna contribute to the blog website, just edit or create the Markdown files you wanna change and create a pull request.
 This can either be done directly on GitHub or locally by following the steps above. Good luck and thank you for helping improve the internet day by day!
 
 More information about contribution can be found unter [CONTRIBUTING.md](https://github.com/trueberryless-org/blog/blob/main/CONTRIBUTING.md).

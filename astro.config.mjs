@@ -50,7 +50,7 @@ export default defineConfig({
       ],
       editLink: {
         baseUrl:
-          "https://github.com/trueberryless-org/blog/tree/main/starlight/",
+          "https://github.com/trueberryless-org/blog/tree/main/",
       },
       defaultLocale: "root",
       locales: {
