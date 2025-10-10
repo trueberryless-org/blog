@@ -4,6 +4,7 @@ import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
+import starlightGiscus from "starlight-giscus";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
