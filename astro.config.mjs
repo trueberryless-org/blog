@@ -49,8 +49,7 @@ export default defineConfig({
         },
       ],
       editLink: {
-        baseUrl:
-          "https://github.com/trueberryless-org/blog/tree/main/",
+        baseUrl: "https://github.com/trueberryless-org/blog/tree/main/",
       },
       defaultLocale: "root",
       locales: {
