@@ -13,10 +13,15 @@ import { loadEnv } from "vite";
 import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
 import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
 
-const { GISCUS_REPO_ID, GISCUS_CATEGORY_ID } = loadEnv(
-  process.env.NODE_ENV ?? "development",
+const { GISCUS_REPO_ID } = loadEnv(
+  process.env.GISCUS_REPO_ID,
   process.cwd(),
-  "GISCUS_"
+  ""
+);
+const { GISCUS_CATEGORY_ID } = loadEnv(
+  process.env.GISCUS_CATEGORY_ID,
+  process.cwd(),
+  ""
 );
 
 if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
@@ -131,7 +136,7 @@ export default defineConfig({
             clemens: {
               name: "Clemens Schlipfinger",
               picture: "/clemens.png",
-              url: "https://www.linkedin.com/in/clemens-schlipfinger/",
+              url: "https://clemens.steinanet.at/",
             },
             hideoo: {
               name: "HiDeoo",
@@ -167,7 +172,6 @@ export default defineConfig({
         TableOfContents: "./src/components/TableOfContents.astro",
         Hero: "./src/components/Hero.astro",
         PageTitle: "./src/components/PageTitle.astro",
-        Pagination: "./src/components/Pagination.astro",
       },
       customCss: ["./src/styles/index.css"],
       markdown: {

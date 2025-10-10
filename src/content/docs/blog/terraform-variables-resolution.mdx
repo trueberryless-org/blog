@@ -9,8 +9,8 @@ tags:
 authors:
   - trueberryless
 cover:
-  alt: A beautiful cover image with the text "VSCE Terraform"
-  image: ../../../../public/blog/terraform-variables-resolution.png
+  alt: A wooden church building perched on a hill, symbolizing stability and faith, akin to resolving variables in Terraform.
+  image: ../../../../public/blog/terraform-variables-resolution.jpg
 ---
 
 import { FileTree, LinkButton } from "@astrojs/starlight/components"
@@ -156,7 +156,7 @@ Creating a VS Code extension was exactly such a use case because I had never cre
 After this initial brainstorming phase, I prefer to use [Claude](https://github.com/anthropics) for programming all the files necessary for such an extension since in my experience this AI bot really has the ability to nail code. I hardly encountered bugs or runtime issues with Claude code, so I use it exactly for such use cases – initial starters. The drawback of Claude is its very limited free trial, which is why I am always careful when choosing my words and try to think of as many possible mistakes the AI could make ahead of time.
 So this is how it began: I took some time to formulate my exact scenario and wish into the limited context windows of a random words machine called Claude and immediately received a huge `extension.ts` implementation. Of course there were obvious differences between my vision and the communication to this LLM, so I had to tell it another time what the important considerations are and in order to be able to receive more code, I also used my magic trick: "If this is too big for one file, just give me the whole extension.ts in multiple files, which should work of course."
 
-Claude then went on a long journey. 
+Claude then went on a long journey.
 
 After some struggling to keep it going my tokens were all used and I had to figure out the remaining code myself. Nonetheless, I managed to get a running version since not much was missing and immediately realised some improvements that went unnoticed until now. Since I had to wait for my tokens to refill, I did exactly this.
 
@@ -173,3 +173,7 @@ Try out the extension yourself by clicking on the button below. There are still 
 Here you can see the example from [the Terraform explanation](#what-is-terraform), showing how this extension visually adds the values of the variables in VS Code:
 
 ![Terraform Variables Resolution Example](../../../assets/blog/terraform-variables-resolution/example.png)
+
+## Credits
+
+Cover image creator: https://unsplash.com/@pablocontreras
