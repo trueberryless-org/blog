@@ -24,8 +24,6 @@ const { GISCUS_CATEGORY_ID } = loadEnv(
   ""
 );
 
-console.log("GISCUS:", GISCUS_REPO_ID, GISCUS_CATEGORY_ID);
-
 if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
   console.warn(
     "[giscus] Skipping Giscus integration: GISCUS_REPO_ID or GISCUS_CATEGORY_ID not set."
