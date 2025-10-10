@@ -37,7 +37,7 @@
     "sharp": "^0.34.4",
     "starlight-blog": "^0.24.2",
     "starlight-cooler-credit": "^0.4.0",
-    "starlight-giscus": "^0.7.0",
+    "starlight-giscus": "^0.8.0",
     "starlight-image-zoom": "^0.13.1",
     "starlight-links-validator": "^0.18.0",
     "starlight-theme-rapide": "^0.5.1",
@@ -45,10 +45,10 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "vite": "^7.1.9",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "prettier": "3.5.3",
-    "prettier-plugin-astro": "0.14.1"
+    "prettier-plugin-astro": "0.14.1",
+    "vite": "^7.1.9"
   },
   "packageManager": "pnpm@10.10.0"
 }

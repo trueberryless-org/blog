@@ -4,7 +4,6 @@ import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
-import starlightGiscus from "starlight-giscus";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
@@ -13,11 +12,18 @@ import { loadEnv } from "vite";
 import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
 import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
 
-const { GISCUS_REPO_ID, GISCUS_CATEGORY_ID } = loadEnv(
-  process.env.NODE_ENV ?? "development",
+const { GISCUS_REPO_ID } = loadEnv(
+  process.env.GISCUS_REPO_ID,
   process.cwd(),
-  "GISCUS_"
+  ""
 );
+const { GISCUS_CATEGORY_ID } = loadEnv(
+  process.env.GISCUS_CATEGORY_ID,
+  process.cwd(),
+  ""
+);
+
+console.log("GISCUS:", GISCUS_REPO_ID, GISCUS_CATEGORY_ID);
 
 if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
   console.warn(
@@ -49,8 +55,7 @@ export default defineConfig({
         },
       ],
       editLink: {
-        baseUrl:
-          "https://github.com/trueberryless-org/blog/tree/main/",
+        baseUrl: "https://github.com/trueberryless-org/blog/tree/main/",
       },
       defaultLocale: "root",
       locales: {
@@ -132,7 +137,7 @@ export default defineConfig({
             clemens: {
               name: "Clemens Schlipfinger",
               picture: "/clemens.png",
-              url: "https://www.linkedin.com/in/clemens-schlipfinger/",
+              url: "https://clemens.steinanet.at/",
             },
             hideoo: {
               name: "HiDeoo",
@@ -168,7 +173,6 @@ export default defineConfig({
         TableOfContents: "./src/components/TableOfContents.astro",
         Hero: "./src/components/Hero.astro",
         PageTitle: "./src/components/PageTitle.astro",
-        Pagination: "./src/components/Pagination.astro",
       },
       customCss: ["./src/styles/index.css"],
       markdown: {

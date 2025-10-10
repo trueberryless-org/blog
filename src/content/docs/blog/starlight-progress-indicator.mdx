@@ -11,8 +11,8 @@ authors:
   - frostybee
   - trueberryless
 cover:
-  alt: A beautiful cover image with the text "Progress Bar"
-  image: ../../../../public/blog/starlight-progress-indicator.png
+  alt: A striking black and red background with a bold red line running horizontally.
+  image: ../../../../public/blog/starlight-progress-indicator.jpg
 ---
 
 In this post, we would like to show you how [FrostyBee](https://github.com/frostybee) created a clean horizontal progress indicator for Starlight sites.
@@ -25,7 +25,7 @@ You will need to have an existing Starlight website.
 
 Let's create a new component called `ProgressIndicator.astro` in the `src/components/` directory. This component will be responsible for rendering the progress indicator.
 
-We create a container which spans across the whole width with the progress bar `<div>` inside. The width of the inner `<div>` is the updated whenever the user scrolls (and when the page loads) to reflect the current scroll position. 
+We create a container which spans across the whole width with the progress bar `<div>` inside. The width of the inner `<div>` is the updated whenever the user scrolls (and when the page loads) to reflect the current scroll position.
 
 ```astro title="src/components/ProgressIndicator.astro" collapse={27-43}
 <div class="progress-scroll-container" aria-hidden="true">
@@ -125,3 +125,7 @@ You can find the whole project code on [GitHub](https://github.com/trueberryless
 With this setup, the progress indicator will be displayed on every page (except landing pages) of your Starlight site. 🥳
 
 You can also check out [FrostyBee's](https://github.com/frostybee) [Starlight Scroll To Top plugin](https://github.com/frostybee/starlight-scroll-to-top) which also supports a built in [Progress Ring](https://frostybee.github.io/starlight-scroll-to-top/configuration/#showprogressring) since version `0.3.1`. 🙌
+
+## Credits
+
+Cover image creator: https://unsplash.com/@muriel_1
