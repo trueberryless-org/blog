@@ -1,0 +1,40 @@
+---
+title: Entwerfen eines Profils, das innerhalb der GitHub-Regeln funktioniert
+date: 2025-02-05
+description: Wie ich ein GitHub-Profile-README erstellt habe, das es eigentlich
+  nicht geben sollte, aber es existiert
+tags:
+  - GitHub
+  - Markdown
+authors:
+  - trueberryless
+cover:
+  alt: Visual representation of git history with contributions stats, featuring
+    text highlighted in green and blue for clarity.
+  image: ../../../../public/blog/github-profile-readme.jpg
+
+---
+
+Jedes großartige Projekt beginnt mit der Erkenntnis eines Problems. Mein GitHub-Profile-README war überladen, voll mit zu vielen Informationen, zu vielen Abzeichen und einer überwältigenden Menge an Inhalten, die Stil und Struktur fehlten. Es gab Erfolge von Hackathons, GitHub-Beitragsgrafiken, verschiedene technische Abzeichen und vieles mehr, was es visuell unansprechend und schwer navigierbar machte. Anfangs dachte ich, dies sei eine effektive Art, mich zu präsentieren, aber mit der Zeit wurde klar, dass die Informationen eher überwältigend als informativ waren. Ich wollte etwas Neues, einen raffinierteren und visuell ansprechenderen Ansatz, um mein Profil zu präsentieren, und die Idee, ein Bento-Raster zu implementieren, kam mir in den Sinn. Das Ziel war es, ein Layout zu schaffen, das nicht nur funktional, sondern auch ästhetisch beeindruckend und strukturiert ist.
+
+{/* excerpt */}
+
+Der erste Schritt bestand darin, ein ideales Layout unter Verwendung von HTML und CSS zu entwerfen. Das Ergebnis war vielversprechend, ein strukturiertes und optisch ansprechendes Design, das die beabsichtigten Informationen effektiv vermittelte. Doch die direkte Umsetzung in meinem GitHub-Profile-README war nicht unkompliziert. GitHub-Flavored Markdown unterliegt strengen Einschränkungen hinsichtlich der unterstützten HTML-Elemente aufgrund von Sicherheitsvorgaben. Viele essenzielle HTML-Tags waren eingeschränkt, was es unmöglich machte, das Design wie vorgesehen einzubetten. Das Verständnis dieser Einschränkungen bedeutete, dass der gesamte Ansatz neu durchdacht werden musste.
+
+Angesichts dieser Einschränkungen überlegte ich, alternative Wege zu finden, um die Inhalte dynamisch zu generieren und zu präsentieren. Ein Ansatz bestand darin, die Inhaltsaktualisierungen mit einem Python-Skript zu automatisieren, um mein neuestes GitHub-Repository abzurufen und es dynamisch in das README einzufügen. Das Skript griff auf die GitHub-API zu, rief das zuletzt aktualisierte Repository ab und änderte entsprechend das README. Obwohl dies ein interessantes Experiment in Automatisierung war, löste es nicht das Kernproblem, nämlich die Notwendigkeit eines strukturierten und visuell ansprechenden Designs.
+
+Unter Berücksichtigung alternativer Ansätze dachte ich kurzzeitig daran, einen Screenshot des entworfenen HTML-Layouts zu machen und ihn als statisches Bild im README einzubetten. Obwohl dies das Problem visuell gelöst hätte, fühlte es sich wie eine unelegante Lösung an, die mangelnde Flexibilität und Reaktionsfähigkeit aufwies. Weitergehend suchte ich nach einer Methode, die sowohl Struktur als auch Anpassungsfähigkeit ermöglichte und dennoch dynamische Inhaltsaktualisierungen beibehielt.
+
+SVGs traten als eine potenzielle Lösung in Erscheinung. Sie unterstützen Skalierbarkeit, bewahren die visuelle Klarheit über verschiedene Auflösungen hinweg und ermöglichen das Einbetten von Texten und anderen Elementen. Ein frühes Experiment beinhaltete das Einbetten von HTML in ein SVG unter Verwendung des `foreignObject`-Tags. Obwohl dies konzeptionell vielversprechend war, erwies sich die Umsetzung als komplex und wurde vorübergehend beiseite gelegt. Beim späteren Zurückkehren zum Problem war ein strukturierterer Ansatz erforderlich.
+
+Der endgültige Ansatz beinhaltete die Verwendung einer zusammengesetzten SVG-Struktur. Die Lösung bestand aus mehreren Schlüsselkomponenten: Konvertierung des ursprünglichen HTML-Layouts in eine SVG-Darstellung, Kodierung von Bildern mit Base64, um sicherzustellen, dass sie korrekt geladen wurden, Integration dynamischer Elemente wie GitHub-Statistiken und Spotify-Status-Updates als Inline-SVGs sowie Automatisierung der Updates über GitHub Actions. Durch den Einsatz dieser Techniken wurde das Bento-Rasterlayout voll funktionsfähig, konnte sich selbst aktualisieren und behielt dabei ein sauberes, strukturiertes Erscheinungsbild innerhalb der Einschränkungen von GitHub-Flavored Markdown bei.
+
+Ein entscheidender Wendepunkt war die Entdeckung eines Stack Overflow-Beitrags, der eine Methode zur effizienten und effektiven Konvertierung von HTML in SVG beschrieb. Diese Methode bot eine strukturierte Möglichkeit, die erforderlichen SVG-Elemente zu generieren, während das beabsichtigte Design beibehalten wurde. Durch die Kombination dieser Methode mit Base64-Kodierung für Bilder und GitHub Actions zur Automatisierung entstand eine vollständig realisierte Lösung, die alle ursprünglichen Anforderungen erfüllte.
+
+Die endgültige Implementierung besteht aus einem verfeinerten und visuell eindrucksvollen GitHub-Profile-README, das dynamische Inhaltsaktualisierungen integriert und dabei eine elegante Struktur beibehält. Sie präsentiert Informationen klar, ohne unnötige Überladung, und ist vollständig automatisiert, aktualisiert sich alle fünf Minuten ohne manuelles Eingreifen. Das Projekt erforderte umfangreiche Recherche und Experimente mit SVGs, GitHub Actions und Markdown-Einschränkungen. Der Prozess verlangte Ausdauer und Problemlösungsfähigkeiten, um innerhalb der Plattformbeschränkungen ein technisch beeindruckendes Ergebnis zu erzielen. Das Resultat ist ein GitHub-Profile-README, das Design, Automatisierung und Funktionalität innerhalb der Beschränkungen der Plattform effektiv ausbalanciert.
+
+Wenn du nun inspiriert bist, selbst ein beeindruckendes GitHub-Profile-README zu erstellen, lies meinen [technischeren und humorvollen Blog-Beitrag](/blog/technically-impressive-github-profile-readme/) oder schau direkt in mein Repository [github.com/trueberryless/trueberryless](https://github.com/trueberryless/trueberryless/tree/7519c6f50094bdfd6fb47f610e6638ac8efdd6ad). Und falls dir meine Arbeit hilft, gib ihr gern einen ⭐ und folge mir auf GitHub unter [trueberryless](https://github.com/trueberryless)! 🚀
+
+## Credits
+
+Ersteller des Titelbildes: [https://unsplash.com/@yancymin](https://unsplash.com/@yancymin)
