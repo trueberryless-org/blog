@@ -148,6 +148,11 @@ export default defineConfig({
               picture: "/frostybee.png",
               url: "https://github.com/frostybee",
             },
+            lan: {
+              name: "Lan",
+              picture: "/lan.png",
+              url: "https://github.com/LanHikari22",
+            },
             ai: {
               name: "Artificial Intelligence",
               title: "Written with the help of AI",
