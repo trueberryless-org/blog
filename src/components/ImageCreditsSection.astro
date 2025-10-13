@@ -1,0 +1,28 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={["image-credits-section not-content", className]}>
+  <slot />
+</div>
+
+<style>
+  .image-credits-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* @media (min-width: 1000px) {
+    .image-credits-section {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  } */
+</style>
