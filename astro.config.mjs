@@ -114,7 +114,11 @@ export default defineConfig({
         starlightImageZoom(),
         starlightThemeRapide(),
         starlightCoolerCredit({
-          credit: "Starlight Blog",
+          credit: {
+            title: "Credits",
+            description: "View all credits of this blog →",
+            href: "https://blog.trueberryless.org/credits",
+          },
         }),
         starlightBlog({
           title: "Deep Thoughts",
