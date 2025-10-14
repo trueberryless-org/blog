@@ -29,6 +29,9 @@ importers:
       '@fontsource-variable/jetbrains-mono':
         specifier: ^5.2.8
         version: 5.2.8
+      '@lucide/astro':
+        specifier: ^0.545.0
+        version: 0.545.0(astro@5.14.3(@types/node@24.7.1)(jiti@1.21.7)(rollup@4.52.4)(typescript@5.9.3)(yaml@2.8.1))
       '@lunariajs/core':
         specifier: ^0.1.1
         version: 0.1.1
@@ -542,6 +545,11 @@ packages:
 
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
+
+  '@lucide/astro@0.545.0':
+    resolution: {integrity: sha512-uhBiJCVXH+YmZdiTncV3I8e2gA4iqA/YLCKyMfxl1pWLleyrJWrQY5Avmt1qKjtYEMah0uJiQzaYtaeekaCdCw==}
+    peerDependencies:
+      astro: ^4 || ^5
 
   '@lunariajs/core@0.1.1':
     resolution: {integrity: sha512-sAqM9+DVsLe3xHM9wu2pEnKGYMs/bWS9qpR+CGHol3RihOELnOQTzHddXbdB1MtgesbI8dnQuG64Ocd8KkWsng==}
@@ -2938,6 +2946,10 @@ snapshots:
       - supports-color
 
   '@kwsites/promise-deferred@1.1.1': {}
+
+  '@lucide/astro@0.545.0(astro@5.14.3(@types/node@24.7.1)(jiti@1.21.7)(rollup@4.52.4)(typescript@5.9.3)(yaml@2.8.1))':
+    dependencies:
+      astro: 5.14.3(@types/node@24.7.1)(jiti@1.21.7)(rollup@4.52.4)(typescript@5.9.3)(yaml@2.8.1)
 
   '@lunariajs/core@0.1.1':
     dependencies:
