@@ -37,7 +37,7 @@ jobs:
         with:
           github_token: ${{ secrets.AI_TRANSLATIONS_GITHUB_TOKEN }}
           lang: fr,de
-          starlight_dir: starlight
+          starlight_dir: /
           files: |
             src/content/docs/**/*
       - name: Create Pull Request
