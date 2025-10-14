@@ -42,18 +42,9 @@ pnpm run preview
 
 in order to run the project in build mode not in dev mode.
 
-## Cover Images
+## Cover and OG Images
 
-All cover images are generated with the [Release Image Generator](https://github.com/trueberryless-org/release-image-generator).
-
-Here is an example URL: https://release-image-generator.trueberryless.org/?text=Blog&width=960&height=480
-
-## Contribution
-
-If you wanna contribute to the blog website, just edit or create the Markdown files you wanna change and create a pull request.
-This can either be done directly on GitHub or locally by following the steps above. Good luck and thank you for helping improve the internet day by day!
-
-More information about contribution can be found unter [CONTRIBUTING.md](https://github.com/trueberryless-org/blog/blob/main/CONTRIBUTING.md).
+Cover images and OG images are mostly from [Unsplash](https://unsplash.com/), see [Credits](https://blog.trueberryless.org/credits/) for full details.
 
 ## License
 
