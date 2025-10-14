@@ -148,7 +148,7 @@ export default defineConfig({
               url: "https://hideoo.dev",
             },
             frostybee: {
-              name: "Frostybee",
+              name: "FrostyBee",
               picture: "/frostybee.png",
               url: "https://github.com/frostybee",
             },
@@ -178,7 +178,6 @@ export default defineConfig({
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
-        TableOfContents: "./src/components/TableOfContents.astro",
         Hero: "./src/components/Hero.astro",
         PageTitle: "./src/components/PageTitle.astro",
       },

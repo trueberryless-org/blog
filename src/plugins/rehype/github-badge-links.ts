@@ -2,7 +2,13 @@ import { h } from "hastscript";
 import { visit } from "unist-util-visit";
 
 export default function rehypeGitHubBadgeLinks() {
-  return (tree: any) => {
+  return (tree: any, file: any) => {
+    const frontmatter = file.data?.astro?.frontmatter ?? {};
+
+    if (frontmatter.badgeLinks === false) {
+      return;
+    }
+
     visit(tree, "element", (node) => {
       if (
         node.tagName === "a" &&
@@ -15,18 +21,15 @@ export default function rehypeGitHubBadgeLinks() {
         if (match) {
           const username = match[1];
 
-          // Add GitHub badge class
           node.properties.className = (node.properties.className || []).concat(
             "gh-badge"
           );
 
-          // Build avatar image
           const avatarImg = h("img", {
             src: `https://github.com/${username}.png`,
             alt: username,
           });
 
-          // Prepend avatar image to original children
           node.children.unshift(avatarImg);
         }
       }
