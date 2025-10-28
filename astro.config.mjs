@@ -2,27 +2,21 @@ import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
 import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
+import { config as loadDotenv } from "dotenv";
 import starlightBlog from "starlight-blog";
 import starlightCoolerCredit from "starlight-cooler-credit";
 import starlightGiscus from "starlight-giscus";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightThemeRapide from "starlight-theme-rapide";
-import { loadEnv } from "vite";
 
 import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
 import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
 
-const { GISCUS_REPO_ID } = loadEnv(
-  process.env.GISCUS_REPO_ID,
-  process.cwd(),
-  ""
-);
-const { GISCUS_CATEGORY_ID } = loadEnv(
-  process.env.GISCUS_CATEGORY_ID,
-  process.cwd(),
-  ""
-);
+loadDotenv();
+
+const GISCUS_REPO_ID = process.env.GISCUS_REPO_ID;
+const GISCUS_CATEGORY_ID = process.env.GISCUS_CATEGORY_ID;
 
 if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
   console.warn(
@@ -112,14 +106,17 @@ export default defineConfig({
           errorOnInvalidHashes: false,
         }),
         starlightImageZoom(),
-        starlightThemeRapide(),
-        starlightCoolerCredit({
-          credit: {
-            title: "Credits",
-            description: "View all credits of this blog →",
-            href: "https://blog.trueberryless.org/credits",
-          },
-        }),
+        ...(GISCUS_REPO_ID && GISCUS_CATEGORY_ID
+          ? [
+              starlightGiscus({
+                repo: "trueberryless-org/blog",
+                repoId: GISCUS_REPO_ID,
+                category: "Comments",
+                categoryId: GISCUS_CATEGORY_ID,
+                lazy: true,
+              }),
+            ]
+          : []),
         starlightBlog({
           title: "Deep Thoughts",
           postCount: 7,
@@ -164,17 +161,14 @@ export default defineConfig({
             },
           },
         }),
-        ...(GISCUS_REPO_ID && GISCUS_CATEGORY_ID
-          ? [
-              starlightGiscus({
-                repo: "trueberryless-org/blog",
-                repoId: GISCUS_REPO_ID,
-                category: "Comments",
-                categoryId: GISCUS_CATEGORY_ID,
-                lazy: true,
-              }),
-            ]
-          : []),
+        starlightCoolerCredit({
+          credit: {
+            title: "Credits",
+            description: "View all credits of this blog →",
+            href: "https://blog.trueberryless.org/credits",
+          },
+        }),
+        starlightThemeRapide(),
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",

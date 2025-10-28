@@ -22,9 +22,9 @@
     "start": "astro dev"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/markdown-remark": "^6.3.7",
-    "@astrojs/starlight": "^0.36.0",
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/markdown-remark": "6.3.8",
+    "@astrojs/starlight": "^0.36.1",
     "@expressive-code/plugin-collapsible-sections": "^0.41.3",
     "@expressive-code/plugin-line-numbers": "^0.41.3",
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.2.6",
@@ -32,7 +32,8 @@
     "@lucide/astro": "^0.545.0",
     "@lunariajs/core": "^0.1.1",
     "@lunariajs/starlight": "^0.1.1",
-    "astro": "^5.14.1",
+    "astro": "^5.15.1",
+    "dotenv": "^17.2.3",
     "hastscript": "^9.0.1",
     "rehype-autolink-headings": "^7.1.0",
     "sharp": "^0.34.4",
