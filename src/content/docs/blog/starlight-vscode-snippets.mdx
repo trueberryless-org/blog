@@ -1,0 +1,58 @@
+---
+title: How VS Code Snippets can improve your workflow when working with Astro
+description: Learn how to create and use VS Code snippets to quickly insert frontmatter for Astro content collections. This guide shows how snippets can automate repetitive tasks, speed up Markdown and MDX editing, and improve your Astro workflow.
+date: 2025-10-28
+tags:
+  - Automation
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A collection of old newspaper sheets piled on a wooden table, displaying vintage articles and worn edges.
+  image: ../../../../public/blog/starlight-vscode-snippets.jpg
+---
+
+This article demonstrates how code snippets can be created in Visual Studio Code that can significantly boost your productivity when regularly working with [Astro's content collections](https://docs.astro.build/en/guides/content-collections).
+
+:::note
+This article arose from a suggestion by [Sarah Rainsberger](https://github.com/sarah11918) and highlights a feature contributed by [HiDeoo](https://github.com/HiDeoo) - all code examples are also by HiDeoo.
+:::
+
+## The need for snippets
+
+Astro supports [schema validation](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema) for your frontmatter fields in Markdown and MDX files. Therefore, many content files of your collections will have the same structure between the code fences (`---`). If you are tired of typing the same frontmatter fields over and over again, you can create a code snippet that will automatically generate the basic structure of the desired frontmatter while letting you conveniently edit the fields with `TAB ⇥` inputs.
+
+## Creating a snippet
+
+You can create global snippets which can be scoped to multiple languages or language-specific snippets. Since we want the frontmatter snippet in Markdown _and_ MDX files, we will create a global snippet under `Code/User/snippets/markdown.code-snippets` with the scope `markdown,mdx`. Follow the instructions in the [official documentation](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets) for the correct steps for your Operating System.
+
+Here is an example of how your snippet could look like. You can freely adjust the `body` or `prefix` as you see fit:
+
+```json title="Code/User/snippets/markdown.code-snippets"
+{
+  "Add Markdown frontmatter": {
+    "scope": "markdown,mdx",
+    "prefix": "ffmt",
+    "body": [
+      "---",
+      "title: $TM_FILENAME_BASE",
+      "description: The description",
+      "---",
+      "",
+      "## ${1:Heading}",
+      "",
+      "$0"
+    ],
+  }
+}
+```
+
+The flexibility of snippets allows you to create powerful and bespoke productivity boosters. You can enhance the basic configuration from above with the specific frontmatter fields you need, change how the title gets generated, and more.
+
+## Using the snippet
+
+Create an empty Markdown (`.md`) or `.mdx` file. Start typing `ffmt` and press `TAB ⇥` to trigger the snippet. If you do not see any suggestions, you can manually trigger them with `Ctrl + Space` and select the `"Add Markdown frontmatter"` snippet. Depending on your exact configuration, you can now tab through the fields to edit them to your current use case. For example the snippet from above allows you to directly edit the heading and then jumps to the content. The title field of the frontmatter will be set to the file name without its extension.
+
+![Screenshot of the Visual Studio Code editor, displaying generated content from a code snippet.  ](../../../assets/blog/starlight-vscode-snippets/screenshot-triggering-ffmt-snippet.png)
+
+Read more tips and tricks for working with Astro and Starlight on [HiDeoo's blog](https://hideoo.dev/notes).
