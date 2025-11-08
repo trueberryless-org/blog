@@ -1,0 +1,50 @@
+---
+title: Conception d’un pipeline basé sur Kafka et d’un graphique interactif pour
+  la détection des anomalies énergétiques
+date: 2024-05-13
+description: Une solution SOA avec Siemens AG pour analyser les anomalies du
+  réseau électrique, comprenant un pipeline Kafka, PostgreSQL, une API GraphQL
+  et un tableau de bord Angular pour la visualisation.
+excerpt: Dans le cadre de notre thèse avec Siemens AG, nous avons développé une
+  solution orientée services pour détecter les anomalies du réseau électrique —
+  comprenant un pipeline Kafka, PostgreSQL, une API GraphQL et un tableau de
+  bord Angular avec des tableaux et un graphique interactif pour une
+  visualisation en temps réel.
+tags:
+  - Tool
+  - Collaboration
+authors:
+  - trueberryless
+  - clemens
+cover:
+  alt: A view of Europe illuminated at night from space, showcasing city lights
+    and geographical features.
+  image: ../../../../public/blog/diploma-thesis.jpg
+featured: true
+giscus: true
+
+---
+
+Au cours de ma cinquième année à la HTL Krems (2023/24), chaque étudiant devait réaliser une thèse de diplôme — un projet d’envergure divisé en deux parties principales : théorique et pratique. Travaillant en binôme, nous devions produire un document théorique d’environ 100 pages dans lequel nous présentions, analysions et expliquions notre sujet choisi.
+
+La partie théorique était organisée en trois sections. La première consistait à recueillir et résumer les connaissances existantes issues de sources fiables comme des livres et des thèses précédentes. La deuxième se concentrait sur les idées et conclusions tirées de notre prototype — une solution logicielle que nous avons développée pour la partie pratique. Enfin, la troisième section combinait ces deux parties, offrant une comparaison critique et une réflexion sur ce que nous avions appris à travers l’ensemble du projet.
+
+L’aspect pratique exigeait de concevoir et de mettre en œuvre une solution, soit logicielle, soit matérielle, pour résoudre un problème réel. Mon coéquipier, Clemens Schlipfinger, et moi avons décidé de nous concentrer exclusivement sur le logiciel pour garantir la fiabilité. Le matériel peut introduire des problèmes imprévisibles, tandis que le logiciel — surtout lorsqu’il est déployé dans des conteneurs Docker robustes — offre un environnement cohérent qui fonctionne sans problème partout.
+
+Ce qui rendait notre projet particulièrement excitant, c’était notre partenariat avec Siemens AG, une entreprise multinationale renommée spécialisée dans l’énergie, l’automatisation et la digitalisation. Cette collaboration était rare parmi nos pairs et ajoutait une dimension professionnelle à notre travail. Siemens nous a confié la mission de développer une solution logicielle orientée services pour analyser les anomalies du réseau électrique européen.
+
+Le système que nous avons construit comprenait plusieurs composants, chacun conçu pour remplir une fonction spécifique. Au cœur du système se trouvait une application Kafka responsable de l’ingestion des données — des rapports d’anomalies du réseau électrique que nous appelions Findings. Ces rapports détaillaient les défaillances et irrégularités dans le réseau électrique complexe européen, composé de millions de composants interconnectés comme des transistors, des interrupteurs et des générateurs. Kafka transmettait les anomalies les plus récentes à une base de données PostgreSQL, qui était ensuite rendue accessible via une API GraphQL. Cette API offrait des fonctionnalités complètes comme la pagination, le filtrage et le requêtage pour assurer une intégration fluide avec notre frontend basé sur Angular.
+
+Le frontend a été conçu comme un tableau de bord convivial avec trois sections clés :
+
+1. Table des anomalies – Un tableau consultable, paginé et filtrable pour naviguer rapidement parmi les anomalies.
+
+2. Vue Graphique – Une visualisation dynamique des données d’anomalies, facilitant l’identification de la source d’un problème dans le réseau vaste et complexe.
+
+3. Tableau de bord global – Des indicateurs clés et des aperçus pour une vue d’ensemble rapide et exploitable.
+
+Clemens et moi avons réparti les responsabilités de manière équitable. Clemens s’est occupé des systèmes backend, y compris Kafka, PostgreSQL et l’API GraphQL, garantissant un pipeline de données fiable et efficace. De mon côté, j’ai pris le rôle de chef de projet, coordonnant la communication avec Siemens tout en développant le frontend et en assurant l’intégration fluide des différents composants. Cette collaboration nous a permis de tirer parti de nos points forts et de maintenir une charge de travail équilibrée.
+
+Notre produit final répondait non seulement aux exigences de Siemens, mais démontrait également la puissance d’une architecture orientée services (SOA) bien conçue dans la résolution de problèmes complexes et réels. C’était extrêmement gratifiant de voir notre logiciel fonctionner de manière fiable et fournir des informations exploitables pour remédier aux anomalies du réseau électrique.
+
+Pour plus de détails sur notre travail, n’hésitez pas à consulter notre thèse [ici](https://trueberryless.org/thesis.pdf) 📜 ou à lire notre cours vidéo [ici](https://videos.trueberryless.org/videos/thesis/) 🎥 (tous deux disponibles uniquement en allemand).
