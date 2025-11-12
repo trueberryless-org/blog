@@ -1,8 +1,7 @@
 {
-  "name": "blog",
+  "name": "blog-monorepo",
   "version": "0.2.0",
-  "type": "module",
-  "homepage": "https://blog.trueberryless.org",
+  "homepage": "https://github.com/trueberryless-org/blog",
   "bugs": {
     "url": "https://github.com/trueberryless-org/blog/issues"
   },
@@ -12,6 +11,7 @@
   },
   "license": "MIT",
   "author": "trueberryless <trueberryless@gmail.com> (https://trueberryless.org)",
+  "type": "module",
   "scripts": {
     "astro": "astro",
     "build": "astro build",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
-    "prettier": "3.5.3",
+    "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
     "vite": "^7.1.9"
   },
