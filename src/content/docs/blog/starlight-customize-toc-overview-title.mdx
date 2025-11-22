@@ -1,0 +1,151 @@
+---
+title: Customize the "Overview" title of your Starlight Table of Contents
+description: Learn how you can customize the first heading in the right sidebar of every Starlight page globally and individually.
+date: 2025-11-22
+tags:
+  - Starlight
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A wooden desk featuring a small green plant positioned on its surface.
+  image: ../../../../public/blog/starlight-customize-toc-overview-title.jpg
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+This guide shows how you can customize the first heading in the right sidebar (table of contents) of every [Starlight](https://starlight.astro.build) page globally and individually.
+
+{/* excerpt */}
+
+Each Starlight page contains a table of contents on the right side (except if [disabled](https://starlight.astro.build/reference/frontmatter/#tableofcontents)). To be able to link to the top of the page, the first entry of this sidebar has the title "Overview" (as you can also see on this page's sidebar), which can be customized [globally](#global-definition) and even on a [per-page basis](#frontmatter-override).
+
+## Global definition
+
+If you want to set the title of the first table of contents entry once for all pages, you can follow these steps to achieve this for monolingual and multilingual sites:
+
+<Steps>
+
+1. Create [route middleware](https://starlight.astro.build/guides/route-data/#how-to-customize-route-data) to customize the data shown by Starlight.
+
+2. Use this example code to configure the "Overview" title:
+
+    ```ts ""Back to top""
+    // src/routeData.ts
+    import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+
+    export const onRequest = defineRouteMiddleware((context) => {
+      const { starlightRoute } = context.locals;
+
+      const overviewItem = starlightRoute.toc?.items[0];
+      if (overviewItem) overviewItem.text = "Back to top";
+    });
+    ```
+
+3. If your site is [multilingual](https://starlight.astro.build/guides/i18n/), you can also assign different titles depending on the locale:
+
+    ```ts ins="translations[locale ?? defaultLang]" ins={3-13,17}
+    // src/routeData.ts
+    import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+    import starlightConfig from "virtual:starlight/user-config";
+
+    const defaultLang =
+      starlightConfig.defaultLocale.lang ??
+      starlightConfig.defaultLocale.locale ??
+      "en";
+
+    const translations: Record<string, string> = {
+      en: "Back to top",
+      de: "Zurück nach oben",
+    };
+
+    export const onRequest = defineRouteMiddleware((context) => {
+      const { starlightRoute } = context.locals;
+      const { locale } = starlightRoute;
+
+      const overviewItem = starlightRoute.toc?.items[0];
+      if (overviewItem) overviewItem.text = translations[locale ?? defaultLang];
+    });
+    ```
+
+
+</Steps>
+
+## Frontmatter override
+
+In order to set the first table of contents heading to something different on individual pages, follow the steps below:
+
+<Steps>
+
+1. [Extend your frontmatter schema](https://starlight.astro.build/reference/frontmatter/#customize-frontmatter-schema) in `src/content.config.ts`:
+
+    ```ts del={8} ins={5,9-16}
+    // src/content.config.ts
+    import { defineCollection } from 'astro:content';
+    import { docsLoader } from '@astrojs/starlight/loaders';
+    import { docsSchema } from '@astrojs/starlight/schema';
+    import { z } from "astro/zod";
+
+    export const collections = {
+        docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+        docs: defineCollection({
+            loader: docsLoader(),
+            schema: docsSchema({
+                extend: z.object({
+                    overviewTitle: z.string().optional(),
+                }),
+            }),
+        }),
+    };
+    ```
+
+2. This allows you to use the `overviewTitle` in your middleware like that:
+
+    ```ts ins={6} ins=/(?<=\= )individualOverviewTitle/
+    // src/routeData.ts
+    import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+
+    export const onRequest = defineRouteMiddleware((context) => {
+      const { starlightRoute } = context.locals;
+      const individualOverviewTitle = starlightRoute.entry.data.overviewTitle;
+
+      const overviewItem = starlightRoute.toc?.items[0];
+      if (overviewItem)
+        overviewItem.text = individualOverviewTitle ?? "Back to top";
+    });
+    ```
+
+</Steps>
+
+For the sake of completeness, here is a multilingual middleware that supports overriding on individual pages:
+
+```ts
+// src/routeData.ts
+import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+import starlightConfig from "virtual:starlight/user-config";
+
+const defaultLang =
+  starlightConfig.defaultLocale.lang ??
+  starlightConfig.defaultLocale.locale ??
+  "en";
+
+const translations: Record<string, string> = {
+  en: "Back to top",
+  de: "Zurück nach oben",
+};
+
+export const onRequest = defineRouteMiddleware((context) => {
+  const { starlightRoute } = context.locals;
+  const { locale } = starlightRoute;
+  const individualOverviewTitle = starlightRoute.entry.data.overviewTitle;
+
+  const overviewItem = starlightRoute.toc?.items[0];
+  if (overviewItem)
+    overviewItem.text =
+      individualOverviewTitle ?? translations[locale ?? defaultLang];
+});
+```
+
+## Source code
+
+You can also find the complete source code for all four variants on [GitHub](https://github.com/trueberryless/starlight-customize-toc-overview-title) or open the project directly in [StackBlitz](https://stackblitz.com/github/trueberryless/starlight-customize-toc-overview-title).
