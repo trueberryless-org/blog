@@ -79,15 +79,13 @@ In order to set the first table of contents heading to something different on in
 
 1. [Extend your frontmatter schema](https://starlight.astro.build/reference/frontmatter/#customize-frontmatter-schema) in `src/content.config.ts`:
 
-    ```ts del={8} ins={5,9-16}
+    ```ts ins={10-12} ins=", z"
     // src/content.config.ts
-    import { defineCollection } from 'astro:content';
+    import { defineCollection, z } from 'astro:content';
     import { docsLoader } from '@astrojs/starlight/loaders';
     import { docsSchema } from '@astrojs/starlight/schema';
-    import { z } from "astro/zod";
 
     export const collections = {
-        docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
         docs: defineCollection({
             loader: docsLoader(),
             schema: docsSchema({
