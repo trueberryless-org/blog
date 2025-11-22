@@ -189,4 +189,7 @@ export default defineConfig({
       rehypeGitHubBadgeLinks,
     ],
   },
+  redirects: {
+    "/blog/starlight-vscode-snippets": "/blog/vscode-snippets",
+  },
 });
