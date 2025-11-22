@@ -15,8 +15,6 @@ tableOfContents: false
 featured: true
 ---
 
-import StarlightBadgeLink from "../../../components/StarlightBadgeLink.astro";
-
 Recently, I added a very little neat feature to this blog, which you might have noticed as a regular reader. It's nothing huge, but gives every blog this little lovely touch I, which I have longed for a long time. I am ~talking~ writing about all those green badges with profile pictures you can see in this blog as well.
 
 The inspiration to create them was taken from none other than [Antfu](https://github.com/antfu) himself, as he has those badges all over the place on his website (as time of writing).
@@ -66,7 +64,7 @@ export default function rehypeGitHubBadgeLinks() {
 
 Basically all this plugin does, is walking through the HTML, looking for links which reference to any GitHub profile. If it finds one, it adds an `<img>` tag before the text content with the profile picture of the GitHub user or organisation. This is possible very consistently thanks to GitHub's feature of making the picture available as a resource behind the profile link appended with `.png`. Read more about that feature in [this awesome article on `dev.to`](https://dev.to/10xlearner/how-to-get-the-profile-picture-of-a-github-account-1d82).
 
-With a little bit of additional styling it looks really cute in my opinion. Please note that since this is a <StarlightBadgeLink /> page, I use available CSS variables, like in line four:
+With a little bit of additional styling it looks really cute in my opinion. Please note that since this is a [Starlight](https://starlight.astro.build) page, I use available CSS variables, like in line four:
 
 ```css "var(--sl-color-accent-low)" "var(--sl-color-accent)"
 // src/styles/custom.css

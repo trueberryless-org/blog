@@ -23,8 +23,6 @@ featured: true
 
 ---
 
-import StarlightBadgeLink from "../../../../components/StarlightBadgeLink.astro";
-
 Kürzlich habe ich diesem Blog eine ganz kleine, aber feine Funktion hinzugefügt, die Ihnen als regelmäßiger Leser vielleicht aufgefallen ist. Es ist nichts riesiges, aber es verleiht jedem Blog diesen kleinen, charmanten Touch, nach dem ich mich schon lange gesehnt habe. Ich spreche ~~schreibe~~ von diesen grünen Abzeichen mit Profilbildern, die Sie auch in diesem Blog sehen können.
 
 Die Inspiration, sie zu erstellen, stammt von niemand anderem als [Antfu](https://github.com/antfu) selbst, der solche Abzeichen überall auf seiner Website hat (zum Zeitpunkt des Schreibens).
@@ -74,7 +72,7 @@ export default function rehypeGitHubBadgeLinks() {
 
 Im Wesentlichen durchsucht dieses Plugin das HTML nach Links, die auf ein GitHub-Profil verweisen. Wenn es einen solchen Link findet, fügt es vor dem Textinhalt ein `<img>`-Tag mit dem Profilbild des GitHub-Benutzers oder der Organisation ein. Dies ist dank GitHubs Funktion, das Bild als Ressource hinter dem Profillink mit der Endung `.png` zur Verfügung zu stellen, sehr konsistent möglich. Lesen Sie mehr über diese Funktion in [diesem großartigen Artikel auf `dev.to`](https://dev.to/10xlearner/how-to-get-the-profile-picture-of-a-github-account-1d82).
 
-Mit ein wenig zusätzlichem Styling sieht es meiner Meinung nach wirklich niedlich aus. Bitte beachten Sie, dass dies eine <StarlightBadgeLink />-Seite ist und ich verfügbare CSS-Variablen verwende, wie in Zeile vier:
+Mit ein wenig zusätzlichem Styling sieht es meiner Meinung nach wirklich niedlich aus. Bitte beachten Sie, dass dies eine [Starlight](https://starlight.astro.build)-Seite ist und ich verfügbare CSS-Variablen verwende, wie in Zeile vier:
 
 ```css "var(--sl-color-accent-low)" "var(--sl-color-accent)"
 // src/styles/custom.css

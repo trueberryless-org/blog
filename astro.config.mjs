@@ -95,6 +95,7 @@ export default defineConfig({
         }),
         starlightLinksValidator({
           exclude: [
+            "/blog",
             "/blog/tags/*",
             "/blog/authors/*",
             "/de/blog/tags/*",
