@@ -1,0 +1,234 @@
+---
+title: Ajoutez un contenu supplémentaire à la table des matières de Starlight
+description: Découvrez comment ajouter du contenu supplémentaire tel que des
+  crédits, des annonces ou des informations supplémentaires en dessous de la
+  liste des titres dans la barre latérale droite de Starlight.
+date: 2025-11-23
+tags:
+  - Starlight
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A wooden table featuring a decorative flower vase at its center, adding a
+    touch of elegance to the setting.
+  image: ../../../../public/blog/starlight-customize-toc-additional-content.jpg
+
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Ce guide montre comment vous pouvez ajouter du contenu supplémentaire tel que des crédits, des annonces ou des informations supplémentaires en dessous de la liste des titres dans la barre latérale droite de [Starlight](https://starlight.astro.build).
+
+{/* excerpt */}
+
+## Ajoutez du contenu
+
+La table des matières de Starlight peut être modifiée en [remplaçant](https://starlight.astro.build/guides/overriding-components/) le composant [`TableOfContents.astro`](https://starlight.astro.build/reference/overrides/#tableofcontents). Suivez ces étapes pour ajouter un petit composant Astro après la table des matières existante :
+
+<Steps>
+  1. Créez un petit composant `Card.astro` qui sera affiché après la table des matières. Si vous souhaitez suivre les conventions courantes, il est recommandé de créer un nouveau dossier `src/components/` où vous pouvez placer tous vos composants :
+
+     ```astro collapse={11-36} "not-content"
+     ---
+     // src/components/Card.astro
+
+     ---
+
+     <aside class="not-content starlight-table-of-contents-aside">
+         <h2>Some card!</h2>
+         <p>With some text 🙌</p>
+     </aside>
+
+     <style>
+         .starlight-table-of-contents-aside {
+             position: relative;
+             background-color: var(--sl-color-gray-6);
+             padding: 1rem;
+             border-radius: 0.5rem;
+             border: 1px solid var(--sl-color-text-accent);
+             box-shadow: var(--sl-shadow-md);
+             overflow-y: hidden;
+         }
+         .starlight-table-of-contents-aside h2 {
+             color: var(--sl-color-white);
+             font-size: var(--sl-text-h5);
+             font-weight: 600;
+             text-decoration: none !important;
+             line-height: var(--sl-line-height-headings);
+             margin-bottom: 0.5rem;
+         }
+         .starlight-table-of-contents-aside p {
+             font-size: var(--sl-text-xs);
+             line-height: normal;
+             text-decoration: none !important;
+             color: var(--sl-color-gray-3);
+             overflow-wrap: anywhere;
+         }
+     </style>
+     ```
+
+     Notez l'utilisation de la classe `"not-content"`, une fonctionnalité [fournie par Starlight](https://starlight.astro.build/components/using-components/#compatibility-with-starlights-styles) pour s'assurer que les styles de Starlight pour les éléments ne s'appliquent pas ici, car il s'agit d'un composant personnalisé.
+
+  2. <span id="step-2" />
+
+     Créez le composant `TableOfContents.astro`, qui sera utilisé comme remplacement du composant par défaut de la table des matières de Starlight :
+
+     ```astro "<Default><slot /></Default>" "<Card />"
+     ---
+     // src/components/TableOfContents.astro
+     import Default from "@astrojs/starlight/components/TableOfContents.astro";
+     import Card from "./Card.astro";
+     ---
+
+     <Default><slot /></Default>
+     <div class="starlight-table-of-contents-wrapper-container">
+         <Card />
+     </div>
+
+     <style>
+         .starlight-table-of-contents-wrapper-container {
+             margin-top: 1rem;
+         }
+     </style>
+     ```
+
+     Comme vous pouvez le voir, la table des matières par défaut est affichée en important le composant Starlight et en l'utilisant *avant* notre carte. Consultez la section ["Ajouter du contenu en début"](#prepend-content) pour afficher la carte au-dessus de la table des matières.
+
+  3. Enfin, n'oubliez pas de définir le remplacement du composant dans votre configuration Astro :
+
+     ```ts collapse={1-4,11-24} ins={25-27}
+     // astro.config.mjs
+     // @ts-check
+     import { defineConfig } from 'astro/config';
+     import starlight from '@astrojs/starlight';
+
+     // https://astro.build/config
+     export default defineConfig({
+     	integrations: [
+     		starlight({
+     			title: 'My Docs',
+     			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+     			sidebar: [
+     				{
+     					label: 'Guides',
+     					items: [
+     						// Each item here is one entry in the navigation menu.
+     						{ label: 'Example Guide', slug: 'guides/example' },
+     					],
+     				},
+     				{
+     					label: 'Reference',
+     					autogenerate: { directory: 'reference' },
+     				},
+     			],
+     			components: {
+     			  TableOfContents: "./src/components/TableOfContents.astro"
+     			}
+     		}),
+     	],
+     });
+     ```
+</Steps>
+
+## Ajouter du contenu en début
+
+Si vous préférez avoir la table des matières *après* votre composant, vous devez inverser l'ordre des éléments dans [l'Étape 2 ci-dessus](#step-2) et assigner `margin-bottom` à la place :
+
+```astro ins={10} ins="margin-bottom: 1rem;"
+---
+// src/components/TableOfContents.astro
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
+import Card from "./Card.astro";
+---
+
+<div class="starlight-table-of-contents-wrapper-container">
+    <Card />
+</div>
+<Default><slot /></Default>
+
+<style>
+    .starlight-table-of-contents-wrapper-container {
+        margin-bottom: 1rem;
+    }
+</style>
+```
+
+Le reste des 3 étapes est identique, alors n'oubliez pas de toutes les compléter !
+
+## Placer le contenu en bas
+
+Si vous souhaitez avoir plus d'espace entre votre contenu supplémentaire brillant et la table des matières, vous pouvez utiliser quelques astuces CSS pour y parvenir. Ajoutez ces styles globaux en bas de votre composant `TableOfContents.astro` pour introduire deux nouvelles boîtes flexibles qui déplaceront votre carte vers le bas :
+
+```astro collapse={1-17}
+---
+// src/components/TableOfContents.astro
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
+import Card from "./Card.astro";
+---
+
+<Default><slot /></Default>
+<div class="starlight-table-of-contents-wrapper-container">
+    <Card />
+</div>
+
+<style>
+    .starlight-table-of-contents-wrapper-container {
+        margin-top: 1rem;
+    }
+</style>
+
+<style is:global>
+    @media (min-width: 72rem) {
+        .right-sidebar-panel {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-sidebar-panel > .sl-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+        }
+    }
+</style>
+```
+
+## Compatibilité mobile
+
+Le `TableOfContents.astro` n'est rendu que lorsque la barre latérale droite est visible. Ce n'est pas le cas sur les appareils mobiles, où le composant [`MobileTableOfContents.astro`](https://starlight.astro.build/reference/overrides/#mobiletableofcontents) sera affiché.
+
+Cependant, si vous souhaitez afficher votre contenu supplémentaire sur les appareils mobiles, il est recommandé de remplacer le composant [`Pagination.astro`](https://starlight.astro.build/reference/overrides/#pagination) car ajouter du contenu à la vue mobile de la barre latérale droite semblerait déplacé.
+
+Voici une démonstration rapide de ce à quoi votre remplacement personnalisé de `Pagination.astro` pourrait ressembler :
+
+```astro
+---
+// src/components/Pagination.astro
+import Default from "@astrojs/starlight/components/Pagination.astro";
+import Card from "./Card.astro";
+---
+
+<Default><slot /></Default>
+<div class="starlight-pagination-mobile-content">
+    <Card />
+</div>
+
+<style>
+    .starlight-pagination-mobile-content {
+        display: block;
+    }
+    @media (min-width: 72rem) {
+        .starlight-pagination-mobile-content {
+            display: none;
+        }
+    }
+</style>
+```
+
+Notez que la carte aura une largeur bien plus importante lorsqu'elle sera affichée sous la pagination que dans la table des matières. Veillez donc à utiliser un design réactif dans votre contenu supplémentaire.
+
+## Code source
+
+Vous pouvez également trouver le code source complet pour les trois variantes sur [GitHub](https://github.com/trueberryless/starlight-customize-toc-additional-content) ou ouvrir directement le projet dans [StackBlitz](https://stackblitz.com/github/trueberryless/starlight-customize-toc-additional-content).

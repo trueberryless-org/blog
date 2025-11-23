@@ -1,0 +1,234 @@
+---
+title: Zusätzliche Inhalte zur Inhaltsübersicht von Starlight hinzufügen
+description: Erfahren Sie, wie Sie zusätzliche Inhalte wie Credits, Anzeigen
+  oder weitere Informationen unterhalb der Liste der Überschriften in Ihrer
+  rechten Starlight-Seitenleiste hinzufügen können.
+date: 2025-11-23
+tags:
+  - Starlight
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A wooden table featuring a decorative flower vase at its center, adding a
+    touch of elegance to the setting.
+  image: ../../../../public/blog/starlight-customize-toc-additional-content.jpg
+
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Diese Anleitung zeigt Ihnen, wie Sie zusätzliche Inhalte wie Credits, Anzeigen oder weitere Informationen unterhalb der Liste der Überschriften in Ihrer rechten [Starlight](https://starlight.astro.build)-Seitenleiste hinzufügen können.
+
+{/* excerpt */}
+
+## Inhalt anhängen
+
+Die Inhaltsübersicht von Starlight kann durch [Überschreiben](https://starlight.astro.build/guides/overriding-components/) der [`TableOfContents.astro`-Komponente](https://starlight.astro.build/reference/overrides/#tableofcontents) angepasst werden. Folgen Sie diesen Schritten, um eine kleine Astro-Komponente nach der bestehenden Inhaltsübersicht anzuhängen:
+
+<Steps>
+  1. Erstellen Sie eine kleine `Card.astro`-Komponente, die nach der Inhaltsübersicht angezeigt wird. Um gängige Konventionen zu befolgen, wird empfohlen, einen neuen `src/components/`-Ordner zu erstellen, in dem Sie alle Ihre Komponenten platzieren können:
+
+     ```astro collapse={11-36} "not-content"
+     ---
+     // src/components/Card.astro
+
+     ---
+
+     <aside class="not-content starlight-table-of-contents-aside">
+         <h2>Some card!</h2>
+         <p>With some text 🙌</p>
+     </aside>
+
+     <style>
+         .starlight-table-of-contents-aside {
+             position: relative;
+             background-color: var(--sl-color-gray-6);
+             padding: 1rem;
+             border-radius: 0.5rem;
+             border: 1px solid var(--sl-color-text-accent);
+             box-shadow: var(--sl-shadow-md);
+             overflow-y: hidden;
+         }
+         .starlight-table-of-contents-aside h2 {
+             color: var(--sl-color-white);
+             font-size: var(--sl-text-h5);
+             font-weight: 600;
+             text-decoration: none !important;
+             line-height: var(--sl-line-height-headings);
+             margin-bottom: 0.5rem;
+         }
+         .starlight-table-of-contents-aside p {
+             font-size: var(--sl-text-xs);
+             line-height: normal;
+             text-decoration: none !important;
+             color: var(--sl-color-gray-3);
+             overflow-wrap: anywhere;
+         }
+     </style>
+     ```
+
+     Beachten Sie die Verwendung der `"not-content"` Klassenfunktion [bereitgestellt von Starlight](https://starlight.astro.build/components/using-components/#compatibility-with-starlights-styles), um sicherzustellen, dass Starlight's Styles für Elemente hier nicht angewendet werden, da es sich um eine benutzerdefinierte Komponente handelt.
+
+  2. <span id="step-2" />
+
+     Erstellen Sie die `TableOfContents.astro`-Komponente, die als Ersatz für die standardmäßige Inhaltsübersichtskomponente von Starlight verwendet wird:
+
+     ```astro "<Default><slot /></Default>" "<Card />"
+     ---
+     // src/components/TableOfContents.astro
+     import Default from "@astrojs/starlight/components/TableOfContents.astro";
+     import Card from "./Card.astro";
+     ---
+
+     <Default><slot /></Default>
+     <div class="starlight-table-of-contents-wrapper-container">
+         <Card />
+     </div>
+
+     <style>
+         .starlight-table-of-contents-wrapper-container {
+             margin-top: 1rem;
+         }
+     </style>
+     ```
+
+     Wie Sie sehen können, wird die standardmäßige Inhaltsübersicht durch Importieren der Komponente aus Starlight und Verwendung vor unserer Karte angezeigt. Siehe den Abschnitt ["Inhalt voranstellen"](#prepend-content), um die Karte oberhalb der Inhaltsübersicht anzuzeigen.
+
+  3. Zu guter Letzt vergessen Sie nicht, das Komponenten-Überschreiben in Ihrer Astro-Konfiguration zu setzen:
+
+     ```ts collapse={1-4,11-24} ins={25-27}
+     // astro.config.mjs
+     // @ts-check
+     import { defineConfig } from 'astro/config';
+     import starlight from '@astrojs/starlight';
+
+     // https://astro.build/config
+     export default defineConfig({
+     	integrations: [
+     		starlight({
+     			title: 'My Docs',
+     			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+     			sidebar: [
+     				{
+     					label: 'Guides',
+     					items: [
+     						// Each item here is one entry in the navigation menu.
+     						{ label: 'Example Guide', slug: 'guides/example' },
+     					],
+     				},
+     				{
+     					label: 'Reference',
+     					autogenerate: { directory: 'reference' },
+     				},
+     			],
+     			components: {
+     			  TableOfContents: "./src/components/TableOfContents.astro"
+     			}
+     		}),
+     	],
+     });
+     ```
+</Steps>
+
+## Inhalt voranstellen
+
+Wenn Sie die Inhaltsübersicht *nach* Ihrer Komponente anzeigen möchten, müssen Sie die Reihenfolge der Elemente aus [Schritt 2 oben](#step-2) vertauschen und stattdessen `margin-bottom` zuweisen:
+
+```astro ins={10} ins="margin-bottom: 1rem;"
+---
+// src/components/TableOfContents.astro
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
+import Card from "./Card.astro";
+---
+
+<div class="starlight-table-of-contents-wrapper-container">
+    <Card />
+</div>
+<Default><slot /></Default>
+
+<style>
+    .starlight-table-of-contents-wrapper-container {
+        margin-bottom: 1rem;
+    }
+</style>
+```
+
+Die restlichen 3 Schritte sind gleich, also vergessen Sie nicht, sie alle abzuschließen!
+
+## Inhalt unten platzieren
+
+Wenn Sie mehr Platz zwischen Ihrem neuen glänzenden Inhalt und der Inhaltsübersicht schaffen möchten, können Sie einige CSS-Tricks verwenden, um dies zu erreichen. Fügen Sie diese globalen Styles unten in Ihrer `TableOfContents.astro`-Komponente hinzu, um zwei neue Flexboxen einzuführen, die Ihre Karte nach unten transformieren:
+
+```astro collapse={1-17}
+---
+// src/components/TableOfContents.astro
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
+import Card from "./Card.astro";
+---
+
+<Default><slot /></Default>
+<div class="starlight-table-of-contents-wrapper-container">
+    <Card />
+</div>
+
+<style>
+    .starlight-table-of-contents-wrapper-container {
+        margin-top: 1rem;
+    }
+</style>
+
+<style is:global>
+    @media (min-width: 72rem) {
+        .right-sidebar-panel {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-sidebar-panel > .sl-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+        }
+    }
+</style>
+```
+
+## Mobile Unterstützung
+
+Die `TableOfContents.astro`-Komponente wird nur gerendert, wenn die rechte Seitenleiste sichtbar ist. Das ist bei mobilen Geräten nicht der Fall, wo die [`MobileTableOfContents.astro`-Komponente](https://starlight.astro.build/reference/overrides/#mobiletableofcontents) gerendert wird.
+
+Wenn Sie jedoch Ihre zusätzlichen Inhalte auf mobilen Geräten anzeigen möchten, wird empfohlen, die [`Pagination.astro`-Komponente](https://starlight.astro.build/reference/overrides/#pagination) zu überschreiben, da das Hinzufügen von Inhalten zur mobilen Ansicht der rechten Seitenleiste fehl am Platz wirken würde.
+
+Hier ist eine kurze Demonstration, wie Ihre benutzerdefinierte `Pagination.astro`-Überschreibung aussehen könnte:
+
+```astro
+---
+// src/components/Pagination.astro
+import Default from "@astrojs/starlight/components/Pagination.astro";
+import Card from "./Card.astro";
+---
+
+<Default><slot /></Default>
+<div class="starlight-pagination-mobile-content">
+    <Card />
+</div>
+
+<style>
+    .starlight-pagination-mobile-content {
+        display: block;
+    }
+    @media (min-width: 72rem) {
+        .starlight-pagination-mobile-content {
+            display: none;
+        }
+    }
+</style>
+```
+
+Beachten Sie, dass die Karte unterhalb der Paginierung viel breiter angezeigt wird als in der Inhaltsübersicht. Stellen Sie daher sicher, dass Sie ein responsives Design innerhalb Ihrer zusätzlichen Inhalte verwenden.
+
+## Quellcode
+
+Sie finden den vollständigen Quellcode für alle drei Varianten auch auf [GitHub](https://github.com/trueberryless/starlight-customize-toc-additional-content) oder öffnen das Projekt direkt in [StackBlitz](https://stackblitz.com/github/trueberryless/starlight-customize-toc-additional-content).

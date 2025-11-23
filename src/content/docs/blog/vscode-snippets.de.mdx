@@ -1,0 +1,69 @@
+---
+title: Wie VS Code Snippets Ihren Workflow bei der Arbeit mit Astro verbessern können
+description: Erfahren Sie, wie Sie VS Code-Snippets erstellen und verwenden, um
+  Frontmatter für Astro-Inhaltskollektionen schnell einzufügen. Diese Anleitung
+  zeigt, wie Snippets repetitive Aufgaben automatisieren, das Bearbeiten von
+  Markdown und MDX beschleunigen und Ihren Astro-Workflow verbessern können.
+date: 2025-10-28
+tags:
+  - Automation
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A collection of old newspaper sheets piled on a wooden table, displaying
+    vintage articles and worn edges.
+  image: ../../../../public/blog/vscode-snippets.jpg
+
+---
+
+Dieser Artikel zeigt, wie Code-Snippets in Visual Studio Code erstellt werden können, die Ihre Produktivität beim regelmäßigen Arbeiten mit [Astros Inhaltskollektionen](https://docs.astro.build/en/guides/content-collections) erheblich steigern können.
+
+:::note
+Dieser Artikel entstand aus einer Anregung von [Sarah Rainsberger](https://github.com/sarah11918) und hebt ein Feature hervor, das von [HiDeoo](https://github.com/HiDeoo) beigetragen wurde - alle Codebeispiele stammen ebenfalls von HiDeoo.
+:::
+
+{/* excerpt */}
+
+## Die Notwendigkeit von Snippets
+
+Astro unterstützt [Schema-Validierung](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema) für Ihre Frontmatter-Felder in Markdown- und MDX-Dateien. Daher werden viele Inhaltsdateien Ihrer Kollektionen die gleiche Struktur zwischen den Codeblöcken (`---`) haben. Wenn Sie es leid sind, die gleichen Frontmatter-Felder immer wieder einzutippen, können Sie ein Code-Snippet erstellen, das automatisch die Grundstruktur des gewünschten Frontmatter generiert, während Sie die Felder bequem mit `TAB ⇥` Eingaben bearbeiten können.
+
+## Snippet erstellen
+
+Sie können globale Snippets erstellen, die auf mehrere Sprachen oder sprachspezifische Snippets beschränkt sind. Da wir das Frontmatter-Snippet sowohl in Markdown- als auch MDX-Dateien verwenden möchten, erstellen wir ein globales Snippet unter `Code/User/snippets/markdown.code-snippets` mit dem Scope `markdown,mdx`. Befolgen Sie die Anweisungen in der [offiziellen Dokumentation](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets) für die richtigen Schritte für Ihr Betriebssystem.
+
+Hier ist ein Beispiel dafür, wie Ihr Snippet aussehen könnte. Sie können das `body` oder `prefix` nach Belieben anpassen:
+
+```json title="Code/User/snippets/markdown.code-snippets"
+{
+  "Add Markdown frontmatter": {
+    "scope": "markdown,mdx",
+    "prefix": "ffmt",
+    "body": [
+      "---",
+      "title: $TM_FILENAME_BASE",
+      "description: The description",
+      "---",
+      "",
+      "## ${1:Heading}",
+      "",
+      "$0"
+    ],
+  }
+}
+```
+
+Die Flexibilität von Snippets ermöglicht es Ihnen, leistungsstarke und maßgeschneiderte Produktivitätsverstärker zu erstellen. Sie können die obige Grundkonfiguration mit den spezifischen Frontmatter-Feldern, die Sie benötigen, erweitern, ändern, wie der Titel generiert wird, und mehr.
+
+## Snippet verwenden
+
+Erstellen Sie eine leere Markdown (`.md`) oder `.mdx` Datei. Beginnen Sie mit der Eingabe von `ffmt` und drücken Sie `TAB ⇥`, um das Snippet auszulösen. Wenn Sie keine Vorschläge sehen, können Sie diese manuell mit `Strg + Leertaste` auslösen und das Snippet `"Add Markdown frontmatter"` auswählen. Abhängig von Ihrer genauen Konfiguration können Sie jetzt durch die Felder tabben, um sie an Ihren aktuellen Anwendungsfall anzupassen. Das Beispiel-Snippet oben ermöglicht es Ihnen, die Überschrift direkt zu bearbeiten und springt anschließend zum Inhalt. Das Titelfeld des Frontmatter wird auf den Dateinamen ohne seine Erweiterung gesetzt.
+
+![Screenshot des Visual Studio Code-Editors, der generierten Inhalt aus einem Code-Snippet anzeigt.](../../../assets/blog/vscode-snippets/screenshot-triggering-ffmt-snippet.png)
+
+## Weitere Ressourcen
+
+Wenn Sie Snippets nützlich finden und eine VS Code-Erweiterung erkunden möchten, die eine gute Sammlung vorgefertigter Snippets enthält, werfen Sie einen Blick auf [Astro Snippets von Shelton Louis](https://marketplace.visualstudio.com/items?itemName=SheltonLouis.astro-snippets).
+
+Lesen Sie weitere Tipps und Tricks für die Arbeit mit Astro und Starlight auf [HiDeoos Blog](https://hideoo.dev/notes).

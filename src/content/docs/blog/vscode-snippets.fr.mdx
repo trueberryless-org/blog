@@ -1,0 +1,70 @@
+---
+title: Comment les extraits de code de VS Code peuvent améliorer votre flux de
+  travail avec Astro
+description: Apprenez à créer et utiliser des extraits de code dans VS Code pour
+  insérer rapidement des frontmatter pour les collections de contenu Astro. Ce
+  guide montre comment les extraits peuvent automatiser les tâches répétitives,
+  accélérer l'édition Markdown et MDX, et améliorer votre flux de travail Astro.
+date: 2025-10-28
+tags:
+  - Automation
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A collection of old newspaper sheets piled on a wooden table, displaying
+    vintage articles and worn edges.
+  image: ../../../../public/blog/vscode-snippets.jpg
+
+---
+
+Cet article montre comment des extraits de code peuvent être créés dans Visual Studio Code pour améliorer considérablement votre productivité lorsque vous travaillez régulièrement avec [les collections de contenu d’Astro](https://docs.astro.build/en/guides/content-collections).
+
+:::note
+Cet article est né d'une suggestion de [Sarah Rainsberger](https://github.com/sarah11918) et met en évidence une fonctionnalité apportée par [HiDeoo](https://github.com/HiDeoo) - tous les exemples de code sont également de HiDeoo.
+:::
+
+{/* excerpt */}
+
+## Le besoin d'extraits
+
+Astro prend en charge [la validation de schéma](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema) pour vos champs frontmatter dans les fichiers Markdown et MDX. Ainsi, de nombreux fichiers de contenu de vos collections auront la même structure entre les balises de code (`---`). Si vous en avez assez de taper les mêmes champs frontmatter encore et encore, vous pouvez créer un extrait de code qui générera automatiquement la structure de base du frontmatter souhaité tout en vous permettant de modifier facilement les champs avec des entrées `TAB ⇥`.
+
+## Créer un extrait
+
+Vous pouvez créer des extraits globaux qui peuvent être délimités à plusieurs langages ou des extraits spécifiques à un langage. Étant donné que nous souhaitons l’extrait frontmatter dans les fichiers Markdown *et* MDX, nous allons créer un extrait global sous `Code/User/snippets/markdown.code-snippets` avec la portée `markdown,mdx`. Suivez les instructions de la [documentation officielle](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets) pour les étapes correctes selon votre système d'exploitation.
+
+Voici un exemple de ce à quoi votre extrait pourrait ressembler. Vous pouvez librement ajuster le `body` ou `prefix` selon vos besoins :
+
+```json title="Code/User/snippets/markdown.code-snippets"
+{
+  "Add Markdown frontmatter": {
+    "scope": "markdown,mdx",
+    "prefix": "ffmt",
+    "body": [
+      "---",
+      "title: $TM_FILENAME_BASE",
+      "description: The description",
+      "---",
+      "",
+      "## ${1:Heading}",
+      "",
+      "$0"
+    ],
+  }
+}
+```
+
+La flexibilité des extraits permet de créer des boosters de productivité puissants et sur mesure. Vous pouvez améliorer la configuration de base ci-dessus avec les champs frontmatter spécifiques dont vous avez besoin, modifier la manière dont le titre est généré, et plus encore.
+
+## Utiliser l'extrait
+
+Créez un fichier Markdown (`.md`) ou `.mdx` vide. Commencez à taper `ffmt` et appuyez sur `TAB ⇥` pour déclencher l'extrait. Si vous ne voyez aucune suggestion, vous pouvez les déclencher manuellement avec `Ctrl + Space` et sélectionner l'extrait `"Add Markdown frontmatter"`. En fonction de votre configuration exacte, vous pouvez maintenant parcourir les champs pour les modifier selon votre cas d’utilisation actuel. Par exemple, l'extrait ci-dessus vous permet de modifier directement le titre et saute ensuite au contenu. Le champ de titre du frontmatter sera défini sur le nom du fichier sans son extension.
+
+![Capture d'écran de l'éditeur Visual Studio Code, affichant le contenu généré par un extrait de code.](../../../assets/blog/vscode-snippets/screenshot-triggering-ffmt-snippet.png)
+
+## Ressources supplémentaires
+
+Si vous trouvez les extraits utiles et souhaitez explorer une extension VS Code qui comprend un ensemble décent d'extraits préconfigurés, consultez [Astro Snippets par Shelton Louis](https://marketplace.visualstudio.com/items?itemName=SheltonLouis.astro-snippets).
+
+Découvrez plus de conseils et astuces pour travailler avec Astro et Starlight sur [le blog de HiDeoo](https://hideoo.dev/notes).

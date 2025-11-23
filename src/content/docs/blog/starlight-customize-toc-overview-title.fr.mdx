@@ -1,0 +1,146 @@
+---
+title: Personnalisez le titre "Vue d'ensemble" de votre table des matières Starlight
+description: Apprenez comment personnaliser le premier en-tête dans la barre
+  latérale droite de chaque page Starlight, globalement et individuellement.
+date: 2025-11-22
+tags:
+  - Starlight
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A wooden desk featuring a small green plant positioned on its surface.
+  image: ../../../../public/blog/starlight-customize-toc-overview-title.jpg
+
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Ce guide explique comment personnaliser le premier en-tête de la barre latérale droite (table des matières) de chaque page [Starlight](https://starlight.astro.build), globalement et individuellement.
+
+{/* excerpt */}
+
+Chaque page Starlight contient une table des matières sur le côté droit (sauf si [désactivée](https://starlight.astro.build/reference/frontmatter/#tableofcontents)). Afin de pouvoir établir un lien vers le haut de la page, la première entrée de cette barre latérale porte le titre "Vue d'ensemble" (comme vous pouvez également le voir dans la barre latérale de cette page), qui peut être personnalisée [globalement](#global-definition) et même [page par page](#frontmatter-override).
+
+## Définition globale
+
+Si vous souhaitez définir le titre de la première entrée de la table des matières une fois pour toutes les pages, vous pouvez suivre ces étapes pour y parvenir sur des sites monolingues et multilingues :
+
+<Steps>
+  1. Créez un [route middleware](https://starlight.astro.build/guides/route-data/#how-to-customize-route-data) pour personnaliser les données affichées par Starlight.
+
+  2. Utilisez cet exemple de code pour configurer le titre "Vue d'ensemble" :
+
+     ```ts ""Back to top""
+     // src/routeData.ts
+     import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+
+     export const onRequest = defineRouteMiddleware((context) => {
+       const { starlightRoute } = context.locals;
+
+       const overviewItem = starlightRoute.toc?.items[0];
+       if (overviewItem) overviewItem.text = "Back to top";
+     });
+     ```
+
+  3. Si votre site est [multilingue](https://starlight.astro.build/guides/i18n/), vous pouvez également attribuer des titres différents en fonction de la langue locale :
+
+     ```ts ins="translations[locale ?? defaultLang]" ins={3-13,17}
+     // src/routeData.ts
+     import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+     import starlightConfig from "virtual:starlight/user-config";
+
+     const defaultLang =
+       starlightConfig.defaultLocale.lang ??
+       starlightConfig.defaultLocale.locale ??
+       "en";
+
+     const translations: Record<string, string> = {
+       en: "Back to top",
+       de: "Zurück nach oben",
+     };
+
+     export const onRequest = defineRouteMiddleware((context) => {
+       const { starlightRoute } = context.locals;
+       const { locale } = starlightRoute;
+
+       const overviewItem = starlightRoute.toc?.items[0];
+       if (overviewItem) overviewItem.text = translations[locale ?? defaultLang];
+     });
+     ```
+</Steps>
+
+## Surcharge du Frontmatter
+
+Pour définir un titre différent pour le premier en-tête de la table des matières sur des pages individuelles, suivez les étapes ci-dessous :
+
+<Steps>
+  1. [Étendez votre schéma de frontmatter](https://starlight.astro.build/reference/frontmatter/#customize-frontmatter-schema) dans `src/content.config.ts` :
+
+     ```ts ins={10-12} ins=", z"
+     // src/content.config.ts
+     import { defineCollection, z } from 'astro:content';
+     import { docsLoader } from '@astrojs/starlight/loaders';
+     import { docsSchema } from '@astrojs/starlight/schema';
+
+     export const collections = {
+         docs: defineCollection({
+             loader: docsLoader(),
+             schema: docsSchema({
+                 extend: z.object({
+                     overviewTitle: z.string().optional(),
+                 }),
+             }),
+         }),
+     };
+     ```
+
+  2. Cela vous permet d'utiliser le `overviewTitle` dans votre middleware de cette manière :
+
+     ```ts ins={6} ins=/(?<== )individualOverviewTitle/
+     // src/routeData.ts
+     import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+
+     export const onRequest = defineRouteMiddleware((context) => {
+       const { starlightRoute } = context.locals;
+       const individualOverviewTitle = starlightRoute.entry.data.overviewTitle;
+
+       const overviewItem = starlightRoute.toc?.items[0];
+       if (overviewItem)
+         overviewItem.text = individualOverviewTitle ?? "Back to top";
+     });
+     ```
+</Steps>
+
+Pour plus de complétude, voici un middleware multilingue qui prend en charge la surcharge sur des pages individuelles :
+
+```ts
+// src/routeData.ts
+import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+import starlightConfig from "virtual:starlight/user-config";
+
+const defaultLang =
+  starlightConfig.defaultLocale.lang ??
+  starlightConfig.defaultLocale.locale ??
+  "en";
+
+const translations: Record<string, string> = {
+  en: "Back to top",
+  de: "Zurück nach oben",
+};
+
+export const onRequest = defineRouteMiddleware((context) => {
+  const { starlightRoute } = context.locals;
+  const { locale } = starlightRoute;
+  const individualOverviewTitle = starlightRoute.entry.data.overviewTitle;
+
+  const overviewItem = starlightRoute.toc?.items[0];
+  if (overviewItem)
+    overviewItem.text =
+      individualOverviewTitle ?? translations[locale ?? defaultLang];
+});
+```
+
+## Code source
+
+Vous pouvez également trouver le code source complet pour les quatre variantes sur [GitHub](https://github.com/trueberryless/starlight-customize-toc-overview-title) ou ouvrir le projet directement dans [StackBlitz](https://stackblitz.com/github/trueberryless/starlight-customize-toc-overview-title).

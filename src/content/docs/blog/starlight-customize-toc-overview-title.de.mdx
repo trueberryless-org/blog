@@ -1,0 +1,146 @@
+---
+title: Passe den Titel "Übersicht" deines Starlight-Inhaltsverzeichnisses an
+description: Erfahren Sie, wie Sie die erste Überschrift in der rechten
+  Seitenleiste jeder Starlight-Seite global und individuell anpassen können.
+date: 2025-11-22
+tags:
+  - Starlight
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A wooden desk featuring a small green plant positioned on its surface.
+  image: ../../../../public/blog/starlight-customize-toc-overview-title.jpg
+
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Diese Anleitung zeigt, wie Sie die erste Überschrift in der rechten Seitenleiste (Inhaltsverzeichnis) jeder [Starlight](https://starlight.astro.build)-Seite global und individuell anpassen können.
+
+{/* excerpt */}
+
+Jede Starlight-Seite enthält ein Inhaltsverzeichnis auf der rechten Seite (außer es wurde [deaktiviert](https://starlight.astro.build/reference/frontmatter/#tableofcontents)). Um oben auf die Seite verlinken zu können, hat der erste Eintrag in dieser Seitenleiste den Titel "Übersicht" (wie Sie auch in der Seitenleiste auf dieser Seite sehen können), der sowohl [global](#global-definition) als auch [seitenweise](#frontmatter-override) angepasst werden kann.
+
+## Globale Definition
+
+Wenn Sie den Titel des ersten Eintrags im Inhaltsverzeichnis für alle Seiten einmal festlegen möchten, können Sie die folgenden Schritte ausführen, um dies für einsprachige und mehrsprachige Seiten zu erreichen:
+
+<Steps>
+  1. Erstellen Sie [Route-Middleware](https://starlight.astro.build/guides/route-data/#how-to-customize-route-data), um die von Starlight angezeigten Daten anzupassen.
+
+  2. Verwenden Sie diesen Beispielcode, um den Titel "Übersicht" zu konfigurieren:
+
+     ```ts ""Back to top""
+     // src/routeData.ts
+     import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+
+     export const onRequest = defineRouteMiddleware((context) => {
+       const { starlightRoute } = context.locals;
+
+       const overviewItem = starlightRoute.toc?.items[0];
+       if (overviewItem) overviewItem.text = "Back to top";
+     });
+     ```
+
+  3. Wenn Ihre Website [mehrsprachig](https://starlight.astro.build/guides/i18n/) ist, können Sie je nach Sprache verschiedene Titel zuweisen:
+
+     ```ts ins="translations[locale ?? defaultLang]" ins={3-13,17}
+     // src/routeData.ts
+     import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+     import starlightConfig from "virtual:starlight/user-config";
+
+     const defaultLang =
+       starlightConfig.defaultLocale.lang ??
+       starlightConfig.defaultLocale.locale ??
+       "en";
+
+     const translations: Record<string, string> = {
+       en: "Back to top",
+       de: "Zurück nach oben",
+     };
+
+     export const onRequest = defineRouteMiddleware((context) => {
+       const { starlightRoute } = context.locals;
+       const { locale } = starlightRoute;
+
+       const overviewItem = starlightRoute.toc?.items[0];
+       if (overviewItem) overviewItem.text = translations[locale ?? defaultLang];
+     });
+     ```
+</Steps>
+
+## Frontmatter-Überschreibung
+
+Um die erste Überschrift des Inhaltsverzeichnisses auf einzelnen Seiten festzulegen, führen Sie die folgenden Schritte aus:
+
+<Steps>
+  1. [Erweitern Sie das Frontmatter-Schema](https://starlight.astro.build/reference/frontmatter/#customize-frontmatter-schema) in `src/content.config.ts`:
+
+     ```ts ins={10-12} ins=", z"
+     // src/content.config.ts
+     import { defineCollection, z } from 'astro:content';
+     import { docsLoader } from '@astrojs/starlight/loaders';
+     import { docsSchema } from '@astrojs/starlight/schema';
+
+     export const collections = {
+         docs: defineCollection({
+             loader: docsLoader(),
+             schema: docsSchema({
+                 extend: z.object({
+                     overviewTitle: z.string().optional(),
+                 }),
+             }),
+         }),
+     };
+     ```
+
+  2. Dadurch können Sie das `overviewTitle` in Ihrer Middleware wie folgt verwenden:
+
+     ```ts ins={6} ins=/(?<== )individualOverviewTitle/
+     // src/routeData.ts
+     import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+
+     export const onRequest = defineRouteMiddleware((context) => {
+       const { starlightRoute } = context.locals;
+       const individualOverviewTitle = starlightRoute.entry.data.overviewTitle;
+
+       const overviewItem = starlightRoute.toc?.items[0];
+       if (overviewItem)
+         overviewItem.text = individualOverviewTitle ?? "Back to top";
+     });
+     ```
+</Steps>
+
+Der Vollständigkeit halber hier eine mehrsprachige Middleware, die eine Überschreibung auf einzelnen Seiten unterstützt:
+
+```ts
+// src/routeData.ts
+import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+import starlightConfig from "virtual:starlight/user-config";
+
+const defaultLang =
+  starlightConfig.defaultLocale.lang ??
+  starlightConfig.defaultLocale.locale ??
+  "en";
+
+const translations: Record<string, string> = {
+  en: "Back to top",
+  de: "Zurück nach oben",
+};
+
+export const onRequest = defineRouteMiddleware((context) => {
+  const { starlightRoute } = context.locals;
+  const { locale } = starlightRoute;
+  const individualOverviewTitle = starlightRoute.entry.data.overviewTitle;
+
+  const overviewItem = starlightRoute.toc?.items[0];
+  if (overviewItem)
+    overviewItem.text =
+      individualOverviewTitle ?? translations[locale ?? defaultLang];
+});
+```
+
+## Quellcode
+
+Den vollständigen Quellcode für alle vier Varianten finden Sie auch auf [GitHub](https://github.com/trueberryless/starlight-customize-toc-overview-title) oder öffnen Sie das Projekt direkt in [StackBlitz](https://stackblitz.com/github/trueberryless/starlight-customize-toc-overview-title).
