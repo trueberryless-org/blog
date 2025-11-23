@@ -1,0 +1,232 @@
+---
+title: Add Additional Content to Starlight's Table of Contents
+description: Learn how you append additional content like credits, ads or additional information below to list of headings in your right Starlight sidebar.
+date: 2025-11-23
+tags:
+  - Starlight
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A wooden table featuring a decorative flower vase at its center, adding a touch of elegance to the setting.
+  image: ../../../../public/blog/starlight-customize-toc-additional-content.jpg
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+This guide shows how you can append additional content like credits, ads or additional information below to list of headings in your right [Starlight](https://starlight.astro.build) sidebar.
+
+{/* excerpt */}
+
+## Append content
+
+Starlight's table of contents can be modified by [overriding](https://starlight.astro.build/guides/overriding-components/) the [`TableOfContents.astro` component](https://starlight.astro.build/reference/overrides/#tableofcontents). Follow these steps to append a small Astro component after the existing table of contents:
+
+<Steps>
+
+1. Create a small `Card.astro` component that will be displayed after the table of contents. If you want to follow common conventions, it is recommended to create a new `src/components/` folder where you can place all your components:
+
+    ```astro collapse={11-36} "not-content"
+    ---
+    // src/components/Card.astro
+
+    ---
+
+    <aside class="not-content starlight-table-of-contents-aside">
+        <h2>Some card!</h2>
+        <p>With some text 🙌</p>
+    </aside>
+
+    <style>
+        .starlight-table-of-contents-aside {
+            position: relative;
+            background-color: var(--sl-color-gray-6);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--sl-color-text-accent);
+            box-shadow: var(--sl-shadow-md);
+            overflow-y: hidden;
+        }
+        .starlight-table-of-contents-aside h2 {
+            color: var(--sl-color-white);
+            font-size: var(--sl-text-h5);
+            font-weight: 600;
+            text-decoration: none !important;
+            line-height: var(--sl-line-height-headings);
+            margin-bottom: 0.5rem;
+        }
+        .starlight-table-of-contents-aside p {
+            font-size: var(--sl-text-xs);
+            line-height: normal;
+            text-decoration: none !important;
+            color: var(--sl-color-gray-3);
+            overflow-wrap: anywhere;
+        }
+    </style>
+    ```
+
+    Note the usage of the `"not-content"` class feature [provided by Starlight](https://starlight.astro.build/components/using-components/#compatibility-with-starlights-styles) to make sure that Starlight's styles for elements do not apply here as it is a custom component.
+
+2. <span id="step-2" />
+
+    Create the `TableOfContents.astro` component, which will be used as the replacement of Starlight's default table of contents component:
+
+    ```astro "<Default><slot /></Default>" "<Card />"
+    ---
+    // src/components/TableOfContents.astro
+    import Default from "@astrojs/starlight/components/TableOfContents.astro";
+    import Card from "./Card.astro";
+    ---
+
+    <Default><slot /></Default>
+    <div class="starlight-table-of-contents-wrapper-container">
+        <Card />
+    </div>
+
+    <style>
+        .starlight-table-of-contents-wrapper-container {
+            margin-top: 1rem;
+        }
+    </style>
+    ```
+
+    As you can see, the default table of contents are displayed by importing the component from Starlight and using it _before_ our card. See the ["Prepend content" section](#prepend-content) to display the card above the table of contents.
+
+3. Last but not least, do not forget to set the component override in your Astro config:
+
+    ```ts collapse={1-4,11-24} ins={25-27}
+    // astro.config.mjs
+    // @ts-check
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+
+    // https://astro.build/config
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'My Docs',
+    			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+    			sidebar: [
+    				{
+    					label: 'Guides',
+    					items: [
+    						// Each item here is one entry in the navigation menu.
+    						{ label: 'Example Guide', slug: 'guides/example' },
+    					],
+    				},
+    				{
+    					label: 'Reference',
+    					autogenerate: { directory: 'reference' },
+    				},
+    			],
+    			components: {
+    			  TableOfContents: "./src/components/TableOfContents.astro"
+    			}
+    		}),
+    	],
+    });
+    ```
+
+</Steps>
+
+## Prepend content
+
+If you would prefer the table of contents _after_ your component, you need to swap the order of the elements from [Step 2 above](#step-2) and assign `margin-bottom` instead:
+
+```astro ins={10} ins="margin-bottom: 1rem;"
+---
+// src/components/TableOfContents.astro
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
+import Card from "./Card.astro";
+---
+
+<div class="starlight-table-of-contents-wrapper-container">
+    <Card />
+</div>
+<Default><slot /></Default>
+
+<style>
+    .starlight-table-of-contents-wrapper-container {
+        margin-bottom: 1rem;
+    }
+</style>
+```
+
+The rest of the 3 steps are the same, so do not forget to complete them all!
+
+## Place content at bottom
+
+If you want to have more spacing between your new shiny content and the table of contents, you can use some CSS tricks to achieve this. Add these global styles to the bottom of your `TableOfContents.astro` component to introduce two new flexboxes which will transform your card to the bottom:
+
+```astro collapse={1-17}
+---
+// src/components/TableOfContents.astro
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
+import Card from "./Card.astro";
+---
+
+<Default><slot /></Default>
+<div class="starlight-table-of-contents-wrapper-container">
+    <Card />
+</div>
+
+<style>
+    .starlight-table-of-contents-wrapper-container {
+        margin-top: 1rem;
+    }
+</style>
+
+<style is:global>
+    @media (min-width: 72rem) {
+        .right-sidebar-panel {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-sidebar-panel > .sl-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+        }
+    }
+</style>
+```
+
+## Mobile support
+
+The `TableOfContents.astro` is only rendered when the right sidebar is visible. This is not the case on mobile devices, where the [`MobileTableOfContents.astro` component](https://starlight.astro.build/reference/overrides/#mobiletableofcontents) will be rendered.
+
+However, if you want to show your additional content on mobile devices, it is recommended to override the [`Pagination.astro` component](https://starlight.astro.build/reference/overrides/#pagination) as adding content to the mobile view of the right sidebar would look out of place.
+
+Here is a quick demonstration of how your custom `Pagination.astro` override could look like:
+
+```astro
+---
+// src/components/Pagination.astro
+import Default from "@astrojs/starlight/components/Pagination.astro";
+import Card from "./Card.astro";
+---
+
+<Default><slot /></Default>
+<div class="starlight-pagination-mobile-content">
+    <Card />
+</div>
+
+<style>
+    .starlight-pagination-mobile-content {
+        display: block;
+    }
+    @media (min-width: 72rem) {
+        .starlight-pagination-mobile-content {
+            display: none;
+        }
+    }
+</style>
+```
+
+Note that the card will have much more width when displayed under the pagination than in the table of contents. So make sure to use responsive design inside your additional content.
+
+## Source code
+
+You can also find the complete source code for all three variants on [GitHub](https://github.com/trueberryless/starlight-customize-toc-additional-content) or open the project directly in [StackBlitz](https://stackblitz.com/github/trueberryless/starlight-customize-toc-additional-content).
