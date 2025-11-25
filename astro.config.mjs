@@ -12,6 +12,7 @@ import starlightThemeRapide from "starlight-theme-rapide";
 
 import rehypeAutolinkHeadings from "./src/plugins/rehype/autolink-headings";
 import rehypeGitHubBadgeLinks from "./src/plugins/rehype/github-badge-links";
+import remarkReplaceArrows from "./src/plugins/remark/replace-arrows";
 
 loadDotenv();
 
@@ -184,6 +185,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    remarkPlugins: [remarkReplaceArrows],
     rehypePlugins: [
       rehypeHeadingIds,
       rehypeAutolinkHeadings,
