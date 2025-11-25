@@ -39,8 +39,12 @@ export default function remarkArrows() {
     "g"
   );
 
-  return (tree: any, file: any) => {
-    visit(tree, "text", (node: any) => {
+  return (tree: any) => {
+    visit(tree, "text", (node: any, index: number | undefined, parent: any) => {
+      // Skip code blocks and inline code
+      if (parent && (parent.type === "code" || parent.type === "inlineCode")) {
+        return;
+      }
       if (typeof node.value === "string") {
         node.value = node.value.replace(
           pattern,
