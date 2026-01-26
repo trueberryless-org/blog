@@ -1,0 +1,16 @@
+---
+interface Props {
+  min: number;
+  max?: number;
+}
+
+const { min, max } = Astro.props;
+const maxLimit = max ?? Infinity;
+
+const blogEntries = Astro.locals.starlightBlog.posts.filter((p) => {
+  const mins = p.metrics.readingTime.minutes;
+  return mins >= min && mins < maxLimit;
+});
+---
+
+<div class="count">{blogEntries.length} posts</div>

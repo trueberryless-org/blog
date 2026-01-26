@@ -1,0 +1,45 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import PostCount from "../../../components/reading-time/PostCount.astro";
+
+export async function getStaticPaths() {
+  const LENGTHS = [
+    { slug: "short", title: "Short Stories", min: 0, max: 4 },
+    { slug: "medium", title: "Medium Reads", min: 4, max: 8 },
+    { slug: "long", title: "Longer Pieces", min: 8 },
+  ];
+
+  return LENGTHS.map((item) => ({
+    params: { length: item.slug },
+    props: { info: item },
+  }));
+}
+
+const { info } = Astro.props;
+---
+
+<StarlightPage
+  frontmatter={{
+    pagefine: false,
+    title: info.title,
+    prev: false,
+    next: false,
+  }}
+>
+  <PostCount min={info.min} max={info.max} />
+</StarlightPage>
+
+<style>
+  :global([data-has-toc] :is(.right-sidebar-panel, mobile-starlight-toc)) {
+    display: none;
+  }
+
+  :global([data-has-toc] .main-frame) {
+    padding-top: var(--sl-nav-height);
+  }
+
+  .count {
+    font-size: var(--sl-text-xl);
+    font-weight: 600;
+  }
+</style>
