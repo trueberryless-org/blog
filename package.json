@@ -47,8 +47,8 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "6.0.0",
-    "prettier": "3.6.2",
+    "@trivago/prettier-plugin-sort-imports": "6.0.2",
+    "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1",
     "vite": "^7.2.4"
   },
