@@ -1,6 +1,5 @@
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
-import lunaria from "@lunariajs/starlight";
 import { defineConfig } from "astro/config";
 import { config as loadDotenv } from "dotenv";
 import starlightBlog from "starlight-blog";
@@ -51,21 +50,6 @@ export default defineConfig({
       editLink: {
         baseUrl: "https://github.com/trueberryless-org/blog/tree/main/",
       },
-      defaultLocale: "root",
-      locales: {
-        root: {
-          label: "English",
-          lang: "en",
-        },
-        fr: {
-          label: "French",
-          lang: "fr",
-        },
-        de: {
-          label: "Deutsch",
-          lang: "de",
-        },
-      },
       lastUpdated: true,
       logo: {
         light: "./src/assets/light-logo.png",
@@ -91,9 +75,6 @@ export default defineConfig({
       ],
       routeMiddleware: "./src/routeData.ts",
       plugins: [
-        lunaria({
-          sync: true,
-        }),
         starlightLinksValidator({
           exclude: [
             "/blog",
@@ -174,8 +155,6 @@ export default defineConfig({
       ],
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
-        Hero: "./src/components/Hero.astro",
-        PageTitle: "./src/components/PageTitle.astro",
       },
       customCss: ["./src/styles/index.css"],
       markdown: {
