@@ -1,10 +1,16 @@
 ---
 import StarlightBlog from "starlight-blog/overrides/MarkdownContent.astro";
 import StarlightImageZoom from "starlight-image-zoom/components/ImageZoom.astro";
+import Comments from "starlight-giscus/components/Comments.astro";
 ---
 
 <StarlightImageZoom />
-<StarlightBlog><slot /></StarlightBlog>
+<StarlightBlog>
+  <slot />
+  <div class="comments">
+    <Comments />
+  </div>
+</StarlightBlog>
 
 <script>
   // Shortly highlight fragments to find faster on page
@@ -23,3 +29,9 @@ import StarlightImageZoom from "starlight-image-zoom/components/ImageZoom.astro"
     }
   });
 </script>
+
+<style>
+  .comments {
+    margin-top: 2rem;
+  }
+</style>
