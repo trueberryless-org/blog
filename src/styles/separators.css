@@ -1,0 +1,15 @@
+hr {
+  border: none;
+  text-align: center;
+  margin: 3rem 0;
+  overflow: visible;
+}
+
+hr::after {
+  content: "∗ ∗ ∗";
+  display: inline-block;
+  color: var(--sl-color-gray-3);
+  font-size: 1.2rem;
+  letter-spacing: 0.5rem;
+  opacity: 0.6;
+}
