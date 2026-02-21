@@ -76,15 +76,7 @@ export default defineConfig({
       routeMiddleware: "./src/routeData.ts",
       plugins: [
         starlightLinksValidator({
-          exclude: [
-            "/blog",
-            "/blog/tags/*",
-            "/blog/authors/*",
-            "/de/blog/tags/*",
-            "/de/blog/authors/*",
-            "/fr/blog/tags/*",
-            "/fr/blog/authors/*",
-          ],
+          exclude: ["/blog", "/blog/tags/*", "/blog/authors/*"],
           errorOnRelativeLinks: false,
           errorOnInvalidHashes: false,
         }),
@@ -170,8 +162,5 @@ export default defineConfig({
       rehypeAutolinkHeadings,
       rehypeGitHubBadgeLinks,
     ],
-  },
-  redirects: {
-    "/blog/starlight-vscode-snippets": "/blog/vscode-snippets",
   },
 });
