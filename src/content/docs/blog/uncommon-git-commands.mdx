@@ -109,9 +109,9 @@ This is a destructive action. Therefore I included a safeguard by using the lowe
 > Use this to rewrite history. In the interactive editor, change `pick` to `reword` for any of the last `n` commits you want to modify.
 
 **🧹 Prune Local Branches**
-> `git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | xargs git branch -D`
+> `git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | grep -v '^\*$' | xargs -I{} git branch -d "{}"`
 >
-> A pipeline that identifies local branches whose remote counterparts have been deleted ("gone") and deletes them without safety checks.
+> A pipeline that identifies local branches whose remote counterparts have been deleted ("gone") and attempts to delete them safely.
 
 ## Resources
 
