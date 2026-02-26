@@ -84,6 +84,18 @@ git log --oneline
 
 Interactive rebasing is incredibly useful, as other options like `squash`, `break` or even `exec` are available. Just keep in mind that it makes more sense to do this on a branch where only you work to avoid team friction.
 
+## Clean up local branches
+
+When a PR is merged, the branch is usually deleted after it is safely merged into the default branch. But the branch still exists locally. If you want to delete all the local branches, which got deleted in your remote repository, you can run this command in most shells (use `wsl` on Windows):
+
+```bash
+git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | grep -v '^\*$' | xargs -I{} git branch -d "{}"
+```
+
+:::caution
+This is a destructive action. Therefore I included a safeguard by using the lowercase `-d` parameter. If your branches are not cleanly merged, git will not delete them. If you are sure you want to delete all those branches no matter what, use `-D` instead.
+:::
+
 ## Summary
 
 **🛰️ Track Upstream Branch**
@@ -95,6 +107,11 @@ Interactive rebasing is incredibly useful, as other options like `squash`, `brea
 > `git rebase -i HEAD~n`
 >
 > Use this to rewrite history. In the interactive editor, change `pick` to `reword` for any of the last `n` commits you want to modify.
+
+**🧹 Prune Local Branches**
+> `git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | grep -v '^\*$' | xargs -I{} git branch -d "{}"`
+>
+> A pipeline that identifies local branches whose remote counterparts have been deleted ("gone") and attempts to delete them safely.
 
 ## Resources
 
