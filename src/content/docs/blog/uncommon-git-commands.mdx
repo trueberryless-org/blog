@@ -1,0 +1,106 @@
+---
+title: Uncommon Git Commands
+date: 2026-02-26
+description: This blog lists some git commands that can be pretty useful but are so rarely used, that you always forget them.
+tags:
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A solitary tree stands in a vast green field under a clear blue sky.
+  image: ../../../../public/blog/uncommon-git-commands.jpg
+giscus: true
+---
+
+I like to use the `git` CLI. I have tried UIs like GitKraken, Fork or GitHub Desktop. I don't like them.
+
+The majority of commands can be remembered after a short amount of time because you use them on a daily basis. However, there are some commands you need to know only here and then, which makes it really difficult to memorize them. Ever time I need them, I haven't used them exactly for so long, that I forgot which option it was. And then I always have to look them up again, feeling frustrated and uncool for not being able to fully know git by heart. It's embaressing.
+
+So I decided to write this little post, which doesn't help memorizing them, but I'll always know where I can look them up quickly 😅
+
+## Checkout a remote branch on fork
+
+When contributing to open source, it is common that you want to checkout a branch of the upstream branch, that doesn't exist in your remote fork yet. Neither does it exist in your local repository. Now when it comes to checking out a remote branch on a local repository, `git switch` is your friend. Just remember to fetch the upstream, so git knows the reference you want to track. However, what if the branch is not in _your_ remote repository - your fork.
+
+I usually have set up the original remote repository as the upstream repo locally, which can be done with:
+
+```bash
+git remote add upstream https://github.com/<org>/<repo>
+```
+
+With this information, git can then fetch the upstream:
+
+```bash
+git fetch upstream
+```
+
+And now comes the magic: Create and checkout a branch, that until then only exists in the original remote repo with:
+
+```bash
+git checkout -b <branch> upstream/<branch>
+```
+
+I know that it is pretty annoying that you have to specify the branch name two times, but in theory you could name the local branch differently.
+
+Also don't forget that this branch does not yet exist in your remote fork, but you can push it easily with:
+
+```bash
+git push -u origin <branch>
+```
+
+## Rename the commit message of an older commit
+
+:::note
+Renaming commits is not recommended when the commit is already pushed to the remote as you are changing the commit history for everyone.
+:::
+
+If you want to rename the last commit, just use:
+
+```bash
+git commit --amend
+```
+
+When you already have multiple local commits, you have to start an interactive rebase with:
+
+```bash
+git rebase -i HEAD~3
+```
+
+Here, 3 is the number of commits you want to adapt. If your commit is back 10 commits, you need to put a 10 there instead.
+
+Git will open your favourite editor with some text like:
+
+```
+pick 64e085f Commit Message 1
+pick e5f6g7h Commit Message 2
+pick i9j0k1l Commit Message 3
+```
+
+You can now edit this text like a normal file and replace all the `pick` keywords where you want to change the commit message with `reword`. After you save and close the file, git will repeatedly open text files with the old commit message, which you can freely edit to your likings. After you adapted everything you wanted and close the last file, the rebase is finished and you can check your corrections with:
+
+```bash
+git log --oneline
+```
+
+Interactive rebasing is incredible useful, as other options like `squash`, `break` or even `exec` are available. Just keep in mind that it makes more sense to do this on a branch where only you work in order to avoid team friction.
+
+## Summary
+
+**🛰️ Track Upstream Branch**
+> `git fetch upstream && git checkout -b <branch> upstream/<branch>`
+>
+> Fetches the latest references from the original repository and creates a local branch that tracks the upstream version in one logical flow.
+
+**🔄 Rename Older Commits**
+> `git rebase -i HEAD~n`
+>
+> Use this to rewrite history. In the interactive editor, change `pick` to `reword` for any of the last `n` commits you want to modify.
+
+## Resources
+
+Here are some helpful resources for learning git and other situations you often find yourself in:
+
+- https://learngitbranching.js.org/
+- https://ohshitgit.com/
+
+That's it for now, more useful uncommon git commands might be added in the future!
