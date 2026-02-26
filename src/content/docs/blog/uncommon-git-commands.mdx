@@ -89,7 +89,7 @@ Interactive rebasing is incredibly useful, as other options like `squash`, `brea
 When a PR is merged, the branch is usually deleted after it is safely merged into the default branch. But the branch still exists locally. If you want to delete all the local branches, which got deleted in your remote repository, you can run this command in most shells (use `wsl` on Windows):
 
 ```bash
-git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | xargs git branch -d
+git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | grep -v '^\*$' | xargs -I{} git branch -d "{}"
 ```
 
 :::caution
