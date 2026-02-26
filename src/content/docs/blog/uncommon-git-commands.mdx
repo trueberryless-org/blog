@@ -93,7 +93,7 @@ git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | xargs git branch 
 ```
 
 :::caution
-This is a destructive action. Therefore I included a safe guard by lowercasing the `-d` parameter. If your branches are not cleanly merged, git will not delete them. If you are absolutely sure to delete all those branches no matter what, use `-D` instead.
+This is a destructive action. Therefore I included a safeguard by using the lowercase `-d` parameter. If your branches are not cleanly merged, git will not delete them. If you are sure you want to delete all those branches no matter what, use `-D` instead.
 :::
 
 ## Summary
