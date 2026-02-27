@@ -1,0 +1,180 @@
+---
+title: Recommended Git Config
+date: 2026-02-27
+description: There are some quality of life configurations for git that can improve your workflow significantly.
+tags:
+  - Education
+authors:
+  - trueberryless
+cover:
+  alt: A monochrome image of a dark room, featuring deep shadows and minimal light with abstract circles and shapes.
+  image: ../../../../public/blog/recommended-git-config.jpg
+giscus: true
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+In order to optimize my git workflow, specifically for GitHub, I present you with some configs and tricks that I set up.
+
+## Automatic rebase
+
+Since I like to keep my commit history linear, I personally prefer to rebase instead of merge when I pull new changes from the remote repository. This means that if I run `git pull`, it will not perform a `fetch` and `merge` but rather a `fetch` followed by a `rebase`, which results in my local commits being automatically included on top of the remote commits coming in. That way, I avoid having merge commits that would IMHO pollute the history.
+
+If you want to try this out yourself, use the `--rebase` parameter on `pull` like that:
+
+```bash
+git pull --rebase
+```
+
+If you feel happy with this workflow, you can set it in your global config, so you don't need to include the `--rebase` option anymore:
+
+```bash
+git config --global pull.rebase true
+```
+
+## Default branch: `main`
+
+By default, git often initializes new repositories with `master` as the primary branch. However, most modern platforms (especially GitHub) have moved towards using `main`. Instead of renaming your branch every time you run `git init`, you can tell git to use `main` globally by default:
+
+```bash
+git config --global init.defaultBranch main
+```
+
+## Adding co-authors
+
+I really like to credit people who contributed in any way to my commits. What I find annoying, however, is that you have to know the GitHub email address of the user you want to [Co-author](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors). I used to go to the people's profile, search for a recent commit they made and appending `.patch` to the GitHub commit URL. In the diff that you get this way, you can manually extract the email of the user. But why should I manually do this 1min work if I could spend 10h automating it?
+
+<div style="display: flex; justify-content: space-evenly; align-items: flex-start; gap: 2rem;">
+  <img src="https://imgs.xkcd.com/comics/automation.png" alt="An xkcd comic strip titled 'Automation' exploring the discrepancy between theoretical expectation and reality. In the 'THEORY' panel, a graph shows a brief spike for 'WRITING CODE' before a sharp decline as 'AUTOMATION TAKES OVER,' leaving vast 'FREE TIME.' In the 'REALITY' panel, the 'WRITING CODE' spike leads into a fluctuating line of 'DEBUGGING' and 'RETHINKING' that eventually climbs steadily upward as 'ONGOING DEVELOPMENT,' leaving 'NO TIME FOR ORIGINAL TASK ANYMORE' as the workload permanently increases beyond the original baseline." />
+  <img src="https://imgs.xkcd.com/comics/is_it_worth_the_time.png" alt="An xkcd comic titled 'Is It Worth the Time?' featuring a grid that calculates the time-saving break-even point over five years. The horizontal axis lists task frequency (50/day to yearly) and the vertical axis lists time saved per task (1 second to 1 day). Each cell shows the maximum time you should spend automating; for instance, saving 30 seconds on a daily task justifies 12 hours of work, while saving 1 second on a yearly task justifies only 5 seconds. The table uses various units like minutes, hours, days, weeks, and months to illustrate the limits of efficient automation." />
+</div>
+
+Sorry, I just had to include those two [legendary](https://xkcd.com/1319/) [xkcds](https://xkcd.com/1205/) in here.
+
+---
+
+So I created a little bash script which simplifies adding Co-authors to your commits. All you need is `gh` and `jq` installed, and the little bash script below.
+
+<Tabs>
+  <TabItem label="MacOS">
+
+      ```bash
+      brew install gh jq
+      ```
+
+  </TabItem>
+  <TabItem label="Linux">
+
+      ```bash
+      sudo apt install gh jq
+      ```
+
+  </TabItem>
+  <TabItem label="Windows">
+
+      :::note
+      Just use WSL please.
+      :::
+
+  </TabItem>
+</Tabs>
+
+Save this bash script as `git-ucommit` to a folder that is in your `$PATH` (like `~/bin` or `/usr/local/bin`) and make it executable with `chmod +x ~/bin/git-ucommit`:
+
+```bash
+// ~/bin/git-ucommit
+#!/usr/bin/env bash
+
+# Check for dependencies
+if ! command -v gh &> /dev/null || ! command -v jq &> /dev/null; then
+    echo "Error: 'gh' (GitHub CLI) and 'jq' are required."
+    exit 1
+fi
+
+args=()
+usernames=()
+message=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -u|--user)
+      usernames+=("$2")
+      shift 2
+      ;;
+    -m|--message)
+      message="$2"
+      shift 2
+      ;;
+    *)
+      args+=("$1")
+      shift
+      ;;
+  esac
+done
+
+trailer_args=()
+
+# Resolve GitHub usernames to Co-authored-by trailers
+for user in "${usernames[@]}"; do
+  user_json=$(gh api users/"$user" 2>/dev/null)
+  if [[ $? -ne 0 ]]; then
+    echo "Warning: Could not find GitHub user '$user'. Skipping."
+    continue
+  fi
+
+  name=$(echo "$user_json" | jq -r '.name // .login')
+  id=$(echo "$user_json" | jq -r '.id')
+  email="$id+$user@users.noreply.github.com"
+
+  trailer_args+=(--trailer "Co-authored-by: $name <$email>")
+done
+
+# Execute the commit
+if [[ -n "$message" ]]; then
+  final_msg=$(echo -e "$message" | git interpret-trailers "${trailer_args[@]}")
+  git commit "${args[@]}" -m "$final_msg"
+else
+  # No -m flag? Inject trailers and open the editor
+  git commit "${args[@]}" "${trailer_args[@]}" -e
+fi
+```
+
+Since the file name starts with `git-`, you do not even need to create a git alias, as it is smart enough to detect your executable and just allows you run:
+
+```bash
+git ucommit -m "fix: suggestions" -u trueberryless -u delucis
+```
+
+:::note
+Unfortunately, I didn't find a way to add those options to the default `commit` command, so I prepended the letter `u` to it, which stands for users.
+:::
+
+I myself integrated this functionality into my [nix-darwin](https://github.com/nix-darwin/nix-darwin) setup. Check out my [Nix module](https://github.com/trueberryless/nix/blob/a1be76b4723b0061c34cca1063a477774156ce0a/modules/git-tools.nix) if you can profit from this setup.
+
+## Summary
+
+**🔄 Automatic Rebase on Pull**
+> `git config --global pull.rebase true`
+>
+> Sets your global configuration to perform a rebase instead of a merge when pulling. This keeps your git history linear and avoids unnecessary merge commits.
+
+**🌱 Modern Default Branch**
+> `git config --global init.defaultBranch main`
+>
+> Ensures every new local repository you initialize starts with `main` instead of `master`, aligning your local environment with GitHub's defaults.
+
+**👥 Simplified Co-Authoring**
+> `git ucommit -m "message" -u <username>`
+>
+> Uses a custom bash script alongside `gh` and `jq` to automatically resolve GitHub usernames to the correct "Co-authored-by" trailers, saving you from manual email lookups.
+
+## Resources
+
+Here are some helpful resources for optimizing your Git and GitHub workflow:
+
+- [GitHub CLI (gh) Documentation](https://cli.github.com/manual/)
+- [Creating a commit with multiple authors](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors)
+- [Git Interpret Trailers Documentation](https://git-scm.com/docs/git-interpret-trailers)
+
+That's it! With these tweaks, your local environment stays modern, your history stays clean, and giving credit to your collaborators becomes a breeze. Happy coding!
