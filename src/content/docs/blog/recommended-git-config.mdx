@@ -1,7 +1,7 @@
 ---
 title: Recommended Git Config
 date: 2026-02-27
-description: There are some quality of life configurations for git that can improve your workflow significantely.
+description: There are some quality of life configurations for git that can improve your workflow significantly.
 tags:
   - Education
 authors:
@@ -18,7 +18,7 @@ In order to optimize my git workflow, specifically for GitHub, I present you wit
 
 ## Automatic rebase
 
-Since I like to keep my commit history linear, I personally prefer to rebase instead of merge when I pull new changes from the remote repository. This means that if I run `git pull`, it will not perform a `fetch` and `merge` but rather a `fetch` followed by a `rebase`, which results in my local commits being automatically included on top of the remote commits comming in. That way, I avoid having merge commits that would IMHO pollute the history.
+Since I like to keep my commit history linear, I personally prefer to rebase instead of merge when I pull new changes from the remote repository. This means that if I run `git pull`, it will not perform a `fetch` and `merge` but rather a `fetch` followed by a `rebase`, which results in my local commits being automatically included on top of the remote commits coming in. That way, I avoid having merge commits that would IMHO pollute the history.
 
 If you want to try this out yourself, use the `--rebase` parameter on `pull` like that:
 
@@ -113,7 +113,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-trailers=""
+trailer_args=()
 
 # Resolve GitHub usernames to Co-authored-by trailers
 for user in "${usernames[@]}"; do
@@ -127,16 +127,16 @@ for user in "${usernames[@]}"; do
   id=$(echo "$user_json" | jq -r '.id')
   email="$id+$user@users.noreply.github.com"
 
-  trailers+=$'\n'"Co-authored-by: $name <$email>"
+  trailer_args+=(--trailer "Co-authored-by: $name <$email>")
 done
 
 # Execute the commit
 if [[ -n "$message" ]]; then
-  final_msg=$(echo -e "$message" | git interpret-trailers --trailer "$trailers")
+  final_msg=$(echo -e "$message" | git interpret-trailers "${trailer_args[@]}")
   git commit "${args[@]}" -m "$final_msg"
 else
   # No -m flag? Inject trailers and open the editor
-  git commit "${args[@]}" --trailer "$trailers" -e
+  git commit "${args[@]}" "${trailer_args[@]}" -e
 fi
 ```
 
