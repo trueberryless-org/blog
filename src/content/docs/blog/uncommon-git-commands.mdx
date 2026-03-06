@@ -96,6 +96,36 @@ git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | grep -v '^\*$' | 
 This is a destructive action. Therefore I included a safeguard by using the lowercase `-d` parameter. If your branches are not cleanly merged, git will not delete them. If you are sure you want to delete all those branches no matter what, use `-D` instead.
 :::
 
+## Remove tracked files with .gitignore
+
+We’ve all been there: you create a `config.json` or a `.env` file, write some code, and commit it. Later, you realize that file should definitely not be in the repository, so you add it to your `.gitignore`. 
+
+The problem? Git is already tracking it. Adding a file to `.gitignore` only stops Git from tracking *new* files. To tell Git to "forget" a file it is already tracking without deleting it from your hard drive, you use the `--cached` flag:
+
+```bash
+git rm --cached <file_path>
+```
+
+If you accidentally committed an entire directory (like `node_modules` or `dist`), you can do it recursively:
+
+```bash
+git rm -r --cached <folder_name>/
+```
+
+If your repository has become a bit of a mess and you want to "reset" the tracking for everything to strictly follow your current `.gitignore` rules, run this sequence from the repository root:
+
+```bash
+git rm -r --cached .
+git add .
+git commit -m "Refactor: apply .gitignore to all tracked files"
+```
+
+This removes everything from the index and adds it all back. Because the files are now in your `.gitignore`, Git will simply skip over them during the `add` step, effectively untracking them.
+
+:::caution
+If the file contained secrets, untracking it is not enough. The secret is still present in earlier commits and may already be on the remote, so rotate the secret and consider rewriting history as well.
+:::
+
 ## Summary
 
 **🛰️ Track Upstream Branch**
@@ -112,6 +142,11 @@ This is a destructive action. Therefore I included a safeguard by using the lowe
 > `git fetch -p && git branch -vv | awk '/: gone] / {print $1}' | grep -v '^\*$' | xargs -I{} git branch -d "{}"`
 >
 > A pipeline that identifies local branches whose remote counterparts have been deleted ("gone") and attempts to delete them safely.
+
+**🧺 Untrack "Ignored" Files**
+> `git rm --cached <file>`
+> 
+> Removes files from the Git index while keeping them physically on your disk. Essential for when you added a file to `.gitignore` after it was already committed.
 
 ## Resources
 
