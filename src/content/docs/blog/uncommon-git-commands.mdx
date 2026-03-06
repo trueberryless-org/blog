@@ -122,6 +122,10 @@ git commit -m "Refactor: apply .gitignore to all tracked files"
 
 This removes everything from the index and adds it all back. Because the files are now in your `.gitignore`, Git will simply skip over them during the `add` step, effectively untracking them.
 
+:::caution
+If the file contained secrets, untracking it is not enough. The secret is still present in earlier commits and may already be on the remote, so rotate the secret and consider rewriting history as well.
+:::
+
 ## Summary
 
 **🛰️ Track Upstream Branch**
