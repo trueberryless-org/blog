@@ -21,14 +21,14 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
-    "@astrojs/markdown-remark": "6.3.10",
+    "@astrojs/markdown-remark": "7.0.0",
     "@astrojs/starlight": "^0.37.6",
     "@expressive-code/plugin-collapsible-sections": "^0.41.7",
     "@expressive-code/plugin-line-numbers": "^0.41.7",
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.2.6",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@lucide/astro": "^0.575.0",
-    "astro": "^5.18.0",
+    "astro": "^6.0.5",
     "dotenv": "^17.3.1",
     "hastscript": "^9.0.1",
     "rehype-autolink-headings": "^7.1.0",
@@ -46,7 +46,7 @@
     "@trivago/prettier-plugin-sort-imports": "6.0.2",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1",
-    "vite": "^7.3.1"
+    "vite": "^8.0.0"
   },
   "packageManager": "pnpm@10.10.0"
 }
