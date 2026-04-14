@@ -50,4 +50,4 @@ Cover images and OG images are mostly from [Unsplash](https://unsplash.com/), se
 
 Licensed under the MIT license, Copyright © trueberryless.
 
-See [LICENSE](/LICENSE) for more information.
+See [LICENSE](https://github.com/trueberryless-org/blog/blob/main/LICENSE) for more information.
