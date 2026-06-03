@@ -48,5 +48,5 @@
     "prettier-plugin-astro": "0.14.1",
     "vite": "^8.0.0"
   },
-  "packageManager": "pnpm@10.10.0"
+  "packageManager": "pnpm@11.1.2"
 }
