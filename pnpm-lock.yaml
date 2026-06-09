@@ -57,8 +57,8 @@ importers:
         specifier: ^0.9.1
         version: 0.9.1(@astrojs/starlight@0.39.3(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))(typescript@5.9.3))
       starlight-image-zoom:
-        specifier: ^0.14.1
-        version: 0.14.1(@astrojs/starlight@0.39.3(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))(typescript@5.9.3))
+        specifier: ^0.14.2
+        version: 0.14.2(@astrojs/starlight@0.39.3(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))(typescript@5.9.3))
       starlight-links-validator:
         specifier: ^0.24.0
         version: 0.24.0(@astrojs/starlight@0.39.3(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))(typescript@5.9.3))(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))
@@ -2224,8 +2224,8 @@ packages:
     peerDependencies:
       '@astrojs/starlight': '>=0.37.0'
 
-  starlight-image-zoom@0.14.1:
-    resolution: {integrity: sha512-HFY+/779bq65tiEgiQVk8XIH6HPP34PTxWDmdlIo9pwidLyJUUrSH030/1Iu/r+KjAD7W/jpPWjC8Nkn7+uPhw==}
+  starlight-image-zoom@0.14.2:
+    resolution: {integrity: sha512-YBvE724gFMiVjObGtXmfIDi3zAxVBsvGukeRXOiWLNnESFOBZFfO9DpC/reHohrCxFrO+5ot0XR8EimbE0LpsA==}
     engines: {node: '>=22.12.0'}
     peerDependencies:
       '@astrojs/starlight': '>=0.38.0'
@@ -5411,7 +5411,7 @@ snapshots:
     dependencies:
       '@astrojs/starlight': 0.39.3(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))(typescript@5.9.3)
 
-  starlight-image-zoom@0.14.1(@astrojs/starlight@0.39.3(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))(typescript@5.9.3)):
+  starlight-image-zoom@0.14.2(@astrojs/starlight@0.39.3(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))(typescript@5.9.3)):
     dependencies:
       '@astrojs/starlight': 0.39.3(astro@6.4.3(@types/node@24.12.0)(lightningcss@1.32.0)(rollup@4.61.0)(yaml@2.9.0))(typescript@5.9.3)
       mdast-util-mdx-jsx: 3.2.0
