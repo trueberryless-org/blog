@@ -22,13 +22,13 @@
   "dependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/markdown-remark": "7.2.0",
-    "@astrojs/starlight": "^0.39.3",
-    "@expressive-code/plugin-collapsible-sections": "^0.43.0",
-    "@expressive-code/plugin-line-numbers": "^0.43.0",
+    "@astrojs/starlight": "^0.40.0",
+    "@expressive-code/plugin-collapsible-sections": "^0.43.1",
+    "@expressive-code/plugin-line-numbers": "^0.43.1",
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.2.6",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@lucide/astro": "^0.577.0",
-    "astro": "^6.4.4",
+    "astro": "^6.4.5",
     "dotenv": "^17.4.2",
     "hastscript": "^9.0.1",
     "rehype-autolink-headings": "^7.1.0",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "6.0.2",
-    "prettier": "3.8.3",
+    "prettier": "3.8.4",
     "prettier-plugin-astro": "0.14.1",
     "vite": "^8.0.16"
   },
