@@ -32,7 +32,7 @@
     "dotenv": "^17.4.2",
     "hastscript": "^9.0.1",
     "rehype-autolink-headings": "^7.1.0",
-    "sharp": "^0.35.0",
+    "sharp": "^0.35.1",
     "starlight-blog": "^0.26.1",
     "starlight-cooler-credit": "^0.6.0",
     "starlight-giscus": "^0.9.1",
