@@ -1,9 +1,0 @@
-{
-  "starlightBlog.post.lastUpdate": " • Dernière mise à jour : <time datetime=\"{{isoDate}}\">{{date, datetime(dateStyle: medium)}}</time>",
-  "starlightBlog.metrics.readingTime.minutes": " • {{count}} min de lecture",
-  "starlightBlog.metrics.words_one": " • {{count}} mot",
-  "starlightBlog.metrics.words_other": " • {{count}} mots",
-  "actionContinuousTranslation.aiNotice": "Cette traduction a été générée par une IA générative à l'aide de la traduction continue Action. →",
-  "blog.fontReference.description": "La police principale que j'utilise sur ce site web →",
-  "blog.fontReference.imageAlt": "Un tampon rond doré avec un « f » minuscule, sur un fond transparent texturé."
-}
