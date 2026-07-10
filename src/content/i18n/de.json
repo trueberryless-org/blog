@@ -1,9 +1,0 @@
-{
-  "starlightBlog.post.lastUpdate": " • Zuletzt aktualisiert: <time datetime=\"{{isoDate}}\">{{date, datetime(dateStyle: medium)}}</time>",
-  "starlightBlog.metrics.readingTime.minutes": " • {{count}} min Lesezeit",
-  "starlightBlog.metrics.words_one": " • {{count}} Wort",
-  "starlightBlog.metrics.words_other": " • {{count}} Wörter",
-  "actionContinuousTranslation.aiNotice": "Diese Übersetzung wurde von einer generativen KI mithilfe von Action Continuous Translation erstellt. →",
-  "blog.fontReference.description": "Die Schriftart, die ich auf dieser Website hauptsächlich benutze →",
-  "blog.fontReference.imageAlt": "Ein goldener runder Stempel mit einem kleinen „f“ auf einem strukturierten, durchsichtigen Hintergrund."
-}
