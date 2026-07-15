@@ -1,0 +1,52 @@
+---
+import Page from "../../node_modules/starlight-blog/components/Page.astro";
+import PostCount from "../../node_modules/starlight-blog/components/PostCount.astro";
+import Posts from "../../node_modules/starlight-blog/components/Posts.astro";
+import {
+  getBlogEntries,
+  type StarlightBlogEntry,
+} from "../../node_modules/starlight-blog/libs/content";
+
+const { posts } = Astro.locals.starlightBlog;
+
+export async function getStaticPaths() {
+  return [
+    { params: { length: "short" } },
+    { params: { length: "medium" } },
+    { params: { length: "long" } },
+  ];
+}
+const { length } = Astro.params;
+
+const pageProps = {
+  frontmatter: {
+    pagefind: false,
+    title: length + " posts",
+    prev: false,
+    next: false,
+  },
+};
+
+const starlightBlogEntries = (await getBlogEntries(
+  "en"
+)) as StarlightBlogEntry[];
+const entries = starlightBlogEntries.filter((entry) => {
+  const representativeEntry = posts.find((post) => post.href === entry.id);
+  if (!representativeEntry) return false;
+  if (length === "short")
+    return representativeEntry.metrics.readingTime.minutes < 2;
+  if (length === "medium")
+    return (
+      representativeEntry.metrics.readingTime.minutes >= 2 &&
+      representativeEntry.metrics.readingTime.minutes < 5
+    );
+  if (length === "long")
+    return representativeEntry.metrics.readingTime.minutes >= 5;
+  return false;
+});
+---
+
+<Page {...pageProps}>
+  <PostCount>{entries.length} {length} posts.</PostCount>
+  <Posts {entries} locale="en" />
+</Page>
